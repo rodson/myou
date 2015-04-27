@@ -90,6 +90,20 @@ gulp.task('styles', function () {
     .pipe($.size({title: 'styles'}));
 });
 
+// Concat angularjs files
+gulp.task('concat', function () {
+  return gulp.src([
+    'app/**/*module.js',
+    'app/**/*.js',
+    '!app/**/*.spec.js'
+  ])
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('app.js'))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/assets/scripts'))
+    .pipe($.size({title: 'concat'}));
+});
+
 // Scan your HTML for assets & optimize them
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: '{.tmp,.}'});
@@ -115,7 +129,7 @@ gulp.task('html', function () {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles'], function () {
+gulp.task('serve', ['styles', 'concat'], function () {
   browserSync({
     notify: false,
     // Customize the BrowserSync console logging prefix
@@ -125,7 +139,7 @@ gulp.task('serve', ['styles'], function () {
 
   gulp.watch(['./**/*.html'], reload);
   gulp.watch(['assets/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/**/*.js'], ['jshint']);
+  gulp.watch(['app/**/*.js'], ['jshint', 'concat']);
   gulp.watch(['assets/images/**/*'], [reload]);
 });
 
@@ -141,7 +155,7 @@ gulp.task('dev', ['serve', 'karma']);
 
 // Build production files, the default task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
+  runSequence('styles', 'concat', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
 });
 
 // Run PageSpeed Insights
