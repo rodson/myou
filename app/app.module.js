@@ -2,17 +2,15 @@
   'use strict';
 
   angular
-    .module('app', [
+    .module('myou', [
       'ui.router',
-      'ngMaterial',
       'app.version',
-      'app.view1',
-      'app.view2'
+      'myou.login'
     ])
     .config(mainConfig);
 
   function mainConfig($urlRouterProvider) {
-    $urlRouterProvider.otherwise('/view1');
+    $urlRouterProvider.otherwise('/login');
   }
 
 })();
