@@ -5,8 +5,6 @@
     .module('app.view1', ['ui.router'])
     .config(view1Config);
 
-  view1Config.$inject = ['$stateProvider'];
-
   function view1Config($stateProvider) {
     $stateProvider
       .state('view1', {

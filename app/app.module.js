@@ -11,8 +11,6 @@
     ])
     .config(mainConfig);
 
-  mainConfig.$inject = ['$urlRouterProvider'];
-
   function mainConfig($urlRouterProvider) {
     $urlRouterProvider.otherwise('/view1');
   }
