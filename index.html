@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Angular Starter</title>
+  <meta name="description" content="A starter project for angular application.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- build:css assets/styles/main.min.css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="assets/styles/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+  <ul>
+    <li><a ui-sref="view1">view1</a></li>
+    <li><a ui-sref="view2">view2</a></li>
+  </ul>
+
+  <div ui-view></div>
+
+  <div>Angular starter app: v<span app-version></span></div>
+
+<!-- build:js assets/scripts/lib.min.js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<!-- endbuild -->
+
+<!-- build:js assets/scripts/app.min.js -->
+<script src="app/app.module.js"></script>
+<script src="app/view1/view1.module.js"></script>
+<script src="app/view2/view2.module.js"></script>
+<script src="app/view1/view1.controller.js"></script>
+<script src="app/view2/view2.controller.js"></script>
+<script src="app/components/version/version.module.js"></script>
+<script src="app/components/version/version.directive.js"></script>
+<!-- endbuild -->
+</body>
+</html>
