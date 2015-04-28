@@ -9,11 +9,20 @@
     </div>
 
     <md-input-container md-no-float class="md-default-theme form-group">
-      <input type="email" placeholder="邮箱地址">
+      <md-icon class="icon" md-svg-src="assets/images/material-action/ic_account_circle_24px.svg" alt="account"></md-icon>
+      <input type="email" placeholder="邮箱地址" tabindex="0">
     </md-input-container>
 
     <md-input-container md-no-float class="md-default-theme form-group">
+      <md-icon class="icon" md-svg-src="assets/images/material-action/ic_lock_24px.svg" alt="password"></md-icon>
       <input type="password" placeholder="密码">
     </md-input-container>
+
+    <md-checkbox class="login-check">
+      <span class="text">下次自动登录</span>
+    </md-checkbox>
+
+
+    <md-button class="md-raised md-primary md-default-theme login-btn">登陆</md-button>
 
 </div>
