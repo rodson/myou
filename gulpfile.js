@@ -76,7 +76,6 @@ gulp.task('styles', function () {
     'assets/styles/components/components.scss'
   ])
     .pipe($.sourcemaps.init())
-    .pipe($.changed('.tmp/assets/styles', {extension: '.css'}))
     .pipe($.sass({
       precision: 10,
       onError: console.error.bind(console, 'Sass error:')
@@ -84,6 +83,7 @@ gulp.task('styles', function () {
     .pipe($.autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/assets/styles'))
+    .pipe(reload({stream: true, once: true}))
     // Concatenate and minify styles
     .pipe($.if('*.css', $.csso()))
     .pipe(gulp.dest('dist/assets/styles'))
@@ -138,7 +138,7 @@ gulp.task('serve', ['styles', 'concat'], function () {
   });
 
   gulp.watch(['./**/*.html'], reload);
-  gulp.watch(['assets/styles/**/*.{scss,css}'], ['styles', reload]);
+  gulp.watch(['assets/styles/**/*.{scss,css}'], ['styles']);
   gulp.watch(['app/**/*.js'], ['jshint', 'concat']);
   gulp.watch(['assets/images/**/*'], [reload]);
 });
