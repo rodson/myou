@@ -5,13 +5,19 @@
     .module('myou', [
       'ui.router',
       'ngMaterial',
+      'LocalStorageModule',
+
       'app.version',
+
       'myou.login'
     ])
     .config(mainConfig);
 
-  function mainConfig($urlRouterProvider, $mdThemingProvider) {
+  function mainConfig($urlRouterProvider, $mdThemingProvider,
+      localStorageServiceProvider) {
     $urlRouterProvider.otherwise('/login');
+
+    localStorageServiceProvider.setPrefix('Myou');
 
     // Config default theme
     $mdThemingProvider.definePalette('holoLight', {

@@ -4,7 +4,8 @@
   angular
     .module('myou.login', [
       'ui.router',
-      'ngMaterial'
+      'ngMaterial',
+      'LocalStorageModule'
     ])
     .config(loginConfig);
 

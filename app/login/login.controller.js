@@ -20,8 +20,6 @@
       LoginService.login({
         email: vm.email,
         password: vm.password
-      }).then(function(data) {
-        // vm.loginData = data;
       });
     }
 

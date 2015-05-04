@@ -5,7 +5,7 @@
     .module('myou.login')
     .factory('LoginService', LoginService);
 
-  function LoginService($http, LoginConstant) {
+  function LoginService($http, LoginConstant, localStorageService) {
 
     return {
       login: login,
@@ -17,7 +17,13 @@
         .catch(loginFailed);
 
       function loginComplete(response) {
-        return response.data;
+        var responseData = response.data;
+
+        // Save data to local storage
+        localStorageService.set('token', responseData.token);
+        localStorageService.set('user', responseData.user);
+
+        return responseData;
       }
 
       function loginFailed(error) {

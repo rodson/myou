@@ -23,6 +23,7 @@
     "beforeEach": false,
     "afterEach": false,
     "module": false,
+    "jasmine": true,
     "inject": false
   }
 }
