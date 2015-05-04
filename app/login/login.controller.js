@@ -6,6 +6,6 @@
     .controller('LoginController', LoginController);
 
   function LoginController() {
-    console.log('this is login view');
+    var vm = this;
   }
 })();

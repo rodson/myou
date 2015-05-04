@@ -8,21 +8,50 @@
       <h1 class="title-text md-headline">萌友</h1>
     </div>
 
-    <md-input-container md-no-float class="md-default-theme form-group">
-      <md-icon class="icon" md-svg-src="assets/images/material-action/ic_account_circle_24px.svg" alt="account"></md-icon>
-      <input type="email" placeholder="邮箱地址" tabindex="0">
-    </md-input-container>
+    <form name="loginForm" novalidate>
+      <md-input-container md-no-float class="md-default-theme form-group">
+        <md-icon class="icon"
+            md-svg-src="assets/images/material-action/ic_account_circle_24px.svg"
+            alt="account">
+        </md-icon>
+        <input type="email" name="email" placeholder="邮箱地址" tabindex="0"
+            required ng-model="vm.email">
+        <div ng-show="loginForm.$submitted || loginForm.email.$touched"
+            ng-messages="loginForm.email.$error">
+          <div ng-show="loginForm.email.$error.required"
+              class="error" ng-message="required">
+            请输入邮箱
+          </div>
+          <div ng-show="loginForm.email.$error.email"
+              class="error" ng-message="email">
+            邮箱格式不正确
+          </div>
+        </div>
+      </md-input-container>
 
-    <md-input-container md-no-float class="md-default-theme form-group">
-      <md-icon class="icon" md-svg-src="assets/images/material-action/ic_lock_24px.svg" alt="password"></md-icon>
-      <input type="password" placeholder="密码">
-    </md-input-container>
+      <md-input-container md-no-float class="md-default-theme form-group">
+        <md-icon class="icon"
+            md-svg-src="assets/images/material-action/ic_lock_24px.svg"
+            alt="password">
+        </md-icon>
+        <input type="password" name="password" required
+            placeholder="密码" ng-model="vm.password">
+        <div ng-show="loginForm.$submitted || loginForm.password.$touched"
+            ng-messages="loginForm.password.$error">
+          <div ng-show="loginForm.password.$error.required"
+              class="error" ng-message="required">
+            请输入密码
+          </div>
+        </div>
+      </md-input-container>
 
-    <md-checkbox class="login-check">
-      <span class="text">下次自动登录</span>
-    </md-checkbox>
+      <md-checkbox class="login-check">
+        <span class="text">下次自动登录</span>
+      </md-checkbox>
 
+      <md-button class="md-raised md-primary md-default-theme login-btn">
+        登陆
+      </md-button>
 
-    <md-button class="md-raised md-primary md-default-theme login-btn">登陆</md-button>
-
+    </form>
 </div>
