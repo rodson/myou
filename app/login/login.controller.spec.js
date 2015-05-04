@@ -3,27 +3,27 @@
 describe('LoginController', function() {
 
   describe('login', function() {
-    var mockLoginService;
+    var LoginService;
     var loginController;
 
     beforeEach(function() {
+      module('myou.login');
+    });
 
-      module('myou.login', function($provide) {
-        mockLoginService = {};
-        mockLoginService.login = jasmine.createSpy();
-        $provide.value('LoginService', mockLoginService);
-      });
-
-      inject(function($controller, _LoginService_) {
-        mockLoginService = _LoginService_;
+    beforeEach(function() {
+      inject(function($controller, _LoginService_, $q) {
+        var deferred = $q.defer();
+        LoginService = _LoginService_;
+        spyOn(LoginService, 'login').and.returnValue(deferred.promise);
         loginController = $controller('LoginController',
-            {LoginService: mockLoginService});
+            {LoginService: LoginService});
       });
+
     });
 
     it('should return if valid is false', function() {
       loginController.login(false);
-      expect(mockLoginService.login).not.toHaveBeenCalled();
+      expect(LoginService.login).not.toHaveBeenCalled();
     });
 
     it('should call login if valid', function() {
@@ -31,7 +31,7 @@ describe('LoginController', function() {
       loginController.password = 'rodson';
 
       loginController.login(true);
-      expect(mockLoginService.login).toHaveBeenCalledWith({
+      expect(LoginService.login).toHaveBeenCalledWith({
         email: 'rodson@cvte.com',
         password: 'rodson'
       });

@@ -9,7 +9,8 @@
 
       'app.version',
 
-      'myou.login'
+      'myou.login',
+      'myou.dashboard'
     ])
     .config(mainConfig);
 

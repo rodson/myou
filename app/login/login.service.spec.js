@@ -8,6 +8,7 @@ describe('LoginService', function() {
   var LoginService;
   var LoginConstant;
   var $httpBackend;
+  var $state;
   var mockStorageService;
 
   beforeEach(module('myou.login', function($provide) {
@@ -16,10 +17,14 @@ describe('LoginService', function() {
     $provide.value('localStorageService', mockStorageService);
   }));
 
-  beforeEach(inject(function(_$httpBackend_, _LoginService_, _LoginConstant_) {
-      $httpBackend = _$httpBackend_;
-      LoginService = _LoginService_;
-      LoginConstant = _LoginConstant_;
+  beforeEach(inject(function(_$httpBackend_, _$state_,
+      _LoginService_, _LoginConstant_) {
+    $httpBackend = _$httpBackend_;
+    $state = _$state_;
+    LoginService = _LoginService_;
+    LoginConstant = _LoginConstant_;
+
+    spyOn($state, 'go');
   }));
 
   beforeEach(function() {
@@ -49,6 +54,12 @@ describe('LoginService', function() {
     $httpBackend.flush();
     expect(mockStorageService.set).toHaveBeenCalledWith('token', 'token');
     expect(mockStorageService.set).toHaveBeenCalledWith('user', 'user');
+  });
+
+  it('should go to dashboard state when login successfully', function() {
+    LoginService.login({});
+    $httpBackend.flush();
+    expect($state.go).toHaveBeenCalledWith('dashboard');
   });
 
 });

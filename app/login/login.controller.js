@@ -10,6 +10,7 @@
 
     vm.email = '';
     vm.password = '';
+    vm.errorMsg = '';
     vm.login = login;
 
     function login(isValid) {
@@ -20,6 +21,8 @@
       LoginService.login({
         email: vm.email,
         password: vm.password
+      }).then(function(data) {
+
       });
     }
 
