@@ -1,4 +1,44 @@
-<h1>Dashboard</h1>
-<a ui-sref=".document">document</a>
-<a ui-sref=".usermanager">usermanager</a>
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <div class="app-logo">
+      <img class="icon" src="assets/images/m-white-128.png" alt="myou">
+      <span class="text md-title">萌友</span>
+    </div>
+    <div class="toolbar-nav">
+      <md-button class="md-icon-button nav-item" aria-label="More">
+        <span class="text">API统计</span>
+      </md-button>
+      <md-button class="md-icon-button nav-item" aria-label="More">
+        <span class="text">文档中心</span>
+      </md-button>
+    </div>
+    <span flex></span>
+    <md-button class="md-icon-button action" aria-label="More">
+      <md-icon class="icon"
+          md-svg-src="assets/images/material-action/ic_account_circle_24px.svg"
+          alt="account">
+      </md-icon>
+      <span class="text">Rodson</span>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-toolbar class="toolbar-tabs">
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button tabs-item" aria-label="More">
+      <span class="text">应用开发</span>
+    </md-button>
+    <md-button class="md-icon-button tabs-item" aria-label="More">
+      <span class="text">系统升级</span>
+    </md-button>
+    <md-button class="md-icon-button tabs-item" aria-label="More">
+      <span class="text">WEB包发布</span>
+    </md-button>
+    <md-button class="md-icon-button tabs-item" aria-label="More">
+      <span class="text">页面统计</span>
+    </md-button>
+    <md-button class="md-icon-button tabs-item" aria-label="More">
+      <span class="text">接口监控</span>
+    </md-button>
+  </div>
+</md-toolbar>
 <div ui-view></div>

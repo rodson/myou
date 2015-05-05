@@ -1,0 +1,49 @@
+md-toolbar {
+  height: 56px;
+  min-height: 56px;
+}
+
+.toolbar-tabs.md-default-theme {
+  background-color: #efefef;
+  color: $primary-color;
+
+  .tabs-item {
+    margin: 0 10px;
+    color: #999999;
+  }
+}
+
+.toolbar-nav {
+  margin-left: 32px;
+
+  .nav-item {
+    margin: 0 10px;
+  }
+}
+
+.action {
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  .text {
+    vertical-align: middle;
+  }
+}
+
+.app-logo {
+  .icon {
+    width: 28px;
+    height: 24px;
+    vertical-align: middle;
+  }
+
+  .text {
+    font-size: 22px;
+    font-weight: 800;
+    vertical-align: middle;
+  }
+}
