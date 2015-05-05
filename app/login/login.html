@@ -8,7 +8,7 @@
       <h1 class="title-text md-headline">萌友</h1>
     </div>
 
-    <form name="loginForm" novalidate ng-submit="vm.login(loginForm.$valid)">
+    <form name="loginForm" novalidate ng-submit="vm.login(loginForm.$valid, $event)">
       <md-input-container md-no-float class="md-default-theme form-group">
         <md-icon class="icon"
             md-svg-src="assets/images/material-action/ic_account_circle_24px.svg"

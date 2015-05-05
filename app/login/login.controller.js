@@ -5,7 +5,7 @@
     .module('myou.login')
     .controller('LoginController', LoginController);
 
-  function LoginController(LoginService) {
+  function LoginController(LoginService, $mdDialog) {
     var vm = this;
 
     vm.email = '';
@@ -13,7 +13,7 @@
     vm.errorMsg = '';
     vm.login = login;
 
-    function login(isValid) {
+    function login(isValid, ev) {
       if (!isValid) {
         return;
       }
@@ -21,8 +21,17 @@
       LoginService.login({
         email: vm.email,
         password: vm.password
-      }).then(function(data) {
-
+      }).then(function(errorMsg) {
+        if (errorMsg) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('登录失败')
+              .content(errorMsg)
+              .ariaLabel('登录失败')
+              .ok('确定')
+              .targetEvent(ev)
+          );
+        }
       });
     }
 

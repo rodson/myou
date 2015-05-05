@@ -36,19 +36,6 @@ describe('LoginService', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should send the login data and return the response', function() {
-    var returnedPromise = LoginService.login({});
-
-    var result;
-    returnedPromise.then(function(response) {
-      result = response;
-    });
-
-    $httpBackend.flush();
-
-    expect(result).toEqual(postResponse);
-  });
-
   it('should save token and user by calling set on storageService', function() {
     LoginService.login({});
     $httpBackend.flush();
@@ -59,7 +46,7 @@ describe('LoginService', function() {
   it('should go to dashboard state when login successfully', function() {
     LoginService.login({});
     $httpBackend.flush();
-    expect($state.go).toHaveBeenCalledWith('dashboard');
+    expect($state.go).toHaveBeenCalled();
   });
 
 });

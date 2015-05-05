@@ -23,13 +23,17 @@
         localStorageService.set('token', responseData.token);
         localStorageService.set('user', responseData.user);
 
-        $state.go('dashboard');
-
-        return responseData;
+        $state.go('dashboard.usermanager');
       }
 
       function loginFailed(error) {
-        return error.data;
+        var errorData = error.data;
+
+        if (errorData.code === LoginConstant.USER_NOT_EXIST_CODE) {
+          return LoginConstant.USER_NOT_EXIST_MSG;
+        } else if (errorData.code === LoginConstant.PASSWORD_ERROR_CODE) {
+          return LoginConstant.PASSWORD_ERROR_MSG;
+        }
       }
     }
   }
