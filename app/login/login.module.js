@@ -5,18 +5,9 @@
     .module('myou.login', [
       'ui.router',
       'ngMaterial',
-      'LocalStorageModule'
-    ])
-    .config(loginConfig);
+      'LocalStorageModule',
 
-  function loginConfig($stateProvider) {
-    $stateProvider
-      .state('login', {
-        url: '/login',
-        templateUrl: 'app/login/login.html',
-        controller: 'LoginController',
-        controllerAs: 'vm'
-      });
-  }
+      'myou.shared'
+    ]);
 
 })();

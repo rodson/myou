@@ -1,24 +1,13 @@
 (function() {
   'use strict';
 
-  angular
-    .module('myou', [
-      'ui.router',
-      'ngMaterial',
-      'LocalStorageModule',
-
-      'app.version',
-
-      'myou.login',
-      'myou.dashboard'
-    ])
-    .config(mainConfig);
-
   function mainConfig($urlRouterProvider, $mdThemingProvider,
-      localStorageServiceProvider) {
+      localStorageServiceProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/login');
 
     localStorageServiceProvider.setPrefix('Myou');
+
+    $httpProvider.interceptors.push('TokenInterceptor');
 
     // Config default theme
     $mdThemingProvider.definePalette('holoLight', {
@@ -44,5 +33,32 @@
     $mdThemingProvider.theme('default')
       .primaryPalette('holoLight');
   }
+
+  function TokenInterceptor(localStorageService) {
+    return {
+      request: function(config) {
+        if (localStorageService.get('token')) {
+          config.headers.Authorization = 'Bearer ' +
+              localStorageService.get('token');
+        }
+        return config;
+      }
+    };
+  }
+
+  angular
+    .module('myou', [
+      'ui.router',
+      'ngMaterial',
+      'LocalStorageModule',
+
+      'app.version',
+
+      'myou.login',
+      'myou.dashboard'
+    ])
+    .config(mainConfig)
+    .factory('TokenInterceptor', TokenInterceptor);
+
 
 })();

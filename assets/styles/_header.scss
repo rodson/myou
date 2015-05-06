@@ -4,12 +4,13 @@ md-toolbar {
 }
 
 .toolbar-tabs.md-default-theme {
-  background-color: #efefef;
+  background-color: #F5F5F5;
   color: $primary-color;
 
   .tabs-item {
     margin: 0 10px;
     color: #999999;
+    font-size: 15px;
   }
 }
 

@@ -1,40 +1,52 @@
 (function() {
   'use strict';
 
-  angular
-    .module('myou.login')
-    .factory('LoginService', LoginService);
+  function LoginService($http, $state, $mdDialog, Constant,
+      localStorageService) {
 
-  function LoginService($http, $state, LoginConstant, localStorageService) {
+    var LoginService = {};
 
-    return {
-      login: login,
-    };
-
-    function login(data) {
-      return $http.post(LoginConstant.LOGIN_URL, data)
-        .then(loginComplete)
-        .catch(loginFailed);
+    LoginService.login = function (data, ev) {
+      return $http.post(Constant.URL.LOGIN, data)
+        .success(loginComplete)
+        .error(loginFailed);
 
       function loginComplete(response) {
-        var responseData = response.data;
+        var responseData = response;
 
         // Save data to local storage
         localStorageService.set('token', responseData.token);
         localStorageService.set('user', responseData.user);
 
-        $state.go('dashboard.usermanager');
+        $state.go('dashboard.appdevelop');
       }
 
       function loginFailed(error) {
-        var errorData = error.data;
+        var errorData = error;
+        var errorMsg = '';
 
-        if (errorData.code === LoginConstant.USER_NOT_EXIST_CODE) {
-          return LoginConstant.USER_NOT_EXIST_MSG;
-        } else if (errorData.code === LoginConstant.PASSWORD_ERROR_CODE) {
-          return LoginConstant.PASSWORD_ERROR_MSG;
+        if (errorData.code === Constant.RETURN_DATA.USER_NOT_EXIST_CODE) {
+          errorMsg = Constant.RETURN_DATA.USER_NOT_EXIST_MSG;
+        } else if (errorData.code === Constant.RETURN_DATA.PASSWORD_ERROR_CODE) {
+          errorMsg = Constant.RETURN_DATA.PASSWORD_ERROR_MSG;
         }
+
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('登录失败')
+            .content(errorMsg)
+            .ariaLabel('登录失败')
+            .ok('确定')
+            .targetEvent(ev)
+        );
       }
-    }
+    };
+
+    return LoginService;
   }
+
+  angular
+    .module('myou.login')
+    .factory('LoginService', LoginService);
+
 })();

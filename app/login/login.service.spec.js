@@ -6,7 +6,7 @@ describe('LoginService', function() {
       'user': 'user'
   };
   var LoginService;
-  var LoginConstant;
+  var Constant;
   var $httpBackend;
   var $state;
   var mockStorageService;
@@ -18,17 +18,17 @@ describe('LoginService', function() {
   }));
 
   beforeEach(inject(function(_$httpBackend_, _$state_,
-      _LoginService_, _LoginConstant_) {
+      _LoginService_, _Constant_) {
     $httpBackend = _$httpBackend_;
     $state = _$state_;
     LoginService = _LoginService_;
-    LoginConstant = _LoginConstant_;
+    Constant = _Constant_;
 
     spyOn($state, 'go');
   }));
 
   beforeEach(function() {
-    $httpBackend.whenPOST(LoginConstant.LOGIN_URL, {}).respond(postResponse);
+    $httpBackend.whenPOST(Constant.URL.LOGIN_URL, {}).respond(postResponse);
   });
 
   afterEach(function() {
