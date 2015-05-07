@@ -1,1 +1,26 @@
-{{vm.products}}
+<div class="products-container">
+  <div class="product-card" ng-repeat="product in vm.products">
+
+  <div class="header">
+
+    <div class="tooltips">
+      <md-icon md-svg-src="assets/images/material-action/ic_info_24px.svg"></md-icon>
+      <div class="popover">
+        {{ product.description }}
+      </div>
+    </div>
+
+    <span class="more">
+      <md-icon md-svg-src="assets/images/material-other/ic_more_vert_24px.svg"></md-icon>
+    </span>
+
+    <div class="type">应用开发</div>
+  </div>
+
+  <div class="text-center">
+    <h2 class="name">{{ product.name }}</h2>
+  </div>
+
+  </div>
+</div>
+
