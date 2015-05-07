@@ -38,7 +38,8 @@
 
       'myou.shared',
 
-      'myou.dashboard.products'
+      'myou.dashboard.products',
+      'myou.dashboard.addproduct'
     ])
     .config(dashboardConfig);
 

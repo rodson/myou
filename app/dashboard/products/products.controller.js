@@ -12,9 +12,14 @@
       });
   }
 
-  function ProductsCtrl(ProductsService) {
+  function ProductsCtrl($state, ProductsService) {
     var vm = this;
+
     vm.products = ProductsService.products;
+
+    vm.gotoAddProduct = function() {
+      $state.go('dashboard.addproduct');
+    };
   }
 
   ProductsCtrl.resolve = {
