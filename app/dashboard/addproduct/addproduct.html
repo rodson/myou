@@ -1,1 +1,55 @@
-<h1>Add product</h1>
+<div class="addproduct-container">
+  <div id="product-type">
+    <label class="radio-inline">
+      <input type="radio" name="platform"
+             value="android_app">
+      <i class="fa fa-puzzle-piece"><span>应用开发</span></i>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="platform"
+             value="windows_app">
+      <i class="fa fa-cloud-upload"><span>系统升级</span></i>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="platform"
+             value="android_rom">
+      <i class="fa fa-wordpress"><span>WEB包发布</span></i>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="platform"
+             value="web_app">
+      <i class="fa fa-bar-chart-o"><span>页面统计</span></i>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="platform"
+             value="web_app">
+      <i class="fa fa-bullseye"><span>接口监控</span></i>
+    </label>
+  </div>
+  <div class="main">
+    <section>
+      <md-input-container flex>
+        <label>产品名称</label>
+        <input>
+      </md-input-container>
+      <md-input-container flex>
+        <label>产品描述</label>
+        <input>
+      </md-input-container>
+      <span class="label">
+        平台:
+      </span>
+      <md-radio-group class="inline">
+        <md-radio-button value="Apple" class="inline md-primary">Android应用</md-radio-button>
+        <md-radio-button value="Banana" class="inline md-primary">Windows应用</md-radio-button>
+        <md-radio-button value="Mango" class="inline md-primary">IOS应用</md-radio-button>
+      </md-radio-group>
+    </section>
+
+    <section class="clearfix">
+      <md-button id="create" class="md-raised md-primary">
+        创建
+      </md-button>
+    </section>
+  </div>
+</div>
