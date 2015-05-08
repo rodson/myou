@@ -3,6 +3,13 @@
 
   function productsConfig($stateProvider) {
     $stateProvider
+      .state('dashboard.products', {
+        url: '/products',
+        templateUrl: 'app/dashboard/products/products.html',
+        controllerAs: 'vm',
+        controller: 'ProductsCtrl',
+        resolve: ProductsCtrl.resolve
+      })
       .state('dashboard.appdevelop', {
         url: '/appdevelop',
         templateUrl: 'app/dashboard/products/products.html',

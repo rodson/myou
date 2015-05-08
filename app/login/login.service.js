@@ -18,7 +18,7 @@
         localStorageService.set('token', responseData.token);
         localStorageService.set('user', responseData.user);
 
-        $state.go('dashboard.appdevelop');
+        $state.go('dashboard.products');
       }
 
       function loginFailed(error) {
