@@ -31,7 +31,7 @@ md-radio-group {
 
 #product-type {
   margin-left: 32px;
-  height: 80px;
+  height: 76px;
   box-sizing: border-box;
 
   label.radio-inline {
@@ -44,9 +44,9 @@ md-radio-group {
       color: #ccc;
       display: inline;
       box-sizing: border-box;
-      width: 120px;
-      line-height: 44px;
-      height: 46px;
+      width: 100px;
+      line-height: 40px;
+      height: 42px;
       font-size: 18px;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -54,7 +54,7 @@ md-radio-group {
       span {
         color: #ccc;
         margin-left: 6px;
-        font-size: 16px;
+        font-size: 14px;
       }
     }
     input {

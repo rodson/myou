@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  function LoginService($http, $state, $mdDialog, Constant,
-      localStorageService) {
+  function LoginService($http, $state, $mdToast,
+      Constant, localStorageService) {
 
     var LoginService = {};
 
@@ -31,13 +31,11 @@
           errorMsg = Constant.RETURN_DATA.PASSWORD_ERROR_MSG;
         }
 
-        $mdDialog.show(
-          $mdDialog.alert()
-            .title('登录失败')
+        $mdToast.show(
+          $mdToast.simple()
             .content(errorMsg)
-            .ariaLabel('登录失败')
-            .ok('确定')
-            .targetEvent(ev)
+            .position('right top')
+            .hideDelay(3000)
         );
       }
     };
