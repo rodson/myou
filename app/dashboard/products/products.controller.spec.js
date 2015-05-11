@@ -17,15 +17,25 @@ describe('ProductsCtrl: ', function() {
       });
 
       spyOn($state, 'go');
+      spyOn(ProductsService, 'enterProduct');
     });
   });
 
   describe('fn: gotoAddProduct: ', function() {
-
     it('should call $state go when it is invoked', function() {
       ProductsCtrl.gotoAddProduct();
       expect($state.go).toHaveBeenCalledWith('dashboard.addproduct');
     });
+  });
 
+  describe('fn: enterProduct: ', function() {
+    var product = {
+      id: 'fff'
+    };
+
+    it('should call enterProduct on ProductsService', function() {
+      ProductsCtrl.enterProduct(product);
+      expect(ProductsService.enterProduct).toHaveBeenCalledWith(product);
+    });
   });
 });
