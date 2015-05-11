@@ -3,6 +3,7 @@
 describe('AddProductService: ', function() {
   var AddProductService;
   var Constant;
+  var StateManager;
   var $mdToast;
   var $httpBackend;
   var $state;
@@ -11,17 +12,19 @@ describe('AddProductService: ', function() {
     module('myou.dashboard.addproduct');
 
     inject(function(_AddProductService_, _$httpBackend_, _$state_,
-      _$mdToast_, _Constant_) {
+      _$mdToast_, _Constant_, _StateManager_) {
       AddProductService = _AddProductService_;
       $httpBackend = _$httpBackend_;
       $state = _$state_;
       $mdToast = _$mdToast_;
       Constant = _Constant_;
+      StateManager = _StateManager_;
     });
   });
 
   beforeEach(function() {
     spyOn($mdToast, 'show');
+    spyOn(StateManager, 'enterProduct');
   });
 
   describe('fn: createProduct: ', function() {
@@ -53,7 +56,15 @@ describe('AddProductService: ', function() {
   });
 
   describe('fn: enterProduct: ', function() {
+    it('should call enterProduct on StateManager', function() {
+      AddProductService.createdProduct = {
+        platform: 'android_app',
+        _id: 'qwerty'
+      };
 
+      AddProductService.enterProduct();
+      expect(StateManager.enterProduct).toHaveBeenCalledWith('android_app', 'qwerty');
+    });
   });
 
 });

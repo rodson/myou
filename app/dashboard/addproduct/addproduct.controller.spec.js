@@ -14,6 +14,7 @@ describe('AddProductCtrl: ', function() {
       var deferred = $q.defer();
       spyOn(AddProductService, 'createProduct')
         .and.returnValue(deferred.promise);
+      spyOn(AddProductService, 'enterProduct');
     });
   });
 
@@ -45,6 +46,13 @@ describe('AddProductCtrl: ', function() {
       var isValid = false;
       AddProductCtrl.createProduct(isValid);
       expect(AddProductService.createProduct).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('fn: enterProduct: ', function() {
+    it('should call enterProduct on AddProductService', function() {
+      AddProductCtrl.enterProduct();
+      expect(AddProductService.enterProduct).toHaveBeenCalled();
     });
   });
 });
