@@ -1,6 +1,6 @@
 'use strict';
 
-describe('StateManager', function() {
+describe('shared: StateManager', function() {
   var StateManager;
   var $state;
   var Constant;

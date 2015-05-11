@@ -24,6 +24,10 @@
     vm.enterProduct = function(product) {
       ProductsService.enterProduct(product);
     };
+
+    vm.showPlatformName = function(platform) {
+      return ProductsService.showPlatformName(platform);
+    };
   }
 
   ProductsCtrl.resolve = {
