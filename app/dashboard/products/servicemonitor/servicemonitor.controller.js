@@ -5,7 +5,7 @@
     $stateProvider
       .state('dashboard.servicemonitor', {
         url: '/servicemonitor/:id',
-        templateUrl: 'app/dashboard/servicemonitor/servicemonitor.html',
+        templateUrl: 'app/dashboard/products/servicemonitor/servicemonitor.html',
         controllerAs: 'vm',
         controller: 'ServiceMonitorCtrl'
       });

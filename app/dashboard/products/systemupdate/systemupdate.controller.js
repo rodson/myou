@@ -5,7 +5,7 @@
     $stateProvider
       .state('dashboard.systemupdate', {
         url: '/systemupdate/:id',
-        templateUrl: 'app/dashboard/systemupdate/systemupdate.html',
+        templateUrl: 'app/dashboard/products/systemupdate/systemupdate.html',
         controllerAs: 'vm',
         controller: 'SystemUpdateCtrl'
       });

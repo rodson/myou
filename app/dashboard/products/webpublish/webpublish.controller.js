@@ -5,7 +5,7 @@
     $stateProvider
       .state('dashboard.webpublish', {
         url: '/webpublish/:id',
-        templateUrl: 'app/dashboard/webpublish/webpublish.html',
+        templateUrl: 'app/dashboard/products/webpublish/webpublish.html',
         controllerAs: 'vm',
         controller: 'WebPublishCtrl'
       });

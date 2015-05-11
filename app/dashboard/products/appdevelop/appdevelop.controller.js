@@ -5,7 +5,7 @@
     $stateProvider
       .state('dashboard.appdevelop', {
         url: '/appdevelop/:id',
-        templateUrl: 'app/dashboard/appdevelop/appdevelop.html',
+        templateUrl: 'app/dashboard/products/appdevelop/appdevelop.html',
         controllerAs: 'vm',
         controller: 'AppDevelopCtrl'
       });

@@ -5,7 +5,7 @@
     $stateProvider
       .state('dashboard.pageanalytic', {
         url: '/pageanalytic/:id',
-        templateUrl: 'app/dashboard/pageanalytic/pageanalytic.html',
+        templateUrl: 'app/dashboard/products/pageanalytic/pageanalytic.html',
         controllerAs: 'vm',
         controller: 'PageAnalyticCtrl'
       });
