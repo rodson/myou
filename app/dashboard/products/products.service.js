@@ -1,7 +1,9 @@
 (function() {
   'use strict';
 
-  function ProductsService($http, Constant, StateManager, PlatformManager) {
+  function ProductsService($http, Constant, localStorageService,
+    StateManager, PlatformManager) {
+
     var ProductsService = {};
     ProductsService.products = '';
 
@@ -27,6 +29,7 @@
     };
 
     ProductsService.enterProduct = function(product) {
+      localStorageService.set('app', product);
       StateManager.enterProduct(product.platform, product._id);
     };
 
