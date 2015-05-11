@@ -2,10 +2,10 @@
   'use strict';
 
   angular
-    .module('myou.dashboard.addproduct', [
+    .module('myou.dashboard.servicemonitor', [
       'ui.router',
-      'ngMaterial',
 
       'myou.shared'
     ]);
+
 })();

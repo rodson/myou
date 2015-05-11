@@ -1,7 +1,7 @@
 <md-toolbar class="toolbar-tabs">
   <div class="md-toolbar-tools">
 
-    <div>
+<!--     <div>
       <md-button class="md-icon-button tabs-item">
         <i class="fa fa-puzzle-piece"></i>
         <span class="text">应用开发</span>
@@ -22,11 +22,11 @@
         <i class="fa fa-bullseye"></i>
         <span class="text">接口监控</span>
       </md-button>
-    </div>
+    </div> -->
 
     <md-input-container md-no-float class="search">
       <md-icon class="icon" md-svg-src="assets/images/material-action/ic_search_24px.svg"></md-icon>
-      <input ng-model="user.phone" type="text" placeholder="Phone Number">
+      <input ng-model="vm.searchText" type="text" placeholder="搜索产品">
     </md-input-container>
     <span flex></span>
     <md-button class="md-raised md-primary" ng-click="vm.gotoAddProduct()"
@@ -36,7 +36,8 @@
   </div>
 </md-toolbar>
 <div class="products-container">
-  <div class="product-card" ng-repeat="product in vm.products">
+  <div class="product-card"
+      ng-repeat="product in vm.products | filter:vm.searchText | orderBy: 'createdAt':true">
 
   <div class="header">
 
@@ -55,7 +56,7 @@
   </div>
 
   <div class="text-center">
-    <h2 class="name">{{ product.name }}</h2>
+    <h2 class="name" ng-click="vm.enterProduct(product)">{{ product.name }}</h2>
   </div>
 
   </div>

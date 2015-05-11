@@ -40,7 +40,13 @@
 
       'myou.dashboard.products',
       'myou.dashboard.addproduct',
-      'myou.dashboard.document'
+      'myou.dashboard.appdevelop',
+      'myou.dashboard.pageanalytic',
+      'myou.dashboard.servicemonitor',
+      'myou.dashboard.systemupdate',
+      'myou.dashboard.webpublish',
+      'myou.dashboard.document',
+      'myou.dashboard.apistatis'
     ])
     .config(dashboardConfig);
 

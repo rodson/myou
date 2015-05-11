@@ -11,7 +11,31 @@
       });
   }
 
-  function AddProductCtrl() {
+  function AddProductCtrl(AddProductService) {
+    var vm = this;
+
+    vm.platforms = AddProductService.platforms;
+    vm.platform = AddProductService.platforms.APP_DEVELOP;
+    vm.appPlatform = AddProductService.platforms.ANDROID_APP;
+    vm.product = {};
+
+    vm.createProduct = function(isValid) {
+      if (isValid) {
+        if (vm.platform === AddProductService.platforms.APP_DEVELOP) {
+          vm.product.platform = vm.appPlatform;
+        } else {
+          vm.product.platform = vm.platform;
+        }
+
+        AddProductService.createProduct(vm.product).then(function() {
+          vm.createdProduct = AddProductService.createdProduct;
+        });
+      }
+    };
+
+    vm.enterProduct = function() {
+      AddProductService.enterProduct();
+    };
 
   }
 

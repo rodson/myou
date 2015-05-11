@@ -2,5 +2,7 @@
   'use strict';
 
   angular
-    .module('myou.shared', []);
+    .module('myou.shared', [
+      'ui.router'
+    ]);
 })();

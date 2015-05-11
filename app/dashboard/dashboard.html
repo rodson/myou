@@ -1,16 +1,27 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <div class="app-logo">
-      <img class="icon" src="assets/images/m-white-128.png" alt="myou">
-      <span class="text md-title">萌友</span>
+      <a ui-sref=".products">
+        <img class="icon" src="assets/images/m-white-128.png" alt="myou">
+        <span class="text md-title">萌友</span>
+      </a>
     </div>
     <div class="toolbar-nav">
-      <md-button class="md-icon-button nav-item">
-        <span class="text">API统计</span>
-      </md-button>
-      <md-button class="md-icon-button nav-item" aria-label="More">
-        <span class="text">文档中心</span>
-      </md-button>
+      <a ui-sref=".products">
+        <md-button class="md-icon-button nav-item">
+          <span class="text">我的产品</span>
+        </md-button>
+      </a>
+      <a ui-sref=".apistatis">
+        <md-button class="md-icon-button nav-item">
+          <span class="text">API统计</span>
+        </md-button>
+      </a>
+      <a ui-sref=".document">
+        <md-button class="md-icon-button nav-item" aria-label="More">
+          <span class="text">文档中心</span>
+        </md-button>
+      </a>
     </div>
     <span flex></span>
     <md-button class="md-icon-button action" aria-label="More">

@@ -9,13 +9,6 @@
         controllerAs: 'vm',
         controller: 'ProductsCtrl',
         resolve: ProductsCtrl.resolve
-      })
-      .state('dashboard.appdevelop', {
-        url: '/appdevelop',
-        templateUrl: 'app/dashboard/products/products.html',
-        controllerAs: 'vm',
-        controller: 'ProductsCtrl',
-        resolve: ProductsCtrl.resolve
       });
   }
 
@@ -26,6 +19,10 @@
 
     vm.gotoAddProduct = function() {
       $state.go('dashboard.addproduct');
+    };
+
+    vm.enterProduct = function(product) {
+      ProductsService.enterProduct(product);
     };
   }
 

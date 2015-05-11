@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function ProductsService($http, Constant) {
+  function ProductsService($http, Constant, StateManager) {
     var ProductsService = {};
     ProductsService.products = '';
 
@@ -24,6 +24,10 @@
 
     ProductsService.updateProduct = function (id, product) {
       return $http.put(Constant.URL.PRODUCTS + '/' + id, product);
+    };
+
+    ProductsService.enterProduct = function(product) {
+      StateManager.enterProduct(product.platform, product._id);
     };
 
     return ProductsService;

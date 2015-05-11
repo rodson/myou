@@ -37,6 +37,11 @@ md-toolbar {
 }
 
 .app-logo {
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
   .icon {
     width: 28px;
     height: 24px;
