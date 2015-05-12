@@ -1,64 +1,66 @@
-<md-toolbar class="toolbar-tabs">
-  <div class="md-toolbar-tools">
+<div class="wrapper main">
+  <md-toolbar class="toolbar-tabs">
+    <div class="md-toolbar-tools">
 
-<!--     <div>
-      <md-button class="md-icon-button tabs-item">
-        <i class="fa fa-puzzle-piece"></i>
-        <span class="text">应用开发</span>
-      </md-button>
-      <md-button class="md-icon-button tabs-item">
-      <i class="fa fa-cloud-upload"></i>
-        <span class="text">系统升级</span>
-      </md-button>
-      <md-button class="md-icon-button tabs-item">
-        <i class="fa fa-wordpress"></i>
-        <span class="text">WEB包发布</span>
-      </md-button>
-      <md-button class="md-icon-button tabs-item">
-        <i class="fa fa-bar-chart-o"></i>
-        <span class="text">页面统计</span>
-      </md-button>
-      <md-button class="md-icon-button tabs-item">
-        <i class="fa fa-bullseye"></i>
-        <span class="text">接口监控</span>
-      </md-button>
-    </div> -->
+  <!--     <div>
+        <md-button class="md-icon-button tabs-item">
+          <i class="fa fa-puzzle-piece"></i>
+          <span class="text">应用开发</span>
+        </md-button>
+        <md-button class="md-icon-button tabs-item">
+        <i class="fa fa-cloud-upload"></i>
+          <span class="text">系统升级</span>
+        </md-button>
+        <md-button class="md-icon-button tabs-item">
+          <i class="fa fa-wordpress"></i>
+          <span class="text">WEB包发布</span>
+        </md-button>
+        <md-button class="md-icon-button tabs-item">
+          <i class="fa fa-bar-chart-o"></i>
+          <span class="text">页面统计</span>
+        </md-button>
+        <md-button class="md-icon-button tabs-item">
+          <i class="fa fa-bullseye"></i>
+          <span class="text">接口监控</span>
+        </md-button>
+      </div> -->
 
-    <md-input-container md-no-float class="search">
-      <md-icon class="icon" md-svg-src="assets/images/material-action/ic_search_24px.svg"></md-icon>
-      <input ng-model="vm.searchText" type="text" placeholder="搜索产品">
-    </md-input-container>
-    <span flex></span>
-    <md-button class="md-raised md-primary" ng-click="vm.gotoAddProduct()"
-        style="width: 78px; margin-right: 20px">
-      创建
-    </md-button>
-  </div>
-</md-toolbar>
-<div class="products-container">
-  <div class="product-card"
-      ng-repeat="product in vm.products | filter:vm.searchText | orderBy: 'createdAt':true">
+      <md-input-container md-no-float class="search">
+        <md-icon class="icon" md-svg-src="assets/images/material-action/ic_search_24px.svg"></md-icon>
+        <input ng-model="vm.searchText" type="text" placeholder="搜索产品">
+      </md-input-container>
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-click="vm.gotoAddProduct()"
+          style="width: 78px; margin-right: 20px">
+        创建
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div class="products-container">
+    <div class="product-card"
+        ng-repeat="product in vm.products | filter:vm.searchText | orderBy: 'createdAt':true">
 
-  <div class="header">
+    <div>
 
-    <div class="tooltips">
-      <md-icon md-svg-src="assets/images/material-action/ic_info_24px.svg"></md-icon>
-      <div class="popover">
-        {{ product.description }}
+      <div class="tooltips">
+        <md-icon md-svg-src="assets/images/material-action/ic_info_24px.svg"></md-icon>
+        <div class="popover">
+          {{ product.description }}
+        </div>
       </div>
+
+      <span class="more">
+        <md-icon md-svg-src="assets/images/material-other/ic_more_vert_24px.svg"></md-icon>
+      </span>
+
+      <div class="type">{{ vm.showPlatformName(product.platform) }}</div>
     </div>
 
-    <span class="more">
-      <md-icon md-svg-src="assets/images/material-other/ic_more_vert_24px.svg"></md-icon>
-    </span>
+    <div class="text-center">
+      <h2 class="name" ng-click="vm.enterProduct(product)">{{ product.name }}</h2>
+    </div>
 
-    <div class="type">{{ vm.showPlatformName(product.platform) }}</div>
-  </div>
-
-  <div class="text-center">
-    <h2 class="name" ng-click="vm.enterProduct(product)">{{ product.name }}</h2>
-  </div>
-
+    </div>
   </div>
 </div>
 

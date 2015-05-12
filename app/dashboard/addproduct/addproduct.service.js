@@ -1,7 +1,9 @@
 (function() {
   'use strict';
 
-  function AddProductService($http, $state, $mdToast, Constant, StateManager) {
+  function AddProductService($http, $state, $mdToast, localStorageService,
+    Constant, StateManager) {
+
     var AddProductService = {};
     AddProductService.createdProduct = {};
     AddProductService.platforms = Constant.PRODUCT_PLATFORM;
@@ -27,6 +29,7 @@
     };
 
     AddProductService.enterProduct = function() {
+      localStorageService.set('app', AddProductService.createdProduct);
       StateManager.enterProduct(AddProductService.createdProduct.platform,
         AddProductService.createdProduct._id);
     };

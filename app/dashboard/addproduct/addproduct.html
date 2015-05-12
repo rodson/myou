@@ -1,108 +1,110 @@
-<div class="addproduct-container">
-  <div id="product-type" ng-hide="vm.createdProduct">
-    <label class="radio-inline">
-      <input type="radio" name="platform" ng-model="vm.platform"
-             value="{{vm.platforms.APP_DEVELOP}}">
-      <i class="fa fa-puzzle-piece"><span>应用开发</span></i>
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="platform" ng-model="vm.platform"
-             value="{{vm.platforms.SYSTEM_UPDATE}}">
-      <i class="fa fa-cloud-upload"><span>系统升级</span></i>
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="platform" ng-model="vm.platform"
-             value="{{vm.platforms.WEB_PUBLISH}}">
-      <i class="fa fa-wordpress"><span>WEB发布</span></i>
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="platform" ng-model="vm.platform"
-             value="{{vm.platforms.PAGE_ANALYTIC}}">
-      <i class="fa fa-bar-chart-o"><span>页面统计</span></i>
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="platform" ng-model="vm.platform"
-             value="{{vm.platforms.SERVICE_MONITOR}}">
-      <i class="fa fa-bullseye"><span>接口监控</span></i>
-    </label>
-  </div>
-
-  <!-- create product form -->
-  <div class="main" ng-hide="vm.createdProduct">
-    <form name="addProductForm" novalidate
-        ng-submit="vm.createProduct(addProductForm.$valid)">
-      <section>
-        <md-input-container flex>
-          <label>产品名称</label>
-          <input type="text" name="name"
-              required ng-model="vm.product.name">
-          <div ng-show="addProductForm.$submitted || addProductForm.name.$touched"
-              ng-messages="addProdcutForm.name.$error">
-            <div ng-show="addProductForm.name.$error.required" class="error"
-                ng-message="required">
-              请输入产品名称
-            </div>
-          </div>
-        </md-input-container>
-        <md-input-container flex>
-          <label>产品描述</label>
-          <input type="text", name="description"
-              required ng-model="vm.product.description">
-          <div ng-show="addProductForm.$submitted || addProductForm.description.$touched"
-            ng-messages="addProductForm.description.$error">
-            <div ng-show="addProductForm.description.$error.required" class="error"
-                ng-message="required">
-              请输入产品描述
-            </div>
-          </div>
-        </md-input-container>
-        <div ng-show="vm.platform === 'appdevelop'">
-          <span class="label">
-            平台:
-          </span>
-          <md-radio-group class="inline" ng-model="vm.appPlatform">
-            <md-radio-button value="{{vm.platforms.ANDROID_APP}}"
-                class="inline md-primary">Android应用</md-radio-button>
-            <md-radio-button value="{{vm.platforms.WINDOWS_APP}}"
-                class="inline md-primary">Windows应用</md-radio-button>
-            <md-radio-button value="{{vm.platforms.IOS_APP}}"
-                class="inline md-primary">IOS应用</md-radio-button>
-          </md-radio-group>
-        </div>
-      </section>
-
-      <section class="clearfix">
-        <md-button id="create" class="md-raised md-primary">
-          创建
-        </md-button>
-      </section>
-    </form>
-  </div>
-
-  <!-- Product info is created. Show when the product is created -->
-  <div class="main" ng-show="vm.createdProduct" style="margin-top: 90px;">
-    <div class="create-success-container">
-      <div class="title">
-        "{{ vm.createdProduct.name }}"创建成功
-      </div>
-      <div ng-show="vm.createdProduct.appKey">
-        <div class="label">
-          唯一APPKEY为：
-        </div>
-        <div class="appkey">
-          {{ vm.createdProduct.appKey}}
-        </div>
-        <p class="tips">
-          每个产品对应的APPKEY是唯一的，请在集成时将此APPKEY添加到代码中。
-        </p>
-      </div>
-      <div class="clearfix">
-        <md-button id="confirm" class="md-raised md-primary"
-            ng-click="vm.enterProduct()">
-          进入产品
-        </md-button>
-      </div>
+<div class="wrapper main">
+  <div class="addproduct-container">
+    <div id="product-type" ng-hide="vm.createdProduct">
+      <label class="radio-inline">
+        <input type="radio" name="platform" ng-model="vm.platform"
+               value="{{vm.platforms.APP_DEVELOP}}">
+        <i class="fa fa-puzzle-piece"><span>应用开发</span></i>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="platform" ng-model="vm.platform"
+               value="{{vm.platforms.SYSTEM_UPDATE}}">
+        <i class="fa fa-cloud-upload"><span>系统升级</span></i>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="platform" ng-model="vm.platform"
+               value="{{vm.platforms.WEB_PUBLISH}}">
+        <i class="fa fa-wordpress"><span>WEB发布</span></i>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="platform" ng-model="vm.platform"
+               value="{{vm.platforms.PAGE_ANALYTIC}}">
+        <i class="fa fa-bar-chart-o"><span>页面统计</span></i>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="platform" ng-model="vm.platform"
+               value="{{vm.platforms.SERVICE_MONITOR}}">
+        <i class="fa fa-bullseye"><span>接口监控</span></i>
+      </label>
     </div>
 
+    <!-- create product form -->
+    <div class="addproduct-main" ng-hide="vm.createdProduct">
+      <form name="addProductForm" novalidate
+          ng-submit="vm.createProduct(addProductForm.$valid)">
+        <section>
+          <md-input-container flex>
+            <label>产品名称</label>
+            <input type="text" name="name"
+                required ng-model="vm.product.name">
+            <div ng-show="addProductForm.$submitted || addProductForm.name.$touched"
+                ng-messages="addProdcutForm.name.$error">
+              <div ng-show="addProductForm.name.$error.required" class="error"
+                  ng-message="required">
+                请输入产品名称
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container flex>
+            <label>产品描述</label>
+            <input type="text", name="description"
+                required ng-model="vm.product.description">
+            <div ng-show="addProductForm.$submitted || addProductForm.description.$touched"
+              ng-messages="addProductForm.description.$error">
+              <div ng-show="addProductForm.description.$error.required" class="error"
+                  ng-message="required">
+                请输入产品描述
+              </div>
+            </div>
+          </md-input-container>
+          <div ng-show="vm.platform === 'appdevelop'">
+            <span class="label">
+              平台:
+            </span>
+            <md-radio-group class="inline" ng-model="vm.appPlatform">
+              <md-radio-button value="{{vm.platforms.ANDROID_APP}}"
+                  class="inline md-primary">Android应用</md-radio-button>
+              <md-radio-button value="{{vm.platforms.WINDOWS_APP}}"
+                  class="inline md-primary">Windows应用</md-radio-button>
+              <md-radio-button value="{{vm.platforms.IOS_APP}}"
+                  class="inline md-primary">IOS应用</md-radio-button>
+            </md-radio-group>
+          </div>
+        </section>
+
+        <section class="clearfix">
+          <md-button id="create" class="md-raised md-primary">
+            创建
+          </md-button>
+        </section>
+      </form>
+    </div>
+
+    <!-- Product info is created. Show when the product is created -->
+    <div class="addproduct-main" ng-show="vm.createdProduct" style="margin-top: 90px;">
+      <div class="create-success-container">
+        <div class="title">
+          "{{ vm.createdProduct.name }}"创建成功
+        </div>
+        <div ng-show="vm.createdProduct.appKey">
+          <div class="label">
+            唯一APPKEY为：
+          </div>
+          <div class="appkey">
+            {{ vm.createdProduct.appKey}}
+          </div>
+          <p class="tips">
+            每个产品对应的APPKEY是唯一的，请在集成时将此APPKEY添加到代码中。
+          </p>
+        </div>
+        <div class="clearfix">
+          <md-button id="confirm" class="md-raised md-primary"
+              ng-click="vm.enterProduct()">
+            进入产品
+          </md-button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

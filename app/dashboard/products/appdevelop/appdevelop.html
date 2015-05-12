@@ -1,5 +1,58 @@
-<md-toolbar class="toolbar-tabs">
-  <div class="md-toolbar-tools">
+<div class="wrapper main">
+  <md-toolbar class="toolbar-tabs">
+    <div class="md-toolbar-tools">
+      <h2>
+        {{ vm.product.name }}
+      </h2>
+    </div>
+  </md-toolbar>
+  <div class="main-container">
+    <nav class="sidebar">
+      <ul>
+
+        <li>
+          <a href="">自动更新</a>
+          <ul>
+            <li><a href="">更新配置</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="">数据分析</a>
+          <ul>
+            <li><a href="">关键数据</a></li>
+            <li><a href="">版本分布</a></li>
+            <li><a href="">自定义事件</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="">用户分析</a>
+          <ul>
+            <li><a href="">用户留存</a></li>
+            <li><a href="">设备终端</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="">错误分析</a>
+          <ul>
+            <li><a href="">错误趋势</a></li>
+            <li><a href="">错误列表</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="">测试设置</a>
+          <ul>
+            <li><a href="">测试设备</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <main class="main-section">
+      App develop
+    </main>
   </div>
-</md-toolbar>
-<h1>App Develop</h1>
+</div>

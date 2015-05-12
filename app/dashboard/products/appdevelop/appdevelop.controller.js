@@ -11,8 +11,10 @@
       });
   }
 
-  function AppDevelopCtrl() {
+  function AppDevelopCtrl(AppDevelopService, localStorageService) {
+    var vm = this;
 
+    vm.product = localStorageService.get('app');
   }
 
   angular

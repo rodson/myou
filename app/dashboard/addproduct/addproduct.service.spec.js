@@ -4,6 +4,7 @@ describe('AddProductService: ', function() {
   var AddProductService;
   var Constant;
   var StateManager;
+  var localStorageService;
   var $mdToast;
   var $httpBackend;
   var $state;
@@ -12,12 +13,13 @@ describe('AddProductService: ', function() {
     module('myou.dashboard.addproduct');
 
     inject(function(_AddProductService_, _$httpBackend_, _$state_,
-      _$mdToast_, _Constant_, _StateManager_) {
+      _$mdToast_, _Constant_, _StateManager_, _localStorageService_) {
       AddProductService = _AddProductService_;
       $httpBackend = _$httpBackend_;
       $state = _$state_;
       $mdToast = _$mdToast_;
       Constant = _Constant_;
+      localStorageService = _localStorageService_;
       StateManager = _StateManager_;
     });
   });
@@ -63,7 +65,20 @@ describe('AddProductService: ', function() {
       };
 
       AddProductService.enterProduct();
-      expect(StateManager.enterProduct).toHaveBeenCalledWith('android_app', 'qwerty');
+      expect(StateManager.enterProduct)
+        .toHaveBeenCalledWith('android_app', 'qwerty');
+    });
+
+    it('should save product to local storage', function() {
+      spyOn(localStorageService, 'set');
+      AddProductService.createdProduct = {
+        platform: 'android_app',
+        _id: 'qwerty'
+      };
+
+      AddProductService.enterProduct();
+      expect(localStorageService.set)
+        .toHaveBeenCalledWith('app', AddProductService.createdProduct);
     });
   });
 
