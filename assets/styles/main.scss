@@ -52,7 +52,7 @@ nav.sidebar {
   position: absolute;
   left: 0;
   box-sizing: border-box;
-  padding: 24px 32px 0px 32px;
+  padding: 24px 32px 0px 0px;
   width: $sidebar-width;
 
   ul {
@@ -65,13 +65,14 @@ nav.sidebar {
   & > ul {
 
     a {
-      border-right: 1px solid #dedede;
+      border-right: 1px solid #eee;
       text-decoration: none;
       color: #999;
       font-size: 15px;
-      width: 146px;
+      width: $sidebar-width;
       box-sizing: border-box;
       padding: 2px 12px 2px 16px;
+      padding-left: 46px;
       font-weight: 500;
       display: inline-block;
 
@@ -91,7 +92,9 @@ nav.sidebar {
         font-size: 17px;
         font-weight: bold;
         color: #bbb;
-        padding: 2px 0;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 32px;
         cursor: default;
         display: inline-block;
 
@@ -143,7 +146,7 @@ body {
 
   main.main-section {
     margin-left: $sidebar-width;
-    padding: 16px 24px;
+    padding: 18px 24px;
   }
 }
 
