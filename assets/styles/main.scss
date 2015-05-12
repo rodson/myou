@@ -67,7 +67,7 @@ nav.sidebar {
     a {
       border-right: 1px solid #dedede;
       text-decoration: none;
-      color: #888;
+      color: #999;
       font-size: 15px;
       width: 146px;
       box-sizing: border-box;
@@ -77,8 +77,9 @@ nav.sidebar {
 
       &:hover {
         color: #666;
-        border-right: 1px solid #bbb;
+        border-right: 1px solid #999;
       }
+
     }
 
     & > li {
@@ -103,6 +104,13 @@ nav.sidebar {
       & > ul {
 
         & > li {
+          &.active {
+            a {
+              color: $primary-color;
+              border-right: 1px solid $primary-color;
+              font-weight: 700;
+            }
+          }
 
           &:first-child {
             margin-top: 4px;
@@ -117,7 +125,7 @@ nav.sidebar {
 
 body {
   position: relative;
-  font-family: "Helvetica Neue",Helvetica, "Roboto Condensed", STHeiti,"Microsoft Yahei","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
+  font-family: "Roboto Condensed", "Microsoft Yahei", sans-serif;
   font-weight: 300;
   background-color: #fff;
   box-sizing: border-box;

@@ -23,21 +23,24 @@ describe('shared: StateManager', function() {
       var platform = Constant.PRODUCT_PLATFORM.ANDROID_APP;
       var id = 'qwerty';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.appdevelop', {id: id});
+      expect($state.go)
+        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
     });
 
     it('should call go on $state with appdevelop when windowsapp', function() {
       var platform = Constant.PRODUCT_PLATFORM.WINDOWS_APP;
       var id = 'qwerty';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.appdevelop', {id: id});
+      expect($state.go)
+        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
     });
 
     it('should call go on $state with appdevelop when iosapp', function() {
       var platform = Constant.PRODUCT_PLATFORM.IOS_APP;
       var id = 'qwerty';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.appdevelop', {id: id});
+      expect($state.go)
+        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
     });
 
     it('should call go on $state with systemupdate when systemupdate', function() {

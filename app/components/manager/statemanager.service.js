@@ -10,7 +10,7 @@
         case Constant.PRODUCT_PLATFORM.ANDROID_APP:
         case Constant.PRODUCT_PLATFORM.WINDOWS_APP:
         case Constant.PRODUCT_PLATFORM.IOS_APP:
-          state = 'dashboard.appdevelop';
+          state = 'dashboard.appdevelop.updatesetting';
           break;
         case Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE:
           state = 'dashboard.systemupdate';

@@ -11,48 +11,52 @@
       <ul>
 
         <li>
-          <a href="">自动更新</a>
+          <a>应用更新</a>
           <ul>
-            <li><a href="">更新配置</a></li>
+            <li ng-class="{active: vm.isActive('updatesetting')}">
+              <a ui-sref=".updatesetting">更新配置</a>
+            </li>
           </ul>
         </li>
 
         <li>
-          <a href="">数据分析</a>
+          <a>数据分析</a>
           <ul>
-            <li><a href="">关键数据</a></li>
-            <li><a href="">版本分布</a></li>
-            <li><a href="">自定义事件</a></li>
+            <li ng-class="{active: vm.isActive('keydata')}">
+              <a ui-sref=".keydata">关键数据</a>
+            </li>
+            <li><a>版本分布</a></li>
+            <li><a>自定义事件</a></li>
           </ul>
         </li>
 
         <li>
-          <a href="">用户分析</a>
+          <a>用户分析</a>
           <ul>
-            <li><a href="">用户留存</a></li>
-            <li><a href="">设备终端</a></li>
+            <li><a>用户留存</a></li>
+            <li><a>设备终端</a></li>
           </ul>
         </li>
 
         <li>
-          <a href="">错误分析</a>
+          <a>错误分析</a>
           <ul>
-            <li><a href="">错误趋势</a></li>
-            <li><a href="">错误列表</a></li>
+            <li><a>错误趋势</a></li>
+            <li><a>错误列表</a></li>
           </ul>
         </li>
 
         <li>
-          <a href="">测试设置</a>
+          <a>测试设置</a>
           <ul>
-            <li><a href="">测试设备</a></li>
+            <li><a>测试设备</a></li>
           </ul>
         </li>
 
       </ul>
     </nav>
     <main class="main-section">
-      App develop
+      <div ui-view></div>
     </main>
   </div>
 </div>

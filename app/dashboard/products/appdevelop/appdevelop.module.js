@@ -4,8 +4,12 @@
   angular
     .module('myou.dashboard.appdevelop', [
       'ui.router',
+      'LocalStorageModule',
 
-      'myou.shared'
+      'myou.shared',
+
+      'myou.dashboard.appdevelop.appupdate',
+      'myou.dashboard.appdevelop.dataanalytic'
     ]);
 
 })();
