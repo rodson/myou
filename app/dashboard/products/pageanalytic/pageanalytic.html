@@ -1,1 +1,61 @@
-<h1>Page Analytic</h1>
+<div class="wrapper main">
+    <md-toolbar class="toolbar-tabs">
+        <div class="md-toolbar-tools">
+            <h2>{{ vm.product.name }}</h2>
+            <md-button class="md-primary margin-left-auto" ng-click='vm.showCopyCodeDialog($event)'>获取代码</md-button>
+        </div>
+    </md-toolbar>
+    <div class="main-container">
+        <nav class="sidebar">
+            <ul>
+                <li>
+                    <a>基础运营</a>
+                    <ul>
+                    		<li ng-class="{active: vm.isActive('global')}"><a ui-sref='.global'>网站概述</a></li>
+                        <li ng-class="{active: vm.isActive('websitetrend')}"><a ui-sref='.websitetrend'>网站趋势</a></li>
+                        <li ng-class="{active: vm.isActive('pageranking')}"><a ui-sref='.pageranking'>页面排行</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>访客信息</a>
+                    <ul>
+                        <li ng-class="{active: vm.isActive('operator')}"><a ui-sref='.operator'>运营商</a></li>
+                        <li ng-class="{active: vm.isActive('area')}"><a ui-sref='.area'>地域</a></li>
+                        <li ng-class="{active: vm.isActive('clientinfo')}"><a ui-sref='.clientinfo'>客户端信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>转换跟踪</a>
+                    <ul>
+                        <li ng-class="{active: vm.isActive('userinfo')}"><a ui-sref='.userinfo'>用户来源</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main class="main-section">
+            <div ui-view></div>
+        </main>
+    </div>
+</div>
+<div>
+    <script type="text/ng-template" id="getCaCode.html">
+        <md-dialog aria-label="获取代码" id='copy-ca-dialog'>
+            <form>
+                <md-dialog-content class="sticky-container">
+                    <md-subheader class="md-sticky-no-effect">注意事项：请将代码复制到网站全部页面的标签&lt&#47body&gt之前</md-subheader>
+                    <div>
+                        <textarea rows="7" class='little-tip' ng-model='vm.textareaVal'></textarea>
+                    </div>
+                </md-dialog-content>
+                <div class="md-actions" layout="row">
+                    <md-button clip-copy="vm.copy()" class="md-primary">
+                        复制
+                    </md-button>
+                    <md-button ng-click="vm.close()" class="md-primary">
+                        关闭
+                    </md-button>
+                </div>
+            </form>
+        </md-dialog>
+    </script>
+</div>
