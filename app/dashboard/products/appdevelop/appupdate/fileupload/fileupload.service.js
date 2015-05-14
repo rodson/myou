@@ -147,8 +147,7 @@
     }
 
     function onProgress(evt) {
-      console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total)
-        + '% file :'+ evt.config.file.name);
+      console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
     }
 
     function onSuccess(data) {
