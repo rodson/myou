@@ -3,7 +3,8 @@
 
   angular
     .module('myou.ui', [
-      'myou.ui.fileUploader'
+      'myou.ui.fileUploader',
+      'myou.ui.datatimePicker'
     ]);
 
 })();

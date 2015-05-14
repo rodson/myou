@@ -11,8 +11,10 @@
 			});
 	}
 
-	function WebsiteTrendCtrl() {
-
+	function WebsiteTrendCtrl(dateFilter) {
+    var vm = this;
+    var format = 'yyyy-MM-dd  HH:mm:ss';
+    vm.startdata = dateFilter(new Date(), format);
 	}
 
 	angular

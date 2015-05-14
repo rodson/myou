@@ -16,6 +16,7 @@ module.exports = function (config) {
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/zeroclipboard/dist/ZeroClipboard.js',
       'bower_components/ng-clip/src/ngClip.js',
+      'bower_components/md-date-time/dist/md-date-time.js',
 
       'app/**/*module.js',
       'app/**/*.js'
