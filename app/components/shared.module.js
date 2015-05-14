@@ -3,6 +3,7 @@
 
   angular
     .module('myou.shared', [
-      'ui.router'
+      'ui.router',
+      'myou.ui'
     ]);
 })();
