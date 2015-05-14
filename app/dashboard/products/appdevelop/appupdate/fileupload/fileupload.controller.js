@@ -11,19 +11,28 @@
       });
   }
 
-  function FileUploadCtrl(FileUploadService, PlatformManager) {
+  function FileUploadCtrl(FileUploadService, localStorageService) {
+
     var vm = this;
 
-    vm.isAndroidApp = function(platform) {
-      return PlatformManager.isAndroidApp(platform);
+    vm.app = localStorageService.get('app');
+
+    vm.uploadData = FileUploadService.uploadData;
+
+    vm.checkAppType = function(type) {
+      return FileUploadService.checkAppType(vm.app.platform, type);
     };
 
-    vm.isWindowsApp = function(platform) {
-      return PlatformManager.isWindowsApp(platform);
+    vm.onFileSelect = function(files, type) {
+      FileUploadService.onFileSelect(files, type);
     };
 
-    vm.isIosApp = function(platform) {
-      return PlatformManager.isIosApp(platform);
+    vm.upload = function() {
+      FileUploadService.upload(vm.app);
+    };
+
+    vm.abortUpload = function() {
+      FileUploadService.abortUpload();
     };
 
   }

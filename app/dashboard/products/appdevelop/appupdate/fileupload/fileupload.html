@@ -2,27 +2,30 @@
 
   <div class="sm-container">
 
-    <div class="group-section" ng-show="true">
+    <div class="group-section" ng-show="vm.checkAppType('android')">
       <div class="group-title">
         选择apk文件
       </div>
-      <rs-file-uploader>
+      <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files, 'apk')"
+          file="vm.uploadData.apk">
       </rs-file-uploader>
     </div>
 
-    <div class="group-section" ng-show="true">
+    <div class="group-section" ng-show="vm.checkAppType('windows')">
       <div class="group-title">
         选择zip文件
       </div>
-      <rs-file-uploader>
+      <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files, 'zip')"
+          file="vm.uploadData.zip">
       </rs-file-uploader>
     </div>
 
-    <div class="group-section" ng-show="true">
+    <div class="group-section" ng-show="vm.checkAppType('windows')">
       <div class="group-title">
         选择exe文件
       </div>
-      <rs-file-uploader>
+      <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files, 'exe')"
+          file="vm.uploadData.exe">
       </rs-file-uploader>
     </div>
 
@@ -31,12 +34,12 @@
         更新描述
       </div>
       <md-input-container flex>
-        <textarea columns="2"></textarea>
+        <textarea columns="2" ng-model="vm.uploadData.updateDesc"></textarea>
       </md-input-container>
     </div>
 
     <div class="group-section clearfix">
-      <md-button
+      <md-button ng-click="vm.upload()"
           class="btn-lg md-raised md-primary pull-right">
         上传
       </md-button>
