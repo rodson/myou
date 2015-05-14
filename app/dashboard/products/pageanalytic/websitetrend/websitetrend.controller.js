@@ -13,8 +13,14 @@
 
 	function WebsiteTrendCtrl(dateFilter) {
     var vm = this;
-    var format = 'yyyy-MM-dd  HH:mm:ss';
+    var format = 'yyyy-MM-dd';
     vm.startdata = dateFilter(new Date(), format);
+
+    vm.enddata = dateFilter(new Date('2015-06-09'), format);
+
+    vm.data = {
+      group1 : 'today'
+    };
 	}
 
 	angular

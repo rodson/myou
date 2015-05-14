@@ -2,6 +2,19 @@
   margin-left: auto;
 }
 
+.margin-left-30 {
+  margin-left: 30px;
+}
+.margin-right-30 {
+  margin-right: 30px;
+}
+.margin-top-30 {
+  margin-top: 30px;
+}
+.margin-bottom-30 {
+  margin-bottom: 30px;
+}
+
 .little-tip {
   width: 95%;
   margin-left: auto;
@@ -25,4 +38,34 @@
 
 md-card-content {
   text-align: center;
+}
+
+.pa-pull-right {
+  float: right !important;
+}
+
+md-radio-group, md-radio-button {
+  margin: 5px;
+  display: inline-block;
+}
+
+.time-date > .display > .title {
+  background-color: #176fdd;
+}
+
+.time-date .buttons button span,
+.time-date button, .time-date .button,
+.time-date > .control > .slider > .date-control > .days .day-cell.today span{
+  color: #277bdd;
+}
+.time-date.full-mode > .buttons > button span {
+  color: white;
+}
+
+.time-date > .display > .content,
+.time-date > .control > .full-title,
+.time-date.full-mode > .buttons,
+.time-date > .control > .slider > .date-control > .days .day-cell.selected,
+.time-date > .control > .slider > .date-control > .days .day-cell:hover {
+  background-color: #277bdd;
 }

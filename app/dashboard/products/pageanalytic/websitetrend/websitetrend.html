@@ -1,2 +1,16 @@
-<h1>网站趋势</h1>
-<datatime-picker init-datatime='vm.startdata'></datatime-picker>
+<div>
+  <span>起始日期：</span>
+  <datatime-picker init-datatime='vm.startdata' display-mode='date'></datatime-picker>
+  <span class='margin-left-30'>截止日期：</span>
+  <datatime-picker init-datatime='vm.enddata' display-mode='date'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="">&nbsp;查询&nbsp;</md-button>
+
+  <md-radio-group ng-model="vm.data.group1" class='pa-pull-right'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+
+</div>
+
