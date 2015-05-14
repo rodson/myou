@@ -11,7 +11,20 @@
       });
   }
 
-  function FileUploadCtrl() {
+  function FileUploadCtrl(FileUploadService, PlatformManager) {
+    var vm = this;
+
+    vm.isAndroidApp = function(platform) {
+      return PlatformManager.isAndroidApp(platform);
+    };
+
+    vm.isWindowsApp = function(platform) {
+      return PlatformManager.isWindowsApp(platform);
+    };
+
+    vm.isIosApp = function(platform) {
+      return PlatformManager.isIosApp(platform);
+    };
 
   }
 

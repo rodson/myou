@@ -157,6 +157,35 @@ body {
   top: 0;
 }
 
+.page-sm-container {
+  padding: 48px;
+}
+
+.page-container {
+
+}
+
+.sm-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 610px;
+  margin: 0 auto;
+  padding: 32px 90px;
+}
+
+.group-section {
+  padding: 10px 0;
+
+  .group-title {
+    color: $primary-color;
+    margin-bottom: 10px;
+  }
+}
+
+.btn-lg {
+  width: 80px;
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;

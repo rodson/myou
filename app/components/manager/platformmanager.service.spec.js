@@ -56,4 +56,36 @@ describe('shared: PlatformManager', function() {
       expect(result).toEqual('页面分析');
     });
   });
+
+  describe('fn isXXXApp: ', function() {
+    it('should return true if the platform is android app', function() {
+      expect(PlatformManager
+        .isAndroidApp(Constant.PRODUCT_PLATFORM.ANDROID_APP)).toBe(true);
+    });
+
+    it('should return false if the platform is not android app', function() {
+      expect(PlatformManager
+        .isAndroidApp(Constant.PRODUCT_PLATFORM.WINDOWS_APP)).toBe(false);
+    });
+
+    it('should return true if the platform is windows app', function() {
+      expect(PlatformManager
+        .isWindowsApp(Constant.PRODUCT_PLATFORM.WINDOWS_APP)).toBe(true);
+    });
+
+    it('should return false if the platform is not windows app', function() {
+      expect(PlatformManager
+        .isWindowsApp(Constant.PRODUCT_PLATFORM.IOS_APP)).toBe(false);
+    });
+
+    it('should return true if the platform is ios app', function() {
+      expect(PlatformManager
+        .isIosApp(Constant.PRODUCT_PLATFORM.IOS_APP)).toBe(true);
+    });
+
+    it('should return false if the platform is not ios app', function() {
+      expect(PlatformManager
+        .isIosApp(Constant.PRODUCT_PLATFORM.ANDROID_APP)).toBe(false);
+    });
+  });
 });

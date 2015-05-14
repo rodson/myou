@@ -32,6 +32,18 @@
       return name;
     };
 
+    PlatformManager.isAndroidApp = function(platform) {
+      return platform === Constant.PRODUCT_PLATFORM.ANDROID_APP;
+    };
+
+    PlatformManager.isWindowsApp = function(platform) {
+      return platform === Constant.PRODUCT_PLATFORM.WINDOWS_APP;
+    };
+
+    PlatformManager.isIosApp = function(platform) {
+      return platform === Constant.PRODUCT_PLATFORM.IOS_APP;
+    };
+
     return PlatformManager;
   }
 
