@@ -2,7 +2,9 @@
   'use strict';
 
   function UpdateSettingService() {
+    var UpdateSettingService = {};
 
+    return UpdateSettingService;
   }
 
   angular
