@@ -10,7 +10,7 @@
         CHECK_LOGIN: 'http://localhost:4000/api/in/auth/loggedin',
 
         PRODUCTS: 'http://localhost:4000/api/in/applications',
-        PRODUCTS_OVERVIEW: 'http://localhost:4000/api/analytics/overview',
+        PRODUCTS_OVERVIEW: 'http://myoutest.cvte.com/api/analytics/overview',
         PRODUCTS_SUMMARY: 'http://localhost:4000/api/analytics/summary',
       },
 

@@ -21,7 +21,6 @@ module.exports = function (config) {
       'bower_components/angular-moment/angular-moment.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-tablesort/js/angular-tablesort.js',
-      'assets/js/highstock.src.js',
       'bower_components/highcharts-ng/src/highcharts-ng.js',
       'app/**/*module.js',
       'app/**/*.js'

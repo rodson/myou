@@ -70,7 +70,6 @@
           break;
       }
 
-      console.log(checkDate);
       vm.highchartsNG.series = [{
         name: 'PV',
         data: [1, 2, 3, 4, 5]
