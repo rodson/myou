@@ -12,6 +12,7 @@
   }
 
   function UpdateSettingCtrl() {
+    var vm = this;
 
   }
 
