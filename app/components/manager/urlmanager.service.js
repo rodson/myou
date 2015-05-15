@@ -5,7 +5,12 @@
     var UrlManager = {};
 
     UrlManager.getUploadUrl = function(id, platform) {
-      return Constant.URL.PRODUCTS + '/' + id + '/update/versions' + '?platform=' + platform;
+      return Constant.URL.PRODUCTS + '/' + id +
+        '/update/versions' + '?platform=' + platform;
+    };
+    
+    UrlManager.getAppUpdateInfoUrl = function(id) {
+      return Constant.URL.PRODUCTS + '/' + id + '/update/versions';
     };
 
     return UrlManager;

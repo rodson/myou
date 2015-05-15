@@ -21,4 +21,11 @@ describe('UrlManager', function() {
     expect(UrlManager.getUploadUrl(id, platform)).toEqual(expectedUrl);
   });
 
+  it('should return app update info url', function() {
+    var id = 'qwerty';
+    var expectedUrl = Constant.URL.PRODUCTS + '/qwerty/update/versions';
+    expect(UrlManager.getAppUpdateInfoUrl(id)).toEqual(expectedUrl);
+
+  });
+
 });

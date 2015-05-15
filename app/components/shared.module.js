@@ -5,6 +5,7 @@
     .module('myou.shared', [
       'ui.router',
       'myou.ui',
-      'myou.util'
+      'myou.util',
+      'myou.filter'
     ]);
 })();

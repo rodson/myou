@@ -1,30 +1,28 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Link</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Material design sidebar</td>
-      <td>http://material.design.com</td>
-      <td>complete</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Material design sidebar</td>
-      <td>http://material.design.com</td>
-      <td>complete</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Material design sidebar</td>
-      <td>http://material.design.com</td>
-      <td>complete</td>
-    </tr>
-  </tbody>
-</table>
+<div class="page-container">
+
+  <!-- Newest Update Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>文件名</th>
+        <th>文件大小</th>
+        <th>上传时间</th>
+        <th>版本名</th>
+        <th>版本号</th>
+        <th>版本描述</th>
+        <th>删除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ vm.newestUpdate.fileName }}</td>
+        <td>{{ vm.newestUpdate.fileSize | bytes }}</td>
+        <td>{{ vm.newestUpdate.createdAt | date: 'yyyy-MM-dd H:mm' }}</td>
+        <td>{{ vm.newestUpdate.versionName }}</td>
+        <td>{{ vm.newestUpdate.versionCode }}</td>
+        <td>updateDesc</td>
+        <td>delete</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

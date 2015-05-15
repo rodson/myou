@@ -7,14 +7,23 @@
         url: '/updatesetting',
         templateUrl: 'app/dashboard/products/appdevelop/appupdate/updatesetting/updatesetting.html',
         controllerAs: 'vm',
-        controller: 'UpdateSettingCtrl'
+        controller: 'UpdateSettingCtrl',
+        resolve: UpdateSettingCtrl.resolve
       });
   }
 
-  function UpdateSettingCtrl() {
+  function UpdateSettingCtrl(UpdateSettingService) {
     var vm = this;
 
+    vm.newestUpdate = UpdateSettingService.newestUpdate;
+    vm.updateInfos = UpdateSettingService.updateInfos;
   }
+
+  UpdateSettingCtrl.resolve = {
+    getAppUpdates: function(UpdateSettingService, $stateParams) {
+      return UpdateSettingService.getAppUpdates($stateParams.id);
+    }
+  };
 
   angular
     .module('myou.dashboard.appdevelop.appupdate')
