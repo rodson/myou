@@ -2,11 +2,11 @@
   'use strict';
 
   angular
-    .module('myou.util.service', ['angularMoment'])
+    .module('myou.util.service', [])
     .factory('MomentDateService', MomentDateService);
 
-  function MomentDateService(amMoment) {
-
+  function MomentDateService() {
+    var moment = window.moment;
     var momentDateService = {};
 
     momentDateService.getToday = function() {

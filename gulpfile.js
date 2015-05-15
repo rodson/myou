@@ -36,8 +36,7 @@ gulp.task('karma', function(done) {
 // Lint JavaScript
 gulp.task('jshint', function() {
   return gulp.src([
-      'app/**/*.js',
-      'assets/js/*.js'
+      'app/**/*.js'
     ])
     .pipe(reload({
       stream: true,
@@ -114,7 +113,6 @@ gulp.task('concat', function() {
   return gulp.src([
       'app/**/*module.js',
       'app/**/*.js',
-      'assets/js/*.js',
       '!app/**/*.spec.js'
     ])
     .pipe($.sourcemaps.init())

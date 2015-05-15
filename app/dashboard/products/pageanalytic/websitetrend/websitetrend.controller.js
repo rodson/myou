@@ -8,13 +8,12 @@
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
         controller: 'WebsiteTrendCtrl',
-        // resolve: WebsiteTrendCtrl.resolve
+        resolve: WebsiteTrendCtrl.resolve
       });
   }
 
-  function WebsiteTrendCtrl(dateFilter, MomentDateService) {
+  function WebsiteTrendCtrl(MomentDateService, WebsiteTrendService) {
     var vm = this;
-    var format = 'yyyy-MM-dd';
 
     vm.radioChecked = 'today';
 
@@ -28,7 +27,7 @@
         text: 'PV/UV/IP趋势'
       },
       xAxis: {
-        categories: [1, 2, 3, 4, 5],
+        categories: [],
         labels: {
           staggerLines: 1
         }
@@ -36,22 +35,11 @@
       yAxis: {
         title: {
           text: '数量'
-        },
-        plotLines: [{
-          value: 0,
-          width: 1,
-          color: '#808080'
-        }]
-      },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 1
+        }
       }
-    }
+    };
 
-    vm.getData = function() {
+    vm.getCheckDate = function(){
       switch (vm.radioChecked) {
         case 'today':
           checkDate = MomentDateService.getToday();
@@ -69,26 +57,30 @@
           checkDate = MomentDateService.getToday();
           break;
       }
-
-      vm.highchartsNG.series = [{
-        name: 'PV',
-        data: [1, 2, 3, 4, 5]
-      }, {
-        name: 'UV',
-        data: [2, 3, 4, 5, 6]
-      }, {
-        name: 'IP',
-        data: [3, 4, 5, 6, 7]
-      }];
-
+      vm.startdate = checkDate.start;
+      vm.enddate = checkDate.end;
+      vm.getData();
     };
 
-    vm.getData();
+    vm.getData = function() {
+      WebsiteTrendService.getData(10000014, vm.startdate, vm.enddate, function(data) {
+        vm.setData(data);
+      });
+    };
+
+    vm.setData = function(data) {
+      vm.highchartsNG.series = data.data;
+      vm.highchartsNG.xAxis.labels.step = Math.ceil(data.cx.length / 8);
+      vm.highchartsNG.xAxis.categories = data.cx;
+    };
+
+    vm.setData(WebsiteTrendService.data);
   }
 
   WebsiteTrendCtrl.resolve = {
-    getData: function() {
-      return vm.getData();
+    getData: function(MomentDateService, WebsiteTrendService) {
+      var today = MomentDateService.getToday();
+      return WebsiteTrendService.getData(10000014, today.start, today.end);
     }
   };
 

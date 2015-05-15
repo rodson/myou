@@ -18,9 +18,9 @@ module.exports = function (config) {
       'bower_components/zeroclipboard/dist/ZeroClipboard.js',
       'bower_components/ng-clip/src/ngClip.js',
       'bower_components/md-date-time/dist/md-date-time.js',
-      'bower_components/angular-moment/angular-moment.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-tablesort/js/angular-tablesort.js',
+      'bower_components/highcharts-release/highcharts.src.js',
       'bower_components/highcharts-ng/src/highcharts-ng.js',
       'app/**/*module.js',
       'app/**/*.js'

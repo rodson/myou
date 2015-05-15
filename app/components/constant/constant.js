@@ -11,7 +11,7 @@
 
         PRODUCTS: 'http://localhost:4000/api/in/applications',
         PRODUCTS_OVERVIEW: 'http://myoutest.cvte.com/api/analytics/overview',
-        PRODUCTS_SUMMARY: 'http://localhost:4000/api/analytics/summary',
+        PRODUCTS_SUMMARY: 'http://myoutest.cvte.com/api/analytics/summary',
       },
 
       RETURN_DATA: {
