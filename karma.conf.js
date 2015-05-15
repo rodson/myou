@@ -7,6 +7,7 @@ module.exports = function (config) {
 
     files: [
       'bower_components/angular/angular.js',
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
@@ -17,7 +18,11 @@ module.exports = function (config) {
       'bower_components/zeroclipboard/dist/ZeroClipboard.js',
       'bower_components/ng-clip/src/ngClip.js',
       'bower_components/md-date-time/dist/md-date-time.js',
-
+      'bower_components/angular-moment/angular-moment.js',
+      'bower_components/moment/moment.js',
+      'bower_components/angular-tablesort/js/angular-tablesort.js',
+      'assets/js/highstock.src.js',
+      'bower_components/highcharts-ng/src/highcharts-ng.js',
       'app/**/*module.js',
       'app/**/*.js'
     ],

@@ -23,96 +23,122 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 // Config karma for unit testing
-gulp.task('karma', function (done) {
+gulp.task('karma', function(done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     autoWatch: true,
     singleRun: false
-  }, function () {
+  }, function() {
     done();
   });
 });
 
 // Lint JavaScript
-gulp.task('jshint', function () {
-  return gulp.src('app/**/*.js')
-    .pipe(reload({stream: true, once: true}))
+gulp.task('jshint', function() {
+  return gulp.src([
+      'app/**/*.js',
+      'assets/js/*.js'
+    ])
+    .pipe(reload({
+      stream: true,
+      once: true
+    }))
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
 // Optimize images
-gulp.task('images', function () {
+gulp.task('images', function() {
   return gulp.src('assets/images/**/*')
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true
     })))
     .pipe(gulp.dest('dist/assets/images'))
-    .pipe($.size({title: 'images'}));
+    .pipe($.size({
+      title: 'images'
+    }));
 });
 
 // Copy all files at the root level (app)
-gulp.task('copy', function () {
+gulp.task('copy', function() {
   return gulp.src([
-    'app/**/*',
-  ], {
-    dot: true
-  }).pipe(gulp.dest('dist/app'))
-    .pipe($.size({title: 'copy'}));
+      'app/**/*',
+    ], {
+      dot: true
+    }).pipe(gulp.dest('dist/app'))
+    .pipe($.size({
+      title: 'copy'
+    }));
 });
 
 // Copy web fonts to dist
-gulp.task('fonts', function () {
+gulp.task('fonts', function() {
   return gulp.src(['assets/fonts/**'])
     .pipe(gulp.dest('dist/assets/fonts'))
-    .pipe($.size({title: 'fonts'}));
+    .pipe($.size({
+      title: 'fonts'
+    }));
 });
 
 // Compile and automatically prefix stylesheets
-gulp.task('styles', function () {
+gulp.task('styles', function() {
   return gulp.src([
-    'assets/styles/*.scss',
-    'assets/styles/components/components.scss'
-  ])
+      'assets/styles/*.scss',
+      'assets/styles/components/components.scss'
+    ])
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       precision: 10,
       onError: console.error.bind(console, 'Sass error:')
     }))
-    .pipe($.autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
+    .pipe($.autoprefixer({
+      browsers: AUTOPREFIXER_BROWSERS
+    }))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/assets/styles'))
-    .pipe(reload({stream: true, once: true}))
+    .pipe(reload({
+      stream: true,
+      once: true
+    }))
     // Concatenate and minify styles
     .pipe($.if('*.css', $.csso()))
     .pipe(gulp.dest('dist/assets/styles'))
-    .pipe($.size({title: 'styles'}));
+    .pipe($.size({
+      title: 'styles'
+    }));
 });
 
 // Concat angularjs files
-gulp.task('concat', function () {
+gulp.task('concat', function() {
   return gulp.src([
-    'app/**/*module.js',
-    'app/**/*.js',
-    '!app/**/*.spec.js'
-  ])
+      'app/**/*module.js',
+      'app/**/*.js',
+      'assets/js/*.js',
+      '!app/**/*.spec.js'
+    ])
     .pipe($.sourcemaps.init())
     .pipe($.concat('app.js'))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/assets/scripts'))
-    .pipe($.size({title: 'concat'}));
+    .pipe($.size({
+      title: 'concat'
+    }));
 });
 
 // Scan your HTML for assets & optimize them
-gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: '{.tmp,.}'});
+gulp.task('html', function() {
+  var assets = $.useref.assets({
+    searchPath: '{.tmp,.}'
+  });
 
   return gulp.src('./index.html')
     .pipe(assets)
     .pipe($.if('*.js', $.ngAnnotate()))
     // Concatenate and minify JavaScript
-    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+    .pipe($.if('*.js', $.uglify({
+      preserveComments: 'some'
+    })))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
     .pipe($.if('*.css', $.csso()))
@@ -122,14 +148,18 @@ gulp.task('html', function () {
     .pipe($.if('*.html', $.minifyHtml()))
     // Output files
     .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'html'}));
+    .pipe($.size({
+      title: 'html'
+    }));
 });
 
 // Clean output directory
-gulp.task('clean', del.bind(null, ['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist/*', '!dist/.git'], {
+  dot: true
+}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'concat'], function () {
+gulp.task('serve', ['styles', 'concat'], function() {
   browserSync({
     notify: false,
     // Customize the BrowserSync console logging prefix
@@ -140,11 +170,12 @@ gulp.task('serve', ['styles', 'concat'], function () {
   gulp.watch(['./**/*.html'], reload);
   gulp.watch(['assets/styles/**/*.{scss,css}'], ['styles']);
   gulp.watch(['app/**/*.js'], ['jshint', 'concat']);
+  gulp.watch(['assets/js/*.js'], ['jshint', 'concat']);
   gulp.watch(['assets/images/**/*'], [reload]);
 });
 
 // Build and serve the output from the dist build
-gulp.task('dist', ['default'], function () {
+gulp.task('dist', ['default'], function() {
   browserSync({
     notify: false,
     server: 'dist'
@@ -154,11 +185,11 @@ gulp.task('dist', ['default'], function () {
 gulp.task('dev', ['serve', 'karma']);
 
 // Build production files, the default task
-gulp.task('default', ['clean'], function (cb) {
+gulp.task('default', ['clean'], function(cb) {
   runSequence('styles', 'concat', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
 });
 
 // Run PageSpeed Insights
-gulp.task('pagespeed', function (cb) {
+gulp.task('pagespeed', function(cb) {
 
 });

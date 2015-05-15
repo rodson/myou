@@ -4,6 +4,7 @@
   angular
     .module('myou.shared', [
       'ui.router',
-      'myou.ui'
+      'myou.ui',
+      'myou.util'
     ]);
 })();

@@ -9,7 +9,7 @@
     globalService.getData = function(trickId) {
       var queryString = '?tid=' + trickId;
 
-      return $http.get(Constant.URL.PRODUCTS_GLOBAL + queryString)
+      return $http.get(Constant.URL.PRODUCTS_OVERVIEW + queryString)
         .success(function(data) {
           globalService.globalData = data;
         });

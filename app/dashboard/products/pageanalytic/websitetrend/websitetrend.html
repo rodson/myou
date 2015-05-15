@@ -1,16 +1,18 @@
 <div>
   <span>起始日期：</span>
-  <datatime-picker init-datatime='vm.startdata' display-mode='date'></datatime-picker>
+  <datatime-picker init-datatime='vm.startdate' display-mode='date'></datatime-picker>
   <span class='margin-left-30'>截止日期：</span>
-  <datatime-picker init-datatime='vm.enddata' display-mode='date'></datatime-picker>
-  <md-button class="md-raised md-primary margin-left-30" ng-click="">&nbsp;查询&nbsp;</md-button>
+  <datatime-picker init-datatime='vm.enddate' display-mode='date'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
 
-  <md-radio-group ng-model="vm.data.group1" class='pa-pull-right'>
+  <md-radio-group ng-model="vm.radioChecked" class='pa-pull-right' ng-change='vm.getData()'>
     <md-radio-button value="today" class="md-primary">今天</md-radio-button>
     <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
     <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
     <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
   </md-radio-group>
-
+</div>
+<div>
+  <highchart id="chart" class='margin-top-30 border-radio-15' config="vm.highchartsNG"></highchart>
 </div>
 

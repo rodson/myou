@@ -29,7 +29,7 @@ describe('GlobalService: ', function() {
         uv: 2
       };
 
-      $httpBackend.expectGET(Constant.URL.PRODUCTS_GLOBAL + '?tid=10000000')
+      $httpBackend.expectGET(Constant.URL.PRODUCTS_OVERVIEW + '?tid=10000000')
         .respond(globalData);
       GlobalService.getData('10000000');
       $httpBackend.flush();
