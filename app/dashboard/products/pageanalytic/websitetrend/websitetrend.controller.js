@@ -7,14 +7,14 @@
         url: '/websitetrend',
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
-        controller: 'WebsiteTrendCtrl',
+        controller: WebsiteTrendCtrl,
         resolve: WebsiteTrendCtrl.resolve
       });
   }
 
   function WebsiteTrendCtrl(MomentDateService, WebsiteTrendService) {
     var vm = this;
-
+    vm.step = 8;
     vm.radioChecked = 'today';
 
     var checkDate = MomentDateService.getToday();
@@ -69,8 +69,11 @@
     };
 
     vm.setData = function(data) {
+      if(!data || !data.data || !data.cx) {
+        return false;
+      }
       vm.highchartsNG.series = data.data;
-      vm.highchartsNG.xAxis.labels.step = Math.ceil(data.cx.length / 8);
+      vm.highchartsNG.xAxis.labels.step = Math.ceil(data.cx.length / vm.step);
       vm.highchartsNG.xAxis.categories = data.cx;
     };
 

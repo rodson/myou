@@ -1,1 +1,49 @@
-<h1>运营商</h1>
+<div>
+  <span>起始日期：</span>
+  <datatime-picker init-datatime='vm.startdate' display-mode='date'></datatime-picker>
+  <span class='margin-left-30'>截止日期：</span>
+  <datatime-picker init-datatime='vm.enddate' display-mode='date'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+
+  <md-radio-group ng-model="vm.radioChecked" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+</div>
+<div>
+<div class='margin-top-30'>
+  <div>
+    <md-radio-group ng-model="vm.radioOperator" class='highchart-pv'>
+      <md-radio-button value="pv" class="md-primary">PV</md-radio-button>
+      <md-radio-button value="ip" class="md-primary">IP</md-radio-button>
+      <md-radio-button value="uv" class="md-primary">UV</md-radio-button>
+    </md-radio-group>
+    <highchart config="vm.highchartsOperator"></highchart>
+  </div>
+  <br/>
+  <br/>
+  <div>
+    <h3>详细数据：</h3>
+    <table class="table" ts-wrapper>
+      <thead>
+        <tr>
+          <th ts-criteria="isp|lowercase">网络运营商</th>
+          <th ts-criteria="pv|parseInt" ts-default='descending'>浏览量(PV)</th>
+          <th ts-criteria="uv|parseInt">独立访客(UV)</th>
+          <th ts-criteria="ip|parseInt">独立IP(IP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in vm.datas" ts-repeat>
+          <td>{{ x.isp }}</td>
+          <td>{{ x.pv }}</td>
+          <td>{{ x.uv }}</td>
+          <td>{{ x.ip }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -12,6 +12,11 @@
         PRODUCTS: 'http://localhost:4000/api/in/applications',
         PRODUCTS_OVERVIEW: 'http://myoutest.cvte.com/api/analytics/overview',
         PRODUCTS_SUMMARY: 'http://myoutest.cvte.com/api/analytics/summary',
+        PRODUCTS_PAGERANKING: 'http://myoutest.cvte.com/api/analytics/pagerank',
+        PRODUCTS_ISP: 'http://myoutest.cvte.com/api/analytics/isp',
+        PRODUCTS_REGION: 'http://myoutest.cvte.com/api/analytics/region',
+        PRODUCTS_DEVICE: 'http://myoutest.cvte.com/api/analytics/device',
+        PRODUCTS_SOURCE: 'http://myoutest.cvte.com/api/analytics/source',
       },
 
       RETURN_DATA: {

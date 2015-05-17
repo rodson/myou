@@ -69,3 +69,33 @@ md-radio-group, md-radio-button {
 .time-date > .control > .slider > .date-control > .days .day-cell:hover {
   background-color: #277bdd;
 }
+
+table .tablesort-asc, table .tablesort-desc {
+  background-color: transparent;
+  color: #277bdd !important;
+}
+
+.highchart-select {
+  position: absolute;
+  top: 200px;
+  right: 40px;
+}
+
+.operator-content > div {
+  display: inline-block;
+}
+
+.operator-chart {
+  width: 30%;
+}
+
+.operator-table {
+  width: 60%;
+}
+
+.highchart-pv {
+  position: absolute;
+  z-index: 1;
+  right: 30px;
+}
+

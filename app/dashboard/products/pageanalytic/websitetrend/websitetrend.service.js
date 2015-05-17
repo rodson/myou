@@ -9,6 +9,8 @@
 
     var websiteTrendService = {};
 
+    websiteTrendService.data = {};
+
     websiteTrendService.getData = function(trickId, start, end, cb) {
       return $http.get(Constant.URL.PRODUCTS_SUMMARY + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId)
         .success(function(data) {
