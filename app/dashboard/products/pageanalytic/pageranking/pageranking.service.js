@@ -6,6 +6,7 @@
 
   function PageRankingService($http, $q, Constant){
     var pageRankingService = {};
+    pageRankingService.data = {};
 
     pageRankingService.getData = function(start, end, trickId, cb){
       return $http.get(Constant.URL.PRODUCTS_PAGERANKING + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId)

@@ -54,6 +54,7 @@
     vm.setData = function(data) {
       vm.datas = data;
     };
+
     vm.setData(PageRankingService.data);
   }
 

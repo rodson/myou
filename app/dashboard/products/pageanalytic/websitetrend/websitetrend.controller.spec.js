@@ -91,18 +91,6 @@ describe('WebsiteTrendCtrl: ', function() {
       });
   });
 
-  describe('fn: getData', function() {
-    it('when WebsiteTrendCtrl.getData is called,' +
-      'WebsiteTrendService.getData and WebsiteTrendCtrl.setData should be called', function() {
-        spyOn(WebsiteTrendCtrl, 'getData').and.callThrough();
-        spyOn(WebsiteTrendService, 'getData');
-
-        WebsiteTrendCtrl.getData();
-        expect(WebsiteTrendCtrl.getData).toHaveBeenCalled();
-        expect(WebsiteTrendService.getData).toHaveBeenCalled();
-      });
-  });
-
   describe('fn: getCheckDate', function() {
     it('when radioChecked is changed,' +
       'WebsiteTrendCtrl.getCheckDate should be called and ' +
