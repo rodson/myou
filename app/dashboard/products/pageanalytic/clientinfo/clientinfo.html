@@ -1,1 +1,25 @@
-<h1>客户端信息</h1>
+<div>
+  <span>起始日期：</span>
+  <datatime-picker init-datatime='vm.startdate' display-mode='date'></datatime-picker>
+  <span class='margin-left-30'>截止日期：</span>
+  <datatime-picker init-datatime='vm.enddate' display-mode='date'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+
+  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+</div>
+<div>
+<md-radio-group ng-model="vm.radioPvUvIp" class='highchart-pv' ng-change='vm.getCheckPieType()'>
+  <md-radio-button value="pv" class="md-primary">PV</md-radio-button>
+  <md-radio-button value="ip" class="md-primary">IP</md-radio-button>
+  <md-radio-button value="uv" class="md-primary">UV</md-radio-button>
+</md-radio-group>
+<div class='content-info margin-top-30'>
+  <highchart config="vm.highchartsPieOS" class='highcharts-clientinfo margin-top-30'></highchart>
+  <highchart config="vm.highchartsPieBroswer" class='highcharts-clientinfo margin-top-30'></highchart>
+  <highchart config="vm.highchartsPieScreen" class='highcharts-clientinfo margin-top-30'></highchart>
+</div>

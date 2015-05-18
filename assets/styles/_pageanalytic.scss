@@ -88,6 +88,19 @@ table .tablesort-asc, table .tablesort-desc {
   height: 350px;
 }
 
+.highcharts-clientinfo{
+  width: 33%;
+  height: 280px;
+}
+
+.highcharts-clientinfo .highcharts-container {
+  overflow: visible !important;
+
+  & svg {
+    overflow: visible !important;
+  }
+}
+
 .content-table {
   width: 60%;
 }

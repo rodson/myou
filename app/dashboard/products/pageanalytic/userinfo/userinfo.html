@@ -1,1 +1,36 @@
-<h1>用户来源</h1>
+<div>
+  <span>起始日期：</span>
+  <datatime-picker init-datatime='vm.startdate' display-mode='date'></datatime-picker>
+  <span class='margin-left-30'>截止日期：</span>
+  <datatime-picker init-datatime='vm.enddate' display-mode='date'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+
+  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+</div>
+<div>
+<div class='content-info margin-top-30'>
+  <div class='content-chart'>
+    <highchart config="vm.highchartsPie" class='content-highcharts'></highchart>
+  </div>
+  <div class='content-table pull-right'>
+    <table class="table" ts-wrapper>
+      <thead>
+        <tr>
+          <th ts-criteria="name|lowercase">用户来源</th>
+          <th ts-criteria="count|parseInt" ts-default='descending'>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in vm.datas" ts-repeat>
+          <td>{{ x.name }}</td>
+          <td>{{ x.count }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
