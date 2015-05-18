@@ -9,7 +9,7 @@ $table-bg-accent: #f5f5f5;
 $table-bg-hover: rgba(0, 0, 0, .12);
 $table-bg-active: $table-bg-hover;
 
-$table-cell-padding: 1.3rem;
+$table-cell-padding: 1.2rem;
 $table-condensed-cell-padding: $table-cell-padding/2;
 
 .table {
@@ -27,7 +27,7 @@ $table-condensed-cell-padding: $table-cell-padding/2;
       > td {
         text-align: left;
         padding: $table-cell-padding;
-        vertical-align: top;
+        vertical-align: middle;
         color: $table-body-font-color;
         border-top: 0;
         font-size: 14px;

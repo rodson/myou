@@ -9,8 +9,7 @@
         <th>上传时间</th>
         <th>版本名</th>
         <th>版本号</th>
-        <th>版本描述</th>
-        <th>删除</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -20,8 +19,22 @@
         <td>{{ vm.newestUpdate.createdAt | date: 'yyyy-MM-dd H:mm' }}</td>
         <td>{{ vm.newestUpdate.versionName }}</td>
         <td>{{ vm.newestUpdate.versionCode }}</td>
-        <td>updateDesc</td>
-        <td>delete</td>
+        <td>
+          <rs-dropdown>
+            <li>
+              <a href="#">
+                <i class="fa fa-edit"></i>
+                <span>更新描述</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-times"></i>
+                <span>删除</span>
+              </a>
+            </li>
+          </rs-dropdown>
+        </td>
       </tr>
     </tbody>
   </table>
