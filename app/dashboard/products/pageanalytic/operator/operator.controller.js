@@ -16,14 +16,14 @@
     var vm = this;
 
     vm.radioDate = 'today';
-    vm.radioOperator = 'pv';
+    vm.radioPvUvIp = 'pv';
 
     var checkDate = MomentDateService.getToday();
 
     vm.startdate = checkDate.start;
     vm.enddate = checkDate.end;
 
-    vm.highchartsOperator = {
+    vm.highchartsPie = {
       options: {
         chart: {
           type: 'pie',
@@ -46,15 +46,15 @@
         },
         tooltip: {
           formatter: function() {
-            return this.series.name + '：<b>' + this.y + '</b>，占比：<b>' + this.percentage.toFixed(1) + ' %</b>';
+            return '<b>' + this.key + '</b><br>' + this.series.name + '：<b>' + this.y + '</b>，占比：<b>' + this.percentage.toFixed(1) + ' %</b>';
           }
         },
       },
       title: {
-        text: '<label style="font-size:14px;">运营商分布</label>',
+        text: '',//'<label style="font-size:14px;">运营商分布</label>',
         align: 'center',
         verticalAlign: 'middle',
-        y: -10
+        y: Math.ceil(OperatorService.data.tableData.length / 5 + 1) * (-5)
       },
       noData: '<br>No data'
     };
@@ -98,11 +98,11 @@
     };
 
     vm.setPieData = function() {
-      vm.highchartsOperator.series = [{
+      vm.highchartsPie.series = [{
         type: 'pie',
         innerSize: '50%',
-        name: vm.radioOperator.toUpperCase(),
-        data: OperatorService.data[vm.radioOperator]
+        name: vm.radioPvUvIp.toUpperCase(),
+        data: OperatorService.data[vm.radioPvUvIp]
       }];
     };
 

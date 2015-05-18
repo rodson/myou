@@ -75,16 +75,20 @@ table .tablesort-asc, table .tablesort-desc {
   color: #277bdd !important;
 }
 
-.operator-content > div {
+.content-info > div {
   display: inline-block;
   vertical-align: top;
 }
 
-.operator-chart {
-  width: 35%;
+.content-chart {
+  width: 38%;
 }
 
-.operator-table {
+.content-highcharts {
+  height: 350px;
+}
+
+.content-table {
   width: 60%;
 }
 

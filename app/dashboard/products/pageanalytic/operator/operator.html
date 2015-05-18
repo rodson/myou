@@ -13,16 +13,16 @@
   </md-radio-group>
 </div>
 <div>
-<md-radio-group ng-model="vm.radioOperator" class='highchart-pv' ng-change='vm.getCheckPieType()'>
+<md-radio-group ng-model="vm.radioPvUvIp" class='highchart-pv' ng-change='vm.getCheckPieType()'>
   <md-radio-button value="pv" class="md-primary">PV</md-radio-button>
   <md-radio-button value="ip" class="md-primary">IP</md-radio-button>
   <md-radio-button value="uv" class="md-primary">UV</md-radio-button>
 </md-radio-group>
-<div class='operator-content margin-top-30'>
-  <div class='operator-chart margin-top-30'>
-    <highchart config="vm.highchartsOperator"></highchart>
+<div class='content-info margin-top-30'>
+  <div class='content-chart margin-top-30'>
+    <highchart config="vm.highchartsPie" class='content-highcharts'></highchart>
   </div>
-  <div class='operator-table pull-right margin-top-30'>
+  <div class='content-table pull-right margin-top-30'>
     <!-- <h3>详细数据：</h3> -->
     <table class="table" ts-wrapper>
       <thead>
@@ -44,4 +44,5 @@
     </table>
   </div>
 </div>
+
 

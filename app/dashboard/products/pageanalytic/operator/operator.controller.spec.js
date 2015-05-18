@@ -20,8 +20,8 @@ describe('OperatorCtrl: ', function() {
   });
 
   describe('variable: ', function() {
-    it('radioOperator should equal "pv"', function() {
-      expect(OperatorCtrl.radioOperator).toBe('pv');
+    it('radioPvUvIp should equal "pv"', function() {
+      expect(OperatorCtrl.radioPvUvIp).toBe('pv');
     });
 
     it('radioDate should equal "today"', function() {

@@ -8,6 +8,7 @@
     var operatorService = {};
 
     operatorService.data = {};
+
     var testData = [{
       'ip': '9',
       'isp': '电信',
@@ -21,6 +22,16 @@
     }, {
       'ip': '1',
       'isp': '铁通',
+      'pv': '31',
+      'uv': '1'
+    }, {
+      'ip': '1',
+      'isp': '铁通1',
+      'pv': '31',
+      'uv': '1'
+    }, {
+      'ip': '1',
+      'isp': '铁通2',
       'pv': '31',
       'uv': '1'
     }];
