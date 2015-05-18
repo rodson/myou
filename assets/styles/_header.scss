@@ -2,6 +2,7 @@ md-toolbar {
   height: $header-height;
   min-height: $header-height;
   box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.26);
+  width: 100%;
 }
 
 .toolbar-tabs.md-default-theme {
@@ -54,4 +55,3 @@ md-toolbar {
     vertical-align: middle;
   }
 }
-

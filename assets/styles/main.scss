@@ -12,7 +12,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  min-width: 1000px;
+  min-width: $min-width;
   margin: 0;
   padding: 0;
 }
@@ -24,6 +24,7 @@ h1, h2, h3, h4 {
 
 .header {
   position: absolute;
+  width: 100%;
 }
 
 .inline {
@@ -130,7 +131,7 @@ nav.sidebar {
 
 body {
   position: relative;
-  font-family: "Roboto Condensed", "Microsoft Yahei", sans-serif;
+  // font-family: "Roboto Condensed", "Microsoft Yahei", sans-serif;
   font-weight: 300;
   background-color: #fff;
   box-sizing: border-box;
@@ -162,7 +163,6 @@ body {
 }
 
 .page-container {
-  padding: 0 30px;
 }
 
 .sm-container {
@@ -177,13 +177,34 @@ body {
   padding: 14px 0;
 
   .group-title {
+    font-weight: 700;
+    font-size: 18px;
     color: $primary-color;
     margin-bottom: 10px;
   }
+
+  &.group-border {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 18px 30px;
+  }
+
+  &.group-padding {
+    padding: 8px 30px;
+  }
+}
+
+.extra-width {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .btn-lg {
   width: 80px;
+}
+
+.frame-title {
+  width: 100%;
 }
 
 @font-face {

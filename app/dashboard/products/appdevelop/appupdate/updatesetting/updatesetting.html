@@ -1,41 +1,97 @@
 <div class="page-container">
 
   <!-- Newest Update Table -->
-  <table class="table">
-    <thead>
-      <tr>
-        <th>文件名</th>
-        <th>文件大小</th>
-        <th>上传时间</th>
-        <th>版本名</th>
-        <th>版本号</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ vm.newestUpdate.fileName }}</td>
-        <td>{{ vm.newestUpdate.fileSize | bytes }}</td>
-        <td>{{ vm.newestUpdate.createdAt | date: 'yyyy-MM-dd H:mm' }}</td>
-        <td>{{ vm.newestUpdate.versionName }}</td>
-        <td>{{ vm.newestUpdate.versionCode }}</td>
-        <td>
-          <rs-dropdown>
-            <li>
-              <a href="#">
-                <i class="fa fa-edit"></i>
-                <span>更新描述</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-times"></i>
-                <span>删除</span>
-              </a>
-            </li>
-          </rs-dropdown>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="group-section group-padding">
+    <div class="group-title">
+      最新版本
+    </div>
+    <table class="table" style="min-width: 930px;">
+      <thead>
+        <tr>
+          <th>文件名</th>
+          <th>文件大小</th>
+          <th>上传时间</th>
+          <th>版本名</th>
+          <th>版本号</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-show="vm.newestUpdate">
+          <td style="min-width: 100px">{{ vm.newestUpdate.fileName }}</td>
+          <td style="min-width: 100px">{{ vm.newestUpdate.fileSize | bytes }}</td>
+          <td style="min-width: 150px">{{ vm.newestUpdate.createdAt | date: 'yyyy-MM-dd H:mm' }}</td>
+          <td style="min-width: 100px">{{ vm.newestUpdate.versionName }}</td>
+          <td style="min-width: 100px">{{ vm.newestUpdate.versionCode }}</td>
+          <td>
+            <rs-dropdown>
+              <li>
+                <a href="#">
+                  <i class="fa fa-edit"></i>
+                  <span>更新描述</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-times"></i>
+                  <span>删除</span>
+                </a>
+              </li>
+            </rs-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Update config table -->
+  <div class="group-section group-padding">
+    <div class="group-title">
+      更新配置
+    </div>
+    <table class="table" style="min-width: 900px;">
+      <thead>
+        <tr>
+          <th>文件名</th>
+          <th>文件大小</th>
+          <th>上传时间</th>
+          <th>版本名</th>
+          <th>源版本</th>
+          <th>目标版本</th>
+          <th>更新状态</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="updateInfo in vm.updateInfos | orderBy:'versionCode':'true'" ng-hide="$index === 0">
+          <td style="min-width: 100px">{{ updateInfo.fileName }}</td>
+          <td style="min-width: 100px">{{ updateInfo.fileSize | bytes }}</td>
+          <td style="min-width: 150px">{{ updateInfo.createdAt | date:'yyyy-MM-dd H:mm'}}</td>
+          <td style="min-width: 100px">{{ updateInfo.versionName }}</td>
+          <td style="min-width: 100px">{{ updateInfo.versionCode }}</td>
+          <td style="min-width: 100px">{{ updateInfo.rule.targetVersion }}</td>
+          <td style="min-width: 100px">
+            <md-switch class="md-primary" md-no-ink ng-model="data.cb5">
+            </md-switch>
+          </td>
+          <td>
+            <rs-dropdown>
+              <li>
+                <a href="#">
+                  <i class="fa fa-edit"></i>
+                  <span>更新描述</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-times"></i>
+                  <span>删除</span>
+                </a>
+              </li>
+            </rs-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
