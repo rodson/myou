@@ -1,8 +1,8 @@
 <div>
   <span>起始日期：</span>
-  <datatime-picker init-datatime='vm.startdate' display-mode='date'></datatime-picker>
+  <datatime-picker init-datatime='vm.startdate' dnamelay-mode='date'></datatime-picker>
   <span class='margin-left-30'>截止日期：</span>
-  <datatime-picker init-datatime='vm.enddate' display-mode='date'></datatime-picker>
+  <datatime-picker init-datatime='vm.enddate' dnamelay-mode='date'></datatime-picker>
   <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
 
   <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
@@ -19,7 +19,82 @@
   <md-radio-button value="uv" class="md-primary">UV</md-radio-button>
 </md-radio-group>
 <div class='content-info margin-top-30'>
-  <highchart config="vm.highchartsPieOS" class='highcharts-clientinfo margin-top-30'></highchart>
-  <highchart config="vm.highchartsPieBroswer" class='highcharts-clientinfo margin-top-30'></highchart>
-  <highchart config="vm.highchartsPieScreen" class='highcharts-clientinfo margin-top-30'></highchart>
+  <div class='content-chart margin-top-30'>
+    <highchart config="vm.highchartsPieOS" class='content-highcharts'></highchart>
+  </div>
+  <div class='content-table margin-top-30'>
+    <!-- <h3>详细数据：</h3> -->
+    <table class="table" ts-wrapper>
+      <thead>
+        <tr>
+          <th ts-criteria="name|lowercase">操作系统</th>
+          <th ts-criteria="pv|parseInt" ts-default='descending'>浏览量(PV)</th>
+          <th ts-criteria="uv|parseInt">独立访客(UV)</th>
+          <th ts-criteria="ip|parseInt">独立IP(IP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in vm.datasOs" ts-repeat>
+          <td>{{ x.name }}</td>
+          <td>{{ x.pv }}</td>
+          <td>{{ x.uv }}</td>
+          <td>{{ x.ip }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class='content-info margin-top-30'>
+  <div class='content-chart margin-top-30'>
+    <highchart config="vm.highchartsPieBroswer" class='content-highcharts'></highchart>
+  </div>
+  <div class='content-table margin-top-30'>
+    <!-- <h3>详细数据：</h3> -->
+    <table class="table" ts-wrapper>
+      <thead>
+        <tr>
+          <th ts-criteria="name|lowercase">浏览器</th>
+          <th ts-criteria="pv|parseInt" ts-default='descending'>浏览量(PV)</th>
+          <th ts-criteria="uv|parseInt">独立访客(UV)</th>
+          <th ts-criteria="ip|parseInt">独立IP(IP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in vm.datasBr" ts-repeat>
+          <td>{{ x.name }}</td>
+          <td>{{ x.pv }}</td>
+          <td>{{ x.uv }}</td>
+          <td>{{ x.ip }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class='content-info margin-top-30'>
+  <div class='content-chart margin-top-30'>
+    <highchart config="vm.highchartsPieScreen" class='content-highcharts'></highchart>
+  </div>
+  <div class='content-table margin-top-30'>
+    <!-- <h3>详细数据：</h3> -->
+    <table class="table" ts-wrapper>
+      <thead>
+        <tr>
+          <th ts-criteria="name|lowercase">屏幕分辨率</th>
+          <th ts-criteria="pv|parseInt" ts-default='descending'>浏览量(PV)</th>
+          <th ts-criteria="uv|parseInt">独立访客(UV)</th>
+          <th ts-criteria="ip|parseInt">独立IP(IP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in vm.datasSr" ts-repeat>
+          <td>{{ x.name }}</td>
+          <td>{{ x.pv }}</td>
+          <td>{{ x.uv }}</td>
+          <td>{{ x.ip }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -3,7 +3,8 @@
 
   angular
     .module('myou.util.service', [])
-    .factory('MomentDateService', MomentDateService);
+    .factory('MomentDateService', MomentDateService)
+    .factory('PieArrayService', PieArrayService);
 
   function MomentDateService() {
     var moment = window.moment;
@@ -38,6 +39,35 @@
     };
 
     return momentDateService;
+  }
+
+  //适合数据格式为[['', int],['', int],['', int]]
+  function PieArrayService() {
+    var pieArrayService = {};
+
+    var compare = function(a, b) {
+      return b[1] - a[1];
+    };
+
+    pieArrayService.sort = function(list) {
+      return list.sort(compare);
+    };
+
+    pieArrayService.getLarger = function(list, count) {
+      count = count || 5;
+      var listSorted = pieArrayService.sort(list);
+      if(listSorted.length > count) {
+        var c = 0;
+        for(var i = count - 1; i < listSorted.length; i++){
+          c += listSorted[i][1];
+        }
+        listSorted.length = count - 1;
+        listSorted.push(['其他', c]);
+      }
+      return listSorted;
+    };
+
+    return pieArrayService;
   }
 
 })();

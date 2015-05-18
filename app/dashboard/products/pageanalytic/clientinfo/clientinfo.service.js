@@ -4,7 +4,7 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('ClientInfoService', ClientInfoService);
 
-  function ClientInfoService($http, $q, Constant) {
+  function ClientInfoService($http, $q, Constant, PieArrayService) {
     var clientInfoService = {};
 
     clientInfoService.data = {};
@@ -34,6 +34,11 @@
       'name': 'Windows',
       'pv': '429',
       'uv': '69'
+    }, {
+      'ip': '2',
+      'name': 'OS X',
+      'pv': '21',
+      'uv': '2'
     }];
 
     var testDataBroswer = [{
@@ -66,11 +71,6 @@
       'name': 'Mobile Safari',
       'pv': '18',
       'uv': '3'
-    }, {
-      'ip': '3',
-      'name': 'Sogou Explorer',
-      'pv': '60',
-      'uv': '2'
     }];
 
     var testDataScreen = [{
@@ -108,141 +108,118 @@
       'name': '1366x768',
       'pv': '128',
       'uv': '30'
-    }, {
-      'ip': '12',
-      'name': '1440x900',
-      'pv': '186',
-      'uv': '11'
-    }, {
-      'ip': '3',
-      'name': '1600x900',
-      'pv': '21',
-      'uv': '3'
-    }, {
-      'ip': '1',
-      'name': '1680x1050',
-      'pv': '16',
-      'uv': '1'
-    }, {
-      'ip': '1',
-      'name': '1725x970',
-      'pv': '3',
-      'uv': '3'
-    }, {
-      'ip': '5',
-      'name': '1920x1080',
-      'pv': '40',
-      'uv': '20'
-    }, {
-      'ip': '1',
-      'name': '320x568',
-      'pv': '8',
-      'uv': '1'
-    }, {
-      'ip': '1',
-      'name': '375x667',
-      'pv': '10',
-      'uv': '2'
-    }, {
-      'ip': '1',
-      'name': '720x1280',
-      'pv': '3',
-      'uv': '1'
-    },{
-      'ip': '1',
-      'name': '1280x800',
-      'pv': '19',
-      'uv': '1'
-    }, {
-      'ip': '11',
-      'name': '1366x768',
-      'pv': '128',
-      'uv': '30'
-    }, {
-      'ip': '12',
-      'name': '1440x900',
-      'pv': '186',
-      'uv': '11'
-    }, {
-      'ip': '3',
-      'name': '1600x900',
-      'pv': '21',
-      'uv': '3'
-    }, {
-      'ip': '1',
-      'name': '1680x1050',
-      'pv': '16',
-      'uv': '1'
-    }, {
-      'ip': '1',
-      'name': '1725x970',
-      'pv': '3',
-      'uv': '3'
-    }, {
-      'ip': '5',
-      'name': '1920x1080',
-      'pv': '40',
-      'uv': '20'
-    }, {
-      'ip': '1',
-      'name': '320x568',
-      'pv': '8',
-      'uv': '1'
-    }, {
-      'ip': '1',
-      'name': '375x667',
-      'pv': '10',
-      'uv': '2'
-    }, {
-      'ip': '1',
-      'name': '720x1280',
-      'pv': '3',
-      'uv': '1'
     }];
 
     clientInfoService.data.dataOs = {
-      ip: [],
-      pv: [],
-      uv: []
-    };
-    clientInfoService.data.dataBr = {
-      ip: [],
-      pv: [],
-      uv: []
-    };
-    clientInfoService.data.dataSr = {
+      tableData: [],
       ip: [],
       pv: [],
       uv: []
     };
 
+    clientInfoService.data.dataBr = {
+      tableData: [],
+      ip: [],
+      pv: [],
+      uv: []
+    };
+
+    clientInfoService.data.dataSr = {
+      tableData: [],
+      ip: [],
+      pv: [],
+      uv: []
+    };
+
+    clientInfoService.data.dataOs.tableData = testDataOS;
     testDataOS.forEach(function(dt) {
       clientInfoService.data.dataOs.pv.push([dt.name, parseInt(dt.pv)]);
-      clientInfoService.data.dataOs.uv.push([dt.name, parseInt(dt.ip)]);
-      clientInfoService.data.dataOs.ip.push([dt.name, parseInt(dt.uv)]);
+      clientInfoService.data.dataOs.uv.push([dt.name, parseInt(dt.uv)]);
+      clientInfoService.data.dataOs.ip.push([dt.name, parseInt(dt.ip)]);
     });
 
+    PieArrayService.getLarger(clientInfoService.data.dataOs.pv);
+    PieArrayService.getLarger(clientInfoService.data.dataOs.uv);
+    PieArrayService.getLarger(clientInfoService.data.dataOs.ip);
+
+    clientInfoService.data.dataBr.tableData = testDataBroswer;
     testDataBroswer.forEach(function(dt) {
       clientInfoService.data.dataBr.pv.push([dt.name, parseInt(dt.pv)]);
-      clientInfoService.data.dataBr.uv.push([dt.name, parseInt(dt.ip)]);
-      clientInfoService.data.dataBr.ip.push([dt.name, parseInt(dt.uv)]);
+      clientInfoService.data.dataBr.uv.push([dt.name, parseInt(dt.uv)]);
+      clientInfoService.data.dataBr.ip.push([dt.name, parseInt(dt.ip)]);
     });
 
+    PieArrayService.getLarger(clientInfoService.data.dataBr.pv);
+    PieArrayService.getLarger(clientInfoService.data.dataBr.uv);
+    PieArrayService.getLarger(clientInfoService.data.dataBr.ip);
+
+    clientInfoService.data.dataSr.tableData = testDataScreen;
     testDataScreen.forEach(function(dt) {
       clientInfoService.data.dataSr.pv.push([dt.name, parseInt(dt.pv)]);
-      clientInfoService.data.dataSr.uv.push([dt.name, parseInt(dt.ip)]);
-      clientInfoService.data.dataSr.ip.push([dt.name, parseInt(dt.uv)]);
+      clientInfoService.data.dataSr.uv.push([dt.name, parseInt(dt.uv)]);
+      clientInfoService.data.dataSr.ip.push([dt.name, parseInt(dt.ip)]);
     });
 
-    clientInfoService.getData = function(start, end, trickId, cb) {
-      return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId)
+    PieArrayService.getLarger(clientInfoService.data.dataSr.pv);
+    PieArrayService.getLarger(clientInfoService.data.dataSr.uv);
+    PieArrayService.getLarger(clientInfoService.data.dataSr.ip);
+
+    clientInfoService.getDataOs = function(start, end, trickId, cb) {
+      return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=os_family_name')
         .success(function(data) {
 
+          clientInfoService.data.dataOs.tableData = data;
           data.forEach(function(dt) {
-            clientInfoService.data.pv.push([dt.isp, parseInt(dt.pv)]);
-            clientInfoService.data.uv.push([dt.isp, parseInt(dt.ip)]);
-            clientInfoService.data.ip.push([dt.isp, parseInt(dt.uv)]);
+            clientInfoService.data.dataOs.pv.push([dt.name, parseInt(dt.pv)]);
+            clientInfoService.data.dataOs.uv.push([dt.name, parseInt(dt.uv)]);
+            clientInfoService.data.dataOs.ip.push([dt.name, parseInt(dt.ip)]);
           });
+
+          PieArrayService.getLarger(clientInfoService.data.dataOs.pv);
+          PieArrayService.getLarger(clientInfoService.data.dataOs.uv);
+          PieArrayService.getLarger(clientInfoService.data.dataOs.ip);
+
+          if (cb && typeof(cb) === 'function') {
+            cb();
+          }
+        });
+    };
+
+    clientInfoService.getDataBr = function(start, end, trickId, cb) {
+      return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=browser_name')
+        .success(function(data) {
+
+          clientInfoService.data.dataBr.tableData = data;
+          data.forEach(function(dt) {
+            clientInfoService.data.dataBr.pv.push([dt.name, parseInt(dt.pv)]);
+            clientInfoService.data.dataBr.uv.push([dt.name, parseInt(dt.uv)]);
+            clientInfoService.data.dataBr.ip.push([dt.name, parseInt(dt.ip)]);
+          });
+
+          PieArrayService.getLarger(clientInfoService.data.dataBr.pv);
+          PieArrayService.getLarger(clientInfoService.data.dataBr.uv);
+          PieArrayService.getLarger(clientInfoService.data.dataBr.ip);
+
+          if (cb && typeof(cb) === 'function') {
+            cb();
+          }
+        });
+    };
+
+    clientInfoService.getDataSr = function(start, end, trickId, cb) {
+      return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=sr')
+        .success(function(data) {
+
+          clientInfoService.data.dataSr.tableData = data;
+          data.forEach(function(dt) {
+            clientInfoService.data.dataSr.pv.push([dt.name, parseInt(dt.pv)]);
+            clientInfoService.data.dataSr.uv.push([dt.name, parseInt(dt.uv)]);
+            clientInfoService.data.dataSr.ip.push([dt.name, parseInt(dt.ip)]);
+          });
+
+          PieArrayService.getLarger(clientInfoService.data.dataSr.pv);
+          PieArrayService.getLarger(clientInfoService.data.dataSr.uv);
+          PieArrayService.getLarger(clientInfoService.data.dataSr.ip);
 
           if (cb && typeof(cb) === 'function') {
             cb();

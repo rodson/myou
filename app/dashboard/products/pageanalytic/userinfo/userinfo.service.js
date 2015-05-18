@@ -5,9 +5,9 @@
     .factory('UserinfoService', UserinfoService);
 
   function UserinfoService($http, $q, Constant) {
-    var UserinfoService = {};
+    var userinfoService = {};
 
-    UserinfoService.data = {};
+    userinfoService.data = {};
 
     var testData = [{
       'count': '22',
@@ -20,21 +20,21 @@
       'name': '百度'
     }];
 
-    UserinfoService.data.tableData = testData;
-    UserinfoService.data.pieData = [];
+    userinfoService.data.tableData = testData;
+    userinfoService.data.pieData = [];
 
     testData.forEach(function(dt) {
-      UserinfoService.data.pieData.push([dt.name, parseInt(dt.count)]);
+      userinfoService.data.pieData.push([dt.name, parseInt(dt.count)]);
     });
 
-    UserinfoService.getData = function(start, end, trickId, cb) {
+    userinfoService.getData = function(start, end, trickId, cb) {
       return $http.get(Constant.URL.PRODUCTS_SOURCE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId)
         .success(function(data) {
-          UserinfoService.data.tableData = data;
-          UserinfoService.data.pieData = [];
+          userinfoService.data.tableData = data;
+          userinfoService.data.pieData = [];
 
           data.forEach(function(dt) {
-            UserinfoService.data.pieData.push([dt.name, parseInt(dt.count)]);
+            userinfoService.data.pieData.push([dt.name, parseInt(dt.count)]);
           });
 
           if (cb && typeof(cb) === 'function') {
@@ -43,7 +43,7 @@
         });
     };
 
-    return UserinfoService;
+    return userinfoService;
   }
 
 

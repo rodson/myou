@@ -25,20 +25,14 @@
     vm.highchartsPieOS = {
       options: {
         chart: {
-          type: 'pie',
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false
+          type: 'pie'
         },
         plotOptions: {
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: false,
-              style: {
-                color: 'black'
-              }
+              enabled: false
             },
             showInLegend: true
           }
@@ -52,26 +46,20 @@
       title: {
         text: ''
       },
-      noData: '<br>No data'
+      noData: 'No data'
     };
 
     vm.highchartsPieBroswer = {
       options: {
         chart: {
-          type: 'pie',
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false
+          type: 'pie'
         },
         plotOptions: {
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: false,
-              style: {
-                color: 'black'
-              }
+              enabled: false
             },
             showInLegend: true
           }
@@ -85,26 +73,20 @@
       title: {
         text: ''
       },
-      noData: '<br>No data'
+      noData: 'No data'
     };
 
     vm.highchartsPieScreen = {
       options: {
         chart: {
-          type: 'pie',
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false
+          type: 'pie'
         },
         plotOptions: {
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: false,
-              style: {
-                color: 'black'
-              }
+              enabled: false
             },
             showInLegend: true
           }
@@ -118,24 +100,78 @@
       title: {
         text: ''
       },
-      noData: '<br>No data'
+      noData: 'No data'
     };
 
-    vm.setPieData = function() {
+    vm.getCheckDate = function() {
+      switch (vm.radioDate) {
+        case 'today':
+          checkDate = MomentDateService.getToday();
+          break;
+        case 'yesterday':
+          checkDate = MomentDateService.getYesterday();
+          break;
+        case 'last7days':
+          checkDate = MomentDateService.getLast7Day();
+          break;
+        case 'last30days':
+          checkDate = MomentDateService.getLast30Day();
+          break;
+        default:
+          checkDate = MomentDateService.getToday();
+          break;
+      }
+      vm.startdate = checkDate.start;
+      vm.enddate = checkDate.end;
+      vm.getData();
+    };
+
+    vm.getCheckPieType = function() {
+      vm.setPieData();
+    };
+
+    vm.getData = function() {
+      ClientInfoService.getDataOs(vm.startdate, vm.enddate, 10000014, function(){
+        setDataOs();
+      });
+      ClientInfoService.getDataBr(vm.startdate, vm.enddate, 10000014, function() {
+        setDataBr();
+      });
+      ClientInfoService.getDataSr(vm.startdate, vm.enddate, 10000014, function() {
+        setDataSr();
+      });
+    };
+
+    var setDataOs = function() {
+      vm.datasOs = ClientInfoService.data.dataOs.tableData;
+      setPieDataOs();
+    };
+    var setDataBr = function() {
+      vm.datasBr = ClientInfoService.data.dataBr.tableData;
+      setPieDataBr();
+    };
+    var setDataSr = function() {
+      vm.datasSr = ClientInfoService.data.dataSr.tableData;
+      setPieDataSr();
+    };
+
+    var setPieDataOs = function() {
       vm.highchartsPieOS.series = [{
         type: 'pie',
         innerSize: '50%',
         name: vm.radioPvUvIp.toUpperCase(),
         data: ClientInfoService.data.dataOs[vm.radioPvUvIp]
       }];
-
+    };
+    var setPieDataBr = function() {
       vm.highchartsPieBroswer.series = [{
         type: 'pie',
         innerSize: '50%',
         name: vm.radioPvUvIp.toUpperCase(),
         data: ClientInfoService.data.dataBr[vm.radioPvUvIp]
       }];
-
+    };
+    var setPieDataSr = function() {
       vm.highchartsPieScreen.series = [{
         type: 'pie',
         innerSize: '50%',
@@ -144,7 +180,19 @@
       }];
     };
 
-    vm.setPieData();
+    vm.setData = function(type) {
+      setDataOs();
+      setDataBr();
+      setDataSr();
+    };
+
+    vm.setPieData = function() {
+      setPieDataOs();
+      setPieDataBr();
+      setPieDataSr();
+    };
+
+    vm.setData();
   }
 
   angular
