@@ -15,7 +15,8 @@
   function OperatorCtrl(MomentDateService, OperatorService) {
     var vm = this;
 
-    vm.radioChecked = 'today';
+    vm.radioDate = 'today';
+    vm.radioOperator = 'pv';
 
     var checkDate = MomentDateService.getToday();
 
@@ -35,7 +36,7 @@
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: true,
+              enabled: false,
               style: {
                 color: 'black'
               }
@@ -50,25 +51,16 @@
         },
       },
       title: {
-        text: '运营商分布'
+        text: '<label style="font-size:14px;">运营商分布</label>',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: -10
       },
-      noData: 'No data'
+      noData: '<br>No data'
     };
 
-    vm.highchartsOperator.series = [{
-      type: 'pie',
-      data: [
-        ['联通', 11],
-        ['移动', 21],
-        ['电信', 31],
-        ['珠海', 25],
-        ['海南', 25],
-        ['男孩', 25]
-      ]
-    }];
-
     vm.getCheckDate = function() {
-      switch (vm.radioChecked) {
+      switch (vm.radioDate) {
         case 'today':
           checkDate = MomentDateService.getToday();
           break;
@@ -90,47 +82,31 @@
       vm.getData();
     };
 
+    vm.getCheckPieType = function() {
+      vm.setPieData();
+    };
+
     vm.getData = function() {
       OperatorService.getData(vm.startdate, vm.enddate, 10000014, function(data) {
-        vm.setData(data);
+        vm.setData();
       });
     };
 
-    vm.setData = function(data) {
-      vm.datas = data;
-      vm.datas = [{
-        isp: '联通',
-        ip: 12,
-        pv: 40,
-        uv: 13
-      }, {
-        isp: '移动',
-        ip: 12,
-        pv: 40,
-        uv: 13
-      }, {
-        isp: '电信',
-        ip: 12,
-        pv: 40,
-        uv: 13
-      }, {
-        isp: '珠海',
-        ip: 12,
-        pv: 40,
-        uv: 13
-      }, {
-        isp: '海珠',
-        ip: 12,
-        pv: 40,
-        uv: 13
-      }, {
-        isp: '海南',
-        ip: 12,
-        pv: 40,
-        uv: 13
+    vm.setData = function() {
+      vm.datas = OperatorService.data.tableData;
+      vm.setPieData();
+    };
+
+    vm.setPieData = function() {
+      vm.highchartsOperator.series = [{
+        type: 'pie',
+        innerSize: '50%',
+        name: vm.radioOperator.toUpperCase(),
+        data: OperatorService.data[vm.radioOperator]
       }];
     };
-    vm.setData(OperatorService.data);
+
+    vm.setData();
   }
 
   OperatorCtrl.resolve = {

@@ -75,18 +75,13 @@ table .tablesort-asc, table .tablesort-desc {
   color: #277bdd !important;
 }
 
-.highchart-select {
-  position: absolute;
-  top: 200px;
-  right: 40px;
-}
-
 .operator-content > div {
   display: inline-block;
+  vertical-align: top;
 }
 
 .operator-chart {
-  width: 30%;
+  width: 35%;
 }
 
 .operator-table {
@@ -96,6 +91,7 @@ table .tablesort-asc, table .tablesort-desc {
 .highchart-pv {
   position: absolute;
   z-index: 1;
-  right: 30px;
+  right: 25px;
+  top: 170px;
 }
 
