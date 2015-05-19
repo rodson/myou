@@ -207,6 +207,17 @@ body {
   width: 100%;
 }
 
+.nopadding {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-container {
+  box-sizing: border-box;
+  padding: 12px 32px;
+  width: 460px;
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;

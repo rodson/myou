@@ -25,14 +25,14 @@
           <td style="min-width: 100px">{{ vm.newestUpdate.versionCode }}</td>
           <td>
             <rs-dropdown>
-              <li>
-                <a href="#">
+              <li ng-click="vm.showUpdateDescModal($event, vm.newestUpdate)">
+                <a href="javascript:void(0)">
                   <i class="fa fa-edit"></i>
                   <span>更新描述</span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="javascript:void(0)">
                   <i class="fa fa-times"></i>
                   <span>删除</span>
                 </a>
@@ -71,7 +71,8 @@
           <td style="min-width: 100px">{{ updateInfo.versionCode }}</td>
           <td style="min-width: 100px">{{ updateInfo.rule.targetVersion }}</td>
           <td style="min-width: 100px">
-            <md-switch class="md-primary" md-no-ink ng-model="data.cb5">
+            <md-switch class="md-primary nopadding"
+            aria-label="toggle" md-no-ink ng-model="data.cb5">
             </md-switch>
           </td>
           <td>

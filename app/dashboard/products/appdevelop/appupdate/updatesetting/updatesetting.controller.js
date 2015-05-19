@@ -17,6 +17,11 @@
 
     vm.newestUpdate = UpdateSettingService.newestUpdate;
     vm.updateInfos = UpdateSettingService.updateInfos;
+    vm.app = UpdateSettingService.getApplication();
+
+    vm.showUpdateDescModal = function(ev, updateInfo) {
+      UpdateSettingService.showUpdateDescModal(ev, updateInfo);
+    };
   }
 
   UpdateSettingCtrl.resolve = {
