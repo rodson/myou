@@ -8,7 +8,9 @@
 
     vm.ok = function() {
       UpdateSettingService.deleteAppUpdate(data.updateId).then(function() {
-        $mdDialog.hide();
+        UpdateSettingService.getAppUpdates().then(function() {
+          $mdDialog.hide();
+        });
       });
     };
 

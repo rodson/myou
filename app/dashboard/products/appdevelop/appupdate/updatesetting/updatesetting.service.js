@@ -16,6 +16,10 @@
     };
 
     UpdateSettingService.getAppUpdates = function(id) {
+      if (!id) {
+        id = UpdateSettingService.app._id;
+      }
+
       return $http.get(UrlManager.getAppUpdateInfoUrl(id))
         .success(function(data) {
           UpdateSettingService.updateInfos = data;
@@ -106,7 +110,7 @@
     };
 
     UpdateSettingService.showDeleteUpdateDialog = function(ev, updateInfo) {
-      $mdDialog.show({
+      return $mdDialog.show({
         controller: 'DeleteUpdateDialogCtrl',
         controllerAs: 'vm',
         templateUrl: 'app/dashboard/products/appdevelop/appupdate/updatesetting/deleteupdatedialog/deleteupdatedialog.html',
@@ -119,9 +123,6 @@
             };
           }
         }
-      })
-      .then(function(result) {
-        // TODO: update version list
       });
     };
 
