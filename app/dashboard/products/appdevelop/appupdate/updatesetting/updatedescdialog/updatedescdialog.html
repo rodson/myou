@@ -1,14 +1,14 @@
 <md-dialog>
   <md-dialog-content>
     <div class="modal-container">
-      <div class="group-section">
+      <div class="group-section clearfix">
         <div class="group-title">
           更新描述
         </div>
         <md-input-container flex>
           <textarea columns="2" ng-model="vm.updateDesc"></textarea>
         </md-input-container>
-        <div class="md-actions" layout="row">
+        <div class="pull-right">
           <span flex></span>
           <md-button class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
             取消

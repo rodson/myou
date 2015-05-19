@@ -1,0 +1,52 @@
+<md-dialog>
+  <md-dialog-content>
+    <div class="modal-container">
+      <div class="group-section clearfix">
+        <div class="group-title" ng-hide="vm.isTest">
+          更新配置
+        </div>
+        <div class="group-title" ng-show="vm.isTest">
+          测试配置
+        </div>
+        <md-divider></md-divider>
+        <div class="setting-container">
+          <div class="setting-group">
+            <label>目标版本</label>
+            <div class="item">
+              <md-select class="nopadding" placeholder="选择版本" ng-model="vm.targetVersion">
+                <md-option ng-repeat="version in vm.versions"
+                  value="{{ version }}">{{ version }}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+          <div class="setting-group">
+            <label>差分升级</label>
+            <div class="item">
+              <md-switch class="md-primary nopadding"
+                aria-label="toggle" md-no-ink ng-model="data.cb5">
+              </md-switch>
+            </div>
+          </div>
+          <div class="setting-group">
+            <label>静默下载</label>
+            <div class="item">
+              <md-switch class="md-primary nopadding"
+                aria-label="toggle" md-no-ink ng-model="data.cb5">
+              </md-switch>
+            </div>
+          </div>
+        </div>
+        <div class="pull-right">
+          <span flex></span>
+          <md-button class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+            取消
+          </md-button>
+          <md-button class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+            保存
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </md-dialog-content>
+</md-dialog>

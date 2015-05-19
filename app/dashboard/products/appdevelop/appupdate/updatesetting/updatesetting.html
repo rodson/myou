@@ -25,10 +25,10 @@
           <td style="min-width: 100px">{{ vm.newestUpdate.versionCode }}</td>
           <td>
             <rs-dropdown>
-              <li ng-click="vm.showUpdateDescModal($event, vm.newestUpdate)">
+              <li ng-click="vm.showUpdateDescDialog($event, vm.newestUpdate)">
                 <a href="javascript:void(0)">
                   <i class="fa fa-edit"></i>
-                  <span>更新描述</span>
+                  <span>版本描述</span>
                 </a>
               </li>
               <li ng-click="vm.showDeleteUpdateDialog($event, vm.newestUpdate)">
@@ -69,7 +69,7 @@
           <td style="min-width: 150px">{{ updateInfo.createdAt | date:'yyyy-MM-dd H:mm'}}</td>
           <td style="min-width: 100px">{{ updateInfo.versionName }}</td>
           <td style="min-width: 100px">{{ updateInfo.versionCode }}</td>
-          <td style="min-width: 100px">{{ updateInfo.rule.targetVersion }}</td>
+          <td style="min-width: 100px">{{ updateInfo.rule.targetVersion | version }}</td>
           <td style="min-width: 100px">
             <md-switch class="md-primary nopadding"
             aria-label="toggle" md-no-ink ng-model="data.cb5">
@@ -77,14 +77,26 @@
           </td>
           <td>
             <rs-dropdown>
-              <li>
-                <a href="#">
+              <li ng-click="vm.showUpdateDescDialog($event, updateInfo)">
+                <a href="javascript:void(0)">
                   <i class="fa fa-edit"></i>
-                  <span>更新描述</span>
+                  <span>版本描述</span>
                 </a>
               </li>
-              <li>
-                <a href="#">
+              <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, false)">
+                <a href="javascript:void(0)">
+                  <i class="fa fa-cog"></i>
+                  <span>更新配置</span>
+                </a>
+              </li>
+              <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, true)">
+                <a href="javascript:void(0)">
+                  <i class="fa fa-bug"></i>
+                  <span>测试配置</span>
+                </a>
+              </li>
+              <li ng-click="vm.showDeleteUpdateDialog($event, updateInfo)">
+                <a href="javascript:void(0)">
                   <i class="fa fa-times"></i>
                   <span>删除</span>
                 </a>

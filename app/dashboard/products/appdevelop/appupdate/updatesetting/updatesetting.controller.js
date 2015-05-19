@@ -19,12 +19,16 @@
     vm.updateInfos = UpdateSettingService.updateInfos;
     vm.app = UpdateSettingService.getApplication();
 
-    vm.showUpdateDescModal = function(ev, updateInfo) {
-      UpdateSettingService.showUpdateDescModal(ev, updateInfo);
+    vm.showUpdateDescDialog = function(ev, updateInfo) {
+      UpdateSettingService.showUpdateDescDialog(ev, updateInfo);
     };
 
     vm.showDeleteUpdateDialog = function(ev, updateInfo) {
       UpdateSettingService.showDeleteUpdateDialog(ev, updateInfo);
+    };
+
+    vm.showUpdateRuleDialog = function(ev, updateInfo, isTest) {
+      UpdateSettingService.showUpdateRuleDialog(ev, updateInfo, isTest);
     };
   }
 
