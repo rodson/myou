@@ -17,6 +17,7 @@
         PRODUCTS_REGION: 'http://myoutest.cvte.com/api/analytics/region',
         PRODUCTS_DEVICE: 'http://myoutest.cvte.com/api/analytics/device',
         PRODUCTS_SOURCE: 'http://myoutest.cvte.com/api/analytics/source',
+        APISTATIS_USAGE: 'http://myoutest.cvte.com/api-java/in/api-usage',
       },
 
       RETURN_DATA: {

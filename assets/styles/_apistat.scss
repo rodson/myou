@@ -1,0 +1,39 @@
+.apistat-div {
+  padding: 70px 30px 10px;
+
+  .white-toolbar {
+    background-color: white;
+    color: rgb(39,123,221);
+    // height: 60px;
+
+    .oneday-apistat {
+      position: absolute;
+      left: 10px;
+      top: 12px;
+    }
+
+    .date-picker {
+      position: absolute;
+      right:10px;
+      top: 8px;
+      font-size: 16px;
+    }
+  }
+}
+
+
+
+.content-padding {
+  hr {
+    border-top: 1px;
+  }
+
+  .table-div {
+    padding: 10px 20px;
+  }
+
+  .count-th {
+    width: 40%;
+  }
+
+}

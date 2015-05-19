@@ -2,11 +2,12 @@
   'use strict';
 
   function apiStatisConfig($stateProvider) {
-
     $stateProvider
       .state('dashboard.apistatis', {
         url: '/apistatis',
-        templateUrl: 'app/dashboard/apistatis/apistatis.html'
+        templateUrl: 'app/dashboard/apistatis/apistatis.html',
+        controller: 'APIStatisCtrl',
+        controllerAs: 'vm'
       });
   }
 

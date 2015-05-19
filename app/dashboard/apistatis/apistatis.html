@@ -1,1 +1,47 @@
-<h1>API Statistic</h1>
+<div class='apistat-div'>
+  <md-toolbar class='white-toolbar'>
+    <h4 class='oneday-apistat'>单日API请求：{{vm.onedayCount}}</h4>
+    <datatime-picker init-datatime='vm.checkdate' display-mode='date' class='date-picker'></datatime-picker>
+  </md-toolbar>
+  <md-content class='content-padding'>
+    <highchart class='margin-top-30' config="vm.highchartsURL"></highchart>
+    <hr>
+    <highchart class='margin-top-30' config="vm.highchartsAPP"></highchart>
+    <hr>
+    <div class='table-div'>
+      <h4>URL详细数据：</h4>
+      <table class="table" ts-wrapper>
+        <thead>
+          <tr>
+            <th ts-criteria="name|lowercase">URL</th>
+            <th ts-criteria="count|parseInt" ts-default='descending' class='count-th'>数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="x in vm.dataURL" ts-repeat>
+            <td>{{ x.name }}</td>
+            <td>{{ x.count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class='table-div'>
+      <h4>APP详细数据：</h4>
+      <table class="table" ts-wrapper>
+        <thead>
+          <tr>
+            <th ts-criteria="name|lowercase">APP</th>
+            <th ts-criteria="count|parseInt" ts-default='descending' class='count-th'>数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="x in vm.dataAPP" ts-repeat>
+            <td>{{ x.name }}</td>
+            <td>{{ x.count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-content>
+</div>
