@@ -48,8 +48,8 @@
 
     testData.forEach(function(dt) {
       areaService.data.pv.push([dt.country + '.' + dt.province, parseInt(dt.pv)]);
-      areaService.data.uv.push([dt.country + '.' + dt.province, parseInt(dt.ip)]);
-      areaService.data.ip.push([dt.country + '.' + dt.province, parseInt(dt.uv)]);
+      areaService.data.uv.push([dt.country + '.' + dt.province, parseInt(dt.uv)]);
+      areaService.data.ip.push([dt.country + '.' + dt.province, parseInt(dt.ip)]);
     });
 
     PieArrayService.getLarger(areaService.data.pv);
@@ -67,8 +67,8 @@
 
           data.forEach(function(dt) {
             areaService.data.pv.push([dt.country + '.' + dt.province, parseInt(dt.pv)]);
-            areaService.data.uv.push([dt.country + '.' + dt.province, parseInt(dt.ip)]);
-            areaService.data.ip.push([dt.country + '.' + dt.province, parseInt(dt.uv)]);
+            areaService.data.uv.push([dt.country + '.' + dt.province, parseInt(dt.uv)]);
+            areaService.data.ip.push([dt.country + '.' + dt.province, parseInt(dt.ip)]);
           });
 
           PieArrayService.getLarger(areaService.data.pv);

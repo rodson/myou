@@ -56,7 +56,7 @@
         verticalAlign: 'top',
         y: Math.ceil(AreaService.data.tableData.length / 5 + 1) * (-5)
       },
-      noData: '<br>No data'
+      noData: 'No data'
     };
 
     vm.getCheckDate = function() {
