@@ -208,6 +208,40 @@ body {
   width: 100%;
 }
 
+.nopadding {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-container {
+  box-sizing: border-box;
+  padding: 12px 32px;
+  width: 460px;
+}
+
+.emphasis {
+  color: $primary-color;
+}
+
+.setting-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  .setting-group {
+    padding: 18px 16px;
+
+    label {
+      vertical-align: middle;
+      color: $text-color;
+    }
+
+    .item {
+      float: right;
+      vertical-align: middle;
+    }
+  }
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
