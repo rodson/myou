@@ -24,7 +24,11 @@
     };
 
     vm.showDeleteUpdateDialog = function(ev, updateInfo) {
-      UpdateSettingService.showDeleteUpdateDialog(ev, updateInfo);
+      UpdateSettingService.showDeleteUpdateDialog(ev, updateInfo)
+        .then(function() {
+          vm.newestUpdate = UpdateSettingService.newestUpdate;
+          vm.updateInfos = UpdateSettingService.updateInfos;
+        });
     };
 
     vm.showUpdateRuleDialog = function(ev, updateInfo, isTest) {
