@@ -57,6 +57,34 @@
         });
     };
 
+    UpdateSettingService.modifyUpdateRule = function(updateId, srcRule, destRule, isTest) {
+      // Reset updatable if update rule is changed
+      if (PlatformManager.isAndroidApp(UpdateSettingService.app.platform)) {
+        destRule.targetVersion = parseInt(destRule.targetVersion);
+        if (destRule.targetVersion !== srcRule.targetVersion ||
+          destRule.isDiff !== srcRule.isDiff) {
+
+          destRule.updatable = false;
+
+        }
+      } else if (PlatformManager.isWindowsApp(UpdateSettingService.app.platform)) {
+        if (VersionHelper.compareVersion(destRule.targetVersion, srcRule.targetVersion) !== 0 ||
+          destRule.isDiff !== srcRule.isDiff) {
+
+          destRule.updatable = false;
+
+        }
+      }
+
+      // Set post data
+      var updateBody = {};
+      var ruleField = isTest ? 'testRule' : 'rule';
+      updateBody[ruleField] = destRule;
+
+      return UpdateSettingService.modifyAppUpdate(updateId, updateBody);
+
+    };
+
     UpdateSettingService.showUpdateDescDialog = function(ev, updateInfo) {
       $mdDialog.show({
         controller: 'UpdateDescDialogCtrl',
@@ -117,6 +145,21 @@
         }
       }
 
+      // Set update rule
+      var rule = isTest ? updateInfo.testRule : updateInfo.rule;
+
+      // Initialize rule if it's not set
+      if (!rule) {
+        rule = {
+          targetVersion: versions[0],
+          updatable: false,
+          isSilentDownload: false,
+          isDiff: true
+        };
+      }
+
+      rule = angular.copy(rule);
+
       $mdDialog.show({
         controller: 'UpdateRuleDialogCtrl',
         controllerAs: 'vm',
@@ -126,13 +169,19 @@
           data: function() {
             return {
               versions: validVersions,
-              isTest: isTest
+              isTest: isTest,
+              updateId: updateInfo._id,
+              rule: rule
             };
           }
         }
       })
-      .then(function(result) {
-        // TODO:
+      .then(function(rule) {
+        if (isTest) {
+          updateInfo.testRule = rule;
+        } else {
+          updateInfo.rule = rule;
+        }
       });
     };
 
