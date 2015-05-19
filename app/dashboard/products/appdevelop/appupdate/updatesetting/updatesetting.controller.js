@@ -22,6 +22,10 @@
     vm.showUpdateDescModal = function(ev, updateInfo) {
       UpdateSettingService.showUpdateDescModal(ev, updateInfo);
     };
+
+    vm.showDeleteUpdateDialog = function(ev, updateInfo) {
+      UpdateSettingService.showDeleteUpdateDialog(ev, updateInfo);
+    };
   }
 
   UpdateSettingCtrl.resolve = {

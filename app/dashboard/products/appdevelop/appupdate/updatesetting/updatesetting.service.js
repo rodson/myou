@@ -24,9 +24,24 @@
 
     UpdateSettingService.modifyAppUpdate = function(updateId, update) {
       return $http.put(UrlManager.getAppUpdateInfoUrl(UpdateSettingService.app._id) +
-        '/' + updateId + '?platform=' +UpdateSettingService.app.platform, update)
+        '/' + updateId + '?platform=' + UpdateSettingService.app.platform, update)
         .success(function() {
           // Ignore this.
+        }).error(function(data) {
+          $mdToast.show(
+            $mdToast.simple()
+              .content(data.message)
+              .position('right top')
+              .hideDelay(3000)
+          );
+        });
+    };
+
+    UpdateSettingService.deleteAppUpdate = function(updateId) {
+      return $http.delete(UrlManager.getAppUpdateInfoUrl(UpdateSettingService.app._id) +
+        '/' + updateId + '?platform=' + UpdateSettingService.app.platform)
+        .success(function() {
+          // Ignore this
         }).error(function(data) {
           $mdToast.show(
             $mdToast.simple()
@@ -54,9 +69,26 @@
       })
       .then(function(result) {
         updateInfo.updateDesc = result;
-      }, function(data) {
-        console.log('cancel is clicked');
-        console.log(data);
+      });
+    };
+
+    UpdateSettingService.showDeleteUpdateDialog = function(ev, updateInfo) {
+      $mdDialog.show({
+        controller: 'DeleteUpdateDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'app/dashboard/products/appdevelop/appupdate/updatesetting/deleteupdatedialog/deleteupdatedialog.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              versionCode: updateInfo.versionCode,
+              updateId: updateInfo._id
+            };
+          }
+        }
+      })
+      .then(function(result) {
+
       });
     };
 
