@@ -74,7 +74,8 @@
         verticalAlign: 'middle',
         borderWidth: 0
       },
-      noData: 'No data'
+      noData: 'No data',
+      loading: true
     };
 
     vm.highchartsAPP = {
@@ -104,12 +105,16 @@
       title: {
         text: 'APP分布'
       },
-      noData: 'No data'
+      noData: 'No data',
+      loading: true
     };
 
     $scope.$watch('vm.checkdate', function(){
       vm.getData();
     });
+
+    vm.highchartsURL.series = [];
+    vm.highchartsAPP.series = [];
 
     vm.getData = function() {
       vm.dataURL = [];

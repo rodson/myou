@@ -28,7 +28,7 @@
         targetEvent: ev,
         resolve: {
           trickid: function() {
-            return $scope.trickId;
+            return vm.trickId;
           }
         }
       }).then(function(answer) {
