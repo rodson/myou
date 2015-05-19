@@ -6,10 +6,14 @@
     vm.updateDesc = data.updateDesc;
 
     vm.ok = function() {
-      UpdateSettingService.modifyAppUpdate(data.updateId, {updateDesc: vm.updateDesc})
-        .then(function() {
-          $mdDialog.hide(vm.updateDesc);
-        });
+      if (vm.updateDesc === data.updateDesc) {
+        $mdDialog.cancel();
+      } else {
+        UpdateSettingService.modifyAppUpdate(data.updateId, {updateDesc: vm.updateDesc})
+          .then(function() {
+            $mdDialog.hide(vm.updateDesc);
+          });
+      }
     };
 
     vm.cancel = function() {
