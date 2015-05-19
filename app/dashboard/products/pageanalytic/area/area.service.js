@@ -9,6 +9,7 @@
 
     areaService.data = {};
 
+    /******************************* test data start ******************************/
     var testData = [{
       'country': 'China',
       'ip': '1',
@@ -55,6 +56,7 @@
     PieArrayService.getLarger(areaService.data.pv);
     PieArrayService.getLarger(areaService.data.uv);
     PieArrayService.getLarger(areaService.data.ip);
+    /******************************* test data end ******************************/
 
     areaService.getData = function(start, end, trickId, cb) {
       return $http.get(Constant.URL.PRODUCTS_REGION + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId)

@@ -11,10 +11,11 @@
       });
   }
 
-  function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast, $state) {
+  function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast, $state, PageAnalyticService) {
     var vm = this;
 
     vm.product = localStorageService.get('app');
+
     vm.isActive = function(path) {
       return $location.path().indexOf(path) > -1;
     };
@@ -25,6 +26,11 @@
         controllerAs: 'vm',
         templateUrl: 'getCaCode.html',
         targetEvent: ev,
+        resolve: {
+          trickid: function() {
+            return $scope.trickId;
+          }
+        }
       }).then(function(answer) {
         $mdToast.show(
           $mdToast.simple()
@@ -35,7 +41,18 @@
       }, function() {});
     };
 
-    $state.go('dashboard.pageanalytic.global');
+    vm.getData = function() {
+      PageAnalyticService.getData(vm.product.appKey, function(){
+        vm.trickId = PageAnalyticService.trickId;
+
+        $state.go('dashboard.pageanalytic.global', vm.trickId);
+      });
+    };
+
+    vm.getData();
+    /**************************** start test *****************************/
+    $state.go('dashboard.pageanalytic.global', vm.trickId || 10000014);
+    /**************************** end test *****************************/
   }
 
   function DialogController($mdDialog) {

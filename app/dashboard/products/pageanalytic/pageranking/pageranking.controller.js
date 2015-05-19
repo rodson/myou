@@ -55,7 +55,9 @@
       vm.datas = data;
     };
 
+    /******************************* test start ******************************/
     vm.setData(PageRankingService.data);
+    /******************************* test end ******************************/
   }
 
   PageRankingCtrl.resolve = {

@@ -9,6 +9,7 @@
 
     clientInfoService.data = {};
 
+    /******************************* test data start ******************************/
     var testDataOS = [{
       'ip': '2',
       'name': 'Android',
@@ -163,6 +164,7 @@
     PieArrayService.getLarger(clientInfoService.data.dataSr.pv);
     PieArrayService.getLarger(clientInfoService.data.dataSr.uv);
     PieArrayService.getLarger(clientInfoService.data.dataSr.ip);
+    /******************************* test data end ******************************/
 
     clientInfoService.getDataOs = function(start, end, trickId, cb) {
       return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=os_family_name')

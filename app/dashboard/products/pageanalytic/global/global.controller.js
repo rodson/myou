@@ -8,7 +8,7 @@
 				templateUrl: 'app/dashboard/products/pageanalytic/global/global.html',
 				controllerAs: 'vm',
 				controller: 'GlobalCtrl',
-        resolve: GlobalCtrl.resolve
+        // resolve: GlobalCtrl.resolve
 			});
 	}
 

@@ -10,6 +10,7 @@
         CHECK_LOGIN: 'http://localhost:4000/api/in/auth/loggedin',
 
         PRODUCTS: 'http://localhost:4000/api/in/applications',
+        PRODUCTS_TRICKID: 'http://myoutest.cvte.com/api/analytics/trackid',
         PRODUCTS_OVERVIEW: 'http://myoutest.cvte.com/api/analytics/overview',
         PRODUCTS_SUMMARY: 'http://myoutest.cvte.com/api/analytics/summary',
         PRODUCTS_PAGERANKING: 'http://myoutest.cvte.com/api/analytics/pagerank',

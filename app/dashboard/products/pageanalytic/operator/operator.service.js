@@ -9,6 +9,7 @@
 
     operatorService.data = {};
 
+    /******************************* test data start ******************************/
     var testData = [{
       'ip': '9',
       'isp': '电信',
@@ -46,6 +47,7 @@
       operatorService.data.uv.push([dt.isp, parseInt(dt.ip)]);
       operatorService.data.ip.push([dt.isp, parseInt(dt.uv)]);
     });
+    /******************************* test data end ******************************/
 
     operatorService.getData = function(start, end, trickId, cb) {
       return $http.get(Constant.URL.PRODUCTS_ISP + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId)

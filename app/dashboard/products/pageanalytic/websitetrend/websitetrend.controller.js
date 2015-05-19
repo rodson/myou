@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
         controller: WebsiteTrendCtrl,
-        resolve: WebsiteTrendCtrl.resolve
+        // resolve: WebsiteTrendCtrl.resolve
       });
   }
 
@@ -77,7 +77,9 @@
       vm.highchartsNG.xAxis.categories = data.cx;
     };
 
+    /******************************* test start ******************************/
     vm.setData(WebsiteTrendService.data);
+    /******************************* test end ******************************/
   }
 
   WebsiteTrendCtrl.resolve = {
