@@ -18,6 +18,7 @@
     vm.newestUpdate = UpdateSettingService.newestUpdate;
     vm.updateInfos = UpdateSettingService.updateInfos;
     vm.app = UpdateSettingService.getApplication();
+    vm.test = 'false';
 
     vm.showUpdateDescDialog = function(ev, updateInfo) {
       UpdateSettingService.showUpdateDescDialog(ev, updateInfo);
@@ -34,6 +35,11 @@
     vm.showUpdateRuleDialog = function(ev, updateInfo, isTest) {
       UpdateSettingService.showUpdateRuleDialog(ev, updateInfo, isTest);
     };
+
+    vm.toggleUpdatable = function(updatable) {
+      UpdateSettingService.toggleUpdatable(updatable);
+    };
+
   }
 
   UpdateSettingCtrl.resolve = {

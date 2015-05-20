@@ -48,6 +48,10 @@
   <div class="group-section group-padding">
     <div class="group-title">
       更新配置
+    <md-radio-group ng-model="vm.test" class="pull-right">
+      <md-radio-button value="false" class="md-primary">发布配置</md-radio-button>
+      <md-radio-button value="true" class="md-primary">测试配置</md-radio-button>
+    </md-radio-group>
     </div>
     <table class="table" style="min-width: 900px;">
       <thead>
@@ -57,8 +61,10 @@
           <th>上传时间</th>
           <th>版本名</th>
           <th>源版本</th>
-          <th>目标版本</th>
-          <th>更新状态</th>
+          <th ng-class="{'hidden': vm.test === 'true'}">目标版本</th>
+          <th ng-class="{'hidden': vm.test === 'true'}">更新状态</th>
+          <th ng-class="{'hidden': vm.test === 'false'}">测试版本</th>
+          <th ng-class="{'hidden': vm.test === 'false'}">测试状态</th>
           <th></th>
         </tr>
       </thead>
@@ -69,10 +75,16 @@
           <td style="min-width: 150px">{{ updateInfo.createdAt | date:'yyyy-MM-dd H:mm'}}</td>
           <td style="min-width: 100px">{{ updateInfo.versionName }}</td>
           <td style="min-width: 100px">{{ updateInfo.versionCode }}</td>
-          <td style="min-width: 100px">{{ updateInfo.rule.targetVersion | version }}</td>
-          <td style="min-width: 100px">
+          <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">{{ updateInfo.rule.targetVersion | version }}</td>
+          <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">
             <md-switch class="md-primary nopadding"
-            aria-label="toggle" md-no-ink ng-model="data.cb5">
+            aria-label="toggle" md-no-ink ng-model="updateInfo.rule.updatable" ng-change="vm.toggleUpdatable(updateInfo.rule.updatable)">
+            </md-switch>
+          </td>
+          <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'false'}">{{ updateInfo.testRule.targetVersion | version }}</td>
+          <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'false'}">
+            <md-switch class="md-primary nopadding"
+            aria-label="toggle" md-no-ink ng-model="updateInfo.testRule.updatable">
             </md-switch>
           </td>
           <td>
@@ -83,13 +95,13 @@
                   <span>版本描述</span>
                 </a>
               </li>
-              <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, false)">
+              <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, false)" ng-class="{'hidden': vm.test === 'true'}">
                 <a href="javascript:void(0)">
                   <i class="fa fa-cog"></i>
                   <span>更新配置</span>
                 </a>
               </li>
-              <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, true)">
+              <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, true)" ng-class="{'hidden': vm.test === 'false'}">
                 <a href="javascript:void(0)">
                   <i class="fa fa-bug"></i>
                   <span>测试配置</span>
