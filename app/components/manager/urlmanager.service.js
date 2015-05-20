@@ -17,6 +17,10 @@
       return Constant.URL.FILE_SYNC + '/' + platform + '/' + appKey + '/' + fileName;
     };
 
+    UrlManager.getUpdateConfigUrl = function(id) {
+      return Constant.URL.PRODUCTS + '/' + id + '/updateConfig';
+    };
+
     return UrlManager;
   }
 

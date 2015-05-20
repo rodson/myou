@@ -18,6 +18,7 @@
     vm.newestUpdate = UpdateSettingService.newestUpdate;
     vm.updateInfos = UpdateSettingService.updateInfos;
     vm.app = UpdateSettingService.getApplication();
+    vm.updateConfig = UpdateSettingService.updateConfig;
     vm.test = 'false';
 
     vm.showUpdateDescDialog = function(ev, updateInfo) {
@@ -40,11 +41,23 @@
       UpdateSettingService.toggleUpdatable(ev, updateInfo, isTest);
     };
 
+    vm.toggleUpdateToLatest = function(ev) {
+      UpdateSettingService.toggleUpdateToLatest();
+    };
+
+    vm.isWindowsApp = function() {
+      return UpdateSettingService.isWindowsApp();
+    };
+
   }
 
   UpdateSettingCtrl.resolve = {
     getAppUpdates: function(UpdateSettingService, $stateParams) {
       return UpdateSettingService.getAppUpdates($stateParams.id);
+    },
+
+    getUpdateToLatest: function(UpdateSettingService, $stateParams) {
+      return UpdateSettingService.getUpdateToLatest($stateParams.id);
     }
   };
 
