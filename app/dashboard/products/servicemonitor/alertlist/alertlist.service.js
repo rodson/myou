@@ -2,81 +2,106 @@
   'use strict';
 
   angular.module('myou.dashboard.pageanalytic')
-    .factory('DailyDataService', DailyDataService);
+    .factory('AlertListService', AlertListService);
 
-  function DailyDataService($http, $q, Constant) {
-    var dailyDataService = {};
-    dailyDataService.data = {
-      alterCount: 0,
-      allCount: 0,
-      data: []
+  function AlertListService($http, $q, Constant) {
+    var alertListService = {};
+    alertListService.data = {
+      statistic: [],
+      alert: {}
     };
 
     /************************** test start **************************/
-    var testData = {
-      'all_count': 4616,
-      'alert_count': 2848,
+    var testDataStatic = [{
+      'service_address': 'http://121.40.72.175/connector/api/cloud/file/v2/image',
+      'http_method': 'POST',
+      'all_count': 2,
+      'alert_count': 1,
+      'alert_percent': 0.5
+    }, {
+      'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts.json',
+      'http_method': 'POST',
+      'all_count': 55,
+      'alert_count': 38,
+      'alert_percent': 0.6909
+    }, {
+      'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/babies',
+      'http_method': 'POST',
+      'all_count': 1,
+      'alert_count': 1,
+      'alert_percent': 1
+    }, {
+      'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/babies.json',
+      'http_method': 'GET',
+      'all_count': 113,
+      'alert_count': 111,
+      'alert_percent': 0.9823
+    }];
+
+    var testDataAlert = {
+      'total': 3662,
       'data': [{
-        'service_address': 'http://trace.cvtapi.com/connector/api/cloud/v2/babies/:id/locations.json',
-        'http_method': 'GET',
-        'all_count': 1079,
-        'alert_count': 923,
-        'alert_percent': 0.8554
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations',
-        'http_method': 'GET',
-        'all_count': 204,
-        'alert_count': 204,
-        'alert_percent': 1
-      }, {
         'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
         'http_method': 'GET',
-        'all_count': 184,
-        'alert_count': 162,
-        'alert_percent': 0.8804
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
       }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/follow',
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
         'http_method': 'GET',
-        'all_count': 181,
-        'alert_count': 181,
-        'alert_percent': 1
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
       }, {
-        'service_address': 'http://trace.cvtapi.com/connector/api/cloud/v2/babies/:id.json',
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
         'http_method': 'GET',
-        'all_count': 181,
-        'alert_count': 47,
-        'alert_percent': 0.2597
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/invitations',
-        'http_method': 'GET',
-        'all_count': 178,
-        'alert_count': 178,
-        'alert_percent': 1
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/trackers',
-        'http_method': 'GET',
-        'all_count': 175,
-        'alert_count': 175,
-        'alert_percent': 1
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
       }]
     };
 
-    dailyDataService.data.alterCount = testData.alert_count;
-    dailyDataService.data.allCount = testData.all_count;
-    dailyDataService.data.data = testData.data;
-    dailyDataService.data.data.forEach(function(i) {
-      i.alert_percent = (i.alert_percent * 100).toFixed(2);
+    alertListService.data.statistic = testDataStatic;
+    alertListService.data.alert.total = testDataAlert.total;
+    alertListService.data.alert.data = testDataAlert.data;
+    alertListService.data.alert.data.forEach(function(str) {
+      // str.service_address = str.service_address.replace(/^http:\/\//, '');
+      str.platform = str.platform.replace(/_app$/, '');
     });
+
     /************************** test end **************************/
 
-    dailyDataService.getData = function(appkey, datetime, cb) {
-      return $http.get(Constant.URL.PRODUCTS_SERVICE_MONITOR + '/' + appkey + '/alert_data_daily?date=' + datetime)
+    alertListService.getStatisticData = function(appkey, start, end, cb) {
+      return $http.get(Constant.URL.PRODUCTS_SERVICE_MONITOR + '/' + appkey + '/alert_data_minute?start_datetime=' + start + '&end_datetime=' + end).success(function(data) {
+        alertListService.data.statistic = data;
+        if (cb && typeof(cb) === 'function') {
+          cb();
+        }
+      });
+    };
+
+    alertListService.getAlertData = function(appkey, start, end, limit, skip, serviceaddr, cb) {
+      console.log(Constant.URL.PRODUCTS_SERVICE_MONITOR + '/' + appkey + '/alert_list?start_datetime=' + start + '&end_datetime=' + end + '&limit=' + limit + '&skip=' + skip + '&service_address=' + serviceaddr);
+      return $http.get(Constant.URL.PRODUCTS_SERVICE_MONITOR + '/' + appkey + '/alert_list?start_datetime=' + start + '&end_datetime=' + end + '&limit=' + limit + '&skip=' + skip + '&service_address=' + serviceaddr)
         .success(function(data) {
-          dailyDataService.data.alterCount = data.alert_count;
-          dailyDataService.data.allCount = data.all_count;
-          dailyDataService.data.data = data.data;
-          dailyDataService.data.data.forEach(function(i) {
-            i.alert_percent = (i.alert_percent * 100).toFIxed(4);
+          alertListService.data.alert.total = data.total;
+          alertListService.data.alert.data = data.data;
+
+          alertListService.data.alert.data.forEach(function(str) {
+            // str.service_address = str.service_address.replace(/^http:\/\//, '');
+            str.platform = str.platform.replace(/_app$/, '');
           });
 
           if (cb && typeof(cb) === 'function') {
@@ -85,7 +110,7 @@
         });
     };
 
-    return dailyDataService;
+    return alertListService;
   }
 
 

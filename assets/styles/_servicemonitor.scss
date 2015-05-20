@@ -3,3 +3,52 @@
   padding: 5px 3px 3px;
   margin-left: 10px;
 }
+
+.search-div {
+  padding: 15px 0px 15px 0px;
+  position: relative;
+  margin-right: 20px;
+
+  .clear-btn {
+    position: absolute;
+    right: 0px;
+    top: 14px;
+    font-size: 12px;
+  }
+}
+
+.search-input {
+  display: inline-block;
+  padding: 0px;
+  vertical-align: bottom;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+}
+
+.long-text {
+  word-break:break-all;
+  word-wrap:break-all;
+}
+
+.alter-table > thead > tr > th {
+  padding: 16px 0px 16px 16px !important;
+  // text-align: center !important;
+}
+
+.alter-table > tbody > tr > td {
+  // padding: 16px 0px !important;
+  // text-align: center !important;
+}
+
+md-content.alter-pagetabs{
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+md-tabs.md-default-theme md-tabs-ink-bar {
+  background-color: #277bdd;
+  color: #277bdd;
+}

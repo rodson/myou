@@ -1,1 +1,86 @@
-<h1>alertlist</h1>
+<div>
+  <span>起始时间：</span>
+  <datatime-picker init-datatime='vm.startdate' display-mode='full'></datatime-picker>
+  <span class='margin-left-30'>截止时间：</span>
+  <datatime-picker init-datatime='vm.enddate' display-mode='full'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+
+  <md-radio-group ng-model="vm.radio" class='pull-right'>
+    <md-radio-button value="statistic" class="md-primary">统计列表</md-radio-button>
+    <md-radio-button value="alert" class="md-primary">所有告警</md-radio-button>
+  </md-radio-group>
+</div>
+
+<div ng-show='vm.radio === "alert"' class='search-div'>
+  <md-input-container md-no-float class='search-input'>
+    <input type='text' ng-model="vm.serverAddr" ng-attr-title='{{vm.serverAddr}}'
+      placeholder='可输入服务地址进行详细查询'>
+  </md-input-container>
+  <md-button class="clear-btn" ng-click="vm.serverAddr=''">&nbsp;清除&nbsp;</md-button>
+</div>
+
+
+<div ng-show='vm.radio === "statistic"'>
+  <table class="table margin-top-30" ts-wrapper>
+    <thead>
+      <tr>
+        <th ts-criteria="service_address|lowercase">服务地址</th>
+        <th ts-criteria="http_method|lowercase">HTTP方法</th>
+        <th ts-criteria="all_count|parseInt" ts-default='descending'>请求数</th>
+        <th ts-criteria="alert_count|parseInt">告警数</th>
+        <th ts-criteria="alert_percent|parseFloat">告警率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in vm.statisticList" ts-repeat>
+        <td>{{ x.service_address }}</td>
+        <td>{{ x.http_method }}</td>
+        <td>{{ x.all_count }}</td>
+        <td>{{ x.alert_count }}</td>
+        <td>{{ x.alert_percent }}%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div ng-show='vm.radio === "alert"'>
+  <table class="table alter-table" ts-wrapper>
+    <thead>
+      <tr>
+        <th ts-criteria="service_address|lowercase">服务地址</th>
+        <th ts-criteria="http_method|lowercase">方法</th>
+        <th style='min-width: 80px;' ts-criteria="status_code|lowercase">状态码</th>
+        <th ts-criteria="time_cost|parseInt">延时</th>
+        <th ts-criteria="ip|lowercase">IP地址</th>
+        <th ts-criteria="platform|lowercase">平台</th>
+        <th ts-criteria="report_datetime|lowercase" ts-default='descending'>上报时间</th>
+        <th style='min-width: 60px;' ts-criteria="error_message|lowercase">错误</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in vm.alertList" ts-repeat>
+        <td ng-click='updateAlertListFromTable(alertItem.service_address)' class='long-text'>
+          {{ x.service_address }}
+        </td>
+        <td>{{ x.http_method }}</td>
+        <td>{{ x.status_code }}</td>
+        <td>{{ x.time_cost }}</td>
+        <td>{{ x.ip }}</td>
+        <td>{{ x.platform }}</td>
+        <td>{{ x.report_datetime }}</td>
+        <td ng-attr-title="{{alertItem.error_message}}" ng-click='showErrorMsg(alertItem.error_message)'
+          ng-class='!!alertItem.error_message ? "cursor-pointer" : ""'>
+          <i id='err-msg-info' class="fa" ng-class='!!alertItem.error_message ? "fa-info-circle" : ""'>
+            {{!!alertItem.error_message ? "" : "-"}}
+          </i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <md-content class="md-padding alter-pagetabs" ng-show='vm.totalItems > 1'>
+    <md-tabs md-selected="vm.currentPage" md-border-bottom>
+      <md-tab ng-repeat="tab in vm.tabs" label="{{tab.index}}">
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

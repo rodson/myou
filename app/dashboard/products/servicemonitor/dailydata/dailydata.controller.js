@@ -30,7 +30,9 @@
       vm.tableDatas = DailyDataService.data.data;
     };
 
+    /************************* test start **************************/
     vm.setData();
+    /************************* test end **************************/
   }
 
   angular
