@@ -2,7 +2,7 @@
   'use strict';
 
   function UpdateSettingService($http, $mdDialog, UrlManager,
-    $mdToast, localStorageService, PlatformManager, VersionHelper) {
+    localStorageService, PlatformManager, VersionHelper) {
 
     var UpdateSettingService = {};
     UpdateSettingService.newestUpdate = {};
@@ -70,11 +70,12 @@
         .success(function() {
           // Ignore this.
         }).error(function(data) {
-          $mdToast.show(
-            $mdToast.simple()
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
               .content(data.message)
-              .position('right top')
-              .hideDelay(3000)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
           );
         });
     };
@@ -85,11 +86,12 @@
         .success(function() {
           // Ignore this
         }).error(function(data) {
-          $mdToast.show(
-            $mdToast.simple()
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
               .content(data.message)
-              .position('right top')
-              .hideDelay(3000)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
           );
         });
     };
