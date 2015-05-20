@@ -37,7 +37,7 @@
     };
 
     vm.toggleUpdatable = function(ev, updateInfo, isTest) {
-      UpdateSettingService.toggleUpdatable(ev, updateInfo);
+      UpdateSettingService.toggleUpdatable(ev, updateInfo, isTest);
     };
 
   }

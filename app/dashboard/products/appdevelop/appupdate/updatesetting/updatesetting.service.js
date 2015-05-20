@@ -187,6 +187,16 @@
     };
 
     UpdateSettingService.toggleUpdatable = function(ev, updateInfo, isTest) {
+      var rule;
+      var postData = {};
+      if (isTest) {
+        rule = updateInfo.testRule;
+        postData.testRule = rule;
+      } else {
+        rule = updateInfo.rule;
+        postData.rule = rule;
+      }
+
       // 如果没有设置配置信息，弹出提示框并返回
       if (!rule.targetVersion) {
         $mdDialog.show(
@@ -199,16 +209,6 @@
         );
         rule.updatable = !rule.updatable;
         return;
-      }
-
-      var rule;
-      var postData = {};
-      if (isTest) {
-        rule = updateInfo.testRule;
-        postData.testRule = rule;
-      } else {
-        rule = updateInfo.rule;
-        postData.rule = rule;
       }
 
       var updatable = rule.updatable;
