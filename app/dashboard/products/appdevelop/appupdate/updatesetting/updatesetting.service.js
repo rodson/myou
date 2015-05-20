@@ -2,17 +2,46 @@
   'use strict';
 
   function UpdateSettingService($http, $mdDialog, UrlManager,
-    $mdToast, localStorageService, PlatformManager, VersionHelper) {
+    localStorageService, PlatformManager, VersionHelper) {
 
     var UpdateSettingService = {};
     UpdateSettingService.newestUpdate = {};
     UpdateSettingService.updateInfos = [];
     UpdateSettingService.versions = [];
     UpdateSettingService.app = {};
+    UpdateSettingService.updateConfig = {};
 
     UpdateSettingService.getApplication = function() {
       UpdateSettingService.app = localStorageService.get('app');
       return UpdateSettingService.app;
+    };
+
+    UpdateSettingService.getUpdateToLatest = function(id) {
+      if (!id) {
+        id = UpdateSettingService.app._id;
+      }
+      return $http.get(UrlManager.getUpdateConfigUrl(id))
+        .success(function(updateConfig) {
+          UpdateSettingService.updateConfig = updateConfig;
+        });
+    };
+
+    UpdateSettingService.toggleUpdateToLatest = function(ev) {
+      var updateConfig = UpdateSettingService.updateConfig;
+      return $http.put(UrlManager.getUpdateConfigUrl(UpdateSettingService.app._id), updateConfig)
+        .success(function() {
+          // Success
+        }).error(function(err) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
+              .content(err.message)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
+              .targetEvent(ev)
+          );
+          updateConfig.updateToLatest = !updateConfig.updateToLatest;
+        });
     };
 
     UpdateSettingService.getAppUpdates = function(id) {
@@ -31,17 +60,22 @@
         });
     };
 
+    UpdateSettingService.isWindowsApp = function() {
+      return PlatformManager.isWindowsApp(UpdateSettingService.app.platform);
+    };
+
     UpdateSettingService.modifyAppUpdate = function(updateId, update) {
       return $http.put(UrlManager.getAppUpdateInfoUrl(UpdateSettingService.app._id) +
         '/' + updateId + '?platform=' + UpdateSettingService.app.platform, update)
         .success(function() {
           // Ignore this.
         }).error(function(data) {
-          $mdToast.show(
-            $mdToast.simple()
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
               .content(data.message)
-              .position('right top')
-              .hideDelay(3000)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
           );
         });
     };
@@ -52,11 +86,12 @@
         .success(function() {
           // Ignore this
         }).error(function(data) {
-          $mdToast.show(
-            $mdToast.simple()
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
               .content(data.message)
-              .position('right top')
-              .hideDelay(3000)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
           );
         });
     };

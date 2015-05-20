@@ -11,8 +11,9 @@
           <th>文件名</th>
           <th>文件大小</th>
           <th>上传时间</th>
-          <th>版本名</th>
+          <th ng-hide="vm.isWindowsApp()">版本名</th>
           <th>版本号</th>
+          <th ng-show="vm.isWindowsApp()">所有升到最新</th>
           <th></th>
         </tr>
       </thead>
@@ -21,8 +22,13 @@
           <td style="min-width: 100px">{{ vm.newestUpdate.fileName }}</td>
           <td style="min-width: 100px">{{ vm.newestUpdate.fileSize | bytes }}</td>
           <td style="min-width: 150px">{{ vm.newestUpdate.createdAt | date: 'yyyy-MM-dd H:mm' }}</td>
-          <td style="min-width: 100px">{{ vm.newestUpdate.versionName }}</td>
+          <td style="min-width: 100px" ng-hide="vm.isWindowsApp()">{{ vm.newestUpdate.versionName }}</td>
           <td style="min-width: 100px">{{ vm.newestUpdate.versionCode }}</td>
+          <td style="min-width: 100px" ng-show="vm.isWindowsApp()">
+            <md-switch class="nopadding md-primary"
+            aria-label="toggle" md-no-ink ng-model="vm.updateConfig.updateToLatest" ng-change="vm.toggleUpdateToLatest($event)">
+            </md-switch>
+          </td>
           <td>
             <rs-dropdown>
               <li ng-click="vm.showUpdateDescDialog($event, vm.newestUpdate)">
@@ -45,7 +51,7 @@
   </div>
 
   <!-- Update config table -->
-  <div class="group-section group-padding">
+  <div class="group-section group-padding" ng-hide="vm.isWindowsApp() && vm.updateConfig.updateToLatest">
     <div class="group-title">
       更新配置
     <md-radio-group ng-model="vm.test" class="pull-right">
@@ -59,7 +65,7 @@
           <th>文件名</th>
           <th>文件大小</th>
           <th>上传时间</th>
-          <th>版本名</th>
+          <th ng-hide="vm.isWindowsApp()">版本名</th>
           <th>源版本</th>
           <th ng-class="{'hidden': vm.test === 'true'}">目标版本</th>
           <th ng-class="{'hidden': vm.test === 'true'}">更新状态</th>
@@ -73,7 +79,7 @@
           <td style="min-width: 100px">{{ updateInfo.fileName }}</td>
           <td style="min-width: 100px">{{ updateInfo.fileSize | bytes }}</td>
           <td style="min-width: 150px">{{ updateInfo.createdAt | date:'yyyy-MM-dd H:mm'}}</td>
-          <td style="min-width: 100px">{{ updateInfo.versionName }}</td>
+          <td style="min-width: 100px" ng-hide="vm.isWindowsApp()">{{ updateInfo.versionName }}</td>
           <td style="min-width: 100px">{{ updateInfo.versionCode }}</td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">{{ updateInfo.rule.targetVersion | version }}</td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">
