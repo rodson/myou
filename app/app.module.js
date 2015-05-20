@@ -50,6 +50,7 @@
     .module('myou', [
       'ui.router',
       'ngMaterial',
+      'ngMdIcons',
       'LocalStorageModule',
 
       'app.version',

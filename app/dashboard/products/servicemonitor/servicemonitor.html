@@ -1,7 +1,14 @@
 <div class="wrapper main">
   <md-toolbar class="toolbar-tabs">
     <div class="md-toolbar-tools">
-      <h2>{{ vm.product.name }} <h4>({{ vm.product.appKey }})</h4></h2>
+      <h2>{{ vm.product.name }}</h2>
+      <md-button class="md-primary appkey-btn" ng-show='!vm.showAppKey' ng-click='vm.show()'>
+        &nbsp;>&nbsp;
+      </md-button>
+      <md-button class="md-primary appkey-btn" ng-show='vm.showAppKey' ng-click='vm.hide()'>
+        &nbsp;<&nbsp;
+      </md-button>
+      <h4 ng-show='vm.showAppKey'>&nbsp;&nbsp;(appkey:&nbsp;{{ vm.product.appKey }})</h4>
     </div>
   </md-toolbar>
   <div class="main-container">

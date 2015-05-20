@@ -19,7 +19,17 @@
       return $state.current.name === 'dashboard.servicemonitor.' + li;
     };
 
-    $state.go('dashboard.servicemonitor.dailydata');
+    vm.showAppKey = false;
+
+    vm.show = function() {
+      vm.showAppKey = true;
+    };
+
+    vm.hide = function() {
+      vm.showAppKey = false;
+    };
+
+    $state.go('dashboard.servicemonitor.dailydata', vm.product.appKey);
   }
 
   angular

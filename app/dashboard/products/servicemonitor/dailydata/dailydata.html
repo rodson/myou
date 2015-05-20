@@ -1,1 +1,31 @@
-<h1>dailydata</h1>
+<div>
+  <span>选择时间：</span>
+  <datatime-picker init-datatime='vm.initdata' display-mode='full'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+  <div class='pull-right'>
+    <span>请求数：{{ vm.requestCount }}</span>
+    <span class='margin-left-30'>告警数：{{ vm.alertCount }}</span>
+  </div>
+</div>
+<div>
+  <table class="table margin-top-30" ts-wrapper>
+    <thead>
+      <tr>
+        <th ts-criteria="service_address|lowercase">服务地址</th>
+        <th ts-criteria="http_method|parseInt">HTTP方法</th>
+        <th ts-criteria="all_count|parseInt" ts-default='descending'>请求数</th>
+        <th ts-criteria="alert_count|parseInt">告警数</th>
+        <th ts-criteria="alert_percent|parseFloat">告警率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in vm.tableDatas" ts-repeat>
+        <td>{{ x.service_address }}</td>
+        <td>{{ x.http_method }}</td>
+        <td>{{ x.all_count }}</td>
+        <td>{{ x.alert_count }}</td>
+        <td>{{ x.alert_percent }}%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
