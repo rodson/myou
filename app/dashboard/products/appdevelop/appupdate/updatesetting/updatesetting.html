@@ -78,13 +78,13 @@
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">{{ updateInfo.rule.targetVersion | version }}</td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">
             <md-switch class="md-primary nopadding"
-            aria-label="toggle" md-no-ink ng-model="updateInfo.rule.updatable" ng-change="vm.toggleUpdatable($event, updateInfo)">
+            aria-label="toggle" md-no-ink ng-model="updateInfo.rule.updatable" ng-change="vm.toggleUpdatable($event, updateInfo, false)">
             </md-switch>
           </td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'false'}">{{ updateInfo.testRule.targetVersion | version }}</td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'false'}">
             <md-switch class="nopadding"
-            aria-label="toggle" md-no-ink ng-model="updateInfo.testRule.updatable">
+            aria-label="toggle" md-no-ink ng-model="updateInfo.testRule.updatable" ng-change="vm.toggleUpdatable($event, updateInfo, true)">
             </md-switch>
           </td>
           <td>

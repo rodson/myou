@@ -186,9 +186,9 @@
       });
     };
 
-    UpdateSettingService.toggleUpdatable = function(ev, updateInfo) {
+    UpdateSettingService.toggleUpdatable = function(ev, updateInfo, isTest) {
       // 如果没有设置配置信息，弹出提示框并返回
-      if (!updateInfo.rule.targetVersion) {
+      if (!rule.targetVersion) {
         $mdDialog.show(
           $mdDialog.alert()
             .title('启动失败')
@@ -197,21 +197,31 @@
             .ok('知道了')
             .targetEvent(ev)
         );
-        updateInfo.rule.updatable = !updateInfo.rule.updatable;
+        rule.updatable = !rule.updatable;
         return;
       }
 
-      var updatable = updateInfo.rule.updatable;
+      var rule;
+      var postData = {};
+      if (isTest) {
+        rule = updateInfo.testRule;
+        postData.testRule = rule;
+      } else {
+        rule = updateInfo.rule;
+        postData.rule = rule;
+      }
+
+      var updatable = rule.updatable;
       if (!updatable) {
         // 发送关闭更新请求
-        UpdateSettingService.modifyAppUpdate(updateInfo._id, {rule: updateInfo.rule})
+        UpdateSettingService.modifyAppUpdate(updateInfo._id, postData)
           .error(function() {
-            updateInfo.rule.updatable = !updateInfo.rule.updatable;
+            rule.updatable = !rule.updatable;
           });
       } else {
         var srcVersion = updateInfo.versionCode;
-        var targetVersion = updateInfo.rule.targetVersion;
-        var isDiff = updateInfo.rule.isDiff;
+        var targetVersion = rule.targetVersion;
+        var isDiff = rule.isDiff;
 
         // windows平台通过依赖条件自动检测是否差分
         if (PlatformManager.isWindowsApp(UpdateSettingService.app.platform)) {
@@ -239,9 +249,9 @@
         // 检查文件是否已经同步好
         checkFileSync(srcVersion, targetVersion, isDiff).success(function() {
           // 文件同步好，发送打开更新请求
-          UpdateSettingService.modifyAppUpdate(updateInfo._id, {rule: updateInfo.rule})
+          UpdateSettingService.modifyAppUpdate(updateInfo._id, postData)
             .error(function() {
-              updateInfo.rule.updatable = !updateInfo.rule.updatable;
+              rule.updatable = !rule.updatable;
             });
         }).error(function() {
           // 文件未同步好
@@ -253,7 +263,7 @@
               .ok('知道了')
               .targetEvent(ev)
           );
-          updateInfo.rule.updatable = !updateInfo.rule.updatable;
+          rule.updatable = !rule.updatable;
         });
       }
 

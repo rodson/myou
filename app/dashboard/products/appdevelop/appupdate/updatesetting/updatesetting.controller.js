@@ -36,7 +36,7 @@
       UpdateSettingService.showUpdateRuleDialog(ev, updateInfo, isTest);
     };
 
-    vm.toggleUpdatable = function(ev, updateInfo) {
+    vm.toggleUpdatable = function(ev, updateInfo, isTest) {
       UpdateSettingService.toggleUpdatable(ev, updateInfo);
     };
 
