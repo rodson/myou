@@ -12,7 +12,7 @@
       });
   }
 
-  function AreaCtrl(MomentDateService, AreaService) {
+  function AreaCtrl(MomentDateService, AreaService, AreaMapDataConstant) {
     var vm = this;
 
     vm.radioDate = 'today';
@@ -51,13 +51,62 @@
         },
       },
       title: {
-        text: '',//'<label style="font-size:14px;">地域分布</label>',
+        text: '', //'<label style='font-size:14px;'>地域分布</label>',
         align: 'center',
         verticalAlign: 'top',
         y: Math.ceil(AreaService.data.tableData.length / 5 + 1) * (-5)
       },
       noData: 'No data'
     };
+
+    /******************* test map start *****************/
+
+    vm.highchartsMap = {
+      loading: false,
+      noData: 'No data',
+      options: {
+        chart: {
+          height: 450,
+        },
+        mapNavigation: {
+          enabled: false,
+          buttonOptions: {
+            verticalAlign: 'bottom'
+          }
+        },
+        colorAxis: {
+          min: 0
+        },
+        legend: {
+          enabled: true,
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          x: -20
+        }
+      },
+      chartType: 'map',
+      title: {
+        text: ''
+      },
+      series: [{
+        data: AreaService.data[vm.radioPvUvIp],
+        mapData: AreaMapDataConstant.MAP_DATA,
+        joinBy: 'name',
+        name: vm.radioPvUvIp.toUpperCase(),
+        states: {
+          hover: {
+            color: '#BADA55'
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}'
+        }
+      }]
+    };
+
+    /******************* test map end *****************/
 
     vm.getCheckDate = function() {
       switch (vm.radioDate) {
@@ -84,6 +133,7 @@
 
     vm.getCheckPieType = function() {
       vm.setPieData();
+      vm.setMapData();
     };
 
     vm.getData = function() {
@@ -95,6 +145,7 @@
     vm.setData = function() {
       vm.datas = AreaService.data.tableData;
       vm.setPieData();
+      vm.setMapData();
     };
 
     vm.setPieData = function() {
@@ -106,11 +157,28 @@
       }];
     };
 
+    vm.setMapData = function() {
+      vm.highchartsMap.series = [{
+        data: AreaService.data[vm.radioPvUvIp],
+        mapData: AreaMapDataConstant.MAP_DATA,
+        joinBy: 'name',
+        name: vm.radioPvUvIp.toUpperCase(),
+        states: {
+          hover: {
+            color: '#BADA55'
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}'
+        }
+      }];
+    };
     /******************* test start *****************/
     vm.setData();
     /******************* test end *****************/
 
-    vm.getData();
+    // vm.getData();
   }
 
   AreaCtrl.resolve = {

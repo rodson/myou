@@ -4,7 +4,7 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('AreaService', AreaService);
 
-  function AreaService($http, $q, Constant, PieArrayService) {
+  function AreaService($http, $q, Constant, PieArrayService, AreaMapDataConstant) {
     var areaService = {};
 
     areaService.data = {};
@@ -40,6 +40,12 @@
       'province': '湖南省',
       'pv': '71',
       'uv': '2'
+    }, {
+      'country': '中国',
+      'ip': '2',
+      'province': '陕西省',
+      'pv': '71',
+      'uv': '2'
     }];
 
     areaService.data.tableData = testData;
@@ -48,14 +54,33 @@
     areaService.data.ip = [];
 
     testData.forEach(function(dt) {
-      areaService.data.pv.push([dt.country + '.' + dt.province, parseInt(dt.pv)]);
-      areaService.data.uv.push([dt.country + '.' + dt.province, parseInt(dt.uv)]);
-      areaService.data.ip.push([dt.country + '.' + dt.province, parseInt(dt.ip)]);
+
+      areaService.data.pv.push({
+        name: dt.province,
+        value: parseInt(dt.pv)
+      });
+      areaService.data.uv.push({
+        name: dt.province,
+        value: parseInt(dt.uv)
+      });
+      areaService.data.ip.push({
+        name: dt.province,
+        value: parseInt(dt.ip)
+      });
     });
 
-    PieArrayService.getLarger(areaService.data.pv);
-    PieArrayService.getLarger(areaService.data.uv);
-    PieArrayService.getLarger(areaService.data.ip);
+    // var findHcKeyFromProvince = function(province) {
+    //   var length = AreaMapDataConstant.MAP_DATA.features.length;
+    //   for(var i = 0; i < length; i++) {
+    //     if (AreaMapDataConstant.MAP_DATA.features[i].properties.name === province) {
+    //       return AreaMapDataConstant.MAP_DATA.features[i].properties['hc-key'];
+    //     }
+    //   }
+    // };
+
+    // PieArrayService.getLarger(areaService.data.pv);
+    // PieArrayService.getLarger(areaService.data.uv);
+    // PieArrayService.getLarger(areaService.data.ip);
     /******************************* test data end ******************************/
 
     areaService.getData = function(start, end, trickId, cb) {
@@ -68,14 +93,23 @@
           areaService.data.ip = [];
 
           data.forEach(function(dt) {
-            areaService.data.pv.push([dt.country + '.' + dt.province, parseInt(dt.pv)]);
-            areaService.data.uv.push([dt.country + '.' + dt.province, parseInt(dt.uv)]);
-            areaService.data.ip.push([dt.country + '.' + dt.province, parseInt(dt.ip)]);
+            areaService.data.pv.push({
+              name: dt.province,
+              value: parseInt(dt.pv)
+            });
+            areaService.data.uv.push({
+              name: dt.province,
+              value: parseInt(dt.uv)
+            });
+            areaService.data.ip.push({
+              name: dt.province,
+              value: parseInt(dt.ip)
+            });
           });
 
-          PieArrayService.getLarger(areaService.data.pv);
-          PieArrayService.getLarger(areaService.data.uv);
-          PieArrayService.getLarger(areaService.data.ip);
+          // PieArrayService.getLarger(areaService.data.pv);
+          // PieArrayService.getLarger(areaService.data.uv);
+          // PieArrayService.getLarger(areaService.data.ip);
 
           if (cb && typeof(cb) === 'function') {
             cb();
