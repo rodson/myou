@@ -52,12 +52,14 @@
 
   <!-- Update config table -->
   <div class="group-section group-padding" ng-hide="vm.isWindowsApp() && vm.updateConfig.updateToLatest">
-    <div class="group-title">
-      更新配置
-    <md-radio-group ng-model="vm.test" class="pull-right">
-      <md-radio-button value="false" class="md-primary">发布配置</md-radio-button>
-      <md-radio-button value="true">测试配置</md-radio-button>
-    </md-radio-group>
+    <div class="group-title clearfix">
+      <span style="position: absolute; top: 18px;">
+        更新配置
+      </span>
+      <md-radio-group ng-model="vm.test" class="pull-right" style="margin-bottom: -1px">
+        <md-radio-button value="false" class="md-primary">发布配置</md-radio-button>
+        <md-radio-button value="true">测试配置</md-radio-button>
+      </md-radio-group>
     </div>
     <table class="table" style="min-width: 900px;">
       <thead>
