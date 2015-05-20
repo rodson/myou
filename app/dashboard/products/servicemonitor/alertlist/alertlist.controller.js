@@ -17,7 +17,7 @@
     vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
     vm.startdate = $filter('date')(now.getTime() - 5 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss');
     vm.radio = 'statistic';
-    vm.limit = 20;
+    vm.limit = 40;
     vm.pageCount = 0;
     vm.skip = 0;
     vm.serverAddr = '';

@@ -39,8 +39,368 @@
     }];
 
     var testDataAlert = {
-      'total': 3662,
+      'total': 1992,
       'data': [{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
+        'http_method': 'GET',
+        'status_code': 404,
+        'error_message': null,
+        'time_cost': 284,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:16:00',
+        'created_at': '2015-05-20 16:16:00'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers/:id',
+        'http_method': 'GET',
+        'status_code': 4200,
+        'error_message': null,
+        'time_cost': 4184.62,
+        'ip': '121.8.170.250',
+        'platform': 'ios_app',
+        'report_datetime': '2015-05-20 16:15:11',
+        'created_at': '2015-05-20 16:15:58'
+      }, {
+        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/trackers.json',
+        'http_method': 'GET',
+        'status_code': 200,
+        'error_message': null,
+        'time_cost': 619,
+        'ip': '121.8.170.250',
+        'platform': 'android_app',
+        'report_datetime': '2015-05-20 16:15:51',
+        'created_at': '2015-05-20 16:15:51'
+      },{
         'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
         'http_method': 'GET',
         'status_code': 404,
