@@ -213,6 +213,29 @@
         var targetVersion = updateInfo.rule.targetVersion;
         var isDiff = updateInfo.rule.isDiff;
 
+        // windows平台通过依赖条件自动检测是否差分
+        if (PlatformManager.isWindowsApp(UpdateSettingService.app.platform)) {
+          var srcDependencies = updateInfo.dependencies || 'Null';
+          var targetDependencies = 'Null';
+
+          var updateInfos = UpdateSettingService.updateInfos;
+          var itemLength = updateInfos.length;
+          // Get the dependencies of target version
+          for (var i = 0; i < itemLength; i++) {
+            var tmpUpdate = updateInfos[i];
+            if (tmpUpdate.versionCode === targetVersion) {
+              targetDependencies = tmpUpdate.dependencies || 'Null';
+              break;
+            }
+          }
+          // If the dependencies between the two is the same, then use delta update.
+          if (srcDependencies === targetDependencies) {
+            isDiff = true;
+          } else {
+            isDiff = false;
+          }
+        }
+
         // 检查文件是否已经同步好
         checkFileSync(srcVersion, targetVersion, isDiff).success(function() {
           // 文件同步好，发送打开更新请求
