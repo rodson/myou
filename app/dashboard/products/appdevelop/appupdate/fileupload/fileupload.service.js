@@ -138,36 +138,20 @@
         templateUrl: 'app/dashboard/products/appdevelop/appupdate/fileupload/uploaddialog/uploaddialog.html',
         controller: 'UploadDialogCtrl',
         controllerAs: 'vm',
-        clickOutsideToClose: false
+        clickOutsideToClose: false,
+        resolve: {
+          data: function() {
+            return {
+              uploadUrl: uploadUrl,
+              appendData: appendData,
+              fileValues: fileValues,
+              fileKeys: fileKeys
+            };
+          }
+        }
       });
 
-      // uploader = Upload.upload({
-      //   url: uploadUrl,
-      //   fields: appendData,
-      //   file: fileValues,
-      //   fileFormDataName: fileKeys
-      // })
-      // .progress(onProgress)
-      // .success(onSuccess)
-      // .error(onError);
-
     }
-
-    function onProgress(evt) {
-      console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
-    }
-
-    function onSuccess(data) {
-      console.log('upload success');
-      console.log(data);
-
-    }
-
-    function onError(data) {
-      console.log('upload error');
-      console.log(data);
-    }
-
 
     return FileUploadService;
   }
