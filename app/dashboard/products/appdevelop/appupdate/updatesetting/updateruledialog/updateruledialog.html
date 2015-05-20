@@ -13,11 +13,9 @@
           <div class="setting-group">
             <label>目标版本</label>
             <div class="item">
-              <md-select class="nopadding" placeholder="选择版本" ng-model="vm.rule.targetVersion">
-                <md-option ng-repeat="version in vm.versions"
-                  value="{{ version }}">{{ version }}
-                </md-option>
-              </md-select>
+              <select class="nopadding" placeholder="选择版本" ng-model="vm.rule.targetVersion">
+                <option ng-repeat="version in vm.versions">{{ version }}</option>
+              </select>
             </div>
           </div>
           <div class="setting-group">

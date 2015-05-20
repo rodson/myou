@@ -242,6 +242,10 @@ body {
   }
 }
 
+.normal-text {
+  color: $text-color;
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;

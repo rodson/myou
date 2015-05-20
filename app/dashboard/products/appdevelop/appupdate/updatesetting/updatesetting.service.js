@@ -186,6 +186,109 @@
       });
     };
 
+    UpdateSettingService.toggleUpdatable = function(ev, updateInfo, isTest) {
+      var rule;
+      var postData = {};
+      if (isTest) {
+        rule = updateInfo.testRule;
+        postData.testRule = rule;
+      } else {
+        rule = updateInfo.rule;
+        postData.rule = rule;
+      }
+
+      // 如果没有设置配置信息，弹出提示框并返回
+      if (!rule.targetVersion) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('启动失败')
+            .content('请先配置升级信息')
+            .ariaLabel('updatable toggle')
+            .ok('知道了')
+            .targetEvent(ev)
+        );
+        rule.updatable = !rule.updatable;
+        return;
+      }
+
+      var updatable = rule.updatable;
+      if (!updatable) {
+        // 发送关闭更新请求
+        UpdateSettingService.modifyAppUpdate(updateInfo._id, postData)
+          .error(function() {
+            rule.updatable = !rule.updatable;
+          });
+      } else {
+        var srcVersion = updateInfo.versionCode;
+        var targetVersion = rule.targetVersion;
+        var isDiff = rule.isDiff;
+
+        // windows平台通过依赖条件自动检测是否差分
+        if (PlatformManager.isWindowsApp(UpdateSettingService.app.platform)) {
+          var srcDependencies = updateInfo.dependencies || 'Null';
+          var targetDependencies = 'Null';
+
+          var updateInfos = UpdateSettingService.updateInfos;
+          var itemLength = updateInfos.length;
+          // Get the dependencies of target version
+          for (var i = 0; i < itemLength; i++) {
+            var tmpUpdate = updateInfos[i];
+            if (tmpUpdate.versionCode === targetVersion) {
+              targetDependencies = tmpUpdate.dependencies || 'Null';
+              break;
+            }
+          }
+          // If the dependencies between the two is the same, then use delta update.
+          if (srcDependencies === targetDependencies) {
+            isDiff = true;
+          } else {
+            isDiff = false;
+          }
+        }
+
+        // 检查文件是否已经同步好
+        checkFileSync(srcVersion, targetVersion, isDiff).success(function() {
+          // 文件同步好，发送打开更新请求
+          UpdateSettingService.modifyAppUpdate(updateInfo._id, postData)
+            .error(function() {
+              rule.updatable = !rule.updatable;
+            });
+        }).error(function() {
+          // 文件未同步好
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('启动失败')
+              .content('下载服务器数据同步大概需要2分钟，请稍后再试')
+              .ariaLabel('updatable toggle')
+              .ok('知道了')
+              .targetEvent(ev)
+          );
+          rule.updatable = !rule.updatable;
+        });
+      }
+
+    };
+
+    function checkFileSync(srcVersion, targetVersion, isDiff) {
+      var fileName = '';
+      if (PlatformManager.isAndroidApp(UpdateSettingService.app.platform)) {
+        if (isDiff) {
+          fileName = srcVersion + '-' + targetVersion + '.patch';
+        } else {
+          fileName = targetVersion + '.apk';
+        }
+      } else if(PlatformManager.isWindowsApp(UpdateSettingService.app.platform)) {
+        if (isDiff) {
+          fileName = srcVersion + '-' + targetVersion + '.zip';
+        } else {
+          fileName = targetVersion + '.exe';
+        }
+      }
+
+      var fileSyncUrl = UrlManager.getFileSyncUrl(UpdateSettingService.app.platform, UpdateSettingService.app.appKey, fileName);
+      return $http.head(fileSyncUrl);
+    }
+
     return UpdateSettingService;
 
   }

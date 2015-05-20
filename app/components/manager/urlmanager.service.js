@@ -8,9 +8,13 @@
       return Constant.URL.PRODUCTS + '/' + id +
         '/update/versions' + '?platform=' + platform;
     };
-    
+
     UrlManager.getAppUpdateInfoUrl = function(id) {
       return Constant.URL.PRODUCTS + '/' + id + '/update/versions';
+    };
+
+    UrlManager.getFileSyncUrl = function(platform, appKey, fileName) {
+      return Constant.URL.FILE_SYNC + '/' + platform + '/' + appKey + '/' + fileName;
     };
 
     return UrlManager;
