@@ -1,1 +1,31 @@
-<h1>System Monitor</h1>
+<div class="wrapper main">
+  <md-toolbar class="toolbar-tabs">
+    <div class="md-toolbar-tools">
+      <h2>{{ vm.product.name }} <h4>({{ vm.product.appKey }})</h4></h2>
+    </div>
+  </md-toolbar>
+  <div class="main-container">
+    <nav class="sidebar">
+      <ul>
+        <li>
+          <a>统计</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('dailydata')}"><a ui-sref='.dailydata'>每日统计</a></li>
+            <li ng-class="{active: vm.isActive('alertlist')}"><a ui-sref='.alertlist'>告警列表</a></li>
+            <li ng-class="{active: vm.isActive('interfaces')}"><a ui-sref='.interfaces'>模调列表</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>设置</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('contacts')}"><a ui-sref='.contacts'>联系人</a></li>
+            <li ng-class="{active: vm.isActive('settings')}"><a ui-sref='.settings'>通知设置</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <main class="main-section">
+      <div ui-view></div>
+    </main>
+  </div>
+</div>

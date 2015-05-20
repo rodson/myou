@@ -11,8 +11,15 @@
       });
   }
 
-  function ServiceMonitorCtrl() {
+  function ServiceMonitorCtrl($state, localStorageService) {
+    var vm = this;
+    vm.product = localStorageService.get('app');
 
+    vm.isActive = function(li) {
+      return $state.current.name === 'dashboard.servicemonitor.' + li;
+    };
+
+    $state.go('dashboard.servicemonitor.dailydata');
   }
 
   angular
