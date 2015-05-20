@@ -3,17 +3,17 @@
 describe('FileUploadService: ', function() {
   var FileUploadService;
   var Constant;
-  var $mdToast;
+  var $mdDialog;
 
   beforeEach(function() {
     module('myou.dashboard.appdevelop.appupdate');
 
-    inject(function(_FileUploadService_, _$mdToast_, _Constant_) {
+    inject(function(_FileUploadService_, _$mdDialog_, _Constant_) {
       FileUploadService = _FileUploadService_;
-      $mdToast = _$mdToast_;
+      $mdDialog = _$mdDialog_;
       Constant = _Constant_;
 
-      spyOn($mdToast, 'show');
+      spyOn($mdDialog, 'show');
     });
   });
 
@@ -50,7 +50,7 @@ describe('FileUploadService: ', function() {
       var file = {name: 'launcher.app'};
       files.push(file);
       FileUploadService.onFileSelect(files, 'apk');
-      expect($mdToast.show).toHaveBeenCalled();
+      expect($mdDialog.show).toHaveBeenCalled();
     });
 
     it('should add to upload data if file extension is valid', function() {
@@ -70,18 +70,18 @@ describe('FileUploadService: ', function() {
 
       result = FileUploadService
         .upload({platform: Constant.PRODUCT_PLATFORM.ANDROID_APP});
-      expect($mdToast.show).toHaveBeenCalled();
+      expect($mdDialog.show).toHaveBeenCalled();
       expect(result).toEqual('请选择apk文件');
 
       result = FileUploadService
         .upload({platform: Constant.PRODUCT_PLATFORM.WINDOWS_APP});
-      expect($mdToast.show).toHaveBeenCalled();
+      expect($mdDialog.show).toHaveBeenCalled();
       expect(result).toEqual('请选择zip文件');
 
       FileUploadService.uploadData.zip = 'zip';
       result = FileUploadService
         .upload({platform: Constant.PRODUCT_PLATFORM.WINDOWS_APP});
-      expect($mdToast.show).toHaveBeenCalled();
+      expect($mdDialog.show).toHaveBeenCalled();
       expect(result).toEqual('请选择exe文件');
     });
   });

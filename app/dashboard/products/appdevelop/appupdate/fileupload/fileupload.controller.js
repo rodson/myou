@@ -11,7 +11,7 @@
       });
   }
 
-  function FileUploadCtrl(FileUploadService, localStorageService) {
+  function FileUploadCtrl(FileUploadService, localStorageService, $mdDialog) {
 
     var vm = this;
 

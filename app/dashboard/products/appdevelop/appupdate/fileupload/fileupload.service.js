@@ -2,7 +2,7 @@
   'use strict';
 
   function FileUploadService(PlatformManager, UrlManager,
-    $mdToast, Upload, Constant) {
+    $mdDialog, Upload, Constant) {
 
     var FileUploadService = {};
     var uploader;
@@ -34,11 +34,11 @@
         FileUploadService.uploadData[type] = file;
       } else {
         var errorMsg = '请选择' + type + '文件';
-        $mdToast.show(
-          $mdToast.simple()
+        $mdDialog.show(
+          $mdDialog.alert()
             .content(errorMsg)
-            .position('right top')
-            .hideDelay(3000)
+            .ariaLabel('select file type')
+            .ok('知道了')
         );
       }
     };
@@ -66,11 +66,11 @@
 
       if (!FileUploadService.uploadData.apk) {
         errorMsg = '请选择apk文件';
-        $mdToast.show(
-          $mdToast.simple()
+        $mdDialog.show(
+          $mdDialog.alert()
             .content(errorMsg)
-            .position('right top')
-            .hideDelay(3000)
+            .ariaLabel('select apk')
+            .ok('知道了')
         );
         return errorMsg;
       }
@@ -90,22 +90,22 @@
       var errorMsg;
       if (!FileUploadService.uploadData.zip) {
         errorMsg = '请选择zip文件';
-        $mdToast.show(
-          $mdToast.simple()
+        $mdDialog.show(
+          $mdDialog.alert()
             .content(errorMsg)
-            .position('right top')
-            .hideDelay(3000)
+            .ariaLabel('select zip')
+            .ok('知道了')
         );
         return errorMsg;
       }
 
       if (!FileUploadService.uploadData.exe) {
         errorMsg = '请选择exe文件';
-        $mdToast.show(
-          $mdToast.simple()
+        $mdDialog.show(
+          $mdDialog.alert()
             .content(errorMsg)
-            .position('right top')
-            .hideDelay(3000)
+            .ariaLabel('select exe')
+            .ok('知道了')
         );
         return errorMsg;
       }
@@ -134,15 +134,22 @@
         }
       }
 
-      uploader = Upload.upload({
-        url: uploadUrl,
-        fields: appendData,
-        file: fileValues,
-        fileFormDataName: fileKeys
-      })
-      .progress(onProgress)
-      .success(onSuccess)
-      .error(onError);
+      $mdDialog.show({
+        templateUrl: 'app/dashboard/products/appdevelop/appupdate/fileupload/uploaddialog/uploaddialog.html',
+        controller: 'UploadDialogCtrl',
+        controllerAs: 'vm',
+        clickOutsideToClose: false
+      });
+
+      // uploader = Upload.upload({
+      //   url: uploadUrl,
+      //   fields: appendData,
+      //   file: fileValues,
+      //   fileFormDataName: fileKeys
+      // })
+      // .progress(onProgress)
+      // .success(onSuccess)
+      // .error(onError);
 
     }
 

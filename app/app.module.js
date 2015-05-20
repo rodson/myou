@@ -10,28 +10,8 @@
     $httpProvider.interceptors.push('TokenInterceptor');
 
     // Config default theme
-    $mdThemingProvider.definePalette('holoLight', {
-      '50': '277BDD',
-      '100': '277BDD',
-      '200': '277BDD',
-      '300': '277BDD',
-      '400': '277BDD',
-      '500': '277BDD',
-      '600': '277BDD',
-      '700': '277BDD',
-      '800': '277BDD',
-      '900': '277BDD',
-      'A100': '277BDD',
-      'A200': '277BDD',
-      'A400': '277BDD',
-      'A700': '277BDD',
-      'contrastDefaultColor': 'light',
-      'contrastDarkColors': ['50', '100',
-       '200', '300', '400', 'A100'],
-      'contrastLightColors': undefined
-    });
     $mdThemingProvider.theme('default')
-      .primaryPalette('holoLight');
+      .primaryPalette('blue');
   }
 
   function TokenInterceptor(localStorageService) {
