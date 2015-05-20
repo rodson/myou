@@ -186,6 +186,76 @@
       });
     };
 
+    UpdateSettingService.toggleUpdatable = function(ev, updateInfo) {
+      // 如果没有设置配置信息，弹出提示框并返回
+      if (!updateInfo.rule.targetVersion) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('启动失败')
+            .content('请先配置升级信息')
+            .ariaLabel('updatable toggle')
+            .ok('知道了')
+            .targetEvent(ev)
+        );
+        updateInfo.rule.updatable = !updateInfo.rule.updatable;
+        return;
+      }
+
+      var updatable = updateInfo.rule.updatable;
+      if (!updatable) {
+        // 发送关闭更新请求
+        UpdateSettingService.modifyAppUpdate(updateInfo._id, {rule: updateInfo.rule})
+          .error(function() {
+            updateInfo.rule.updatable = !updateInfo.rule.updatable;
+          });
+      } else {
+        var srcVersion = updateInfo.versionCode;
+        var targetVersion = updateInfo.rule.targetVersion;
+        var isDiff = updateInfo.rule.isDiff;
+
+        // 检查文件是否已经同步好
+        checkFileSync(srcVersion, targetVersion, isDiff).success(function() {
+          // 文件同步好，发送打开更新请求
+          UpdateSettingService.modifyAppUpdate(updateInfo._id, {rule: updateInfo.rule})
+            .error(function() {
+              updateInfo.rule.updatable = !updateInfo.rule.updatable;
+            });
+        }).error(function() {
+          // 文件未同步好
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('启动失败')
+              .content('下载服务器数据同步大概需要2分钟，请稍后再试')
+              .ariaLabel('updatable toggle')
+              .ok('知道了')
+              .targetEvent(ev)
+          );
+          updateInfo.rule.updatable = !updateInfo.rule.updatable;
+        });
+      }
+
+    };
+
+    function checkFileSync(srcVersion, targetVersion, isDiff) {
+      var fileName = '';
+      if (PlatformManager.isAndroidApp(UpdateSettingService.app.platform)) {
+        if (isDiff) {
+          fileName = srcVersion + '-' + targetVersion + '.patch';
+        } else {
+          fileName = targetVersion + '.apk';
+        }
+      } else if(PlatformManager.isWindowsApp(UpdateSettingService.app.platform)) {
+        if (isDiff) {
+          fileName = srcVersion + '-' + targetVersion + '.zip';
+        } else {
+          fileName = targetVersion + '.exe';
+        }
+      }
+
+      var fileSyncUrl = UrlManager.getFileSyncUrl(UpdateSettingService.app.platform, UpdateSettingService.app.appKey, fileName);
+      return $http.head(fileSyncUrl);
+    }
+
     return UpdateSettingService;
 
   }

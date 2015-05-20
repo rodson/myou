@@ -50,7 +50,7 @@
       更新配置
     <md-radio-group ng-model="vm.test" class="pull-right">
       <md-radio-button value="false" class="md-primary">发布配置</md-radio-button>
-      <md-radio-button value="true" class="md-primary">测试配置</md-radio-button>
+      <md-radio-button value="true">测试配置</md-radio-button>
     </md-radio-group>
     </div>
     <table class="table" style="min-width: 900px;">
@@ -78,12 +78,12 @@
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">{{ updateInfo.rule.targetVersion | version }}</td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'true'}">
             <md-switch class="md-primary nopadding"
-            aria-label="toggle" md-no-ink ng-model="updateInfo.rule.updatable" ng-change="vm.toggleUpdatable(updateInfo.rule.updatable)">
+            aria-label="toggle" md-no-ink ng-model="updateInfo.rule.updatable" ng-change="vm.toggleUpdatable($event, updateInfo)">
             </md-switch>
           </td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'false'}">{{ updateInfo.testRule.targetVersion | version }}</td>
           <td style="min-width: 100px" ng-class="{'hidden': vm.test === 'false'}">
-            <md-switch class="md-primary nopadding"
+            <md-switch class="nopadding"
             aria-label="toggle" md-no-ink ng-model="updateInfo.testRule.updatable">
             </md-switch>
           </td>
