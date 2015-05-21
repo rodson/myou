@@ -35,12 +35,10 @@
 
 .alter-table > thead > tr > th {
   padding: 16px 0px 16px 16px !important;
-  // text-align: center !important;
 }
 
-.alter-table > tbody > tr > td {
-  // padding: 16px 0px !important;
-  // text-align: center !important;
+.tree-grid > thead > tr > th {
+  padding: 16px 0px 16px 16px !important;
 }
 
 md-content.alter-pagetabs{
@@ -48,7 +46,85 @@ md-content.alter-pagetabs{
   padding-right: 100px;
 }
 
+md-tabs {
+  overflow: hidden !important;
+}
+
 md-tabs.md-default-theme md-tabs-ink-bar {
   background-color: #277bdd;
   color: #277bdd;
+}
+
+.tree-grid-animate-enter,
+.tree-grid-row.ng-enter {
+  transition : 100ms linear all;
+  position : relative;
+  display: table-row;
+  opacity : 0;
+  max-height : 0;
+}
+
+.tree-grid-animate-leave,
+.tree-grid-row.ng-leave {
+  transition : 100ms linear all;
+  position : relative;
+  display: table-row;
+  height : 30px;
+  max-height : 30px;
+  opacity : 1;
+}
+
+.alert-tool-bar div .md-icon-button,
+td .md-icon-button {
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+
+  ng-md-icon {
+    fill: rgb(33,150,243);
+  }
+}
+
+.expand-td {
+  width: 30px;
+  padding-left: 1px !important;
+  padding-right: 1px !important;
+  cursor: pointer;
+}
+
+.child-tr {
+  background: #f7f7f7;
+}
+
+.child-td {
+  background: white;
+  cursor: auto;
+}
+
+.alert-dialog{
+  width: 40%;
+  min-width: 480px;
+
+  .alert-dialog-form {
+    padding: 10px 30px 30px;
+  }
+}
+
+.contacts {
+  h3 {
+    display: inline-block;
+    margin: 0px;
+  }
+
+  button {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    vertical-align: bottom;
+    margin-left: 20px;
+
+    ng-md-icon {
+      fill: rgb(33,150,243);
+    }
+  }
 }

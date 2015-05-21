@@ -24,8 +24,10 @@
     vm.currentPage = 0;
 
     vm.getData = function() {
-      vm.getStatisticData();
-      vm.getAlertData();
+      vm.statisticList = [];
+      vm.setStatisticData();
+      // vm.getStatisticData();
+      // vm.getAlertData();
     };
 
     vm.getStatisticData = function() {

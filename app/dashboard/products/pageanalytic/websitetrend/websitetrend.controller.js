@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
         controller: WebsiteTrendCtrl,
-        // resolve: WebsiteTrendCtrl.resolve
+        resolve: WebsiteTrendCtrl.resolve
       });
   }
 

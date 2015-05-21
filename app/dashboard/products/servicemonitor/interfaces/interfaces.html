@@ -1,1 +1,230 @@
-<h1>interfaces</h1>
+<div class='alert-tool-bar'>
+  <span>起始时间：</span>
+  <datatime-picker init-datatime='vm.startdate' display-mode='full'></datatime-picker>
+  <span class='margin-left-30'>截止时间：</span>
+  <datatime-picker init-datatime='vm.enddate' display-mode='full'></datatime-picker>
+  <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+
+  <div class='pull-right'>
+    <md-button class="md-icon-button" aria-label='添加主调接口' title='添加主调接口' ng-click="vm.showAddModalDialog()">
+      <ng-md-icon icon="my_library_add" size="25"></ng-md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label='展开所有' title='展开所有' ng-click="vm.treeGridCtrl.expand_all()">
+      <ng-md-icon icon="expand_more" size="25"></ng-md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label='收起所有' title='收起所有' ng-click="vm.treeGridCtrl.collapse_all()">
+      <ng-md-icon icon="expand_less" size="25"></ng-md-icon>
+    </md-button>
+  </div>
+</div>
+
+<div class="margin-top-30">
+  <tree-grid id="main-tree-grid" tree-data="vm.treeData" col-defs="vm.colDefs" tree-control="vm.treeGridCtrl" icon-leaf="null" icon-expand="fa fa-plus-square" icon-collapse="fa fa-minus-square" expand-on="null" template-url="treeGridTemplate.html"></tree-grid>
+</div>
+
+<!-- template -->
+<script type="text/ng-template" id="treeGridTemplate.html">
+  <div class="table-responsive">
+    <table class="table tree-grid">
+      <thead>
+        <tr>
+          <th>
+            <a ng-if="vm.expandingProperty.sortable" ng-click="sortBy(vm.expandingProperty)">{{vm.expandingProperty.displayName || vm.expandingProperty.field || vm.expandingProperty}}</a>
+            <span ng-if="!vm.expandingProperty.sortable">{{vm.expandingProperty.displayName || vm.expandingProperty.field || vm.expandingProperty}}</span>
+            <i ng-if="vm.expandingProperty.sorted" class="{{vm.expandingProperty.sortingIcon}} pull-right"></i>
+          </th>
+          <th ng-repeat="col in colDefinitions">
+            <a ng-if="col.sortable" ng-click="sortBy(col)">{{col.displayName || col.field}}</a>
+            <span ng-if="!col.sortable">{{col.displayName || col.field}}</span>
+            <i ng-if="col.sorted" class="{{col.sortingIcon}} pull-right"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in tree_rows | searchFor:$parent.filterString:vm.expandingProperty:colDefinitions track by row.branch.uid" ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'') + (!row.branch.IsMain ? ' child-tr':'')" class="tree-grid-row">
+          <td ng-class="(!row.branch.IsMain ? 'child-td':'')" class='expand-td'>
+            <md-button ng-click="user_clicks_branch(row.branch);row.branch.expanded = !row.branch.expanded" ng-show="row.branch.IsMain" class="md-icon-button" aria-label='被调接口'>
+              <ng-md-icon icon="expand_more" size="25" ng-if="row.branch.expanded" title='收起被调接口'></ng-md-icon>
+              <ng-md-icon icon="chevron_right" size="25" ng-if="!row.branch.expanded" title='展开被调接口'></ng-md-icon>
+            </md-button>
+          </td>
+          <td ng-repeat="col in colDefinitions">
+            <div ng-if="col.cellTemplate" compile="col.cellTemplate" cell-template-scope="col.cellTemplateScope"></div>
+            <div ng-if="!col.cellTemplate">{{row.branch[col.field]}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</script>
+
+<script type="text/ng-template" id="addInterfaceModal.html">
+  <md-dialog aria-label="添加接口" class='alert-dialog'>
+    <form name='addInterfaceForm' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>添加接口</h3>
+        <md-input-container>
+          <label>接口名</label>
+          <input required name="interfaceName" ng-model="vm.interfaceName">
+          <div ng-messages="addInterfaceForm.interfaceName.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>接口描述</label>
+          <input required name="interfaceDesc" ng-model="vm.interfaceDesc">
+          <div ng-messages="addInterfaceForm.interfaceDesc.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+        <md-button ng-click="vm.cancel()" class="md-primary">
+          取消
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+<!--Edit Interface modal-->
+<script type="text/ng-template" id="editInterfaceModal.html">
+  <md-dialog aria-label="编辑接口" class='alert-dialog'>
+    <form name='addInterfaceForm' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>编辑接口</h3>
+        <md-input-container>
+          <label>接口名</label>
+          <input required name="interfaceName" ng-model="vm.interfaceName">
+          <div ng-messages="addInterfaceForm.interfaceName.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>接口描述</label>
+          <input required name="interfaceDesc" ng-model="vm.interfaceDesc">
+          <div ng-messages="addInterfaceForm.interfaceDesc.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+        <md-button ng-click="vm.cancel()" class="md-primary">
+          取消
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+<!--Delete Interface modal-->
+<script type="text/ng-template" id="deleteInterfaceModal.html">
+  <md-dialog aria-label="删除接口" class='alert-dialog'>
+    <form name='addInterfaceForm' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>删除接口</h3>
+        <p>确认删除 {{ vm.interfaceName }}</p>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+        <md-button ng-click="vm.cancel()" class="md-primary">
+          取消
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+<!--Add Callee modal-->
+<script type="text/ng-template" id="addCalleeModal.html">
+  <md-dialog aria-label="添加接口" class='alert-dialog'>
+    <form name='addInterfaceForm' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>添加被调接口</h3>
+        <md-input-container>
+          <label>接口名</label>
+          <input required name="interfaceName" ng-model="vm.interfaceName">
+          <div ng-messages="addInterfaceForm.interfaceName.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>接口描述</label>
+          <input required name="interfaceDesc" ng-model="vm.interfaceDesc">
+          <div ng-messages="addInterfaceForm.interfaceDesc.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="vm.usePublic"> 使用公共接口
+          </label>
+        </div>
+
+        <select class="form-control" ng-disabled="!vm.usePublic" ng-model="vm.selectCallee" ng-options="callee.display for callee in calleeList">
+          <option value="">-- 选择接口 --</option>
+        </select>
+
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+        <md-button ng-click="vm.cancel()" class="md-primary">
+          取消
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+
+<!--Callee Detail modal-->
+<script type="text/ng-template" id="calleeDetailModal.html">
+
+  <md-dialog aria-label="编辑接口" class='alert-dialog'>
+    <form name='addInterfaceForm' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>{{ vm.calleeName }}</h3>
+        <table class="table margin-top-30" ts-wrapper>
+          <thead>
+            <tr>
+              <th ts-criteria="time_cost|lowercase">时延</th>
+              <th ts-criteria="return_code|parseInt">返回码</th>
+              <th ts-criteria="caller_ip|lowercase" ts-default='descending'>主调ip</th>
+              <th ts-criteria="callee_ip|lowercase">被调ip</th>
+              <th ts-criteria="callee_port|parseFloat">被调端口</th>
+              <th ts-criteria="created_at|lowercase">创建时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="x in vm.calleeList" ts-repeat>
+              <td>{{ x.time_cost }}</td>
+              <td>{{ x.return_code }}</td>
+              <td>{{ x.caller_ip }}</td>
+              <td>{{ x.callee_ip }}</td>
+              <td>{{ x.callee_port }}</td>
+              <td>{{ x.created_at }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center" ng-show="vm.totalItems > 0">
+          <pagination total-items="vm.totalItems" ng-model="vm.currentPage" items-per-page="vm.limit" ng-change="updateCalleeTable()" max-size="7" previous-text="&lsaquo;" next-text="&rsaquo;" rotate="false"></pagination>
+        </div>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
