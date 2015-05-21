@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function UpdateSettingService($http, $mdDialog, UrlManager,
+  function UpdateSettingService($http, $mdDialog, UrlManager, $state, $stateParams,
     localStorageService, PlatformManager, VersionHelper) {
 
     var UpdateSettingService = {};
@@ -53,6 +53,7 @@
         .success(function(data) {
           UpdateSettingService.updateInfos = data;
           UpdateSettingService.newestUpdate = data[data.length - 1];
+          UpdateSettingService.versions = [];
           var length = data.length;
           for(var i = length - 1; i >= 0; i--) {
             UpdateSettingService.versions.push(data[i].versionCode);
@@ -158,6 +159,13 @@
             };
           }
         }
+      })
+      .then(function() {
+        $state.transitionTo($state.current, $stateParams, {
+          reload: true,
+          inherit: false,
+          notify: true
+        });
       });
     };
 
