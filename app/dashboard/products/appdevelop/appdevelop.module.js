@@ -5,6 +5,7 @@
     .module('myou.dashboard.appdevelop', [
       'ui.router',
       'LocalStorageModule',
+      'tableSort',
 
       'myou.shared',
 

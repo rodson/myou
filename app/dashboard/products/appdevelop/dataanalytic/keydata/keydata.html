@@ -1,8 +1,52 @@
-<div>
-  <md-radio-group ng-model="vm.radioChecked" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+<div class="clearfix">
+  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
     <md-radio-button value="today" class="md-primary">今天</md-radio-button>
     <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
     <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
     <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
   </md-radio-group>
 </div>
+
+<!-- Key data linechart -->
+<div>
+  <md-radio-group ng-model="vm.radioKeyDataType"  class="pa-pull-right" ng-change='vm.getLineChartData()'>
+    <md-radio-button ng-show="vm.isWindowsApp()" value="new_user_count" class="md-primary">新增装机量</md-radio-button>
+    <md-radio-button ng-hide="vm.isWindowsApp()" value="new_user_count" class="md-primary">新增用户</md-radio-button>
+    <md-radio-button ng-show="vm.isWindowsApp()" value="active_user_count" class="md-primary">活跃电脑数</md-radio-button>
+    <md-radio-button ng-hide="vm.isWindowsApp()" value="active_user_count" class="md-primary">活跃用户</md-radio-button>
+    <md-radio-button value="session_count" class="md-primary">启动次数</md-radio-button>
+    <md-radio-button ng-show="vm.isWindowsApp()" value="accumulate_user_count" class="md-primary">累计装机量</md-radio-button>
+    <md-radio-button ng-hide="vm.isWindowsApp()" value="accumulate_user_count" class="md-primary">累计用户</md-radio-button>
+  </md-radio-group>
+
+  <highchart config="vm.chartConfig"></highchart>
+</div>
+
+<!-- Key data table -->
+<div class="group-section" style="margin-top: 24px;">
+  <div class="group-title">详细数据</div>
+  <table class="table" ts-wrapper>
+    <thead>
+      <tr>
+        <th>日期</th>
+        <th ts-criteria="new_user_count|parseInt" ng-show="vm.isWindowsApp()">新增装机量</th>
+        <th ts-criteria="new_user_count|parseInt" ng-hide="vm.isWindowsApp()">新增用户</th>
+        <th ts-criteria="active_user_count|parseInt" ng-show="vm.isWindowsApp()">活跃电脑数</th>
+        <th ts-criteria="active_user_count|parseInt" ng-hide="vm.isWindowsApp()">活跃用户</th>
+        <th ts-criteria="session_count|parseInt">启动次数</th>
+        <th ts-criteria="accumulate_user_count|parseInt" ng-show="vm.isWindowsApp()">累计装机量</th>
+        <th ts-criteria="accumulate_user_count|parseInt" ng-hide="vm.isWindowsApp()">累计用户</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="specData in vm.tableData">
+        <td>{{ specData.date }}</td>
+        <td>{{ specData.new_user_count }}</td>
+        <td>{{ specData.active_user_count }}</td>
+        <td>{{ specData.session_count }}</td>
+        <td>{{ specData.accumulate_user_count }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

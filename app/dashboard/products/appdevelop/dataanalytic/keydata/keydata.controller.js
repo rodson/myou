@@ -12,39 +12,47 @@
       });
   }
 
-  function KeyDataCtrl(MomentDateService, KeyDataService) {
+  function KeyDataCtrl(KeyDataService) {
     var vm = this;
 
-    vm.radioChecked = 'today';
-
-    var checkDate = MomentDateService.getToday();
+    vm.app = KeyDataService.getApp();
+    vm.chartConfig = KeyDataService.chartConfig;
+    vm.tableData = KeyDataService.tableData;
+    vm.radioDate = 'today';
+    vm.radioKeyDataType = 'new_user_count';
 
     vm.getCheckDate = function() {
-      switch (vm.radioChecked) {
-        case 'today':
-          checkDate = MomentDateService.getToday();
-          break;
-        case 'yesterday':
-          checkDate = MomentDateService.getYesterday();
-          break;
-        case 'last7days':
-          checkDate = MomentDateService.getLast7Day();
-          break;
-        case 'last30days':
-          checkDate = MomentDateService.getLast30Day();
-          break;
-        default:
-          checkDate = MomentDateService.getToday();
-          break;
-      }
-      vm.startdate = checkDate.start;
-      vm.enddate = checkDate.end;
-      vm.getData();
+      KeyDataService.getCheckDate(vm.radioDate);
+      KeyDataService.getLineChartData(vm.radioKeyDataType);
+      KeyDataService.getTableData().then(function() {
+        vm.tableData = KeyDataService.tableData;
+      });
+    };
+
+    vm.isWindowsApp = function() {
+      return KeyDataService.isWindowsApp();
+    };
+
+    vm.getLineChartData = function() {
+      KeyDataService.getLineChartData(vm.radioKeyDataType);
+    };
+
+    vm.getTableData = function() {
+      KeyDataService.getTableData().then(function() {
+        vm.tableData = KeyDataService.tableData;
+      });
     };
 
   }
 
   KeyDataCtrl.resolve = {
+    getLineChartData: function(KeyDataService) {
+      return KeyDataService.getLineChartData('new_user_count');
+    },
+
+    getTableData: function(KeyDataService) {
+      return KeyDataService.getTableData();
+    }
   };
 
   angular
