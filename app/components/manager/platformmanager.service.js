@@ -17,13 +17,13 @@
           name = 'IOS应用';
           break;
         case Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE:
-          name = '系统升级';
+          name = 'ROM升级';
           break;
         case Constant.PRODUCT_PLATFORM.SERVICE_MONITOR:
           name = '接口监控';
           break;
         case Constant.PRODUCT_PLATFORM.WEB_PUBLISH:
-          name = 'WEB发布';
+          name = 'WEB包发布';
           break;
         case Constant.PRODUCT_PLATFORM.PAGE_ANALYTIC:
           name = '页面分析';
