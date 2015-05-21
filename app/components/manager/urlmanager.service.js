@@ -21,6 +21,10 @@
       return Constant.URL.PRODUCTS + '/' + id + '/updateConfig';
     };
 
+    UrlManager.getAnalyzeKeyDataUrl = function(appKey) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey + '/key_data';
+    };
+
     return UrlManager;
   }
 

@@ -1,1 +1,8 @@
-<h1>Key Data</h1>
+<div>
+  <md-radio-group ng-model="vm.radioChecked" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+</div>
