@@ -1,0 +1,29 @@
+<md-dialog>
+  <md-dialog-content>
+    <div class="modal-container">
+      <div class="group-section clearfix">
+        <div class="group-title">
+          文件上传
+        </div>
+        <div class="group-section clearfix">
+          <md-progress-linear md-mode="determinate" value="{{ vm.progress }}"></md-progress-linear>
+          <div class="normal-text pull-right" style="margin-top: 10px;">
+            {{ vm.progress }}%
+          </div>
+        </div>
+        <div class="pull-right">
+          <span class="error" ng-show="vm.isError" style="margin-right: 30px;">
+            上传错误，请重新上传
+          </span>
+          <span flex></span>
+          <md-button ng-show="!vm.isSuccess" class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+            取消
+          </md-button>
+          <md-button ng-show="vm.isSuccess" class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+            确定
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </md-dialog-content>
+</md-dialog>

@@ -15,7 +15,7 @@
       template: [
         '<span class="filename">{{fileName}}</span>',
         '<label>',
-          '<div class="select">选择</div>',
+          '<md-button class="btn-lg md-raised md-primary">选择</md-button>',
           '<input type="file" class="file">',
         '</label>'
       ].join(''),
