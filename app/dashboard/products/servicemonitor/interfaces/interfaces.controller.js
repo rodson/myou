@@ -379,14 +379,20 @@
   function DetialDialogCtrl($mdDialog, data, CalleeService) {
     var vm = this;
     vm.calleeName = data.calleeName;
+
     vm.totalItems = 0;
     vm.limit = 10;
+    vm.skip = 0;
+    vm.pageCount = 0;
     vm.currentPage = 1;
 
-    CalleeService.getCalleeDetail(data.callerId, data.calleeId, data.startDate, data.endDate,
-      vm.limit, (vm.currentPage - 1) * vm.limit, function() {
+    vm.getData = function() {
+      CalleeService.getCalleeDetail(data.callerId, data.calleeId, data.startDate, data.endDate, vm.limit, vm.skip, function() {
+        console.log(CalleeService.data);
         vm.calleeList = CalleeService.data.calleeDetail.data;
         vm.totalItems = CalleeService.data.calleeDetail.total;
+        vm.pageCount = vm.totalItems / vm.limit;
+
         vm.calleeList = [{
           time_cost: 100,
           return_code: 404,
@@ -394,19 +400,27 @@
           callee_ip: '172.18.90.90',
           callee_port: 409,
           created_at: '2015-05-04 10:09:08'
-        },{
+        }, {
           time_cost: 200,
           return_code: 400,
           caller_ip: '172.18.49.189',
           callee_ip: '172.18.90.910',
           callee_port: 4000,
           created_at: '2015-05-05 10:09:08'
-        }]
+        }];
       });
+    };
+
+    vm.getNextPage = function(page) {
+      vm.skip = (page - 1) * vm.limit;
+      vm.getData();
+    };
 
     vm.ok = function() {
       $mdDialog.hide();
     };
+
+    vm.getData();
   }
 
   angular

@@ -33,7 +33,7 @@
     };
 
     vm.getStatisticData = function() {
-      AlertListService.getStatisticData('12345', vm.startdate, vm.enddate, function() {
+      AlertListService.getStatisticData(appKey, vm.startdate, vm.enddate, function() {
         vm.setStatisticData();
       });
     };

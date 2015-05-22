@@ -163,8 +163,11 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-center" ng-show="vm.totalItems > 0">
-          <pagination total-items="vm.totalItems" ng-model="vm.currentPage" items-per-page="vm.limit" ng-change="updateCalleeTable()" max-size="7" previous-text="&lsaquo;" next-text="&rsaquo;" rotate="false"></pagination>
+        <div class="text-center" ng-show="vm.pageCount > 1">
+          <paging class="small" page="vm.currentPage" page-size="vm.limit" total="vm.totalItems" adjacent="2" dots="..." scroll-top="false"
+            hide-if-empty="true" l-class="pagination" active-class="active wave-effect" disabled-class="disabled" show-prev-next="true"
+            paging-action="vm.getNextPage(page)">
+          </paging>
         </div>
       </md-dialog-content>
       <div class="md-actions" layout="row">
