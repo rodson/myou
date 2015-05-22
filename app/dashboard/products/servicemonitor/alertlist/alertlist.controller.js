@@ -11,23 +11,25 @@
       });
   }
 
-  function AlertListCtrl($scope, $filter, AlertListService) {
+  function AlertListCtrl($filter, localStorageService, AlertListService) {
     var vm = this;
+    var appKey = localStorageService.get('app').appKey;
+
     var now = new Date();
     vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
     vm.startdate = $filter('date')(now.getTime() - 5 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss');
     vm.radio = 'statistic';
-    vm.limit = 40;
-    vm.pageCount = 0;
+
+    vm.limit = 20;
     vm.skip = 0;
+    vm.currentPage = 1;
+    vm.pageCount = 0;
+
     vm.serverAddr = '';
-    vm.currentPage = 0;
 
     vm.getData = function() {
-      vm.statisticList = [];
-      vm.setStatisticData();
-      // vm.getStatisticData();
-      // vm.getAlertData();
+      vm.getStatisticData();
+      vm.getAlertData();
     };
 
     vm.getStatisticData = function() {
@@ -36,15 +38,16 @@
       });
     };
 
-    $scope.$watch('vm.currentPage', function(current, old) {
-      if(current !== old){
-        vm.skip = vm.currentPage * vm.limit;
-        vm.getAlertData();
-      }
-    });
+    vm.getNextPage = function(page) {
+      vm.skip = (page - 1) * vm.limit;
+      vm.getAlertData();
+    };
 
-    vm.getAlertData = function() {
-      AlertListService.getAlertData('12345', vm.startdate, vm.enddate, vm.limit, vm.skip, vm.serverAddr || '', function() {
+    vm.getAlertData = function(addr) {
+      if(addr){
+        vm.serverAddr = addr;
+      }
+      AlertListService.getAlertData(appKey, vm.startdate, vm.enddate, vm.limit, vm.skip, vm.serverAddr || '', function() {
         vm.setALertData();
       });
     };
@@ -55,14 +58,7 @@
 
     vm.setALertData = function() {
       vm.totalItems = AlertListService.data.alert.total;
-      vm.pageCount = Math.ceil(vm.totalItems / vm.limit);
-      vm.pageCount = vm.pageCount > 100 ? 100 : vm.pageCount;
-      vm.tabs = [];
-      for (var i = 1; i <= vm.pageCount; i++) {
-        vm.tabs.push({
-          index: i
-        });
-      }
+      vm.pageCount = vm.totalItems / vm.limit;
       vm.alertList = AlertListService.data.alert.data;
     };
 
@@ -70,6 +66,8 @@
     vm.setStatisticData();
     vm.setALertData();
     /*********************** test end ***************************/
+
+    vm.getData();
   }
 
   angular

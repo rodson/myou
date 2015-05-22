@@ -135,6 +135,7 @@
     calleeService.getCalleeDetail = function(callerId, calleeId, startDate, endDate, limit, skip, cb) {
       return $http.get(Constant.URL.PRODUCTS_SERVICE_MONITOR + '/interface_details' + '?caller_interface_id=' + callerId + '&callee_interface_id=' + calleeId + '&start_datetime=' + startDate + '&end_datetime=' + endDate + '&limit=' + limit + '&skip=' + skip)
         .success(function(data) {
+          calleeService.data.calleeDetail = data;
           cb();
         });
     };

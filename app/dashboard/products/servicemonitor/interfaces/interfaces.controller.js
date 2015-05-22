@@ -59,46 +59,48 @@
     }, {
       field: 'Edit',
       displayName: '编辑',
-      cellTemplate: ['<md-button class="md-icon-button" aria-label="编辑" title="编辑" ng-click="cellTemplateScope.click(row)">', '<ng-md-icon icon="mode_edit" size="25"></ng-md-icon></md-button>'].join(''),
+      cellTemplate: ['<md-button class="md-icon-button" aria-label="编辑" title="编辑" ng-click="cellTemplateScope.click($event, row)">', '<ng-md-icon icon="mode_edit" size="25"></ng-md-icon></md-button>'].join(''),
       cellTemplateScope: {
-        click: function(data) {
+        //cellTemplateScope.click($event, row)
+        //为什么这个地方一定要传入$event：告诉$dialog是这里触发你的，否则动画会有问题
+        click: function(event, data) {
           var dt = {
             interface_id: data.branch.ID,
             interface_name: data.branch.Name,
             interface_desc: data.branch.Des
           };
-          vm.showEditModal(null, dt);
+          vm.showEditModal(event, dt);
         }
       }
     }, {
       field: 'Del',
       displayName: '删除',
-      cellTemplate: ['<md-button class="md-icon-button" aria-label="删除" title="删除" ng-click="cellTemplateScope.click(row)">', '<ng-md-icon icon="delete" size="25"></ng-md-icon></md-button>'].join(''),
+      cellTemplate: ['<md-button class="md-icon-button" aria-label="删除" title="删除" ng-click="cellTemplateScope.click($event, row)">', '<ng-md-icon icon="delete" size="25"></ng-md-icon></md-button>'].join(''),
       cellTemplateScope: {
-        click: function(data) {
+        click: function(event, data) {
           var dt = {
             interface_id: data.branch.ID,
             interface_name: data.branch.Name,
             interface_desc: data.branch.Des
           };
-          vm.showDeleteModal(null, dt);
+          vm.showDeleteModal(event, dt);
         }
       }
     }, {
       field: 'Det',
       displayName: '操作',
-      cellTemplate: ['<md-button class="md-icon-button" aria-label="..." ng-attr-title="{{ row.branch.IsMain ? \'添加被调接口\' : \'详细信息\' }}"', 'ng-click="cellTemplateScope.click(row)">', '<ng-md-icon icon="add_circle" size="25" ng-if="row.branch.IsMain"></ng-md-icon>', '<ng-md-icon icon="info" size="25" ng-if="!row.branch.IsMain"></ng-md-icon>', '</md-button>'].join(''),
+      cellTemplate: ['<md-button class="md-icon-button" aria-label="..." ng-attr-title="{{ row.branch.IsMain ? \'添加被调接口\' : \'详细信息\' }}"', 'ng-click="cellTemplateScope.click($event, row)">', '<ng-md-icon icon="add_circle" size="25" ng-if="row.branch.IsMain"></ng-md-icon>', '<ng-md-icon icon="info" size="25" ng-if="!row.branch.IsMain"></ng-md-icon>', '</md-button>'].join(''),
       cellTemplateScope: {
-        click: function(data) {
+        click: function(event, data) {
           if (data.branch.IsMain) {
-            vm.showCalleeAddModal(null, data.branch.ID);
+            vm.showCalleeAddModal(event, data.branch.ID);
           } else {
             var dt = {
               callerId: data.branch.CallerId,
               callee_interface_id: data.branch.ID,
               callee_interface_name: data.branch.Name
             };
-            vm.showCalleeDetail(null, dt);
+            vm.showCalleeDetail(event, dt);
           }
         }
       }
@@ -195,7 +197,7 @@
     vm.showDeleteModal = function(ev, dt) {
       var confirm = $mdDialog.confirm()
         .title('确认删除')
-        .content('是否删除联系人：' + dt.interface_name)
+        .content('是否删除接口：' + dt.interface_name)
         .ariaLabel('确认删除')
         .ok('确认')
         .cancel('取消')
@@ -340,7 +342,7 @@
       vm.calleeList = list;
     });
 
-    vm.usePublicChange = function(){
+    vm.usePublicChange = function() {
       if (vm.usePublic && vm.calleeList[0]) {
         vm.selectCallee = vm.calleeList[0];
       }
@@ -381,13 +383,29 @@
     vm.limit = 10;
     vm.currentPage = 1;
 
+    CalleeService.getCalleeDetail(data.callerId, data.calleeId, data.startDate, data.endDate,
+      vm.limit, (vm.currentPage - 1) * vm.limit, function() {
+        vm.calleeList = CalleeService.data.calleeDetail.data;
+        vm.totalItems = CalleeService.data.calleeDetail.total;
+        vm.calleeList = [{
+          time_cost: 100,
+          return_code: 404,
+          caller_ip: '172.18.49.89',
+          callee_ip: '172.18.90.90',
+          callee_port: 409,
+          created_at: '2015-05-04 10:09:08'
+        },{
+          time_cost: 200,
+          return_code: 400,
+          caller_ip: '172.18.49.189',
+          callee_ip: '172.18.90.910',
+          callee_port: 4000,
+          created_at: '2015-05-05 10:09:08'
+        }]
+      });
+
     vm.ok = function() {
-      CalleeService.getCalleeDetail(data.callerId, data.calleeId, data.startDate, data.endDate,
-        vm.limit, (vm.currentPage - 1) * vm.limit, function(data) {
-          vm.calleeList = data.data;
-          vm.totalItems = data.total;
-          $mdDialog.hide();
-        });
+      $mdDialog.hide();
     };
   }
 

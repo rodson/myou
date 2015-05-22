@@ -57,7 +57,7 @@
     </table>
   </div>
 </script>
-
+<!--Add Interface modal-->
 <script type="text/ng-template" id="addInterfaceModal.html">
   <md-dialog aria-label="vm.title" class='alert-dialog'>
     <form name='addInterfaceForm' class='alert-dialog-form'>
@@ -93,13 +93,13 @@
 <!--Add Callee modal-->
 <script type="text/ng-template" id="addCalleeModal.html">
   <md-dialog aria-label="添加接口" class='alert-dialog'>
-    <form name='addInterfaceForm' class='alert-dialog-form'>
+    <form name='addCalleeModalForm' class='alert-dialog-form'>
       <md-dialog-content class="sticky-container">
         <h3>添加被调接口</h3>
         <md-input-container>
           <label>接口名</label>
           <input required name="interfaceName" ng-model="vm.interfaceName" ng-disabled='vm.usePublic'>
-          <div ng-messages="addInterfaceForm.interfaceName.$error">
+          <div ng-messages="addCalleeModalForm.interfaceName.$error">
             <div ng-message="required"></div>
           </div>
         </md-input-container>
@@ -107,7 +107,7 @@
         <md-input-container>
           <label>接口描述</label>
           <input required name="interfaceDesc" ng-model="vm.interfaceDesc" ng-disabled='vm.usePublic'>
-          <div ng-messages="addInterfaceForm.interfaceDesc.$error">
+          <div ng-messages="addCalleeModalForm.interfaceDesc.$error">
             <div ng-message="required"></div>
           </div>
         </md-input-container>
@@ -137,18 +137,18 @@
 <!--Callee Detail modal-->
 <script type="text/ng-template" id="calleeDetailModal.html">
 
-  <md-dialog aria-label="编辑接口" class='alert-dialog'>
-    <form name='addInterfaceForm' class='alert-dialog-form'>
+  <md-dialog aria-label="详细数据" class='alert-dialog alert-dialog-auto'>
+    <form name='calleeDetailModalForm' class='alert-dialog-form'>
       <md-dialog-content class="sticky-container">
         <h3>{{ vm.calleeName }}</h3>
         <table class="table margin-top-30" ts-wrapper>
           <thead>
             <tr>
-              <th ts-criteria="time_cost|lowercase">时延</th>
+              <th ts-criteria="time_cost|parseInt">时延</th>
               <th ts-criteria="return_code|parseInt">返回码</th>
               <th ts-criteria="caller_ip|lowercase" ts-default='descending'>主调ip</th>
               <th ts-criteria="callee_ip|lowercase">被调ip</th>
-              <th ts-criteria="callee_port|parseFloat">被调端口</th>
+              <th ts-criteria="callee_port|parseInt">被调端口</th>
               <th ts-criteria="created_at|lowercase">创建时间</th>
             </tr>
           </thead>

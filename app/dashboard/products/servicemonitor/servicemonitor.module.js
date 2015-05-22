@@ -5,6 +5,7 @@
     .module('myou.dashboard.servicemonitor', [
       'ui.router',
       'treeGrid',
+      'brantwills.paging',
 
       'myou.shared'
     ]);
