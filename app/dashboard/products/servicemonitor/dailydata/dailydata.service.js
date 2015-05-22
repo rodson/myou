@@ -28,36 +28,6 @@
         'all_count': 204,
         'alert_count': 204,
         'alert_percent': 1
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
-        'http_method': 'GET',
-        'all_count': 184,
-        'alert_count': 162,
-        'alert_percent': 0.8804
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/follow',
-        'http_method': 'GET',
-        'all_count': 181,
-        'alert_count': 181,
-        'alert_percent': 1
-      }, {
-        'service_address': 'http://trace.cvtapi.com/connector/api/cloud/v2/babies/:id.json',
-        'http_method': 'GET',
-        'all_count': 181,
-        'alert_count': 47,
-        'alert_percent': 0.2597
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/invitations',
-        'http_method': 'GET',
-        'all_count': 178,
-        'alert_count': 178,
-        'alert_percent': 1
-      }, {
-        'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/trackers',
-        'http_method': 'GET',
-        'all_count': 175,
-        'alert_count': 175,
-        'alert_percent': 1
       }]
     };
 
@@ -75,8 +45,9 @@
           dailyDataService.data.alterCount = data.alert_count;
           dailyDataService.data.allCount = data.all_count;
           dailyDataService.data.data = data.data;
+
           dailyDataService.data.data.forEach(function(i) {
-            i.alert_percent = (i.alert_percent * 100).toFIxed(4);
+            i.alert_percent = (i.alert_percent * 100).toFIxed(2);
           });
 
           if (cb && typeof(cb) === 'function') {

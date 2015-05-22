@@ -31,7 +31,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -41,7 +41,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -51,7 +51,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -80,7 +80,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -90,7 +90,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -100,7 +100,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -118,7 +118,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 
@@ -128,7 +128,7 @@
           cb(null);
         })
         .error(function(err) {
-          cb('error', err.message);
+          cb(err);
         });
     };
 

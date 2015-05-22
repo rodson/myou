@@ -24,18 +24,6 @@
       'all_count': 55,
       'alert_count': 38,
       'alert_percent': 0.6909
-    }, {
-      'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/babies',
-      'http_method': 'POST',
-      'all_count': 1,
-      'alert_count': 1,
-      'alert_percent': 1
-    }, {
-      'service_address': 'http://121.40.72.175/connector/api/cloud/v2/accounts/:id/babies.json',
-      'http_method': 'GET',
-      'all_count': 113,
-      'alert_count': 111,
-      'alert_percent': 0.9823
     }];
 
     var testDataAlert = {

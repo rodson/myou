@@ -16,7 +16,7 @@
     <input type='text' ng-model="vm.serverAddr" ng-attr-title='{{vm.serverAddr}}'
       placeholder='可输入服务地址进行详细查询'>
   </md-input-container>
-  <md-button class="clear-btn" ng-click="vm.serverAddr=''">&nbsp;清除&nbsp;</md-button>
+  <md-button class="clear-btn md-primary" ng-click="vm.serverAddr=''">&nbsp;清除&nbsp;</md-button>
 </div>
 
 
@@ -44,7 +44,7 @@
 </div>
 
 <div ng-show='vm.radio === "alert"'>
-  <table class="table alter-table" ts-wrapper>
+  <table class="table alter-table margin-top-30" ts-wrapper>
     <thead>
       <tr>
         <th ts-criteria="service_address|lowercase">服务地址</th>

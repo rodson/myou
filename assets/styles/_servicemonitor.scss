@@ -5,14 +5,17 @@
 }
 
 .search-div {
-  padding: 15px 0px 15px 0px;
-  position: relative;
-  margin-right: 20px;
+  position: absolute;
+  top: 60px;
+  z-index: 99;
+  right: 10px;
+  width: 300px;
+
+  md-input-container:not(.md-input-has-value) input:not(:focus) {
+    color: #BBB;
+  }
 
   .clear-btn {
-    position: absolute;
-    right: 0px;
-    top: 14px;
     font-size: 12px;
   }
 }
@@ -21,7 +24,7 @@
   display: inline-block;
   padding: 0px;
   vertical-align: bottom;
-  width: 100%;
+  width: 240px;
 
   input {
     width: 100%;
@@ -132,5 +135,13 @@ td .md-icon-button {
 .settings {
   h3 {
     margin-left: 15px;
+  }
+}
+
+.select-public {
+  md-checkbox {
+    margin-left: 0px;
+    display: inline-block;
+    margin-right: 20px;
   }
 }

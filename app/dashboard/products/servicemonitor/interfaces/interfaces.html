@@ -6,7 +6,7 @@
   <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
 
   <div class='pull-right'>
-    <md-button class="md-icon-button" aria-label='添加主调接口' title='添加主调接口' ng-click="vm.showAddModalDialog()">
+    <md-button class="md-icon-button" aria-label='添加主调接口' title='添加主调接口' ng-click="vm.showAddModalDialog($event)">
       <ng-md-icon icon="my_library_add" size="25"></ng-md-icon>
     </md-button>
     <md-button class="md-icon-button" aria-label='展开所有' title='展开所有' ng-click="vm.treeGridCtrl.expand_all()">
@@ -59,10 +59,10 @@
 </script>
 
 <script type="text/ng-template" id="addInterfaceModal.html">
-  <md-dialog aria-label="添加接口" class='alert-dialog'>
+  <md-dialog aria-label="vm.title" class='alert-dialog'>
     <form name='addInterfaceForm' class='alert-dialog-form'>
       <md-dialog-content class="sticky-container">
-        <h3>添加接口</h3>
+        <h3>{{ vm.title }}</h3>
         <md-input-container>
           <label>接口名</label>
           <input required name="interfaceName" ng-model="vm.interfaceName">
@@ -80,63 +80,11 @@
         </md-input-container>
       </md-dialog-content>
       <div class="md-actions" layout="row">
-        <md-button ng-click="vm.ok()" class="md-primary">
-          确定
-        </md-button>
-        <md-button ng-click="vm.cancel()" class="md-primary">
+        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
           取消
         </md-button>
-      </div>
-    </form>
-  </md-dialog>
-</script>
-<!--Edit Interface modal-->
-<script type="text/ng-template" id="editInterfaceModal.html">
-  <md-dialog aria-label="编辑接口" class='alert-dialog'>
-    <form name='addInterfaceForm' class='alert-dialog-form'>
-      <md-dialog-content class="sticky-container">
-        <h3>编辑接口</h3>
-        <md-input-container>
-          <label>接口名</label>
-          <input required name="interfaceName" ng-model="vm.interfaceName">
-          <div ng-messages="addInterfaceForm.interfaceName.$error">
-            <div ng-message="required"></div>
-          </div>
-        </md-input-container>
-
-        <md-input-container>
-          <label>接口描述</label>
-          <input required name="interfaceDesc" ng-model="vm.interfaceDesc">
-          <div ng-messages="addInterfaceForm.interfaceDesc.$error">
-            <div ng-message="required"></div>
-          </div>
-        </md-input-container>
-      </md-dialog-content>
-      <div class="md-actions" layout="row">
         <md-button ng-click="vm.ok()" class="md-primary">
           确定
-        </md-button>
-        <md-button ng-click="vm.cancel()" class="md-primary">
-          取消
-        </md-button>
-      </div>
-    </form>
-  </md-dialog>
-</script>
-<!--Delete Interface modal-->
-<script type="text/ng-template" id="deleteInterfaceModal.html">
-  <md-dialog aria-label="删除接口" class='alert-dialog'>
-    <form name='addInterfaceForm' class='alert-dialog-form'>
-      <md-dialog-content class="sticky-container">
-        <h3>删除接口</h3>
-        <p>确认删除 {{ vm.interfaceName }}</p>
-      </md-dialog-content>
-      <div class="md-actions" layout="row">
-        <md-button ng-click="vm.ok()" class="md-primary">
-          确定
-        </md-button>
-        <md-button ng-click="vm.cancel()" class="md-primary">
-          取消
         </md-button>
       </div>
     </form>
@@ -150,7 +98,7 @@
         <h3>添加被调接口</h3>
         <md-input-container>
           <label>接口名</label>
-          <input required name="interfaceName" ng-model="vm.interfaceName">
+          <input required name="interfaceName" ng-model="vm.interfaceName" ng-disabled='vm.usePublic'>
           <div ng-messages="addInterfaceForm.interfaceName.$error">
             <div ng-message="required"></div>
           </div>
@@ -158,29 +106,28 @@
 
         <md-input-container>
           <label>接口描述</label>
-          <input required name="interfaceDesc" ng-model="vm.interfaceDesc">
+          <input required name="interfaceDesc" ng-model="vm.interfaceDesc" ng-disabled='vm.usePublic'>
           <div ng-messages="addInterfaceForm.interfaceDesc.$error">
             <div ng-message="required"></div>
           </div>
         </md-input-container>
 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="vm.usePublic"> 使用公共接口
-          </label>
+        <div class='select-public'>
+          <md-checkbox md-no-ink aria-label="使用公共接口" ng-model="vm.usePublic" class="md-primary" ng-change='vm.usePublicChange()'>
+            使用公共接口
+          </md-checkbox>
+          <md-select name='selectName' placeholder="选择接口" ng-model="vm.selectCallee" ng-disabled='!vm.usePublic'>
+            <md-option ng-value="callee" ng-repeat="callee in vm.calleeList">{{callee.display}}</md-option>
+          </md-select>
         </div>
-
-        <select class="form-control" ng-disabled="!vm.usePublic" ng-model="vm.selectCallee" ng-options="callee.display for callee in calleeList">
-          <option value="">-- 选择接口 --</option>
-        </select>
 
       </md-dialog-content>
       <div class="md-actions" layout="row">
-        <md-button ng-click="vm.ok()" class="md-primary">
-          确定
-        </md-button>
-        <md-button ng-click="vm.cancel()" class="md-primary">
+        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
           取消
+        </md-button>
+        <md-button ng-click="vm.ok($event)" class="md-primary">
+          确定
         </md-button>
       </div>
     </form>

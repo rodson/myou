@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/servicemonitor/interfaces/interfaces.html',
         controllerAs: 'vm',
         controller: InterfacesCtrl,
-        resolve: InterfacesCtrl.resolve
+        // resolve: InterfacesCtrl.resolve
       });
   }
 
@@ -24,7 +24,7 @@
       sortable: true
     };
 
-    vm.appId = InterfacesService.data.appId;
+    vm.appId = localStorageService.get('appId');
 
     vm.colDefs = [{
       field: 'ID',
@@ -177,7 +177,7 @@
       $mdDialog.show({
         controller: EditModalDialogCtrl,
         controllerAs: 'vm',
-        templateUrl: 'editInterfaceModal.html',
+        templateUrl: 'addInterfaceModal.html',
         targetEvent: ev,
         resolve: {
           data: function() {
@@ -193,28 +193,29 @@
     };
 
     vm.showDeleteModal = function(ev, dt) {
-      $mdDialog.show({
-        controller: DelModalDialogCtrl,
-        controllerAs: 'vm',
-        templateUrl: 'deleteInterfaceModal.html',
-        targetEvent: ev,
-        resolve: {
-          data: function() {
-            return {
-              callerInterface: dt
-            };
+      var confirm = $mdDialog.confirm()
+        .title('确认删除')
+        .content('是否删除联系人：' + dt.interface_name)
+        .ariaLabel('确认删除')
+        .ok('确认')
+        .cancel('取消')
+        .targetEvent(ev);
+
+      $mdDialog.show(confirm).then(function() {
+        InterfacesService.deleteInterface(dt.interface_id, function(error, message) {
+          if (error) {
+            vm.showAlert(error);
           }
-        }
-      }).then(function(type, message) {
-        vm.showAlert(type, message);
-      }, function() {});
+          vm.getInterfacesInternal();
+        });
+      });
     };
 
     vm.showCalleeAddModal = function(ev, callerId) {
       $mdDialog.show({
         controller: AddCalleeModalDialogCtrl,
         controllerAs: 'vm',
-        templateUrl: 'addInterfaceModal.html',
+        templateUrl: 'addCalleeModal.html',
         targetEvent: ev,
         resolve: {
           data: function() {
@@ -224,8 +225,8 @@
             };
           }
         }
-      }).then(function(type, message) {
-          vm.showAlert(type, message);
+      }).then(function(error) {
+          vm.showAlert(error);
         },
         function() {});
     };
@@ -250,15 +251,15 @@
       }).then(function(answer) {}, function() {});
     };
 
-    vm.showAlert = function(type, message) {
+    vm.showAlert = function(error) {
       $mdDialog.show(
         $mdDialog.alert()
-        .title(type)
-        .content(message)
+        .title(!error ? 'Success' : 'Error')
+        .content(error && error.message)
         .ariaLabel('Alert Dialog')
         .ok('关闭')
       );
-      if (type === 'Success') {
+      if (!error) {
         vm.getInterfacesInternal();
       }
     };
@@ -275,6 +276,7 @@
 
   function AddModalDialogCtrl($mdDialog, data, InterfacesService) {
     var vm = this;
+    vm.title = '添加接口';
     vm.ok = function() {
       if (!vm.interfaceName || !vm.interfaceDesc) {
         return;
@@ -285,22 +287,20 @@
         interface_desc: vm.interfaceDesc
       };
 
-      InterfacesService.createInterface(callerInterface, function(error, msg) {
-        if (error) {
-          $mdDialog.hide('Error', msg);
-        } else {
-          $mdDialog.hide('Success');
-        }
+      InterfacesService.createInterface(callerInterface, function(error) {
+        $mdDialog.hide(error);
       });
     };
 
-    vm.cancel = function() {
+    vm.cancel = function(event) {
+      event.preventDefault();
       $mdDialog.cancel();
     };
   }
 
   function EditModalDialogCtrl($mdDialog, data, InterfacesService) {
     var vm = this;
+    vm.title = '编辑接口';
     vm.interfaceName = data.callerInterface.interface_name;
     vm.interfaceDesc = data.callerInterface.interface_desc;
     vm.ok = function() {
@@ -309,34 +309,13 @@
       }
       data.callerInterface.interface_name = vm.interfaceName;
       data.callerInterface.interface_desc = vm.interfaceDesc;
-      InterfacesService.modifyInterface(data.callerInterface.interface_id, data.callerInterface, function(error, msg) {
-        if (error) {
-          $mdDialog.hide('Error', msg);
-        } else {
-          $mdDialog.hide('Success');
-        }
+      InterfacesService.modifyInterface(data.callerInterface.interface_id, data.callerInterface, function(error) {
+        $mdDialog.hide(error);
       });
     };
 
-    vm.cancel = function() {
-      $mdDialog.cancel();
-    };
-  }
-
-  function DelModalDialogCtrl($mdDialog, data, InterfacesService) {
-    var vm = this;
-    vm.interfaceName = data.callerInterface.interface_name;
-    vm.ok = function() {
-      InterfacesService.deleteInterface(data.callerInterface.interface_id, function(error, message) {
-        if (error) {
-          $mdDialog.hide('Error', message);
-        } else {
-          $mdDialog.hide('Success');
-        }
-      });
-    };
-
-    vm.cancel = function() {
+    vm.cancel = function(event) {
+      event.preventDefault();
       $mdDialog.cancel();
     };
   }
@@ -361,21 +340,21 @@
       vm.calleeList = list;
     });
 
-    vm.ok = function() {
+    vm.usePublicChange = function(){
+      if (vm.usePublic && vm.calleeList[0]) {
+        vm.selectCallee = vm.calleeList[0];
+      }
+    };
+
+    vm.ok = function(event) {
       if (vm.usePublic) {
         if (vm.selectCallee && vm.selectCallee.interface_id) {
           CalleeService.bindCallee({
             caller_interface_id: callerId,
             callee_interface_id: vm.selectCallee.interface_id
-          }, function(error, msg) {
-            if (error) {
-              $mdDialog.hide('Error', msg);
-            } else {
-              $mdDialog.hide('Success');
-            }
+          }, function(error) {
+            $mdDialog.hide(error);
           });
-        } else {
-          // $scope.errorMessage = "请选择接口";
         }
       } else {
         if (!vm.interfaceName || !vm.interfaceDesc) {
@@ -383,17 +362,14 @@
         }
         vm.calleeInterface.interface_name = vm.interfaceName;
         vm.calleeInterface.interface_desc = vm.interfaceDesc;
-        CalleeService.createCallee(vm.calleeInterface, function(error, msg) {
-          if (error) {
-            $mdDialog.hide('Error', msg);
-          } else {
-            $mdDialog.hide('Success');
-          }
+        CalleeService.createCallee(vm.calleeInterface, function(error) {
+          $mdDialog.hide(error);
         });
       }
     };
 
-    vm.cancel = function() {
+    vm.cancel = function(event) {
+      event.preventDefault();
       $mdDialog.cancel();
     };
   }

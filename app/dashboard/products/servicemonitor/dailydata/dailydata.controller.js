@@ -16,7 +16,7 @@
     vm.requestCount = 0;
     vm.alertCount = 0;
 
-    vm.initdata = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    vm.initdata = $filter('date')(new Date(), 'yyyy-MM-dd');
 
     var product = localStorageService.get('app');
 
@@ -33,8 +33,10 @@
     };
 
     /************************* test start **************************/
-    vm.setData();
+    // vm.setData();
     /************************* test end **************************/
+
+    vm.getData();
   }
 
   angular
