@@ -21,6 +21,7 @@
         PRODUCTS_SOURCE: 'http://myoutest.cvte.com/api/analytics/source',
         APISTATIS_USAGE: 'http://myoutest.cvte.com/api-java/in/api-usage',
         PRODUCTS_SERVICE_MONITOR: 'http://localhost:4000/api/in/monitor',
+        ANALYZE_URL: 'http://localhost:4000/api/in/analyze'
       },
 
       RETURN_DATA: {

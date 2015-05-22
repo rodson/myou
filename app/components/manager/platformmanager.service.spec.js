@@ -35,7 +35,7 @@ describe('shared: PlatformManager', function() {
     it('should return 系统升级 when passing systemupdate', function() {
       var result = PlatformManager
         .showPlatformName(Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE);
-      expect(result).toEqual('系统升级');
+      expect(result).toEqual('ROM升级');
     });
 
     it('should return 接口监控 when passing servicemonitor', function() {
@@ -47,7 +47,7 @@ describe('shared: PlatformManager', function() {
     it('should return WEB发布 when passing webpublish', function() {
       var result = PlatformManager
         .showPlatformName(Constant.PRODUCT_PLATFORM.WEB_PUBLISH);
-      expect(result).toEqual('WEB发布');
+      expect(result).toEqual('WEB包发布');
     });
 
     it('should return 页面分析 when passing pageanalytic', function() {
