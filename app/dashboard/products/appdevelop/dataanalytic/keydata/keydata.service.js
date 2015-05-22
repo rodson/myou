@@ -81,6 +81,7 @@
 
     KeyDataService.getCheckDate = function(selectedDate) {
       var checkDate;
+      KeyDataService.radioDate = selectedDate;
 
       switch (selectedDate) {
         case 'today':
@@ -108,6 +109,13 @@
       if (!KeyDataService.startdate) {
         KeyDataService.init();
       }
+
+      if (!stats) {
+        stats = KeyDataService.radioKeyDataType;
+      } else {
+        KeyDataService.radioKeyDataType = stats;
+      }
+
       return $http.get(UrlManager.getAnalyzeKeyDataUrl(KeyDataService.app.appKey) +
         '?start_date=' + KeyDataService.startdate + '&end_date=' + KeyDataService.enddate +
         '&platform=' + KeyDataService.app.platform + '&stats=' + stats)

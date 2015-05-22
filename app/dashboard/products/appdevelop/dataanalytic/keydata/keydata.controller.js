@@ -18,8 +18,8 @@
     vm.app = KeyDataService.getApp();
     vm.chartConfig = KeyDataService.chartConfig;
     vm.tableData = KeyDataService.tableData;
-    vm.radioDate = 'today';
-    vm.radioKeyDataType = 'new_user_count';
+    vm.radioDate = KeyDataService.radioDate;
+    vm.radioKeyDataType = KeyDataService.radioKeyDataType;
 
     vm.getCheckDate = function() {
       KeyDataService.getCheckDate(vm.radioDate);
@@ -47,7 +47,7 @@
 
   KeyDataCtrl.resolve = {
     getLineChartData: function(KeyDataService) {
-      return KeyDataService.getLineChartData('new_user_count');
+      return KeyDataService.getLineChartData();
     },
 
     getTableData: function(KeyDataService) {
