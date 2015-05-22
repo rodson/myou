@@ -1,8 +1,9 @@
-<div class="inset">
-  <md-switch ng-model="data.cb1" aria-label="Switch 1" class='md-primary'>
+<div class="inset settings">
+  <h3>发生错误时，可选择下述方式通知项目联系人进行处理。</h3>
+  <md-switch ng-model="vm.message" aria-label="message" class='md-primary' ng-change='vm.setMonitor()'>
     短信通知
   </md-switch>
-  <md-switch ng-model="data.cb2" aria-label="Switch 2" class="md-primary">
+  <md-switch ng-model="vm.email" aria-label="email" class="md-primary" ng-change='vm.setMonitor()'>
     邮件通知
   </md-switch>
 </div>
