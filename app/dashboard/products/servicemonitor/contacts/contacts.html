@@ -1,6 +1,6 @@
 <div class='contacts'>
   <h3>项目联系人</h3>
-  <md-button class="md-icon-button" aria-label='添加联系人' title='添加联系人' ng-click="vm.showAddModalDialog()">
+  <md-button class="md-icon-button" aria-label='添加联系人' title='添加联系人' ng-click="vm.showAddContactDialog($event)">
     <ng-md-icon icon="person_add" size="25"></ng-md-icon>
   </md-button>
 </div>
@@ -21,12 +21,12 @@
         <td>{{ x.phone_number }}</td>
         <td>{{ x.email }}</td>
         <td>
-          <md-button class="md-icon-button" aria-label="编辑" title="编辑" ng-click="vm.showEditModal(x)">
+          <md-button class="md-icon-button" aria-label="编辑" title="编辑" ng-click="vm.showEditContactDialog($event, x)">
             <ng-md-icon icon="mode_edit" size="25"></ng-md-icon>
           </md-button>
         </td>
         <td>
-          <md-button class="md-icon-button" aria-label="删除" title="删除" ng-click="vm.showDelModal(x)">
+          <md-button class="md-icon-button" aria-label="删除" title="删除" ng-click="vm.showDeleteContactDialog($event, x)">
             <ng-md-icon icon="delete" size="25"></ng-md-icon>
           </md-button>
         </td>
@@ -34,3 +34,45 @@
     </tbody>
   </table>
 </div>
+
+<!-- add ontacts template -->
+<script type="text/ng-template" id="addProjectContactModal.html">
+  <md-dialog aria-label="vm.title" class='alert-dialog'>
+    <form name='addContactForm' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>{{vm.title}}</h3>
+        <md-input-container>
+          <label>姓名</label>
+          <input required name="name" ng-model="vm.name">
+          <div ng-messages="addContactForm.name.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>电话</label>
+          <input required name="phone" ng-model="vm.phone">
+          <div ng-messages="addContactForm.phone.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>邮箱</label>
+          <input required name="email" ng-model="vm.email">
+          <div ng-messages="addContactForm.email.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+      </md-dialog-content>
+      <div class='md-actions' layout="row">
+        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>

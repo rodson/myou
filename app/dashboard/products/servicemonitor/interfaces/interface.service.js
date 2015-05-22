@@ -8,9 +8,6 @@
 
   function InterfacesService($http, $q, Constant) {
 
-    $http.defaults.useXDomain = true;
-    delete $http.defaults.headers.common['X-Requested-With'];
-
     var interfacesService = {};
     interfacesService.data = {};
     interfacesService.data.appId = null;

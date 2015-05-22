@@ -11,21 +11,163 @@
       });
   }
 
-  function ContactsCtrl() {
+  function ContactsCtrl($mdDialog, localStorageService, ContactsService) {
     var vm = this;
-    vm.contacts = [{
-      name: 'wanfeichao',
-      phone_number: 13119275648,
-      email: 'wanfeichao@cvte.cn'
-    }, {
-      name: 'wanfeichao1',
-      phone_number: 13119275649,
-      email: 'wanfeichao@cvte.com'
-    }, {
-      name: 'wanfeichao2',
-      phone_number: 13119275640,
-      email: 'wanfeichao@cvte.net'
-    }]
+    var product = localStorageService.get('app');
+    var appID = localStorageService.get('appId');
+
+    vm.contacts = [];
+
+    vm.getContacts = function() {
+      ContactsService.getProjectContactList(product.appKey, function() {
+        vm.contacts = ContactsService.data.contacts;
+      });
+    };
+
+    vm.showAddContactDialog = function(ev) {
+      $mdDialog.show({
+        controller: AddContactDialogCtrl,
+        controllerAs: 'vm',
+        templateUrl: 'addProjectContactModal.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              appKey: product.appKey,
+              appId: appID
+            };
+          }
+        }
+      }).then(function(error) {
+          vm.showAlert(error);
+        },
+        function() {});
+    };
+
+    vm.showEditContactDialog = function(ev, dt) {
+      $mdDialog.show({
+        controller: EditContactDialogCtrl,
+        controllerAs: 'vm',
+        templateUrl: 'addProjectContactModal.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              appKey: product.appKey,
+              contact: dt
+            };
+          }
+        }
+      }).then(function(error) {
+          vm.showAlert(error);
+        },
+        function() {});
+    };
+
+    vm.showDeleteContactDialog = function(ev, dt) {
+      var confirm = $mdDialog.confirm()
+        .title('确认删除')
+        .content('是否删除联系人：' + dt.name)
+        .ariaLabel('确认删除')
+        .ok('确认')
+        .cancel('取消')
+        .targetEvent(ev);
+
+      $mdDialog.show(confirm).then(function() {
+        ContactsService.deleteProjectContact(product.appKey, dt.contact_id, function(error){
+          if(error) {
+            vm.showAlert(error);
+          }
+          vm.getContacts();
+        });
+      }, function() {
+
+      });
+    };
+
+    vm.showAlert = function(error) {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .title(!!error ? 'Error' : 'Success')
+        .content(error && error.message)
+        .ariaLabel('Alert Dialog')
+        .ok('关闭')
+      );
+      if (!error) {
+        vm.getContacts();
+      }
+    };
+
+    vm.getContacts();
+  }
+
+  function AddContactDialogCtrl($mdDialog, data, ContactsService) {
+    var vm = this;
+    vm.title = '添加联系人';
+    vm.ok = function() {
+      if (!vm.name || !vm.phone || !vm.email) {
+        return;
+      }
+
+      var contact = {
+        app_id: data.appId,
+        name: vm.name,
+        phone_number: vm.phone,
+        email: vm.email
+      };
+
+      ContactsService.createProjectContact(data.appKey, contact, function(error) {
+        if (error) {
+          $mdDialog.hide(error);
+        } else {
+          $mdDialog.hide();
+        }
+      });
+    };
+
+    vm.cancel = function(event) {
+      event.preventDefault();
+      $mdDialog.cancel();
+    };
+  }
+
+  function EditContactDialogCtrl($mdDialog, data, ContactsService) {
+    var vm = this;
+    vm.title = '编辑联系人';
+    vm.name = data.contact.name;
+    vm.phone = data.contact.phone_number;
+    vm.email = data.contact.email;
+
+    vm.ok = function() {
+      if (!vm.name || !vm.phone || !vm.email) {
+        return;
+      }
+
+      if(vm.name === data.contact.name && vm.phone === data.contact.phone_number && vm.email === data.contact.email){
+        $mdDialog.cancel();
+        return;
+      }
+
+      var contact = {
+        contact_id: data.contact.contact_id,
+        name: vm.name,
+        phone_number: vm.phone,
+        email: vm.email
+      };
+
+      ContactsService.modifyProjectContact(data.appKey, data.contact.contact_id, contact, function(error) {
+        if (error) {
+          $mdDialog.hide(error);
+        } else {
+          $mdDialog.hide();
+        }
+      });
+    };
+
+    vm.cancel = function(event) {
+      event.preventDefault();
+      $mdDialog.cancel();
+    };
   }
 
   angular

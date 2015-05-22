@@ -11,15 +11,17 @@
       });
   }
 
-  function DailyDataCtrl($filter, DailyDataService) {
+  function DailyDataCtrl($filter, localStorageService, DailyDataService) {
     var vm = this;
     vm.requestCount = 0;
     vm.alertCount = 0;
 
     vm.initdata = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
+    var product = localStorageService.get('app');
+
     vm.getData = function() {
-      DailyDataService.getData('12345', vm.initdata, function() {
+      DailyDataService.getData(product.appKey, vm.initdata, function() {
         vm.setData();
       });
     };
