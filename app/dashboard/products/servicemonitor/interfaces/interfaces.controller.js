@@ -343,7 +343,7 @@
     });
 
     vm.usePublicChange = function() {
-      if (vm.usePublic && vm.calleeList[0]) {
+      if (vm.usePublic && vm.calleeList[0] && !vm.selectCallee) {
         vm.selectCallee = vm.calleeList[0];
       }
     };

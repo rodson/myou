@@ -27,7 +27,7 @@
     }];
 
     var testDataAlert = {
-      'total': 25,
+      'total': 300,
       'data': [{
         'service_address': 'http://121.40.72.175/connector/api/cloud/v2/babies/:id/locations.json',
         'http_method': 'GET',

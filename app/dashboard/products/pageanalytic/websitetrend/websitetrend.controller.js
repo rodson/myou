@@ -8,11 +8,13 @@
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
         controller: WebsiteTrendCtrl,
-        resolve: WebsiteTrendCtrl.resolve
+        // resolve: WebsiteTrendCtrl.resolve
       });
   }
 
-  function WebsiteTrendCtrl(MomentDateService, WebsiteTrendService) {
+  function WebsiteTrendCtrl(localStorageService, MomentDateService, WebsiteTrendService) {
+    var trickId = localStorageService.get('trickId');
+
     var vm = this;
     vm.step = 8;
     vm.radioChecked = 'today';
@@ -63,7 +65,7 @@
     };
 
     vm.getData = function() {
-      WebsiteTrendService.getData(10000014, vm.startdate, vm.enddate, function(data) {
+      WebsiteTrendService.getData(trickId, vm.startdate, vm.enddate, function(data) {
         vm.setData(data);
       });
     };
@@ -83,9 +85,10 @@
   }
 
   WebsiteTrendCtrl.resolve = {
-    getData: function(MomentDateService, WebsiteTrendService) {
+    getData: function(localStorageService, MomentDateService, WebsiteTrendService) {
       var today = MomentDateService.getToday();
-      return WebsiteTrendService.getData(10000014, today.start, today.end);
+      var trickId = localStorageService.get('trickId');
+      return WebsiteTrendService.getData(trickId, today.start, today.end);
     }
   };
 

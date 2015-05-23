@@ -11,9 +11,9 @@
       });
   }
 
-  function ClientInfoCtrl(MomentDateService, ClientInfoService) {
+  function ClientInfoCtrl(localStorageService, MomentDateService, ClientInfoService) {
     var vm = this;
-
+    var trickId = localStorageService.get('trickId');
     vm.radioDate = 'today';
     vm.radioPvUvIp = 'pv';
 
@@ -131,13 +131,13 @@
     };
 
     vm.getData = function() {
-      ClientInfoService.getDataOs(vm.startdate, vm.enddate, 10000014, function(){
+      ClientInfoService.getDataOs(vm.startdate, vm.enddate, trickId, function(){
         setDataOs();
       });
-      ClientInfoService.getDataBr(vm.startdate, vm.enddate, 10000014, function() {
+      ClientInfoService.getDataBr(vm.startdate, vm.enddate, trickId, function() {
         setDataBr();
       });
-      ClientInfoService.getDataSr(vm.startdate, vm.enddate, 10000014, function() {
+      ClientInfoService.getDataSr(vm.startdate, vm.enddate, trickId, function() {
         setDataSr();
       });
     };

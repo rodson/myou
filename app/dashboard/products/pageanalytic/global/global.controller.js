@@ -22,8 +22,9 @@
 	}
 
   GlobalCtrl.resolve = {
-    globalData: function(GlobalService){
-      return GlobalService.getData(10000014);
+    globalData: function(localStorageService, GlobalService){
+      var trickId = localStorageService.get('trickId');
+      return GlobalService.getData(trickId);
     }
   };
 

@@ -12,9 +12,9 @@
       });
   }
 
-  function AreaCtrl(MomentDateService, AreaService, AreaMapDataConstant) {
+  function AreaCtrl(localStorageService, MomentDateService, AreaService, AreaMapDataConstant) {
     var vm = this;
-
+    var trickId = localStorageService.get('trickId');
     vm.radioDate = 'today';
     vm.radioPvUvIp = 'pv';
 
@@ -137,7 +137,7 @@
     };
 
     vm.getData = function() {
-      AreaService.getData(vm.startdate, vm.enddate, 10000014, function(data) {
+      AreaService.getData(vm.startdate, vm.enddate, trickId, function(data) {
         vm.setData();
       });
     };
@@ -182,9 +182,10 @@
   }
 
   AreaCtrl.resolve = {
-    getData: function(MomentDateService, AreaService) {
+    getData: function(localStorageService, MomentDateService, AreaService) {
       var today = MomentDateService.getToday();
-      return AreaService.getData(today.start, today.end, 10000014);
+      var trickId = localStorageService.get('trickId');
+      return AreaService.getData(today.start, today.end, trickId);
     }
   };
 

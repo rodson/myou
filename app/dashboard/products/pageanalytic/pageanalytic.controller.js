@@ -27,8 +27,10 @@
         templateUrl: 'getCaCode.html',
         targetEvent: ev,
         resolve: {
-          trickid: function() {
-            return vm.trickId;
+          data: function() {
+            return {
+              trickid: vm.trickId,
+            };
           }
         }
       }).then(function(answer) {
@@ -42,22 +44,25 @@
     };
 
     vm.getData = function() {
-      PageAnalyticService.getData(vm.product.appKey, function(){
+      PageAnalyticService.getData(vm.product.appKey, function() {
         vm.trickId = PageAnalyticService.trickId;
+        localStorageService.set('trickId', vm.trickId);
 
-        $state.go('dashboard.pageanalytic.global', vm.trickId);
+        $state.go('dashboard.pageanalytic.global');
       });
     };
 
     vm.getData();
     /**************************** start test *****************************/
-    $state.go('dashboard.pageanalytic.global', vm.trickId || 10000014);
+    $state.go('dashboard.pageanalytic.global');
+    vm.trickId = 10000015;
+    localStorageService.set('trickId', vm.trickId);
     /**************************** end test *****************************/
   }
 
-  function DialogController($mdDialog) {
+  function DialogController($mdDialog, data) {
     var vm = this;
-    vm.trickId = 10001001;
+    vm.trickId = data.trickid;
     vm.textareaVal = '<script type="text/javascript" charset="UTF-8">!function(a){var b,c;window.Ca=window.Ca||{},window.Ca.tid=a,b=document.createElement("script"),c=document.getElementsByTagName("script")[0],b.async=1,b.src="//myou.cvte.com/analytics/ca.js",c.parentNode.insertBefore(b,c)}("' + vm.trickId + '"); </script>';
 
     vm.copy = function() {
