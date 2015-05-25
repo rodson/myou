@@ -24,7 +24,8 @@
         ANALYZE_URL: 'http://localhost:4000/api/in/analyze',
 
         UPDATE_API_STAT: 'http://localhost:4000/api/in/stats/update/applications',
-        VERSION_API_STAT: 'http://localhost:4000/api/in/stats/update/versions'
+        VERSION_API_STAT: 'http://localhost:4000/api/in/stats/update/versions',
+        CUSTOMEVENT_API: 'http://localhost:4000/api/in/events'
       },
 
       RETURN_DATA: {

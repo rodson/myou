@@ -88,7 +88,11 @@
             <div class="group-title">
               编辑产品
             </div>
-            <md-input-container flex ng-disabled="vm.isWebApp()">
+            <md-input-container flex ng-show="vm.isWebApp()">
+              <label>产品名</label>
+              <input ng-model="vm.product.name" disabled>
+            </md-input-container>
+            <md-input-container flex ng-hide="vm.isWebApp()">
               <label>产品名</label>
               <input ng-model="vm.product.name">
             </md-input-container>
@@ -123,7 +127,7 @@
         <div class="modal-container">
           <div class="group-section clearfix">
             <div class="group-title">
-              删除应用程序
+              删除产品
             </div>
             <div>
               确认删除 <span class="emphasis">{{ vm.product.name }} ?
