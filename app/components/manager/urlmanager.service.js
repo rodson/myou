@@ -25,6 +25,10 @@
       return Constant.URL.ANALYZE_URL + '/' + appKey + '/key_data';
     };
 
+    UrlManager.getAnalyzeCustomEventUrl = function(appKey) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey + '/custom_events';
+    };
+
     return UrlManager;
   }
 

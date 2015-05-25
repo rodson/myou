@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  function ProductsService($http, Constant, localStorageService,
-    StateManager, PlatformManager) {
+  function ProductsService($http, $mdDialog, Constant, localStorageService,
+    $state, $stateParams, StateManager, PlatformManager) {
 
     var ProductsService = {};
     ProductsService.products = '';
@@ -35,6 +35,50 @@
 
     ProductsService.showPlatformName = function(platform) {
       return PlatformManager.showPlatformName(platform);
+    };
+
+    ProductsService.showEditProductDialog = function(ev, product) {
+      var editProduct = angular.copy(product);
+
+      $mdDialog.show({
+        controller: 'EditProductDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'editProductDialog.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              product: editProduct
+            };
+          }
+        }
+      }).then(function(changeProduct) {
+        product.name = changeProduct.name;
+        product.description = changeProduct.description;
+      });
+    };
+
+    ProductsService.showDeleteProductDialog = function(ev, product) {
+      return $mdDialog.show({
+        controller: 'DeleteProductDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'deleteProductDialog.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              product: product
+            };
+          }
+        }
+      }).then(function() {
+        // Reload current page
+        $state.transitionTo($state.current, $stateParams, {
+          reload: true,
+          inherit: false,
+          notify: true
+        });
+      });
     };
 
     return ProductsService;
