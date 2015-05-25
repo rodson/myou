@@ -1,3 +1,173 @@
 <div class='user-maneger'>
-  <h1>This is usermanager page</h1>
+  <md-toolbar class='white-toolbar'>
+    <div class="md-toolbar-tools">
+      <h4>人员分组</h4>
+      <md-button class="md-icon-button" aria-label='添加分组' title='添加分组' ng-click="vm.showAddGroupDialog($event)" ng-show="vm.isAdmin()">
+        <ng-md-icon icon="group_add" size="25"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <div class='card-group'>
+    <md-card ng-repeat="group in vm.groupData">
+      <div class='content-tool'>
+        <h3 class="md-title">{{ group.groupName }}</h3>
+        <div class='pull-right'>
+          <md-button class="md-icon-button" aria-label='添加人员' title='添加人员' ng-click="vm.showAddMemberDialog($event, group)">
+            <ng-md-icon icon="person_add" size="25"></ng-md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label='编辑分组' title='编辑分组' ng-click="vm.showEditGroupDialog($event, group)">
+            <ng-md-icon icon="mode_edit" size="25"></ng-md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label='删除分组' title='删除分组' ng-click="vm.showDeleteGroupDialog($event, group)">
+            <ng-md-icon icon="delete" size="25"></ng-md-icon>
+          </md-button>
+        </div>
+      </div>
+      <md-card-content>
+        <md-list>
+          <md-list-item class="md-3-line" ng-repeat="user in group.members">
+            <div class="md-list-item-text">
+              <span><ng-md-icon icon="person" size="25" ng-show="vm.isManager(user)"></ng-md-icon></span>
+              <label>{{ user.username }}</label>
+              <div class='pull-right'>
+                <md-button class="md-icon-button" aria-label='编辑人员' title='编辑人员' ng-click="vm.showEditMemberDialog($event, user)">
+                  <ng-md-icon icon="mode_edit" size="25"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label='删除人员' title='删除人员' ng-click="vm.showDeleteMemberDialog($event, user)">
+                  <ng-md-icon icon="delete" size="25"></ng-md-icon>
+                </md-button>
+              </div>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+    </md-card>
+  </div>
 </div>
+
+<script type="text/ng-template" id="addGroupModal.html">
+  <md-dialog aria-label="vm.title" class='alert-dialog'>
+    <form name='addGroupModal' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>{{ vm.title }}</h3>
+        <md-input-container>
+          <label>组名：</label>
+          <input required name="groupName" ng-model="vm.groupName">
+          <div ng-messages="addGroupModal.groupName.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>组描述：</label>
+          <input required name="groupDesc" ng-model="vm.groupDesc">
+          <div ng-messages="addGroupModal.groupDesc.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+
+<script type="text/ng-template" id="deleteGroupModal.html">
+  <md-dialog aria-label="删除分组" class='alert-dialog'>
+    <form name='delGroupModal' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>删除分组</h3>
+        <label>确定删除分组：{{ vm.grupName }}</label>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.cancel()" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+
+<script type="text/ng-template" id="addMemberModal.html">
+  <md-dialog aria-label="vm.title" class='alert-dialog'>
+    <form name='addMemberModal' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>{{ vm.title }}</h3>
+        <md-radio-group ng-model="vm.userType" class='user-type-radio'>
+          <md-radio-button value="user" class="md-primary">普通用户</md-radio-button>
+          <md-radio-button value="group" class="md-primary">分组管理员</md-radio-button>
+        </md-radio-group>
+
+        <md-input-container>
+          <label>姓名：</label>
+          <input required name="memberName" ng-model="vm.memberName">
+          <div ng-messages="addMemberModal.memberName.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>邮箱：</label>
+          <input required name="memberMail" ng-model="vm.memberMail"  ng-disabled='!vm.addMember'>
+          <div ng-messages="addMemberModal.memberMail.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container ng-show='vm.addMember'>
+          <label>密码：</label>
+          <input required name="password" ng-model="vm.password" type='password'>
+          <div ng-messages="addMemberModal.password.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container ng-show='vm.addMember'>
+          <label>确认密码：</label>
+          <input required name="repassword" ng-model="vm.repassword" type='password'>
+          <div ng-messages="addMemberModal.repassword.$error">
+            <div ng-message="required"></div>
+          </div>
+        </md-input-container>
+
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+
+<script type="text/ng-template" id="deleteMemberModal.html">
+  <md-dialog aria-label="删除成员" class='alert-dialog'>
+    <form name='deleteMemberModal' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>删除成员</h3>
+        <label>确定删除成员：{{ vm.memberName }}</label>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.cancel()" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>

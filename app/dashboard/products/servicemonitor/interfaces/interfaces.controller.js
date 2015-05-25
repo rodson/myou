@@ -169,8 +169,8 @@
             };
           }
         }
-      }).then(function(type, message) {
-          vm.showAlert(type, message);
+      }).then(function(error) {
+          vm.showAlert(error);
         },
         function() {});
     };
@@ -188,8 +188,8 @@
             };
           }
         }
-      }).then(function(type, message) {
-          vm.showAlert(type, message);
+      }).then(function(error) {
+          vm.showAlert(error);
         },
         function() {});
     };

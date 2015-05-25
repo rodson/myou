@@ -1,3 +1,120 @@
 .user-maneger {
-  padding: 70px 30px 10px;
+  padding: 50px 0px;
+
+  .white-toolbar {
+    background: white;
+
+    h4 {
+      margin: 0px;
+      color: black;
+    }
+  }
+
+  button {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    margin-left: 5px;
+
+    ng-md-icon {
+      fill: #2196f3;
+    }
+  }
+
+  .card-group {
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    margin-top: 20px;
+
+    md-card {
+      display: inline-block;
+      min-width: 330px;
+      margin-bottom: 15px;
+
+      .content-tool {
+        text-align: left;
+        box-shadow: 0px 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+        div {
+          margin-top: 3px;
+          margin-right: 3px;
+        }
+
+        h3 {
+          display: inline-block;
+          margin: 5px;
+        }
+      }
+
+      md-card-content {
+        height: 360px;
+        display: block;
+        overflow: auto;
+        padding: 0px;
+        padding-top: 5px;
+        padding-bottom: 10px;
+      }
+
+      .md-list-item-text {
+        text-align: left;
+        height: 38px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        position: relative;
+
+        &:hover {
+          border: 1px solid #2196f3;
+          border-radius: 3px;
+
+          button {
+            visibility: visible;
+            opacity: 1;
+            -webkit-animation: 0.5s show;
+            animation: 0.5s show;
+          }
+        }
+
+        button {
+          opacity: 0;
+          visibility: collapse;
+        }
+
+        span {
+          position: absolute;
+          top: 6px;
+          left: 3px;
+        }
+
+        label {
+          font-size: 18px;
+          position: relative;
+          top: 8px;
+          left: 35px;
+        }
+
+        div {
+          margin-top: 3px;
+          margin-right: 3px;
+        }
+      }
+
+    }
+  }
+
+}
+
+.user-type-radio {
+  margin-left: -2px;
+}
+
+@-webkit-keyframes show {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes show {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

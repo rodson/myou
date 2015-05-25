@@ -24,7 +24,10 @@
         ANALYZE_URL: 'http://localhost:4000/api/in/analyze',
 
         UPDATE_API_STAT: 'http://localhost:4000/api/in/stats/update/applications',
-        VERSION_API_STAT: 'http://localhost:4000/api/in/stats/update/versions'
+        VERSION_API_STAT: 'http://localhost:4000/api/in/stats/update/versions',
+
+        USERINFO: 'http://localhost:4000/api/in/users',
+        USERGROUP: 'http://localhost:4000/api/in/userGroups',
       },
 
       RETURN_DATA: {
