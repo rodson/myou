@@ -134,6 +134,25 @@
   </md-dialog>
 </script>
 
+<script type="text/ng-template" id="deleteInterfaceModal.html">
+  <md-dialog aria-label="删除接口" class='alert-dialog'>
+    <form name='delInterfaceModal' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>删除接口</h3>
+        <label>确定删除接口：{{ vm.interfaceName }}</label>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.cancel()" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>
+
 <!--Callee Detail modal-->
 <script type="text/ng-template" id="calleeDetailModal.html">
 

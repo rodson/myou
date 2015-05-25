@@ -76,3 +76,22 @@
     </form>
   </md-dialog>
 </script>
+
+<script type="text/ng-template" id="deleteContactModal.html">
+  <md-dialog aria-label="删除联系人" class='alert-dialog'>
+    <form name='delContactModal' class='alert-dialog-form'>
+      <md-dialog-content class="sticky-container">
+        <h3>删除联系人</h3>
+        <label>确定删除联系人：{{ vm.name }}</label>
+      </md-dialog-content>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="vm.cancel()" class="md-default-theme">
+          取消
+        </md-button>
+        <md-button ng-click="vm.ok()" class="md-primary">
+          确定
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
+</script>

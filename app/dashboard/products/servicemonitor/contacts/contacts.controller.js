@@ -65,24 +65,23 @@
     };
 
     vm.showDeleteContactDialog = function(ev, dt) {
-      var confirm = $mdDialog.confirm()
-        .title('确认删除')
-        .content('是否删除联系人：' + dt.name)
-        .ariaLabel('确认删除')
-        .ok('确认')
-        .cancel('取消')
-        .targetEvent(ev);
-
-      $mdDialog.show(confirm).then(function() {
-        ContactsService.deleteProjectContact(product.appKey, dt.contact_id, function(error){
-          if(error) {
-            vm.showAlert(error);
+      $mdDialog.show({
+        controller: deleteContactModalDialogCtrl,
+        controllerAs: 'vm',
+        templateUrl: 'deleteContactModal.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              appKey: product.appKey,
+              contact: dt
+            };
           }
-          vm.getContacts();
-        });
-      }, function() {
-
-      });
+        }
+      }).then(function(error) {
+          vm.showAlert(error);
+        },
+        function() {});
     };
 
     vm.showAlert = function(error) {
@@ -143,7 +142,7 @@
         return;
       }
 
-      if(vm.name === data.contact.name && vm.phone === data.contact.phone_number && vm.email === data.contact.email){
+      if (vm.name === data.contact.name && vm.phone === data.contact.phone_number && vm.email === data.contact.email) {
         $mdDialog.cancel();
         return;
       }
@@ -169,6 +168,21 @@
       $mdDialog.cancel();
     };
   }
+
+  function deleteContactModalDialogCtrl($mdDialog, data, ContactsService) {
+    var vm = this;
+    vm.name = data.contact.name;
+
+    vm.ok = function() {
+      ContactsService.deleteProjectContact(data.appKey, data.contact.contact_id, function(error) {
+        $mdDialog.hide(error);
+      });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  };
 
   angular
     .module('myou.dashboard.servicemonitor')

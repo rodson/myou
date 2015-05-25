@@ -195,22 +195,20 @@
     };
 
     vm.showDeleteModal = function(ev, dt) {
-      var confirm = $mdDialog.confirm()
-        .title('确认删除')
-        .content('是否删除接口：' + dt.interface_name)
-        .ariaLabel('确认删除')
-        .ok('确认')
-        .cancel('取消')
-        .targetEvent(ev);
-
-      $mdDialog.show(confirm).then(function() {
-        InterfacesService.deleteInterface(dt.interface_id, function(error, message) {
-          if (error) {
-            vm.showAlert(error);
+      $mdDialog.show({
+        controller: deleteInterfaceModalDialogCtrl,
+        controllerAs: 'vm',
+        templateUrl: 'deleteInterfaceModal.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return dt;
           }
-          vm.getInterfacesInternal();
-        });
-      });
+        }
+      }).then(function(error) {
+          vm.showAlert(error);
+        },
+        function() {});
     };
 
     vm.showCalleeAddModal = function(ev, callerId) {
@@ -421,6 +419,21 @@
     };
 
     vm.getData();
+  }
+
+  function deleteInterfaceModalDialogCtrl($mdDialog, data, InterfacesService) {
+    var vm = this;
+    vm.interfaceName = data.interface_name;
+
+    vm.ok = function() {
+      InterfacesService.deleteInterface(data.interface_id, function(error) {
+        $mdDialog.hide(error);
+      });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
   }
 
   angular
