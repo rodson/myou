@@ -29,6 +29,20 @@
       return Constant.URL.ANALYZE_URL + '/' + appKey + '/custom_events';
     };
 
+    UrlManager.getCustomEventUrl = function(appKey) {
+      return Constant.URL.CUSTOMEVENT_API + '/' + appKey + '/custom_events';
+    };
+
+    UrlManager.getEventVersionUrl = function(appKey, eventId) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey + '/custom_events' +
+        '/version_list/' + eventId;
+    };
+
+    UrlManager.getEventReportUrl = function(appKey, eventId) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey +
+        '/custom_events/report/' + eventId;
+    };
+
     return UrlManager;
   }
 

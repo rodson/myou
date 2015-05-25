@@ -1,0 +1,48 @@
+<div class="clearfix">
+  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+  <md-select placeholder="所有版本" class="nopadding normal-text normal-size pull-right" ng-model="vm.selectedVersion" ng-change="vm.onVersionSelect()" style="margin-right: 32px; margin-top: 5px;">
+    <md-option value="">所有版本</md-option>
+    <md-option ng-repeat="version in vm.versions" value="{{version}}"></md-option>
+  </md-select>
+</div>
+
+<!-- Event data linechart -->
+<div>
+  <md-radio-group ng-model="vm.radioDataType"  class="pa-pull-right" ng-change='vm.getCheckDataType()'>
+    <md-radio-button value="count" class="md-primary">消息数量</md-radio-button>
+    <md-radio-button value="session" class="md-primary">消息数/启动次数</md-radio-button>
+    <md-radio-button value="user" class="md-primary">独立用户数</md-radio-button>
+  </md-radio-group>
+
+  <highchart config="vm.chartConfig"></highchart>
+</div>
+
+<div class="group-section">
+  <div class="group-title">
+    事件统计明细
+  </div>
+  <table class="table" ts-wrapper>
+    <thead>
+      <tr>
+        <th>日期</th>
+        <th>消息数量</th>
+        <th>消息数/启动次数</th>
+        <th>独立用户数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.tableData" ts-repeat>
+        <td>{{ item.event_date }}</td>
+        <td>{{ item.event_count }}</td>
+        <td>{{ item.event_count_session_ratio }}</td>
+        <td>{{ item.event_unique_user_count }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

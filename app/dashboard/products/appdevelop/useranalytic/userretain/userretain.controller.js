@@ -11,6 +11,7 @@
 
   angular
     .module('myou.dashboard.appdevelop.useranalytic')
-    .controller('UserRetainCtrl', UserRetainCtrl);
+    .controller('UserRetainCtrl', UserRetainCtrl)
+    .config(userRetainConfig);
 
 })();

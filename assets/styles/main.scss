@@ -203,6 +203,10 @@ body {
   padding-right: 10px;
 }
 
+.btn-md {
+  width: 50px;
+}
+
 .btn-lg {
   width: 80px;
 }
@@ -247,6 +251,21 @@ body {
 
 .normal-text {
   color: $text-color;
+}
+
+.normal-size {
+  font-size: 14px;
+}
+.table
+tr {
+  td.clickable {
+    cursor: pointer;
+    color: $primary-color;
+
+    &:hover {
+      color: $primary-hover;
+    }
+  }
 }
 
 @font-face {

@@ -7,5 +7,5 @@
       'tableSort',
 
       'myou.shared'
-    ])
+    ]);
 })();

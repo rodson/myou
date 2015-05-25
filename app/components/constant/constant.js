@@ -25,9 +25,9 @@
 
         UPDATE_API_STAT: 'http://localhost:4000/api/in/stats/update/applications',
         VERSION_API_STAT: 'http://localhost:4000/api/in/stats/update/versions',
-
         USERINFO: 'http://localhost:4000/api/in/users',
         USERGROUP: 'http://localhost:4000/api/in/userGroups',
+        CUSTOMEVENT_API: 'http://localhost:4000/api/in/events',
       },
 
       RETURN_DATA: {
