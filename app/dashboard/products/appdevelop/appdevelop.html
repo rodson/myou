@@ -40,7 +40,9 @@
         <li>
           <a>用户分析</a>
           <ul>
-            <li><a>用户留存</a></li>
+            <li ng-class="{active: vm.isActive('userretain')}">
+              <a ui-sref=".userretain">用户留存</a>
+            </li>
             <li><a>设备终端</a></li>
           </ul>
         </li>

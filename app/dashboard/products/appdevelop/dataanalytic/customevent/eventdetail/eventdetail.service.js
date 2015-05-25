@@ -73,7 +73,7 @@
     EventDetailService.getEvent = function() {
       EventDetailService.event = StorageManager.getEvent();
       return EventDetailService.event;
-    }
+    };
 
     EventDetailService.init = function() {
       EventDetailService.getApp();

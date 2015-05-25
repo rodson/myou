@@ -9,7 +9,8 @@
       'myou.shared',
 
       'myou.dashboard.appdevelop.appupdate',
-      'myou.dashboard.appdevelop.dataanalytic'
+      'myou.dashboard.appdevelop.dataanalytic',
+      'myou.dashboard.appdevelop.useranalytic'
     ]);
 
 })();
