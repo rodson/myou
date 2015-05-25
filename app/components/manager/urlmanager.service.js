@@ -38,6 +38,11 @@
         '/version_list/' + eventId;
     };
 
+    UrlManager.getEventReportUrl = function(appKey, eventId) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey +
+        '/custom_events/report/' + eventId;
+    };
+
     return UrlManager;
   }
 

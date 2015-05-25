@@ -66,7 +66,7 @@
 
     KeyDataService.getApp = function() {
       KeyDataService.app = StorageManager.getApp();
-      return StorageManager.app;
+      return KeyDataService.app;
     };
 
     KeyDataService.init = function() {
