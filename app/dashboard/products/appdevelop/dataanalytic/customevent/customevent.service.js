@@ -38,6 +38,10 @@
         });
     };
 
+    CustomEventService.enterEvent = function(event) {
+      $state.go('dashboard.appdevelop.eventdetail', { eventId: event.event_db_id });
+    };
+
     CustomEventService.showAddEventDialog = function(ev) {
       $mdDialog.show({
         controller: 'AddCustomEventDialogCtrl',

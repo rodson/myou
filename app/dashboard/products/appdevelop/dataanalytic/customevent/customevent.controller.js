@@ -30,6 +30,10 @@
         });
     };
 
+    vm.enterEvent = function(event) {
+      CustomEventService.enterEvent(event);
+    };
+
     vm.showAddEventDialog = function(ev) {
       CustomEventService.showAddEventDialog(ev);
     };

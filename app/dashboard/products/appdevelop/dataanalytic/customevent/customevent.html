@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="event in vm.events" ts-repeat>
-          <td>{{ event.event_id }}</td>
+          <td class="clickable" ng-click="vm.enterEvent(event)">{{ event.event_id }}</td>
           <td>{{ event.event_name }}</td>
           <td>{{ event.yesterday_event_count }}</td>
           <td>{{ event.today_event_count }}</td>

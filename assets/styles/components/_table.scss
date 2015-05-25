@@ -32,6 +32,14 @@ $table-condensed-cell-padding: $table-cell-padding/2;
         border-top: 0;
         font-size: 14px;
         transition: all .3s ease;
+
+        &.clickable {
+          color: $primary-color;
+
+          &:hover {
+            color: $primary-hover;
+          }
+        }
       }
     }
   }
