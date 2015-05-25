@@ -39,6 +39,7 @@
     };
 
     CustomEventService.enterEvent = function(event) {
+      StorageManager.setEvent(event);
       $state.go('dashboard.appdevelop.eventdetail', { eventId: event.event_db_id });
     };
 

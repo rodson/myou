@@ -5,10 +5,12 @@
     var EventDetailService = {};
 
     EventDetailService.app = {};
+    EventDetailService.event = {};
     EventDetailService.radioDate = 'today';
     EventDetailService.radioDataType = 'count';
     EventDetailService.tableData = [];
     EventDetailService.lineChart = {};
+    EventDetailService.eventLabelData = [];
 
     EventDetailService.chartConfig = {
       options: {
@@ -68,8 +70,14 @@
       return EventDetailService.app;
     };
 
+    EventDetailService.getEvent = function() {
+      EventDetailService.event = StorageManager.getEvent();
+      return EventDetailService.event;
+    }
+
     EventDetailService.init = function() {
       EventDetailService.getApp();
+      EventDetailService.getEvent();
       EventDetailService.getCheckDate('today');
     };
 
@@ -115,18 +123,53 @@
       }
     };
 
-    EventDetailService.getEventData = function(eventId) {
+    EventDetailService.getEventData = function(eventId, version) {
       if (!EventDetailService.startdate) {
         EventDetailService.init();
       }
+      var queryString = '?start_date=' + EventDetailService.startdate + '&end_date=' + EventDetailService.enddate;
 
-      return $http.get(UrlManager.getEventReportUrl(EventDetailService.app.appKey, eventId) +
-        '?start_date=' + EventDetailService.startdate + '&end_date=' + EventDetailService.enddate)
+      if (version) {
+        queryString = queryString + '&version=' + version;
+      }
+
+      return $http.get(UrlManager.getEventReportUrl(EventDetailService.app.appKey, eventId) + queryString)
         .success(function(data) {
           EventDetailService.lineChart = data.line_chart;
           EventDetailService.tableData = data.table;
 
           EventDetailService.getCheckDataType(EventDetailService.radioDataType);
+        });
+    };
+
+    EventDetailService.getEventLabelData = function(eventId, version) {
+      if (!EventDetailService.startdate) {
+        EventDetailService.init();
+      }
+
+      var queryString = '?start_date=' + EventDetailService.startdate + '&end_date=' + EventDetailService.enddate;
+
+      if (version) {
+        queryString = queryString + '&version=' + version;
+      }
+
+      return $http.get(UrlManager.getEventLabelUrl(EventDetailService.app.appKey, eventId) + queryString)
+        .success(function(data) {
+          EventDetailService.eventLabelData = data;
+        });
+    };
+
+    EventDetailService.getEventVersions = function(eventId) {
+      if (!EventDetailService.app) {
+        EventDetailService.init();
+      }
+
+      eventId = eventId || '';
+
+      return $http.get(UrlManager
+        .getEventVersionUrl(EventDetailService.app.appKey, eventId))
+        .success(function(data) {
+          EventDetailService.versions = data;
         });
     };
 

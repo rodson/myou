@@ -8,6 +8,14 @@
       return localStorageService.get('app');
     };
 
+    StorageManager.setEvent = function(event) {
+      localStorageService.set('event', event);
+    };
+
+    StorageManager.getEvent = function() {
+      return localStorageService.get('event');
+    };
+
     return StorageManager;
   }
 

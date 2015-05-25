@@ -1,4 +1,7 @@
 <div class="clearfix">
+  <span class="main-title">
+    {{ vm.event.event_name }}
+  </span>
   <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
     <md-radio-button value="today" class="md-primary">今天</md-radio-button>
     <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
@@ -29,10 +32,10 @@
   <table class="table" ts-wrapper>
     <thead>
       <tr>
-        <th>日期</th>
-        <th>消息数量</th>
-        <th>消息数/启动次数</th>
-        <th>独立用户数</th>
+        <th ts-criteria="event_date|lowercase">日期</th>
+        <th ts-criteria="event_count|parseInt">消息数量</th>
+        <th ts-criteria="event_count_session_ratio|parseInt">消息数/启动次数</th>
+        <th ts-criteria="event_unique_user_count|parseInt">独立用户数</th>
       </tr>
     </thead>
     <tbody>
@@ -44,5 +47,26 @@
       </tr>
     </tbody>
   </table>
+</div>
 
+<div class="group-section" ng-repeat="eventLabel in eventLabelData">
+  <div class="group-title">
+    {{ eventLabel.event_key }}
+  </div>
+  <table class="table" ts-wrapper>
+    <thead>
+      <tr>
+        <th ts-criteria="event_value|lowercase">参数值</th>
+        <th ts-criteria="event_count|parseInt">消息数量</th>
+        <th ts-criteria="percent|parseInt">占比</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in eventLabel" ts-repeat>
+        <td>{{ item.event_value }}</td>
+        <td>{{ item.event_count }}</td>
+        <td>{{ item.percent }}&#37;</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

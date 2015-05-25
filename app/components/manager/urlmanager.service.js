@@ -43,6 +43,11 @@
         '/custom_events/report/' + eventId;
     };
 
+    UrlManager.getEventLabelUrl = function(appKey, eventId) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey +
+        '/custom_events/value_stats/' + eventId;
+    };
+
     return UrlManager;
   }
 

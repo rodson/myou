@@ -18,15 +18,33 @@
     var eventId = $stateParams.eventId;
 
     vm.app = EventDetailService.getApp();
+    vm.event = EventDetailService.getEvent();
     vm.radioDate = EventDetailService.radioDate;
     vm.radioDataType = EventDetailService.radioDataType;
     vm.chartConfig = EventDetailService.chartConfig;
     vm.tableData = EventDetailService.tableData;
+    vm.eventLabelData = EventDetailService.eventLabelData;
+    vm.versions = EventDetailService.versions;
 
     vm.getCheckDate = function() {
       EventDetailService.getCheckDate(vm.radioDate);
+
       EventDetailService.getEventData(eventId).then(function() {
         vm.tableData = EventDetailService.tableData;
+      });
+
+      EventDetailService.getEventLabelData(eventId).then(function() {
+        vm.eventLabelData = EventDetailService.eventLabelData;
+      });
+    };
+
+    vm.onVersionSelect = function() {
+      EventDetailService.getEventData(eventId, vm.selectedVersion).then(function() {
+        vm.tableData = EventDetailService.tableData;
+      });
+
+      EventDetailService.getEventLabelData(eventId, vm.selectedVersion).then(function() {
+        vm.eventLabelData = EventDetailService.eventLabelData;
       });
     };
 
@@ -39,8 +57,18 @@
     getEventData: function($stateParams, EventDetailService) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventData(eventId);
+    },
+
+    getEventlabelData: function($stateParams, EventDetailService) {
+      var eventId = $stateParams.eventId;
+      return EventDetailService.getEventLabelData(eventId);
+    },
+
+    getEventVersions: function($stateParams, EventDetailService) {
+      var eventId = $stateParams.eventId;
+      return EventDetailService.getEventVersions(eventId);
     }
-  }
+  };
 
   angular
     .module('myou.dashboard.appdevelop.dataanalytic')
