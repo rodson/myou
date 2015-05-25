@@ -48,6 +48,10 @@
         '/custom_events/value_stats/' + eventId;
     };
 
+    UrlManager.getUserRetainUrl = function(appKey) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey + '/user_retain';
+    };
+
     return UrlManager;
   }
 

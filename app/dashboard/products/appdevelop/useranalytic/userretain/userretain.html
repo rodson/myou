@@ -1,1 +1,44 @@
-<h1>User Retain</h1>
+<div class="clearfix">
+  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+</div>
+
+<div class="group-section">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>首次启动日</th>
+        <th ng-hide="vm.isWindowsApp()">新增用户</th>
+        <th ng-show="vm.isWindowsApp()">新增装机量</th>
+        <th>次日</th>
+        <th>2天后</th>
+        <th>3天后</th>
+        <th>4天后</th>
+        <th>5天后</th>
+        <th>6天后</th>
+        <th>7天后</th>
+        <th>14天后</th>
+        <th>30天后</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="retainData in vm.tableData">
+        <td>{{ retainData.date }}</td>
+        <td>{{ retainData.new_user_count }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_1) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_2) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_3) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_4) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_5) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_6) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_7) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_14) }}</td>
+        <td>{{ vm.formatTableData(retainData.user_retain_rate_30) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
