@@ -1,1 +1,43 @@
-<h1>VersionDistribute</h1>
+<div class="group-section nopadding">
+  <div class="group-title">
+    <span style="margin-right: 32px;">
+      单日API请求: {{ vm.apiCount }}
+    </span>
+    <datatime-picker init-datatime='vm.apiStatDate' display-mode='date' class='date-picker'></datatime-picker>
+  </div>
+  <div class="margin-top-30">
+    <highchart config="vm.apiChartConfig"></highchart>
+  </div>
+</div>
+
+<div class="group-section nopadding" style="margin-top: 30px;">
+  <div class="group-title">
+    <span style="margin-right: 32px;">
+      用户总数: {{ vm.userCount }}
+    </span>
+    <datatime-picker init-datatime='vm.versionStatDate' display-mode='date' class='date-picker'></datatime-picker>
+
+  </div>
+
+  <div class='content-info'>
+    <div class='content-chart margin-top-30'>
+      <highchart config="vm.versionChartConfig" class='content-highcharts'></highchart>
+    </div>
+    <div class='content-table margin-top-30'>
+      <table class="table" ts-wrapper>
+        <thead>
+          <tr>
+            <th>产品版本</th>
+            <th ts-criteria="pv|parseInt" ts-default='descending'>累计用户</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="versionItem in vm.versionTableData" ts-repeat>
+            <td>{{ versionItem.version }}</td>
+            <td>{{ versionItem.count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

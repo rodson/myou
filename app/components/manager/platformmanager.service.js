@@ -44,6 +44,10 @@
       return platform === Constant.PRODUCT_PLATFORM.IOS_APP;
     };
 
+    PlatformManager.isWebApp = function(platform) {
+      return platform === Constant.PRODUCT_PLATFORM.WEB_PUBLISH;
+    };
+
     return PlatformManager;
   }
 

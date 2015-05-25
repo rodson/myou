@@ -28,6 +28,14 @@
     vm.showPlatformName = function(platform) {
       return ProductsService.showPlatformName(platform);
     };
+
+    vm.showEditProductDialog = function(ev, product) {
+      ProductsService.showEditProductDialog(ev, product);
+    };
+
+    vm.showDeleteProductDialog = function(ev, product) {
+      ProductsService.showDeleteProductDialog(ev, product);
+    };
   }
 
   ProductsCtrl.resolve = {
@@ -36,9 +44,53 @@
     }
   };
 
+  function EditProductDialogCtrl(data, $mdDialog, ProductsService, PlatformManager) {
+    var vm = this;
+
+    vm.product = data.product;
+
+    vm.isWebApp = function() {
+      return PlatformManager.isWebApp(vm.product.platform);
+    };
+
+    vm.ok = function() {
+      ProductsService.updateProduct(vm.product._id, vm.product)
+        .success(function(data) {
+          $mdDialog.hide(data);
+        }).error(function(err) {
+          vm.errorMessage = err.message;
+        });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  function DeleteProductDialogCtrl(data, $mdDialog, ProductsService) {
+    var vm = this;
+
+    vm.product = data.product;
+
+    vm.ok = function() {
+      ProductsService.deleteProduct(vm.product._id)
+        .success(function() {
+          $mdDialog.hide();
+        }).error(function(err) {
+          vm.errorMessage = err.message;
+        });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
   angular
     .module('myou.dashboard.products')
     .controller('ProductsCtrl', ProductsCtrl)
+    .controller('EditProductDialogCtrl', EditProductDialogCtrl)
+    .controller('DeleteProductDialogCtrl', DeleteProductDialogCtrl)
     .config(productsConfig);
 
 })();
