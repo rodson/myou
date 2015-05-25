@@ -24,6 +24,20 @@
         });
     };
 
+    CustomEventService.getEventVersions = function(eventId) {
+      if (!CustomEventService.app) {
+        CustomEventService.init();
+      }
+
+      eventId = eventId || '';
+
+      return $http.get(UrlManager
+        .getEventVersionUrl(CustomEventService.app.appKey, eventId))
+        .success(function(data) {
+          CustomEventService.versions = data;
+        });
+    };
+
     CustomEventService.showAddEventDialog = function(ev) {
       $mdDialog.show({
         controller: 'AddCustomEventDialogCtrl',

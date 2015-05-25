@@ -17,7 +17,18 @@
 
     CustomEventService.init();
 
+    vm.versions = CustomEventService.versions;
+
     vm.events = CustomEventService.events;
+
+    vm.selectedVersion = '';
+
+    vm.onVersionSelect = function() {
+      CustomEventService.getEvents(vm.selectedVersion)
+        .then(function() {
+          vm.events = CustomEventService.events;
+        });
+    };
 
     vm.showAddEventDialog = function(ev) {
       CustomEventService.showAddEventDialog(ev);
@@ -30,12 +41,15 @@
     vm.showDeleteEventDialog = function(ev, event) {
       CustomEventService.showDeleteEventDialog(ev, event);
     };
-
   }
 
   CustomEventCtrl.resolve = {
     getEvents: function(CustomEventService) {
       return CustomEventService.getEvents();
+    },
+
+    getEventVersions: function(CustomEventService) {
+      return CustomEventService.getEventVersions();
     }
   };
 

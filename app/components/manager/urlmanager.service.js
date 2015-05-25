@@ -33,6 +33,11 @@
       return Constant.URL.CUSTOMEVENT_API + '/' + appKey + '/custom_events';
     };
 
+    UrlManager.getEventVersionUrl = function(appKey, eventId) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey + '/custom_events' +
+        '/version_list/' + eventId;
+    };
+
     return UrlManager;
   }
 

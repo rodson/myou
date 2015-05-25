@@ -1,10 +1,13 @@
 <div class="group-section nopadding">
-  <div class="group-title">
+  <span class="group-title">
     事件管理
-    <md-button class="md-raised md-primary" ng-click="vm.showAddEventDialog($event)">添加</md-button>
-  </div>
-  <div class="action">
-
+  </span>
+  <div class="action pull-right">
+    <md-select placeholder="所有版本" class="nopadding normal-text normal-size" ng-model="vm.selectedVersion" ng-change="vm.onVersionSelect()" style="margin-right: 32px;">
+      <md-option value="">所有版本</md-option>
+      <md-option ng-repeat="version in vm.versions" value="{{version}}"></md-option>
+    </md-select>
+    <md-button class="md-raised md-primary btn-lg" aria-label="add event" ng-click="vm.showAddEventDialog($event)">添加</md-button>
   </div>
   <div>
     <table class="table" ts-wrapper>
