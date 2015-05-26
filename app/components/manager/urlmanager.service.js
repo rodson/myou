@@ -52,6 +52,10 @@
       return Constant.URL.ANALYZE_URL + '/' + appKey + '/user_retain';
     };
 
+    UrlManager.getDeviceUrl = function(appKey) {
+      return Constant.URL.ANALYZE_URL + '/' + appKey + '/device_stats';
+    }
+
     return UrlManager;
   }
 

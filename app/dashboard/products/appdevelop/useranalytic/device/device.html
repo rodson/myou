@@ -1,1 +1,22 @@
-<h1>Device</h1>
+<div class="clearfix">
+  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
+    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
+    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
+    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
+    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
+  </md-radio-group>
+</div>
+
+<!-- Key data linechart -->
+<div>
+  <md-radio-group ng-model="vm.radioDataType"  class="pa-pull-right" ng-change='vm.getBarChartData()'>
+    <md-radio-button value="resolution" class="md-primary">分辨率</md-radio-button>
+    <md-radio-button ng-show="vm.isAndroidApp()" value="device_model" class="md-primary">设备型号</md-radio-button>
+    <md-radio-button value="os_version" class="md-primary">操作系统版本</md-radio-button>
+    <md-radio-button value="app_version" class="md-primary">应用版本</md-radio-button>
+    <md-radio-button ng-show="vm.isAndroidApp()" value="access" class="md-primary">网络环境</md-radio-button>
+    <md-radio-button ng-show="vm.isAndroidApp()" value="carrier" class="md-primary">运营商</md-radio-button>
+  </md-radio-group>
+
+  <highchart config="vm.chartConfig"></highchart>
+</div>
