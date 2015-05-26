@@ -52,8 +52,8 @@
         <li>
           <a>错误分析</a>
           <ul>
-            <li><a>错误趋势</a></li>
-            <li><a>错误列表</a></li>
+            <li ng-class="{active: vm.isActive('errortrend')}"><a ui-sref=".errortrend">错误趋势</a></li>
+            <li ng-class="{active: vm.isActive('errorlists')}"><a ui-sref=".errorlists">错误列表</a></li>
           </ul>
         </li>
 

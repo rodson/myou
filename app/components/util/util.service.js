@@ -34,6 +34,12 @@
         end: moment().format('YYYY-MM-DD')
       };
     };
+    momentDateService.getLast60Day = function() {
+      return {
+        start: moment().subtract(59, 'd').format('YYYY-MM-DD'),
+        end: moment().format('YYYY-MM-DD')
+      };
+    };
     momentDateService.IsDateAvaliable = function(start, end) {
       return moment(end).isAfter(start) || start === end;
     };

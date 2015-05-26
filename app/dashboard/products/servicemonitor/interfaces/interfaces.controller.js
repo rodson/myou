@@ -196,7 +196,7 @@
 
     vm.showDeleteModal = function(ev, dt) {
       $mdDialog.show({
-        controller: deleteInterfaceModalDialogCtrl,
+        controller: DeleteInterfaceModalDialogCtrl,
         controllerAs: 'vm',
         templateUrl: 'deleteInterfaceModal.html',
         targetEvent: ev,
@@ -421,7 +421,7 @@
     vm.getData();
   }
 
-  function deleteInterfaceModalDialogCtrl($mdDialog, data, InterfacesService) {
+  function DeleteInterfaceModalDialogCtrl($mdDialog, data, InterfacesService) {
     var vm = this;
     vm.interfaceName = data.interface_name;
 

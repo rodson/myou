@@ -66,7 +66,7 @@
 
     vm.showDeleteContactDialog = function(ev, dt) {
       $mdDialog.show({
-        controller: deleteContactModalDialogCtrl,
+        controller: DeleteContactModalDialogCtrl,
         controllerAs: 'vm',
         templateUrl: 'deleteContactModal.html',
         targetEvent: ev,
@@ -169,7 +169,7 @@
     };
   }
 
-  function deleteContactModalDialogCtrl($mdDialog, data, ContactsService) {
+  function DeleteContactModalDialogCtrl($mdDialog, data, ContactsService) {
     var vm = this;
     vm.name = data.contact.name;
 
@@ -182,7 +182,7 @@
     vm.cancel = function() {
       $mdDialog.cancel();
     };
-  };
+  }
 
   angular
     .module('myou.dashboard.servicemonitor')

@@ -1,0 +1,23 @@
+<div class='error-lists'>
+  <h3>错误列表</h3>
+  <table class="table" ts-wrapper>
+    <thead>
+      <tr>
+        <th ts-criteria="errortip|lowercase">错误摘要</th>
+        <th ts-criteria="appversion|lowercase" ts-default='descending'>应用版本</th>
+        <th ts-criteria="firstdate|lowercase">首次发生</th>
+        <th ts-criteria="latestate|lowercase">最近发生</th>
+        <th ts-criteria="errorcount|parseFloat">错误数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in vm.datas" ts-repeat>
+        <td>{{ x.errortip }}</td>
+        <td>{{ x.appversion }}</td>
+        <td>{{ x.firstdate }}</td>
+        <td>{{ x.latestate }}</td>
+        <td>{{ x.errorcount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

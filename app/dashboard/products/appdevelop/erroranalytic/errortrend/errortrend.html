@@ -1,0 +1,44 @@
+<div class='error-trend'>
+  <span>选择查询时间段：</span>
+  <md-select placeholder="Pick" ng-model="vm.selectedDate" ng-change='vm.selectDateChanged()'>
+    <md-select-label>{{ vm.selectDate[vm.selectedDate].start + ' 到 ' + vm.selectDate[vm.selectedDate].end }}</md-select-label>
+    <md-option value="0"> {{ vm.selectDate[0].label }} </md-option>
+    <md-option value="1"> {{ vm.selectDate[1].label }} </md-option>
+    <md-option value="2"> {{ vm.selectDate[2].label }} </md-option>
+    <md-option value="3"> {{ vm.selectDate[3].label }} </md-option>
+    <md-option value="4"> {{ vm.selectDate[4].label }} </md-option>
+  </md-select>
+  <br><br>
+  <div class='error-char-title'>
+    <h3>错误分析</h3>
+    <md-radio-group ng-model="vm.radioChecked" ng-change='vm.getCheckDate()'>
+      <md-radio-button value="today" class="md-primary">错误数</md-radio-button>
+      <md-radio-button value="yesterday" class="md-primary">错误数/启动数</md-radio-button>
+    </md-radio-group>
+  </div>
+
+  <div>
+    <highchart id="chart" class='margin-top-30 border-radio-15' config="vm.highchartsNG"></highchart>
+  </div>
+
+  <div class='error-table'>
+    <h3>详细数据</h3>
+    <table class="table" ts-wrapper>
+      <thead>
+        <tr>
+          <th ts-criteria="date|lowercase">日期</th>
+          <th ts-criteria="errorcount|parseInt" ts-default='descending'>错误数</th>
+          <th ts-criteria="errorpersent|parseFloat">错误率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in vm.datas" ts-repeat>
+          <td>{{ x.name }}</td>
+          <td>{{ x.errorcount }}</td>
+          <td>{{ x.errorpersent }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
