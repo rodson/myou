@@ -54,7 +54,11 @@
 
     UrlManager.getDeviceUrl = function(appKey) {
       return Constant.URL.ANALYZE_URL + '/' + appKey + '/device_stats';
-    }
+    };
+
+    UrlManager.getTestDeviceUrl = function(appId) {
+      return Constant.URL.PRODUCTS + '/' + appId + '/testDevices';
+    };
 
     return UrlManager;
   }

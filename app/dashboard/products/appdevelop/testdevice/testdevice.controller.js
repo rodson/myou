@@ -7,17 +7,110 @@
         url: '/testdevice',
         templateUrl: 'app/dashboard/products/appdevelop/testdevice/testdevice.html',
         controllerAs: 'vm',
-        controller: 'TestDeviceCtrl'
+        controller: 'TestDeviceCtrl',
+        resolve: TestDeviceCtrl.resolve
       });
   }
 
-  function TestDeviceCtrl() {
+  function TestDeviceCtrl(TestDeviceService) {
+    var vm = this;
 
+    vm.testDevices = TestDeviceService.testDevices;
+
+    vm.showAddTestDeviceDialog = function(ev) {
+      TestDeviceService.showAddTestDeviceDialog(ev);
+    };
+
+    vm.showEditTestDeviceDialog = function(ev, testDevice) {
+      TestDeviceService.showEditTestDeviceDialog(ev, testDevice);
+    };
+
+    vm.showDeleteTestDeviceDialog = function(ev, testDevice) {
+      TestDeviceService.showDeleteTestDeviceDialog(ev, testDevice);
+    };
+  }
+
+  TestDeviceCtrl.resolve = {
+    getTestDevices: function(TestDeviceService) {
+      return TestDeviceService.getTestDevices();
+    }
+  };
+
+  function AddTestDeviceDialogCtrl($mdDialog, TestDeviceService) {
+    var vm = this;
+
+    vm.testDevice = {
+      deviceName: '',
+      deviceMac: ''
+    };
+
+    vm.ok = function() {
+      if (!vm.testDevice.deviceName) {
+        vm.errorMessage = '请输入设备名';
+      } else if (!vm.testDevice.deviceMac) {
+        vm.errorMessage = '请输入设备mac地址';
+      } else {
+        TestDeviceService.createTestDevice(vm.testDevice).success(function() {
+          $mdDialog.hide();
+        }).error(function(err) {
+          vm.errorMessage = err.message;
+        });
+      }
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  function EditTestDeviceDialogCtrl(TestDeviceService, $mdDialog, data) {
+    var vm = this;
+
+    vm.testDevice = data.testDevice;
+
+    vm.ok = function() {
+      if (!vm.testDevice.deviceName) {
+        vm.errorMessage = '请输入设备名';
+      } else if (!vm.testDevice.deviceMac) {
+        vm.errorMessage = '请输入设备mac地址';
+      } else {
+        TestDeviceService.modifyTestDevice(vm.testDevice._id, vm.testDevice).success(function() {
+          $mdDialog.hide();
+        }).error(function(err) {
+          vm.errorMessage = err.message;
+        });
+      }
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  function DeleteTestDeviceDialogCtrl($mdDialog, TestDeviceService, data) {
+    var vm = this;
+
+    vm.testDevice = data.testDevice;
+
+    vm.ok = function() {
+      TestDeviceService.deleteTestDevice(vm.testDevice._id).success(function() {
+        $mdDialog.hide();
+      }).error(function(err) {
+        vm.errorMessage = err.message;
+      });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
   }
 
   angular
     .module('myou.dashboard.appdevelop.testdevice')
     .controller('TestDeviceCtrl', TestDeviceCtrl)
+    .controller('AddTestDeviceDialogCtrl', AddTestDeviceDialogCtrl)
+    .controller('EditTestDeviceDialogCtrl', EditTestDeviceDialogCtrl)
+    .controller('DeleteTestDeviceDialogCtrl', DeleteTestDeviceDialogCtrl)
     .config(testDeviceConfig);
 
 })();
