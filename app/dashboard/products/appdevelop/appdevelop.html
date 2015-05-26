@@ -43,8 +43,8 @@
             <li ng-class="{active: vm.isActive('userretain')}">
               <a ui-sref=".userretain">用户留存</a>
             </li>
-            <li ng-class="{active: vm.isActive('device')}">
-              <a ui-sref=".device">设备终端</a>
+            <li ng-class="{active: vm.isActive('devicestat')}">
+              <a ui-sref=".devicestat">设备终端</a>
             </li>
           </ul>
         </li>
@@ -60,7 +60,9 @@
         <li>
           <a>测试设置</a>
           <ul>
-            <li><a>测试设备</a></li>
+            <li ng-class="{active: vm.isActive('testdevice')}">
+              <a ui-sref=".testdevice">测试设备</a>
+            </li>
           </ul>
         </li>
 
