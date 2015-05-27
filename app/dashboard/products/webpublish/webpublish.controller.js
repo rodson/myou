@@ -115,7 +115,7 @@
     };
   }
 
-  function UpdateDescDialogCtrl($mdDialog, data, WebPublishService) {
+  function WebPubUpdateDescDialogCtrl($mdDialog, data, WebPublishService) {
     var vm = this;
     vm.versionDesc = data.versionDesc;
 
@@ -135,7 +135,7 @@
     };
   }
 
-  function DeleteUpdateDialogCtrl($mdDialog, WebPublishService, data) {
+  function WebPubDeleteUpdateDialogCtrl($mdDialog, WebPublishService, data) {
     var vm = this;
 
     vm.versionCode = data.versionCode;
@@ -155,8 +155,8 @@
     .module('myou.dashboard.webpublish')
     .controller('WebPublishCtrl', WebPublishCtrl)
     .controller('PublishDialogCtrl', PublishDialogCtrl)
-    .controller('UpdateDescDialogCtrl', UpdateDescDialogCtrl)
-    .controller('DeleteUpdateDialogCtrl', DeleteUpdateDialogCtrl)
+    .controller('WebPubUpdateDescDialogCtrl', WebPubUpdateDescDialogCtrl)
+    .controller('WebPubDeleteUpdateDialogCtrl', WebPubDeleteUpdateDialogCtrl)
     .config(webPublishConfig);
 
 })();

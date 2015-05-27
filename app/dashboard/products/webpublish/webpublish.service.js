@@ -209,7 +209,7 @@
 
     WebPublishService.showUpdateDescDialog = function(ev, updateInfo) {
       $mdDialog.show({
-        controller: 'UpdateDescDialogCtrl',
+        controller: 'WebPubUpdateDescDialogCtrl',
         controllerAs: 'vm',
         templateUrl: 'updateDescDialog.html',
         targetEvent: ev,
@@ -229,7 +229,7 @@
 
     WebPublishService.showDeleteUpdateDialog = function(ev, updateInfo) {
       return $mdDialog.show({
-        controller: 'DeleteUpdateDialogCtrl',
+        controller: 'WebPubDeleteUpdateDialogCtrl',
         controllerAs: 'vm',
         templateUrl: 'deleteUpdateDialog.html',
         targetEvent: ev,
