@@ -11,14 +11,14 @@
   <br><br>
   <div class='error-char-title'>
     <h3>错误分析</h3>
-    <md-radio-group ng-model="vm.radioChecked" ng-change='vm.getCheckDate()'>
-      <md-radio-button value="today" class="md-primary">错误数</md-radio-button>
-      <md-radio-button value="yesterday" class="md-primary">错误数/启动数</md-radio-button>
+    <md-radio-group ng-model="vm.radioChecked" ng-change='vm.selectRadioChanged()'>
+      <md-radio-button value="crash_count" class="md-primary">错误数</md-radio-button>
+      <md-radio-button value="crash_count_per_session" class="md-primary">错误数/启动数</md-radio-button>
     </md-radio-group>
   </div>
 
   <div>
-    <highchart id="chart" class='margin-top-30 border-radio-15' config="vm.highchartsNG"></highchart>
+    <highchart id="chart" class='margin-top-30' config="vm.highchartsNG"></highchart>
   </div>
 
   <div class='error-table'>
@@ -27,15 +27,15 @@
       <thead>
         <tr>
           <th ts-criteria="date|lowercase">日期</th>
-          <th ts-criteria="errorcount|parseInt" ts-default='descending'>错误数</th>
-          <th ts-criteria="errorpersent|parseFloat">错误率</th>
+          <th ts-criteria="crash_count|parseInt" ts-default='descending'>错误数</th>
+          <th ts-criteria="crash_count_per_session|parseFloat">错误率</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="x in vm.datas" ts-repeat>
-          <td>{{ x.name }}</td>
-          <td>{{ x.errorcount }}</td>
-          <td>{{ x.errorpersent }}</td>
+        <tr ng-repeat="x in vm.tableDatas" ts-repeat>
+          <td>{{ x.date }}</td>
+          <td>{{ x.crash_count }}</td>
+          <td>{{ x.crash_count_per_session }}</td>
         </tr>
       </tbody>
     </table>

@@ -35,6 +35,12 @@
   word-break:break-all;
   word-wrap:break-all;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.02);
+    border-radius: 2px;
+  }
 }
 
 .alter-table > thead > tr > th {

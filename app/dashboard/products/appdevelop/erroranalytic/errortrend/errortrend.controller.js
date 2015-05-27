@@ -11,9 +11,16 @@
       });
   }
 
-  function ErrorTrendCtrl(localStorageService, MomentDateService) {
+  function ErrorTrendCtrl(localStorageService, MomentDateService, ErrorTrendService) {
     var vm = this;
     vm.selectedDate = 2;
+    vm.radioChecked = 'crash_count';
+    vm.tableDatas = [];
+
+    var app = localStorageService.get('app');
+    var appKey = app.appKey;
+    var platform = app.platform;
+    var step = 8;
 
     var today = MomentDateService.getToday();
     var yesterday = MomentDateService.getYesterday();
@@ -43,9 +50,65 @@
       end: today.end
     }];
 
-    vm.selectDateChanged = function() {
-      console.log(vm.selectDate[vm.selectedDate]);
+    vm.highchartsNG = {
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: [],
+        labels: {
+          staggerLines: 1
+        }
+      },
+      yAxis: {
+        title: {
+          text: '数量'
+        }
+      },
+      series: [{
+        showInLegend: false
+      }],
+      loading: false,
+      noData: 'No data'
     };
+
+    vm.selectRadioChanged = function() {
+      vm.setHighcharsData();
+    };
+
+    vm.selectDateChanged = function() {
+      ErrorTrendService.data.crash_count = null;
+      ErrorTrendService.data.crash_count_per_session = null;
+      vm.updateHighChartsData();
+      vm.updateTableData();
+    };
+
+    vm.updateHighChartsData = function() {
+      var day = vm.selectDate[vm.selectedDate];
+      ErrorTrendService.getLineChart(appKey, day.start, day.end, platform, vm.radioChecked, function() {
+        vm.setHighcharsData();
+      });
+    };
+
+    vm.updateTableData = function() {
+      var day = vm.selectDate[vm.selectedDate];
+      ErrorTrendService.getTableData(appKey, day.start, day.end, platform, function() {
+        vm.tableDatas = ErrorTrendService.data.table_data;
+      });
+    };
+
+    vm.setHighcharsData = function() {
+      var data = ErrorTrendService.data[vm.radioChecked];
+      if(!data) {
+        vm.updateHighChartsData();
+        return;
+      }
+      vm.highchartsNG.series[0].data = data.data;
+      vm.highchartsNG.xAxis.labels.step = Math.ceil(data.dates.length / step);
+      vm.highchartsNG.xAxis.categories = data.dates;
+    };
+
+    vm.selectDateChanged();
   }
 
   angular

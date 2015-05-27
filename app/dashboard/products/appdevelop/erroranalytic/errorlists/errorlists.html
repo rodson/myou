@@ -1,23 +1,53 @@
 <div class='error-lists'>
-  <h3>错误列表</h3>
+  <div class='error-list-title'>
+    <h3>错误列表</h3>
+    <md-radio-group ng-model="vm.radioChecked" ng-change='vm.selectRadioChanged()'>
+      <md-radio-button value="unfix" class="md-primary">未修复</md-radio-button>
+      <md-radio-button value="fixed" class="md-primary">已修复</md-radio-button>
+    </md-radio-group>
+  </div>
+
   <table class="table" ts-wrapper>
     <thead>
       <tr>
-        <th ts-criteria="errortip|lowercase">错误摘要</th>
-        <th ts-criteria="appversion|lowercase" ts-default='descending'>应用版本</th>
-        <th ts-criteria="firstdate|lowercase">首次发生</th>
-        <th ts-criteria="latestate|lowercase">最近发生</th>
-        <th ts-criteria="errorcount|parseFloat">错误数</th>
+        <th ts-criteria="crash_context_digest|lowercase">错误摘要</th>
+        <th ts-criteria="app_version|lowercase" ts-default='descending'>应用版本</th>
+        <th ts-criteria="first_crash_date_time|lowercase" style='min-width: 110px;'>首次发生</th>
+        <th ts-criteria="last_crash_date_time|lowercase" style='min-width: 110px;'>最近发生</th>
+        <th ts-criteria="count|parseInt" style='min-width: 70px;'>错误数</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="x in vm.datas" ts-repeat>
-        <td>{{ x.errortip }}</td>
-        <td>{{ x.appversion }}</td>
-        <td>{{ x.firstdate }}</td>
-        <td>{{ x.latestate }}</td>
-        <td>{{ x.errorcount }}</td>
+      <tr ng-repeat="x in vm.tableDatas" ts-repeat>
+        <td class='long-text' ng-click='vm.toggleRight("right", x)'>{{ x.crash_context_digest }}</td>
+        <td>{{ x.app_version }}</td>
+        <td>{{ x.first_crash_date_time }}</td>
+        <td>{{ x.last_crash_date_time }}</td>
+        <td>{{ x.count }}</td>
       </tr>
     </tbody>
   </table>
+
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">错误详细信息</h1>
+    </md-toolbar>
+    <md-content>
+      <div class='switch-div'>
+        <h3>错误状态</h3>
+        <md-switch ng-model="vm.errorStatu" aria-label="fixed" ng-true-value="'已修复'" ng-false-value="'未修复'" class="md-primary" ng-change='vm.setErrorFix()'>
+        {{ vm.errorStatu }}
+        </md-switch>
+      </div>
+      <h3>错误堆栈</h3>
+      <p class='error-context'>{{ vm.errorContext }}</p>
+      <h3>终端信息</h3>
+      <md-radio-group ng-model="vm.radioCheckedSider" ng-change='vm.selectRadioSiderChanged()'>
+        <md-radio-button value="os_version" class="md-primary">操作系统分布</md-radio-button>
+        <md-radio-button value="device_model" class="md-primary" ng-hide="vm.isWindowsApp()">设备类型分布</md-radio-button>
+      </md-radio-group>
+      <highchart config="vm.highchartsPie" class='sider-highcharts'></highchart>
+    </md-content>
+  </md-sidenav>
+
 </div>

@@ -1,11 +1,9 @@
 .error-trend {
-
-  h3 {
-    margin: 5px;
-  }
-
   .error-char-title {
     position: relative;
+    h3 {
+      margin: 5px;
+    }
 
     md-radio-group {
       position: absolute;
@@ -13,10 +11,73 @@
       top: -10px;
     }
   }
+
+  .error-table {
+    margin-top: 10px;
+  }
 }
 
 .error-lists {
-  h3 {
-    margin: 5px;
+
+  .error-list-title {
+    position: relative;
+
+    h3 {
+      margin: 5px;
+    }
+
+    md-radio-group {
+      position: absolute;
+      right: 0px;
+      top: -10px;
+    }
   }
+
+  table thead tr th {
+    padding: 16px 0px 16px 16px !important;
+  }
+
+  md-sidenav {
+    width: 540px;
+    max-width: 540px;
+    overflow: hidden;
+
+    md-content {
+      height: 90%;
+    }
+
+    .switch-div {
+      position: relative;
+
+      md-switch {
+        position: absolute;
+        top: -15px;
+        left: 100px;
+      }
+    }
+
+    h3 {
+      margin: 5px;
+      margin-top: 15px;
+      margin-left: 8px;
+    }
+
+    .error-context {
+      padding: 15px;
+      margin: 0px;
+      word-break: break-all;
+      padding-top: 5px;
+      padding-bottom: 0px;
+    }
+
+    .sider-highcharts {
+      width: 400px;
+      height: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
 }
+
+
