@@ -71,7 +71,7 @@
               <td style="min-width: 100px">{{ vm.showPackageState(updateInfo) }}</td>
               <td>
                 <rs-dropdown>
-                  <li ng-hide="!vm.isPackageInstalled(updateInfo)" ng-click="vm.installPackage($event, updateInfo)">
+                  <li ng-hide="vm.isPackageInstalled(updateInfo)" ng-click="vm.installPackage($event, updateInfo)">
                     <a href="javascript:void(0)">
                       <i class="fa fa-coffee"></i>
                       <span>安装</span>

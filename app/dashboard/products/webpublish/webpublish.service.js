@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function WebPublishService($http, $state, $stateParams, $mdDialog, $timeout,
+  function WebPublishService($http, $state, $stateParams, $mdDialog,
     StorageManager, Constant, UrlManager) {
 
     var WebPublishService = {};
@@ -80,16 +80,17 @@
           $mdDialog.cancel();
           $mdDialog.show(
             $mdDialog.alert()
-              .content('操作成功')
+              .content('发布成功')
               .ariaLabel('operaion success')
               .ok('知道了')
               .targetEvent(ev)
           );
+          refreshPage();
         }).error(function(err) {
           $mdDialog.cancel();
           $mdDialog.show(
             $mdDialog.alert()
-              .content(result)
+              .content(err.message)
               .ariaLabel('operaion failed')
               .ok('知道了')
               .targetEvent(ev)
@@ -175,7 +176,35 @@
     };
 
     WebPublishService.installPackage = function(ev, updateInfo) {
-      showLoadingDialog('show loading in', ev);
+      showLoadingDialog(ev);
+
+      var data = {
+        action: 'install'
+      };
+
+      return $http.post(UrlManager.getWebPublishUrl(WebPublishService.app._id,
+        updateInfo._id), data)
+        .success(function() {
+          $mdDialog.cancel();
+          refreshPage();
+          $mdDialog.show(
+            $mdDialog.alert()
+              .content('安装成功')
+              .ariaLabel('operaion success')
+              .ok('知道了')
+              .targetEvent(ev)
+          );
+
+        }).error(function(err) {
+          $mdDialog.cancel();
+          $mdDialog.show(
+            $mdDialog.alert()
+              .content(err.message)
+              .ariaLabel('operaion failed')
+              .ok('知道了')
+              .targetEvent(ev)
+          );
+        });
     };
 
     function refreshPage() {
