@@ -66,6 +66,10 @@
     vm.showDeleteUpdateDialog = function(ev, updateInfo) {
       WebPublishService.showDeleteUpdateDialog(ev, updateInfo);
     };
+
+    vm.showUploadDialog = function(ev) {
+      WebPublishService.showUploadDialog(ev);
+    };
   }
 
   WebPublishCtrl.resolve = {
@@ -151,12 +155,79 @@
     };
   }
 
+  function WebPubUploadDialogCtrl($mdDialog, WebPublishService) {
+    var vm = this;
+
+    vm.uploadData = WebPublishService.uploadData;
+
+    vm.onFileSelect = function(files) {
+      WebPublishService.onFileSelect(files);
+    };
+
+    vm.upload = function() {
+      vm.errorMessage = WebPublishService.upload();
+    };
+
+    vm.ok = function() {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  function WebPubProgressDialogCtrl($mdDialog, Upload, data, $state) {
+    var vm = this;
+    var uploader;
+
+    vm.progress = 0;
+    vm.isSuccess = false;
+    vm.isError = false;
+
+    uploader = Upload.upload({
+      url: data.uploadUrl,
+      fields: data.appendData,
+      file: data.fileValues,
+      fileFormDataName: data.fileKeys
+    })
+    .progress(onProgress)
+    .success(onSuccess)
+    .error(onError);
+
+    vm.cancel = function() {
+      if (uploader) {
+        uploader.abort();
+      }
+      uploader = null;
+      $mdDialog.cancel();
+    };
+
+    vm.ok = function() {
+      $mdDialog.hide();
+    };
+
+    function onProgress(evt) {
+      vm.progress = parseInt(100.0 * evt.loaded / evt.total);
+    }
+
+    function onSuccess(data) {
+      vm.isSuccess = true;
+    }
+
+    function onError(data) {
+      vm.isError = true;
+    }
+  }
+
   angular
     .module('myou.dashboard.webpublish')
     .controller('WebPublishCtrl', WebPublishCtrl)
     .controller('PublishDialogCtrl', PublishDialogCtrl)
     .controller('WebPubUpdateDescDialogCtrl', WebPubUpdateDescDialogCtrl)
     .controller('WebPubDeleteUpdateDialogCtrl', WebPubDeleteUpdateDialogCtrl)
+    .controller('WebPubUploadDialogCtrl', WebPubUploadDialogCtrl)
+    .controller('WebPubProgressDialogCtrl', WebPubProgressDialogCtrl)
     .config(webPublishConfig);
 
 })();

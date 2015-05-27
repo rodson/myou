@@ -6,9 +6,13 @@
 
     var WebPublishService = {};
 
+    var WEBAPP_UPLOAD_DIR = '/data/node-project/upload/appname/';
+    var WEBAPP_PUB_DIR = '/data/node-project/';
+
     WebPublishService.app = {};
     WebPublishService.ips = [];
     WebPublishService.updateInfos = [];
+    WebPublishService.uploadData = {};
 
     WebPublishService.init = function() {
       WebPublishService.app = StorageManager.getApp();
@@ -283,6 +287,52 @@
         });
     };
 
+    WebPublishService.showUploadDialog = function(ev) {
+      return $mdDialog.show({
+        controller: 'WebPubUploadDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'uploadDialog.html',
+        clickOutsideToClose: false,
+        escapeToClose: false,
+        targetEvent: ev
+      })
+      .then(function() {
+        $state.transitionTo($state.current, $stateParams, {
+          reload: true,
+          inherit: false,
+          notify: true
+        });
+      });
+    };
+
+    WebPublishService.onFileSelect = function(files) {
+      if (!files || !files.length) {
+        return false;
+      }
+      var file = files[0];
+      WebPublishService.uploadData.file = file;
+    };
+
+    WebPublishService.upload = function() {
+      var errorMsg;
+      if (!WebPublishService.uploadData.file) {
+        errorMsg = '请选择文件';
+        return errorMsg;
+      }
+
+      var uploadFile = {
+        webAppFile: WebPublishService.uploadData.file
+      };
+
+      var appendData = {
+        versionDesc: WebPublishService.uploadData.versionDesc,
+        uploadDir: WEBAPP_UPLOAD_DIR,
+        pubDir: WEBAPP_PUB_DIR
+      };
+
+      doUpload(uploadFile, appendData);
+    };
+
     function refreshPage() {
       $state.transitionTo($state.current, $stateParams, {
         reload: true,
@@ -297,6 +347,40 @@
         clickOutsideToClose: false,
         escapeToClose: false,
         targetEvent: ev
+      });
+    }
+
+    function doUpload(uploadFile, appendData) {
+      var uploadUrl = UrlManager.getUploadUrl(
+        WebPublishService.app._id, WebPublishService.app.platform);
+      var fileKeys = [];
+      var fileValues = [];
+
+      for (var fileKey in uploadFile) {
+        if (uploadFile.hasOwnProperty(fileKey)) {
+          fileKeys.push(fileKey);
+          fileValues.push(uploadFile[fileKey]);
+        }
+      }
+
+      $mdDialog.show({
+        templateUrl: 'app/dashboard/products/appdevelop/appupdate/fileupload/uploaddialog/uploaddialog.html',
+        controller: 'WebPubProgressDialogCtrl',
+        controllerAs: 'vm',
+        clickOutsideToClose: false,
+        escapeToClose: false,
+        resolve: {
+          data: function() {
+            return {
+              uploadUrl: uploadUrl,
+              appendData: appendData,
+              fileValues: fileValues,
+              fileKeys: fileKeys
+            };
+          }
+        }
+      }).then(function() {
+        refreshPage();
       });
     }
 

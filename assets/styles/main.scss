@@ -233,6 +233,13 @@ body {
   width: 460px;
 }
 
+.modal-container-lg {
+  box-sizing: border-box;
+  padding: 24px 68px;
+  width: 560px;
+  margin: 0 auto;
+}
+
 .emphasis {
   color: $primary-color;
 }

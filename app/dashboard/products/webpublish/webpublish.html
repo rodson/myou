@@ -49,7 +49,7 @@
 
       <div class="group-section">
         <div class="action">
-          <md-button class="md-raised md-primary btn-lg" aria-label="add event" ng-click="vm.showAddTestDeviceDialog($event)">版本上传</md-button>
+          <md-button class="md-raised md-primary btn-lg" aria-label="add event" ng-click="vm.showUploadDialog($event)">版本上传</md-button>
         </div>
         <table class="table">
           <thead>
@@ -239,6 +239,88 @@
           <md-divider></md-divider>
           <div layout="row" layout-sm="column" layout-align="space-around" style="margin: 24px;">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>
+
+<!-- Upload dialog -->
+<div>
+  <script type="text/ng-template" id="uploadDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+    <div class="modal-container-lg">
+
+      <div class="group-section" style="margin: 0 auto;">
+        <div class="group-title">
+          文件上传
+        </div>
+        <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files)"
+            file="vm.uploadData.file">
+        </rs-file-uploader>
+      </div>
+
+      <div class="group-section">
+        <div class="group-title">
+          版本描述
+        </div>
+        <md-input-container flex>
+          <textarea columns="2" ng-model="vm.uploadData.versionDesc"></textarea>
+        </md-input-container>
+      </div>
+
+      <div class="error" style="margin-bottom: 10px;">
+        {{ vm.errorMessage }}
+      </div>
+
+      <div class="group-section clearfix">
+        <div class="pull-right">
+          <span flex></span>
+          <md-button class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+            取消
+          </md-button>
+          <md-button class="md-raised md-primary btn-lg" ng-click="vm.upload()">
+            上传
+          </md-button>
+        </div>
+      </div>
+
+    </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>
+
+<!-- Upload progress dialog -->
+<div>
+  <script type="text/ng-template" id="uploadProgressDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+      <div class="modal-container">
+        <div class="group-section clearfix">
+          <div class="group-title">
+            文件上传
+          </div>
+          <div class="group-section clearfix">
+            <md-progress-linear md-mode="determinate" value="{{ vm.progress }}"></md-progress-linear>
+            <div class="normal-text pull-right" style="margin-top: 10px;">
+              {{ vm.progress }}%
+            </div>
+          </div>
+          <div class="pull-right">
+            <span class="error" ng-show="vm.isError" style="margin-right: 30px;">
+              上传错误，请重新上传
+            </span>
+            <span flex></span>
+            <md-button ng-show="!vm.isSuccess" class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+              取消
+            </md-button>
+            <md-button ng-show="vm.isSuccess" class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+              确定
+            </md-button>
           </div>
         </div>
       </div>
