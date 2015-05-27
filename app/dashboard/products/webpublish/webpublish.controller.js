@@ -27,6 +27,10 @@
       WebPublishService.showPublishDialog(ev, ip);
     };
 
+    vm.updateIps = function() {
+      WebPublishService.updateIps();
+    };
+
     vm.isPackageRunning = function(ipItem) {
       return WebPublishService.isPackageRunning(ipItem);
     };

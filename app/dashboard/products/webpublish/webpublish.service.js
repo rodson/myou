@@ -45,6 +45,21 @@
       }
     };
 
+    WebPublishService.updateIps = function() {
+      return $http.post(UrlManager.getUpdateIpUrl(WebPublishService.app._id), {})
+        .success(function(ips) {
+          refreshPage();
+        })
+        .error(function(err) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .content(err.message)
+              .ariaLabel('operaion failed')
+              .ok('知道了')
+          );
+        });
+    };
+
     WebPublishService.isPackageStoped = function(ipItem) {
       return ipItem.status === Constant.PACKAGE_STATUS.STOPED;
     };
@@ -74,12 +89,7 @@
         }
       })
       .then(function(result) {
-        // Reload current page
-        $state.transitionTo($state.current, $stateParams, {
-          reload: true,
-          inherit: false,
-          notify: true
-        });
+        refreshPage();
 
         if (result === 0) {
           $mdDialog.show(
@@ -130,12 +140,7 @@
         }
       })
       .then(function() {
-        // Reload current page
-        $state.transitionTo($state.current, $stateParams, {
-          reload: true,
-          inherit: false,
-          notify: true
-        });
+        refreshPage();
       });
     };
 
@@ -167,6 +172,14 @@
       return $http.post(UrlManager.getWebPublishUrl(WebPublishService.app._id,
         versionId), data);
     };
+
+    function refreshPage() {
+      $state.transitionTo($state.current, $stateParams, {
+        reload: true,
+        inherit: false,
+        notify: true
+      });
+    }
 
     return WebPublishService;
   }

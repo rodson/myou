@@ -73,6 +73,10 @@
         '/update/versions/' + versionId + '/publish';
     };
 
+    UrlManager.getUpdateIpUrl = function(appId) {
+      return Constant.URL.PRODUCTS + '/' + appId + '/webapp/publishIps';
+    };
+
     return UrlManager;
   }
 
