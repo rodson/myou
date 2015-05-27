@@ -227,11 +227,51 @@
       });
     };
 
+    WebPublishService.showDeleteUpdateDialog = function(ev, updateInfo) {
+      return $mdDialog.show({
+        controller: 'DeleteUpdateDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'deleteUpdateDialog.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              versionCode: updateInfo.versionCode,
+              updateId: updateInfo._id
+            };
+          }
+        }
+      })
+      .then(function() {
+        $state.transitionTo($state.current, $stateParams, {
+          reload: true,
+          inherit: false,
+          notify: true
+        });
+      });
+    };
+
     WebPublishService.modifyAppUpdate = function(updateId, update) {
       return $http.put(UrlManager.getAppUpdateInfoUrl(WebPublishService.app._id) +
         '/' + updateId + '?platform=' + WebPublishService.app.platform, update)
         .success(function() {
           // Ignore this.
+        }).error(function(data) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
+              .content(data.message)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
+          );
+        });
+    };
+
+    WebPublishService.deleteAppUpdate = function(updateId) {
+      return $http.delete(UrlManager.getAppUpdateInfoUrl(WebPublishService.app._id) +
+        '/' + updateId + '?platform=' + WebPublishService.app.platform)
+        .success(function() {
+          // Ignore this
         }).error(function(data) {
           $mdDialog.show(
             $mdDialog.alert()

@@ -62,6 +62,10 @@
     vm.showUpdateDescDialog = function(ev, updateInfo) {
       WebPublishService.showUpdateDescDialog(ev, updateInfo);
     };
+
+    vm.showDeleteUpdateDialog = function(ev, updateInfo) {
+      WebPublishService.showDeleteUpdateDialog(ev, updateInfo);
+    };
   }
 
   WebPublishCtrl.resolve = {
@@ -131,11 +135,28 @@
     };
   }
 
+  function DeleteUpdateDialogCtrl($mdDialog, WebPublishService, data) {
+    var vm = this;
+
+    vm.versionCode = data.versionCode;
+
+    vm.ok = function() {
+      WebPublishService.deleteAppUpdate(data.updateId).then(function() {
+        $mdDialog.hide();
+      });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
   angular
     .module('myou.dashboard.webpublish')
     .controller('WebPublishCtrl', WebPublishCtrl)
     .controller('PublishDialogCtrl', PublishDialogCtrl)
     .controller('UpdateDescDialogCtrl', UpdateDescDialogCtrl)
+    .controller('DeleteUpdateDialogCtrl', DeleteUpdateDialogCtrl)
     .config(webPublishConfig);
 
 })();
