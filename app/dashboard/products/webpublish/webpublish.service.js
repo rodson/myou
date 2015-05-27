@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function WebPublishService($http, $state, $stateParams, $mdDialog,
+  function WebPublishService($http, $state, $stateParams, $mdDialog, $timeout,
     StorageManager, Constant, UrlManager) {
 
     var WebPublishService = {};
@@ -72,41 +72,30 @@
       return WebPublishService.app.name === 'MengYou';
     };
 
-    WebPublishService.publishOpt = function(ipItem, action) {
-      $mdDialog.show({
-        controller: 'PubishOptCtrl',
-        controllerAs: 'vm',
-        templateUrl: 'loadingDialog.html',
-        clickOutsideToClose: false,
-        escapeToClose: false,
-        resolve: {
-          data: function() {
-            return {
-              ipItem: ipItem,
-              action: action
-            };
-          }
-        }
-      })
-      .then(function(result) {
-        refreshPage();
+    WebPublishService.publishOpt = function(ev, ipItem, action) {
+      showLoadingDialog(ev);
 
-        if (result === 0) {
+      WebPublishService.publishWebApp(ipItem.versionId, ipItem.ip, action)
+        .success(function() {
+          $mdDialog.cancel();
           $mdDialog.show(
             $mdDialog.alert()
               .content('操作成功')
               .ariaLabel('operaion success')
               .ok('知道了')
+              .targetEvent(ev)
           );
-        } else {
+        }).error(function(err) {
+          $mdDialog.cancel();
           $mdDialog.show(
             $mdDialog.alert()
               .content(result)
               .ariaLabel('operaion failed')
               .ok('知道了')
+              .targetEvent(ev)
           );
-        }
-      });
+        });
+
     };
 
     WebPublishService.showPublishDialog = function(ev, ipItem) {
@@ -173,11 +162,36 @@
         versionId), data);
     };
 
+    WebPublishService.showPackageState = function(updateInfo) {
+      if (updateInfo.nginxServerState === 'install_done') {
+        return '已安装';
+      } else if (updateInfo.nginxServerState === 'upload_done') {
+        return '未安装';
+      }
+    };
+
+    WebPublishService.isPackageInstalled = function(updateInfo) {
+      return updateInfo.nginxServerState === 'install_done';
+    };
+
+    WebPublishService.installPackage = function(ev, updateInfo) {
+      showLoadingDialog('show loading in', ev);
+    };
+
     function refreshPage() {
       $state.transitionTo($state.current, $stateParams, {
         reload: true,
         inherit: false,
         notify: true
+      });
+    }
+
+    function showLoadingDialog(ev) {
+      $mdDialog.show({
+        templateUrl: 'loadingDialog.html',
+        clickOutsideToClose: false,
+        escapeToClose: false,
+        targetEvent: ev
       });
     }
 

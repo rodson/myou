@@ -2,7 +2,7 @@
   <md-toolbar class="toolbar-tabs" style="min-width: 1200px;">
     <div class="md-toolbar-tools">
       <h2>
-        {{ vm.app.name }}
+        {{ vm.app.name }} {{vm.loading.title}}
       </h2>
     </div>
   </md-toolbar>
@@ -34,13 +34,13 @@
               </td>
               <td>
                 <md-button ng-show="vm.isPackageRunning(ip) && !vm.isSelf()" class="md-raised md-accent"
-                ng-click="vm.publishOpt(ip, 'stop')" aria-label="stop" ng-click="vm.showAddTestDeviceDialog($event)">停止</md-button>
+                ng-click="vm.publishOpt($event, ip, 'stop')" aria-label="stop" ng-click="vm.showAddTestDeviceDialog($event)">停止</md-button>
 
                 <md-button ng-show="vm.isPackageStoped(ip)" class="md-raised md-primary"
-                ng-click="vm.publishOpt(ip, 'start')" aria-label="start" ng-click="vm.showAddTestDeviceDialog($event)">启动</md-button>
+                ng-click="vm.publishOpt($event, ip, 'start')" aria-label="start" ng-click="vm.showAddTestDeviceDialog($event)">启动</md-button>
 
                 <md-button ng-show="vm.isPackageRunning(ip)" class="md-raised md-primary"
-                ng-click="vm.publishOpt(ip, 'restart')" aria-label="restart" ng-click="vm.showAddTestDeviceDialog($event)">重启</md-button>
+                ng-click="vm.publishOpt($event, ip, 'restart')" aria-label="restart" ng-click="vm.showAddTestDeviceDialog($event)">重启</md-button>
               </td>
             </tr>
           </tbody>
@@ -56,29 +56,40 @@
             <tr>
               <th>版本</th>
               <th>创建时间</th>
-              <th>上传路径</th>
+              <!-- <th>上传路径</th> -->
               <th>发布路径</th>
-              <th>版本描述</th>
               <th>状态</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="updateInfo in vm.updateInfos | orderBy: 'createdAt':true">
-              <td>version {{ updateInfo.versionCode }}</td>
-              <td>{{ updateInfo.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
-              <td>{{ updateInfo.uploadDir }}</td>
-              <td>{{ updateInfo.pubDir }}</td>
+              <td style="min-width: 100px">version {{ updateInfo.versionCode }}</td>
+              <td style="min-width: 100px">{{ updateInfo.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
+              <!-- <td style="min-width: 100px">{{ updateInfo.uploadDir }}</td> -->
+              <td style="min-width: 100px">{{ updateInfo.pubDir }}</td>
+              <td style="min-width: 100px">{{ vm.showPackageState(updateInfo) }}</td>
               <td>
-                <a><i class="fa fa-edit" ng-click="showEditUpdateDesc(updateInfo)"></i></a>
-              </td>
-              <td>{{ showPackageState(updateInfo) }}<i class="icon-spinner icon-spin loading" ng-show="updateInfo.installing"></i></td>
-              <td ng-hide="isPackageInstalled(update)">
-                <a><i class="fa fa-coffee" ng-click="installPackage(updateInfo)" ng-disabled="updateInfo.installing"></i></a>
-              </td>
-              <td ng-show="isPackageInstalled(update)">无</td>
-              <td>
-                <a><i class="fa fa-times-circle" ng-click="showDeleteVersionModal(updateInfo)" ng-disabled="updateInfo.installing || loading"></i></a>
+                <rs-dropdown>
+                  <li ng-hide="!vm.isPackageInstalled(updateInfo)" ng-click="vm.installPackage($event, updateInfo)">
+                    <a href="javascript:void(0)">
+                      <i class="fa fa-coffee"></i>
+                      <span>安装</span>
+                    </a>
+                  </li>
+                  <li ng-click="vm.showUpdateDescDialog($event, vm.newestUpdate)">
+                    <a href="javascript:void(0)">
+                      <i class="fa fa-edit"></i>
+                      <span>版本描述</span>
+                    </a>
+                  </li>
+                  <li ng-click="vm.showDeleteUpdateDialog($event, vm.newestUpdate)">
+                    <a href="javascript:void(0)">
+                      <i class="fa fa-times"></i>
+                      <span>删除</span>
+                    </a>
+                  </li>
+                </rs-dropdown>
               </td>
             </tr>
           </tbody>
@@ -157,19 +168,23 @@
   </script>
 </div>
 
-
 <!-- Loadging dialog -->
 <div>
   <script type="text/ng-template" id="loadingDialog.html">
   <md-dialog>
     <md-dialog-content>
       <div class="modal-container">
-        <div layout="row" layout-sm="column" layout-align="space-around" style="margin: 24px;">
-          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        <div class="group-section clearfix">
+          <div class="group-title">
+            正在处理
+          </div>
+          <md-divider></md-divider>
+          <div layout="row" layout-sm="column" layout-align="space-around" style="margin: 24px;">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+          </div>
         </div>
       </div>
     </md-dialog-content>
   </md-dialog>
   </script>
 </div>
-

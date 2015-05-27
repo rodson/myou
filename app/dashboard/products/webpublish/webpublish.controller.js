@@ -43,8 +43,20 @@
       return WebPublishService.isSelf();
     };
 
-    vm.publishOpt = function(ipItem, action) {
-      WebPublishService.publishOpt(ipItem, action);
+    vm.publishOpt = function(ev, ipItem, action) {
+      WebPublishService.publishOpt(ev, ipItem, action);
+    };
+
+    vm.showPackageState = function(updateInfo) {
+      return WebPublishService.showPackageState(updateInfo);
+    };
+
+    vm.isPackageInstalled = function(updateInfo) {
+      return WebPublishService.isPackageInstalled(updateInfo);
+    };
+
+    vm.installPackage = function(ev, updateInfo) {
+      WebPublishService.installPackage(ev, updateInfo);
     };
   }
 
@@ -95,20 +107,10 @@
     };
   }
 
-  function PubishOptCtrl($mdDialog, WebPublishService, data) {
-    WebPublishService.publishWebApp(data.ipItem.versionId, data.ipItem.ip, data.action)
-      .success(function() {
-        $mdDialog.hide(0);
-      }).error(function(err) {
-        $mdDialog.hide(err.message);
-      });
-  }
-
   angular
     .module('myou.dashboard.webpublish')
     .controller('WebPublishCtrl', WebPublishCtrl)
     .controller('PublishDialogCtrl', PublishDialogCtrl)
-    .controller('PubishOptCtrl', PubishOptCtrl)
     .config(webPublishConfig);
 
 })();
