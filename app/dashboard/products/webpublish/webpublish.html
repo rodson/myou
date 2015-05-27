@@ -77,7 +77,7 @@
                       <span>安装</span>
                     </a>
                   </li>
-                  <li ng-click="vm.showUpdateDescDialog($event, vm.newestUpdate)">
+                  <li ng-click="vm.showUpdateDescDialog($event, updateInfo)">
                     <a href="javascript:void(0)">
                       <i class="fa fa-edit"></i>
                       <span>版本描述</span>
@@ -162,6 +162,35 @@
           </div>
         </div>
 
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>
+
+<!-- Update desc dialog -->
+<div>
+  <script type="text/ng-template" id="updateDescDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+      <div class="modal-container">
+        <div class="group-section clearfix">
+          <div class="group-title">
+            更新描述
+          </div>
+          <md-input-container flex>
+            <textarea columns="2" ng-model="vm.versionDesc"></textarea>
+          </md-input-container>
+          <div class="pull-right">
+            <span flex></span>
+            <md-button class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+              取消
+            </md-button>
+            <md-button class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+              保存
+            </md-button>
+          </div>
+        </div>
       </div>
     </md-dialog-content>
   </md-dialog>

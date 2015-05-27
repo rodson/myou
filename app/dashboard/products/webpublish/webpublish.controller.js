@@ -58,6 +58,10 @@
     vm.installPackage = function(ev, updateInfo) {
       WebPublishService.installPackage(ev, updateInfo);
     };
+
+    vm.showUpdateDescDialog = function(ev, updateInfo) {
+      WebPublishService.showUpdateDescDialog(ev, updateInfo);
+    };
   }
 
   WebPublishCtrl.resolve = {
@@ -107,10 +111,31 @@
     };
   }
 
+  function UpdateDescDialogCtrl($mdDialog, data, WebPublishService) {
+    var vm = this;
+    vm.versionDesc = data.versionDesc;
+
+    vm.ok = function() {
+      if (vm.versionDesc === data.versionDesc) {
+        $mdDialog.cancel();
+      } else {
+        WebPublishService.modifyAppUpdate(data.updateId, {versionDesc: vm.versionDesc})
+          .then(function() {
+            $mdDialog.hide(vm.versionDesc);
+          });
+      }
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
   angular
     .module('myou.dashboard.webpublish')
     .controller('WebPublishCtrl', WebPublishCtrl)
     .controller('PublishDialogCtrl', PublishDialogCtrl)
+    .controller('UpdateDescDialogCtrl', UpdateDescDialogCtrl)
     .config(webPublishConfig);
 
 })();

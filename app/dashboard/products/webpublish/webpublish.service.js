@@ -207,6 +207,42 @@
         });
     };
 
+    WebPublishService.showUpdateDescDialog = function(ev, updateInfo) {
+      $mdDialog.show({
+        controller: 'UpdateDescDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'updateDescDialog.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              versionDesc: updateInfo.versionDesc,
+              updateId: updateInfo._id
+            };
+          }
+        }
+      })
+      .then(function(result) {
+        updateInfo.versionDesc = result;
+      });
+    };
+
+    WebPublishService.modifyAppUpdate = function(updateId, update) {
+      return $http.put(UrlManager.getAppUpdateInfoUrl(WebPublishService.app._id) +
+        '/' + updateId + '?platform=' + WebPublishService.app.platform, update)
+        .success(function() {
+          // Ignore this.
+        }).error(function(data) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
+              .content(data.message)
+              .ariaLabel('updatetolatest toggle')
+              .ok('知道了')
+          );
+        });
+    };
+
     function refreshPage() {
       $state.transitionTo($state.current, $stateParams, {
         reload: true,
