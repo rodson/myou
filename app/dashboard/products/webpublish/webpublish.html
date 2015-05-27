@@ -1,1 +1,175 @@
-<h1>Web Publish</h1>
+<div class="wrapper main">
+  <md-toolbar class="toolbar-tabs" style="min-width: 1200px;">
+    <div class="md-toolbar-tools">
+      <h2>
+        {{ vm.app.name }}
+      </h2>
+    </div>
+  </md-toolbar>
+  <div class="main-container">
+    <div class="main-fix-container">
+      <div class="group-section nopadding">
+        <div class="action">
+          <md-button class="md-raised md-primary btn-lg" aria-label="add event" ng-click="vm.showAddTestDeviceDialog($event)">更新IP表</md-button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>IP地址</th>
+              <th>编辑时间</th>
+              <th>当前版本</th>
+              <th>状态</th>
+              <th>版本发布</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="ip in vm.ips">
+              <td>{{ ip.ip }}</td>
+              <td>{{ ip.updatedAt | date: 'yyyy-MM-dd H:mm'}}</td>
+              <td>{{ ip.versionCode }}</td>
+              <td>{{ vm.showPublishState(ip) }}<i class="icon-spinner icon-spin loading" ng-show="ip.waiting"></i></td>
+              <td class="clickable" ng-click="vm.showPublishDialog($event, ip)">
+                <span class="lg-size"><i class="fa fa-paper-plane"></i></span>
+              </td>
+              <td>
+                <md-button ng-show="vm.isPackageRunning(ip) && !vm.isSelf()" class="md-raised md-accent"
+                ng-click="vm.publishOpt(ip, 'stop')" aria-label="stop" ng-click="vm.showAddTestDeviceDialog($event)">停止</md-button>
+
+                <md-button ng-show="vm.isPackageStoped(ip)" class="md-raised md-primary"
+                ng-click="vm.publishOpt(ip, 'start')" aria-label="start" ng-click="vm.showAddTestDeviceDialog($event)">启动</md-button>
+
+                <md-button ng-show="vm.isPackageRunning(ip)" class="md-raised md-primary"
+                ng-click="vm.publishOpt(ip, 'restart')" aria-label="restart" ng-click="vm.showAddTestDeviceDialog($event)">重启</md-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="group-section">
+        <div class="action">
+          <md-button class="md-raised md-primary btn-lg" aria-label="add event" ng-click="vm.showAddTestDeviceDialog($event)">版本上传</md-button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>版本</th>
+              <th>创建时间</th>
+              <th>上传路径</th>
+              <th>发布路径</th>
+              <th>版本描述</th>
+              <th>状态</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="updateInfo in vm.updateInfos | orderBy: 'createdAt':true">
+              <td>version {{ updateInfo.versionCode }}</td>
+              <td>{{ updateInfo.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
+              <td>{{ updateInfo.uploadDir }}</td>
+              <td>{{ updateInfo.pubDir }}</td>
+              <td>
+                <a><i class="fa fa-edit" ng-click="showEditUpdateDesc(updateInfo)"></i></a>
+              </td>
+              <td>{{ showPackageState(updateInfo) }}<i class="icon-spinner icon-spin loading" ng-show="updateInfo.installing"></i></td>
+              <td ng-hide="isPackageInstalled(update)">
+                <a><i class="fa fa-coffee" ng-click="installPackage(updateInfo)" ng-disabled="updateInfo.installing"></i></a>
+              </td>
+              <td ng-show="isPackageInstalled(update)">无</td>
+              <td>
+                <a><i class="fa fa-times-circle" ng-click="showDeleteVersionModal(updateInfo)" ng-disabled="updateInfo.installing || loading"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Publish dialog -->
+<div>
+  <script type="text/ng-template" id="publishDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+      <div class="modal-container">
+        <div class="group-section clearfix" ng-hide="vm.isPublishing">
+
+          <div class="group-title">
+            发布配置
+          </div>
+          <md-divider></md-divider>
+
+          <div class="setting-container">
+            <div class="setting-group">
+              <label>发布版本</label>
+              <div class="item">
+                <select class="nopadding" placeholder="选择版本" ng-model="vm.versionCode">
+                  <option ng-repeat="version in vm.versions">{{ version }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="error" style="margin-bottom: 16px;">
+            {{ vm.errorMessage }}
+          </div>
+
+          <div class="pull-right">
+            <span flex></span>
+            <md-button class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+              取消
+            </md-button>
+            <md-button class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+              发布
+            </md-button>
+          </div>
+
+        </div>
+
+        <div class="group-section clearfix" ng-show="vm.isPublishing && !vm.isDone">
+          <div class="group-title">
+            正在发布
+          </div>
+          <md-divider></md-divider>
+          <div layout="row" layout-sm="column" layout-align="space-around" style="margin: 24px;">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+          </div>
+        </div>
+
+        <div class="group-section clearfix" ng-show="vm.isDone">
+          <div layout="row" layout-sm="column" layout-align="space-around" style="margin: 24px;">
+            <span ng-hide="vm.isError" class="xlg-size emphasis">发布成功!</span>
+            <span ng-show="vm.isError" class="xlg-size error">发布失败!</span>
+          </div>
+          <div class="pull-right">
+            <span flex></span>
+            <md-button class="md-raised md-primary btn-lg" ng-click="vm.hide()">
+              确定
+            </md-button>
+          </div>
+        </div>
+
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>
+
+
+<!-- Loadging dialog -->
+<div>
+  <script type="text/ng-template" id="loadingDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+      <div class="modal-container">
+        <div layout="row" layout-sm="column" layout-align="space-around" style="margin: 24px;">
+          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>
+

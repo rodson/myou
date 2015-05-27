@@ -139,6 +139,7 @@
         controller: 'UploadDialogCtrl',
         controllerAs: 'vm',
         clickOutsideToClose: false,
+        escapeToClose: false,
         resolve: {
           data: function() {
             return {

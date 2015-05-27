@@ -41,6 +41,19 @@
         APP_NAME_EXIST_MSG: '产品名已存在'
       },
 
+      PACKAGE_STATUS: {
+        PUBLISHED: 'publish_done',
+        RUNNING: 'service_running',
+        STOPED: 'service_stopped'
+      },
+
+      PACKAGE_ACTION: {
+        PUB: 'pub',
+        STOP: 'stop',
+        RESTART: 'restart',
+        START: 'start'
+      },
+
       PRODUCT_PLATFORM: {
         APP_DEVELOP: 'appdevelop',
         ANDROID_APP: 'android_app',

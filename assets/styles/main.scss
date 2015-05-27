@@ -157,6 +157,12 @@ body {
   }
 }
 
+.main-fix-container {
+  margin: auto;
+  width: 960px;
+  padding: 18px 24px;
+}
+
 .product-wrapper {
   position: absolute;
   top: 0;
@@ -257,6 +263,16 @@ body {
 .normal-size {
   font-size: 14px;
 }
+
+.lg-size {
+  font-size: 18px;
+}
+
+.xlg-size {
+  font-size: 26px;
+  font-weight: 700;
+}
+
 .table
 tr {
   td.clickable {

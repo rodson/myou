@@ -60,6 +60,19 @@
       return Constant.URL.PRODUCTS + '/' + appId + '/testDevices';
     };
 
+    UrlManager.getWebIpUrl = function(appId) {
+      return Constant.URL.PRODUCTS + '/' + appId + '/update/webIPs';
+    };
+
+    UrlManager.getWebIpRefreshUrl = function(appId) {
+      return Constant.URL.PRODUCTS + '/' + appId + '/webapp/publishIps';
+    };
+
+    UrlManager.getWebPublishUrl = function(appId, versionId) {
+      return Constant.URL.PRODUCTS + '/' + appId +
+        '/update/versions/' + versionId + '/publish';
+    };
+
     return UrlManager;
   }
 
