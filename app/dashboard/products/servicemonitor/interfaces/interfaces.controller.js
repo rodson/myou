@@ -12,7 +12,7 @@
       });
   }
 
-  function InterfacesCtrl(localStorageService, $filter, $mdDialog, InterfacesService, CalleeService) {
+  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService) {
     var vm = this;
     var now = new Date();
     vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
@@ -169,8 +169,8 @@
             };
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -188,8 +188,8 @@
             };
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -205,8 +205,8 @@
             return dt;
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -225,8 +225,8 @@
             };
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -251,17 +251,14 @@
       }).then(function(answer) {}, function() {});
     };
 
-    vm.showAlert = function(error) {
-      $mdDialog.show(
-        $mdDialog.alert()
-        .title(!error ? 'Success' : 'Error')
-        .content(error && error.message)
-        .ariaLabel('Alert Dialog')
-        .ok('关闭')
+    vm.showAlert = function(msg) {
+      $mdToast.show(
+        $mdToast.simple()
+        .content(msg)
+        .position('top right')
+        .hideDelay(1500)
       );
-      if (!error) {
-        vm.getInterfacesInternal();
-      }
+      vm.getInterfacesInternal();
     };
 
     vm.getInterfacesInternal();
@@ -274,7 +271,7 @@
     }
   };
 
-  function AddModalDialogCtrl($mdDialog, data, InterfacesService) {
+  function AddModalDialogCtrl($mdDialog, $timeout, data, InterfacesService) {
     var vm = this;
     vm.title = '添加接口';
     vm.ok = function() {
@@ -288,8 +285,14 @@
       };
 
       InterfacesService.createInterface(callerInterface, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('添加成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -298,7 +301,7 @@
     };
   }
 
-  function EditModalDialogCtrl($mdDialog, data, InterfacesService) {
+  function EditModalDialogCtrl($mdDialog, $timeout, data, InterfacesService) {
     var vm = this;
     vm.title = '编辑接口';
     vm.interfaceName = data.callerInterface.interface_name;
@@ -310,8 +313,14 @@
       data.callerInterface.interface_name = vm.interfaceName;
       data.callerInterface.interface_desc = vm.interfaceDesc;
       InterfacesService.modifyInterface(data.callerInterface.interface_id, data.callerInterface, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('更新成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -320,7 +329,7 @@
     };
   }
 
-  function AddCalleeModalDialogCtrl($mdDialog, data, CalleeService) {
+  function AddCalleeModalDialogCtrl($mdDialog, $timeout, data, CalleeService) {
     var vm = this;
     var appId = data.appId;
     var callerId = data.callerId;
@@ -353,7 +362,10 @@
             caller_interface_id: callerId,
             callee_interface_id: vm.selectCallee.interface_id
           }, function(error) {
-            $mdDialog.hide(error);
+            if (error) {
+              return vm.errortip = error.message;
+            }
+            $mdDialog.hide('添加成功');
           });
         }
       } else {
@@ -363,8 +375,14 @@
         vm.calleeInterface.interface_name = vm.interfaceName;
         vm.calleeInterface.interface_desc = vm.interfaceDesc;
         CalleeService.createCallee(vm.calleeInterface, function(error) {
-          $mdDialog.hide(error);
+          if (error) {
+            return vm.errortip = error.message;
+          }
+          $mdDialog.hide('添加成功');
         });
+        $timeout(function() {
+          vm.errortip = '';
+        }, 2000);
       }
     };
 
@@ -421,14 +439,20 @@
     vm.getData();
   }
 
-  function DeleteInterfaceModalDialogCtrl($mdDialog, data, InterfacesService) {
+  function DeleteInterfaceModalDialogCtrl($mdDialog, $timeout, data, InterfacesService) {
     var vm = this;
     vm.interfaceName = data.interface_name;
 
     vm.ok = function() {
       InterfacesService.deleteInterface(data.interface_id, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('删除成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function() {

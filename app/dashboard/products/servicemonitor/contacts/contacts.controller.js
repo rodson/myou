@@ -11,7 +11,7 @@
       });
   }
 
-  function ContactsCtrl($mdDialog, localStorageService, ContactsService) {
+  function ContactsCtrl($mdDialog, $mdToast, localStorageService, ContactsService) {
     var vm = this;
     var product = localStorageService.get('app');
     var appID = localStorageService.get('appId');
@@ -38,8 +38,8 @@
             };
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -58,8 +58,8 @@
             };
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -78,29 +78,26 @@
             };
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
 
-    vm.showAlert = function(error) {
-      $mdDialog.show(
-        $mdDialog.alert()
-        .title(!!error ? 'Error' : 'Success')
-        .content(error && error.message)
-        .ariaLabel('Alert Dialog')
-        .ok('关闭')
+    vm.showAlert = function(msg) {
+      $mdToast.show(
+        $mdToast.simple()
+        .content(msg)
+        .position('top right')
+        .hideDelay(1500)
       );
-      if (!error) {
-        vm.getContacts();
-      }
+      vm.getContacts();
     };
 
     vm.getContacts();
   }
 
-  function AddContactDialogCtrl($mdDialog, data, ContactsService) {
+  function AddContactDialogCtrl($mdDialog, data, $timeout, ContactsService) {
     var vm = this;
     vm.title = '添加联系人';
     vm.ok = function() {
@@ -117,11 +114,14 @@
 
       ContactsService.createProjectContact(data.appKey, contact, function(error) {
         if (error) {
-          $mdDialog.hide(error);
-        } else {
-          $mdDialog.hide();
+          return vm.errortip = error.message;
         }
+        $mdDialog.hide('添加成功');
       });
+
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -130,7 +130,7 @@
     };
   }
 
-  function EditContactDialogCtrl($mdDialog, data, ContactsService) {
+  function EditContactDialogCtrl($mdDialog, data, $timeout, ContactsService) {
     var vm = this;
     vm.title = '编辑联系人';
     vm.name = data.contact.name;
@@ -156,11 +156,14 @@
 
       ContactsService.modifyProjectContact(data.appKey, data.contact.contact_id, contact, function(error) {
         if (error) {
-          $mdDialog.hide(error);
-        } else {
-          $mdDialog.hide();
+          return vm.errortip = error.message;
         }
+        $mdDialog.hide('更新成功');
       });
+
+      $timeout(function() {
+        vm.errortip = '';
+      }, 3000);
     };
 
     vm.cancel = function(event) {
@@ -169,14 +172,21 @@
     };
   }
 
-  function DeleteContactModalDialogCtrl($mdDialog, data, ContactsService) {
+  function DeleteContactModalDialogCtrl($mdDialog, data, $timeout, ContactsService) {
     var vm = this;
     vm.name = data.contact.name;
 
     vm.ok = function() {
       ContactsService.deleteProjectContact(data.appKey, data.contact.contact_id, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('删除成功');
       });
+
+      $timeout(function() {
+        vm.errortip = '';
+      }, 3000);
     };
 
     vm.cancel = function() {

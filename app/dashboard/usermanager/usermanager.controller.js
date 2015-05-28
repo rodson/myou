@@ -12,7 +12,7 @@
       });
   }
 
-  function UserManagerCtrl(localStorageService, $mdDialog, UserGroupService, UserInfoService) {
+  function UserManagerCtrl(localStorageService, $mdDialog, $mdToast, UserGroupService, UserInfoService) {
     var vm = this;
     vm.userInfo = localStorageService.get('user');
 
@@ -30,8 +30,8 @@
       if (vm.userInfo.userType === 'root') {
         UserGroupService.getGroupList(function() {
           vm.groupData = UserGroupService.groupList;
-          vm.groupData.forEach(function(d){
-            UserInfoService.getUsersByGroupId(d._id, function(){
+          vm.groupData.forEach(function(d) {
+            UserInfoService.getUsersByGroupId(d._id, function() {
               d.members = UserInfoService[d._id];
             });
           });
@@ -39,8 +39,8 @@
       } else {
         UserGroupService.getGroup(vm.userInfo.groupId, function() {
           vm.groupData = UserGroupService.groupList;
-          vm.groupData.forEach(function(d){
-            UserInfoService.getUsersByGroupId(d._id, function(){
+          vm.groupData.forEach(function(d) {
+            UserInfoService.getUsersByGroupId(d._id, function() {
               d.members = UserInfoService[d._id];
             });
           });
@@ -54,8 +54,8 @@
         controllerAs: 'vm',
         templateUrl: 'addGroupModal.html',
         targetEvent: ev
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -71,8 +71,8 @@
             return dt;
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -88,8 +88,8 @@
             return dt;
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -105,8 +105,8 @@
             return dt;
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -122,8 +122,8 @@
             return dt;
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
@@ -139,30 +139,26 @@
             return dt;
           }
         }
-      }).then(function(error) {
-          vm.showAlert(error);
+      }).then(function(msg) {
+          vm.showAlert(msg);
         },
         function() {});
     };
 
-    vm.showAlert = function(error) {
-      if (error) {
-        $mdDialog.show(
-          $mdDialog.alert()
-          .title(!error ? 'Success' : 'Error')
-          .content(error && error.message)
-          .ariaLabel('Alert Dialog')
-          .ok('关闭')
-        );
-      } else {
-        vm.getGroupList();
-      }
+    vm.showAlert = function(msg) {
+      $mdToast.show(
+        $mdToast.simple()
+        .content(msg)
+        .position('top right')
+        .hideDelay(1500)
+      );
+      vm.getGroupList();
     };
 
     vm.getGroupList();
   }
 
-  function AddGroupDialogCtrl($mdDialog, UserGroupService) {
+  function AddGroupDialogCtrl($mdDialog, $timeout, UserGroupService) {
     var vm = this;
     vm.title = '添加分组';
 
@@ -171,8 +167,14 @@
         return;
       }
       UserGroupService.createGroup(vm.groupName, vm.groupDesc, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('添加成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -181,7 +183,7 @@
     };
   }
 
-  function EditGroupDialogCtrl($mdDialog, data, UserGroupService) {
+  function EditGroupDialogCtrl($mdDialog, data, $timeout, UserGroupService) {
     var vm = this;
     vm.title = '编辑分组';
     vm.groupName = data.groupName;
@@ -193,8 +195,14 @@
       }
 
       UserGroupService.editGroup(data._id, vm.groupName, vm.groupDesc, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('更新成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -203,14 +211,20 @@
     };
   }
 
-  function DeleteGroupDialogCtrl($mdDialog, data, UserGroupService) {
+  function DeleteGroupDialogCtrl($mdDialog, data, $timeout, UserGroupService) {
     var vm = this;
     vm.grupName = data.groupName;
 
     vm.ok = function() {
       UserGroupService.deleteGroup(data._id, function(error) {
-        $mdDialog.hide(error);
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('删除成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function() {
@@ -218,7 +232,7 @@
     };
   }
 
-  function AddMemberDialogCtrl($mdDialog, data, UserInfoService) {
+  function AddMemberDialogCtrl($mdDialog, data, $timeout, UserInfoService) {
     var vm = this;
     vm.userType = 'user';
 
@@ -234,16 +248,24 @@
         return;
       }
       if (vm.repassword !== vm.password) {
-        return;
-      }
-      vm.user.username = vm.memberName;
-      vm.user.email = vm.memberMail;
-      vm.user.password = vm.password;
-      vm.user.userType = vm.userType;
+        vm.errortip = '两次输入的密码不一致';
+      } else {
+        vm.user.username = vm.memberName;
+        vm.user.email = vm.memberMail;
+        vm.user.password = vm.password;
+        vm.user.userType = vm.userType;
 
-      UserInfoService.addUser(vm.user, function(error){
-        $mdDialog.hide(error);
-      });
+        UserInfoService.addUser(vm.user, function(error) {
+          if (error) {
+            return vm.errortip = error.message;
+          }
+          $mdDialog.hide('添加成功');
+        });
+      }
+
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -252,7 +274,7 @@
     };
   }
 
-  function EditMemberDialogCtrl($mdDialog, data, UserInfoService) {
+  function EditMemberDialogCtrl($mdDialog, data, $timeout, UserInfoService) {
     var vm = this;
     console.log(data);
     vm.title = '编辑成员';
@@ -268,9 +290,15 @@
       var user = {};
       user.username = vm.memberName;
       user.userType = vm.userType;
-      UserInfoService.updateUser(user, data._id, function(error){
-        $mdDialog.hide(error);
+      UserInfoService.updateUser(user, data._id, function(error) {
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('更新成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function(event) {
@@ -279,20 +307,27 @@
     };
   }
 
-  function DeleteMemberDialogCtrl($mdDialog, data, UserInfoService) {
+  function DeleteMemberDialogCtrl($mdDialog, data, $timeout, UserInfoService) {
     var vm = this;
     vm.memberName = data.username;
 
     vm.ok = function() {
-      UserInfoService.deleteUser(data._id, function(error){
-        $mdDialog.hide(error);
+      UserInfoService.deleteUser(data._id, function(error) {
+        if (error) {
+          return vm.errortip = error.message;
+        }
+        $mdDialog.hide('删除成功');
       });
+      $timeout(function() {
+        vm.errortip = '';
+      }, 2000);
     };
 
     vm.cancel = function() {
       $mdDialog.cancel();
     };
   }
+
   angular
     .module('myou.dashboard.usermaneger')
     .controller('UserManagerCtrl', UserManagerCtrl)

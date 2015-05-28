@@ -65,6 +65,7 @@
           </div>
         </md-input-container>
       </md-dialog-content>
+      <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class='md-actions' layout="row">
         <md-button ng-click="vm.cancel($event)" class="md-default-theme">
           取消
@@ -84,6 +85,7 @@
         <h3>删除联系人</h3>
         <label>确定删除联系人：{{ vm.name }}</label>
       </md-dialog-content>
+      <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
         <md-button ng-click="vm.cancel()" class="md-default-theme">
           取消

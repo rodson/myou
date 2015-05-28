@@ -79,6 +79,7 @@
           </div>
         </md-input-container>
       </md-dialog-content>
+      <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
         <md-button ng-click="vm.cancel($event)" class="md-default-theme">
           取消
@@ -122,6 +123,7 @@
         </div>
 
       </md-dialog-content>
+      <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
         <md-button ng-click="vm.cancel($event)" class="md-default-theme">
           取消
@@ -141,6 +143,7 @@
         <h3>删除接口</h3>
         <label>确定删除接口：{{ vm.interfaceName }}</label>
       </md-dialog-content>
+      <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
         <md-button ng-click="vm.cancel()" class="md-default-theme">
           取消
@@ -189,6 +192,7 @@
           </paging>
         </div>
       </md-dialog-content>
+      <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
         <md-button ng-click="vm.ok()" class="md-primary">
           确定
