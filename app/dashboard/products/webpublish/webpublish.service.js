@@ -364,7 +364,7 @@
       }
 
       $mdDialog.show({
-        templateUrl: 'app/dashboard/products/appdevelop/appupdate/fileupload/uploaddialog/uploaddialog.html',
+        templateUrl: 'uploadProgressDialog.html',
         controller: 'WebPubProgressDialogCtrl',
         controllerAs: 'vm',
         clickOutsideToClose: false,

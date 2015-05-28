@@ -1,1 +1,167 @@
-<h1>System Update</h1>
+<div class="wrapper main">
+  <md-toolbar class="toolbar-tabs" style="min-width: 1200px;">
+    <div class="md-toolbar-tools">
+      <h2>
+        {{ vm.app.name }}
+      </h2>
+    </div>
+  </md-toolbar>
+  <div class="main-container">
+    <div class="main-fix-container">
+     <md-button class="md-raised md-primary btn-lg" aria-label="add event" ng-click="vm.showUploadDialog($event)">版本上传</md-button>
+      <div ng-repeat="updateInfo in vm.updateInfos">
+        <div>
+          <div><span>源版本</span> {{ updateInfo.srcVersion }}</div>
+          <div><span>测试版本</span> {{ updateInfo.testTargetVersion }}</div>
+          <div><span>目标版本</span> {{ updateInfo.targetVersion }}</div>
+        </div>
+        <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>版本</th>
+                <th>文件名</th>
+                <th>文件大小</th>
+                <th>上传时间</th>
+                <th>更新描述</th>
+                <th>静默下载</th>
+                <th>测试</th>
+                <th>发布</th>
+                <th>删除</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="targetItem in updateInfo.list | orderBy: 'createdAt':true">
+                <td>{{ targetItem.targetVersion }}</td>
+                <td>{{ targetItem.fileName }}</td>
+                <td>{{ targetItem.fileSize | bytes}}</td>
+                <td>{{ targetItem.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
+                <td>
+                  <a><i class="fa fa-edit" ng-click="showEditUpdateDesc(targetItem)"></i></a>
+                </td>
+                <td>
+                  <span class="tg-item">
+                    <input class="tgl tgl-light" type="checkbox" ng-checked="isSilentDownload(targetItem)">
+                    <label class="tgl-btn" ng-click="toggleSilentDownload(targetItem)"></label>
+                  </span>
+                </td>
+                <td>
+                  <span class="tg-item">
+                    <input class="tgl tgl-light" type="checkbox" ng-checked="isStartTestUpdate(targetItem)">
+                    <label class="tgl-btn" ng-click="toggleTestUpdatable(targetItem, update)"></label>
+                  </span>
+                </td>
+                <td>
+                  <span class="tg-item">
+                    <input class="tgl tgl-light" type="checkbox" ng-checked="isStartUpdate(targetItem)">
+                    <label class="tgl-btn" ng-click="toggleUpdatable(targetItem, update)"></label>
+                  </span>
+                </td>
+                <td>
+                  <a><i class="fa fa-times-circle" ng-click="showDeleteVersionModal(targetItem, update)"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Upload dialog -->
+<div>
+  <script type="text/ng-template" id="uploadDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+    <div class="modal-container-lg">
+
+      <div class="group-section nopadding" style="margin-bottom: 10px;">
+        <div class="group-title">
+          版本上传
+        </div>
+        <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files)"
+            file="vm.uploadData.file">
+        </rs-file-uploader>
+      </div>
+
+      <div class="clearfix" ng-show="vm.uploadData.progress" style="margin-top: 24px;">
+        <div class="normal-text">
+          计算md5: <span class="normal-size emphasis">{{ vm.uploadData.md5 }}</span>
+        </div>
+        <md-progress-linear md-mode="determinate" value="{{ vm.uploadData.progress }}"></md-progress-linear>
+        <div class="normal-text pull-right" style="margin-top: 10px;">
+          {{ vm.uploadData.progress }}%
+        </div>
+      </div>
+
+      <md-input-container flex class="nopadding space-md">
+        <label>源版本</label>
+        <input ng-model="vm.uploadData.srcVersion">
+      </md-input-container>
+
+      <md-input-container flex class="nopadding space-md">
+        <label>目标版本</label>
+        <input ng-model="vm.uploadData.targetVersion">
+      </md-input-container>
+
+      <md-input-container flex class="nopadding space-md">
+        <label>版本描述</label>
+        <textarea columns="2" ng-model="vm.uploadData.versionDesc"></textarea>
+      </md-input-container>
+
+      <div class="error" style="margin: 10px 0px;">
+        {{ vm.uploadData.errorMessage }}
+      </div>
+
+      <div class="group-section clearfix">
+        <div class="pull-right">
+          <span flex></span>
+          <md-button class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+            取消
+          </md-button>
+          <md-button class="md-raised md-primary btn-lg" ng-click="vm.upload()">
+            上传
+          </md-button>
+        </div>
+      </div>
+
+    </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>
+
+<!-- Upload progress dialog -->
+<div>
+  <script type="text/ng-template" id="uploadProgressDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+      <div class="modal-container">
+        <div class="group-section clearfix">
+          <div class="group-title">
+            文件上传
+          </div>
+          <div class="group-section clearfix">
+            <md-progress-linear md-mode="determinate" value="{{ vm.progress }}"></md-progress-linear>
+            <div class="normal-text pull-right" style="margin-top: 10px;">
+              {{ vm.progress }}%
+            </div>
+          </div>
+          <div class="pull-right">
+            <span class="error" ng-show="vm.isError" style="margin-right: 30px;">
+              上传错误，请重新上传
+            </span>
+            <span flex></span>
+            <md-button ng-show="!vm.isSuccess" class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+              取消
+            </md-button>
+            <md-button ng-show="vm.isSuccess" class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+              确定
+            </md-button>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>

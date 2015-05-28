@@ -281,6 +281,10 @@ body {
   font-weight: 700;
 }
 
+.sm-size {
+  font-size: 12px;
+}
+
 .table
 tr {
   td.clickable {
@@ -291,6 +295,11 @@ tr {
       color: $primary-hover;
     }
   }
+}
+
+.space-md {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .main-title {

@@ -29,6 +29,8 @@
         USERAUTH: 'http://localhost:4000/api/in/auth',
         USERGROUP: 'http://localhost:4000/api/in/userGroups',
         CUSTOMEVENT_API: 'http://localhost:4000/api/in/events',
+
+        QINIU_TOKEN: 'http://localhost:4000/api/in/qiniu/token'
       },
 
       RETURN_DATA: {

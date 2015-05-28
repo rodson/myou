@@ -4,6 +4,7 @@
   angular
     .module('myou.dashboard.systemupdate', [
       'ui.router',
+      'ngMaterial',
 
       'myou.shared'
     ]);
