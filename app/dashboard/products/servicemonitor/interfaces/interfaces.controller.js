@@ -286,7 +286,8 @@
 
       InterfacesService.createInterface(callerInterface, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('添加成功');
       });
@@ -314,7 +315,8 @@
       data.callerInterface.interface_desc = vm.interfaceDesc;
       InterfacesService.modifyInterface(data.callerInterface.interface_id, data.callerInterface, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('更新成功');
       });
@@ -363,7 +365,8 @@
             callee_interface_id: vm.selectCallee.interface_id
           }, function(error) {
             if (error) {
-              return vm.errortip = error.message;
+              vm.errortip = error.message;
+              return;
             }
             $mdDialog.hide('添加成功');
           });
@@ -376,7 +379,8 @@
         vm.calleeInterface.interface_desc = vm.interfaceDesc;
         CalleeService.createCallee(vm.calleeInterface, function(error) {
           if (error) {
-            return vm.errortip = error.message;
+            vm.errortip = error.message;
+            return;
           }
           $mdDialog.hide('添加成功');
         });
@@ -446,7 +450,8 @@
     vm.ok = function() {
       InterfacesService.deleteInterface(data.interface_id, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('删除成功');
       });

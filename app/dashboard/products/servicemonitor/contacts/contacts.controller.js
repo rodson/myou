@@ -114,7 +114,8 @@
 
       ContactsService.createProjectContact(data.appKey, contact, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('添加成功');
       });
@@ -156,7 +157,8 @@
 
       ContactsService.modifyProjectContact(data.appKey, data.contact.contact_id, contact, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('更新成功');
       });
@@ -179,7 +181,8 @@
     vm.ok = function() {
       ContactsService.deleteProjectContact(data.appKey, data.contact.contact_id, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('删除成功');
       });

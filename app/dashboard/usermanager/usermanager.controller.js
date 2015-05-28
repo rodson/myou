@@ -168,7 +168,8 @@
       }
       UserGroupService.createGroup(vm.groupName, vm.groupDesc, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('添加成功');
       });
@@ -196,7 +197,8 @@
 
       UserGroupService.editGroup(data._id, vm.groupName, vm.groupDesc, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('更新成功');
       });
@@ -218,7 +220,8 @@
     vm.ok = function() {
       UserGroupService.deleteGroup(data._id, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('删除成功');
       });
@@ -257,7 +260,8 @@
 
         UserInfoService.addUser(vm.user, function(error) {
           if (error) {
-            return vm.errortip = error.message;
+            vm.errortip = error.message;
+            return;
           }
           $mdDialog.hide('添加成功');
         });
@@ -292,7 +296,8 @@
       user.userType = vm.userType;
       UserInfoService.updateUser(user, data._id, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('更新成功');
       });
@@ -314,7 +319,8 @@
     vm.ok = function() {
       UserInfoService.deleteUser(data._id, function(error) {
         if (error) {
-          return vm.errortip = error.message;
+          vm.errortip = error.message;
+          return;
         }
         $mdDialog.hide('删除成功');
       });
