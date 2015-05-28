@@ -30,14 +30,107 @@
         </a>
       </div>
       <span flex></span>
-      <md-button class="md-icon-button action" aria-label="More">
-        <md-icon class="icon"
-            md-svg-src="assets/images/material-action/ic_account_circle_24px.svg"
-            alt="account">
-        </md-icon>
-        <span class="text">Rodson</span>
-      </md-button>
+      <div ng-controller='UserProfileCtrl as vm'>
+        <md-button class="md-icon-button action" aria-label="More" ng-click='vm.showModifyUserDialog($event)'>
+          <md-icon class="icon"
+              md-svg-src="assets/images/material-action/ic_account_circle_24px.svg"
+              alt="account">
+          </md-icon>
+          <span class="text">{{ vm.username }}</span>
+        </md-button>
+      </div>
     </div>
   </md-toolbar>
   <div class="wrapper" ui-view></div>
 </div>
+
+<!-- modify user template -->
+<script type="text/ng-template" id="modifyUserModal.html">
+  <md-dialog aria-label="修改个人信息" class='alert-dialog modify-user'>
+    <md-dialog-content class="sticky-container">
+      <md-tabs md-border-bottom>
+        <md-tab label="个人信息">
+          <md-content class="md-padding">
+            <form name='modifyUserProfileForm' class='alert-dialog-form'>
+              <md-input-container>
+                <label>姓名</label>
+                <input required name="name" ng-model="vm.name">
+                <div ng-messages="modifyUserProfileForm.name.$error">
+                  <div ng-message="required"></div>
+                </div>
+              </md-input-container>
+
+              <md-input-container>
+                <label>邮箱</label>
+                <input required name="email" ng-model="vm.email" ng-disabled='true'>
+                <div ng-messages="modifyUserProfileForm.email.$error">
+                  <div ng-message="required"></div>
+                </div>
+              </md-input-container>
+
+
+              <md-input-container>
+                <label>所属分组</label>
+                <input required name="group" ng-model="vm.group" ng-disabled='true'>
+                <div ng-messages="modifyUserProfileForm.group.$error">
+                  <div ng-message="required"></div>
+                </div>
+              </md-input-container>
+
+              <h4 class='error-tip'>{{ vm.errortip }}</h4>
+
+              <div class='md-actions' layout="row">
+                <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+                  取消
+                </md-button>
+                <md-button ng-click="vm.ok('profile')" class="md-primary">
+                  确定
+                </md-button>
+              </div>
+            </form>
+          </md-content>
+
+        </md-tab>
+        <md-tab label="修改密码">
+          <form name='modifyUserPassForm' class='alert-dialog-form'>
+            <md-content class="md-padding">
+              <md-input-container>
+                <label>旧密码</label>
+                <input required name="oldpass" type='password' ng-model="vm.oldpass">
+                <div ng-messages="modifyUserPassForm.oldpass.$error">
+                  <div ng-message="required"></div>
+                </div>
+              </md-input-container>
+
+              <md-input-container>
+                <label>新密码</label>
+                <input required name="newpass" ng-model="vm.newpass" type='password'>
+                <div ng-messages="modifyUserPassForm.newpass.$error">
+                  <div ng-message="required"></div>
+                </div>
+              </md-input-container>
+
+
+              <md-input-container>
+                <label>确认新密码</label>
+                <input required name="renewpass" ng-model="vm.renewpass" type='password'>
+                <div ng-messages="modifyUserPassForm.renewpass.$error">
+                  <div ng-message="required"></div>
+                </div>
+              </md-input-container>
+              <h4 class='error-tip'>{{ vm.errortip }}</h4>
+              <div class='md-actions' layout="row">
+                <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+                  取消
+                </md-button>
+                <md-button ng-click="vm.ok('pass')" class="md-primary">
+                  确定
+                </md-button>
+              </div>
+            </form>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+  </md-dialog>
+</script>
