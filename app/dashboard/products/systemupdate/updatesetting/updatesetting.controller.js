@@ -7,13 +7,24 @@
         url: '/updatesetting',
         templateUrl: 'app/dashboard/products/systemupdate/updatesetting/updatesetting.html',
         controllerAs: 'vm',
-        controller: 'RomUpdateSettingCtrl'
+        controller: 'RomUpdateSettingCtrl',
+        resolve: RomUpdateSettingCtrl.resolve
       });
   }
 
-  function RomUpdateSettingCtrl() {
+  function RomUpdateSettingCtrl(RomUpdateSettingService) {
+    var vm = this;
 
+    RomUpdateSettingService.init();
+
+    vm.updateInfos = RomUpdateSettingService.updateInfos;
   }
+
+  RomUpdateSettingCtrl.resolve = {
+    getUpdateInfos: function(RomUpdateSettingService) {
+      return RomUpdateSettingService.getUpdateInfos();
+    }
+  };
 
   angular
     .module('myou.dashboard.systemupdate')
