@@ -13,10 +13,10 @@
         <li>
           <a>应用更新</a>
           <ul>
-            <li ng-class="{active: vm.isActive('updatesetting')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'updatesetting')}">
               <a ui-sref=".updatesetting">更新配置</a>
             </li>
-            <li ng-class="{active: vm.isActive('fileupload')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'fileupload')}">
               <a ui-sref=".fileupload">应用上传</a>
             </li>
           </ul>
@@ -25,13 +25,13 @@
         <li>
           <a>数据分析</a>
           <ul>
-            <li ng-class="{active: vm.isActive('keydata')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'keydata')}">
               <a ui-sref=".keydata">关键数据</a>
             </li>
-            <li ng-class="{active: vm.isActive('versiondistribute')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'versiondistribute')}">
               <a ui-sref=".versiondistribute">版本分布</a>
             </li>
-            <li ng-class="{active: vm.isActive('customevent')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'customevent')}">
               <a ui-sref=".customevent">自定义事件</a>
             </li>
           </ul>
@@ -40,10 +40,10 @@
         <li>
           <a>用户分析</a>
           <ul>
-            <li ng-class="{active: vm.isActive('userretain')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'userretain')}">
               <a ui-sref=".userretain">用户留存</a>
             </li>
-            <li ng-class="{active: vm.isActive('devicestat')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'devicestat')}">
               <a ui-sref=".devicestat">设备终端</a>
             </li>
           </ul>
@@ -52,15 +52,15 @@
         <li>
           <a>错误分析</a>
           <ul>
-            <li ng-class="{active: vm.isActive('errortrend')}"><a ui-sref=".errortrend">错误趋势</a></li>
-            <li ng-class="{active: vm.isActive('errorlists')}"><a ui-sref=".errorlists">错误列表</a></li>
+            <li ng-class="{active: vm.isActive('appdevelop', 'errortrend')}"><a ui-sref=".errortrend">错误趋势</a></li>
+            <li ng-class="{active: vm.isActive('appdevelop', 'errorlists')}"><a ui-sref=".errorlists">错误列表</a></li>
           </ul>
         </li>
 
         <li>
           <a>测试设置</a>
           <ul>
-            <li ng-class="{active: vm.isActive('testdevice')}">
+            <li ng-class="{active: vm.isActive('appdevelop', 'testdevice')}">
               <a ui-sref=".testdevice">测试设备</a>
             </li>
           </ul>

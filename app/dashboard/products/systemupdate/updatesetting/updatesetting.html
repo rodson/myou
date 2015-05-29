@@ -1,0 +1,58 @@
+<div class="page-container">
+  <div ng-repeat="updateInfo in vm.updateInfos">
+    <div>
+      <div><span>源版本</span> {{ updateInfo.srcVersion }}</div>
+      <div><span>测试版本</span> {{ updateInfo.testTargetVersion }}</div>
+      <div><span>目标版本</span> {{ updateInfo.targetVersion }}</div>
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>版本</th>
+            <th>文件名</th>
+            <th>文件大小</th>
+            <th>上传时间</th>
+            <th>更新描述</th>
+            <th>静默下载</th>
+            <th>测试</th>
+            <th>发布</th>
+            <th>删除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="targetItem in updateInfo.list | orderBy: 'createdAt':true">
+            <td>{{ targetItem.targetVersion }}</td>
+            <td>{{ targetItem.fileName }}</td>
+            <td>{{ targetItem.fileSize | bytes}}</td>
+            <td>{{ targetItem.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
+            <td>
+              <a><i class="fa fa-edit" ng-click="showEditUpdateDesc(targetItem)"></i></a>
+            </td>
+            <td>
+              <span class="tg-item">
+                <input class="tgl tgl-light" type="checkbox" ng-checked="isSilentDownload(targetItem)">
+                <label class="tgl-btn" ng-click="toggleSilentDownload(targetItem)"></label>
+              </span>
+            </td>
+            <td>
+              <span class="tg-item">
+                <input class="tgl tgl-light" type="checkbox" ng-checked="isStartTestUpdate(targetItem)">
+                <label class="tgl-btn" ng-click="toggleTestUpdatable(targetItem, update)"></label>
+              </span>
+            </td>
+            <td>
+              <span class="tg-item">
+                <input class="tgl tgl-light" type="checkbox" ng-checked="isStartUpdate(targetItem)">
+                <label class="tgl-btn" ng-click="toggleUpdatable(targetItem, update)"></label>
+              </span>
+            </td>
+            <td>
+              <a><i class="fa fa-times-circle" ng-click="showDeleteVersionModal(targetItem, update)"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

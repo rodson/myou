@@ -1,0 +1,91 @@
+<div class="page-sm-container">
+
+  <div class="sm-container">
+
+    <div class="group-section">
+      <div class="group-title">
+        选择文件
+      </div>
+      <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files)"
+          file="vm.uploadData.file">
+      </rs-file-uploader>
+    </div>
+
+    <div class="group-section clearfix" ng-show="vm.uploadData.progress">
+      <div class="normal-text">
+        计算md5: <span class="normal-size emphasis">{{ vm.uploadData.md5 }}</span>
+      </div>
+      <md-progress-linear md-mode="determinate" value="{{ vm.uploadData.progress }}"></md-progress-linear>
+      <div class="normal-text pull-right" style="margin-top: 10px;">
+        {{ vm.uploadData.progress }}%
+      </div>
+    </div>
+
+    <md-input-container flex>
+        <label>源版本</label>
+        <input ng-model="vm.uploadData.srcVersion">
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>目标版本</label>
+        <input ng-model="vm.uploadData.targetVersion">
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>版本描述</label>
+        <textarea columns="2" ng-model="vm.uploadData.versionDesc"></textarea>
+      </md-input-container>
+
+      <div class="error" style="margin: 10px 0px;">
+        {{ vm.uploadData.errorMessage }}
+      </div>
+
+      <div class="group-section clearfix">
+        <div class="pull-right">
+          <span flex></span>
+          <md-button class="md-raised md-primary btn-lg" ng-click="vm.upload()">
+            上传
+          </md-button>
+        </div>
+      </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- Upload progress dialog -->
+<div>
+  <script type="text/ng-template" id="uploadProgressDialog.html">
+  <md-dialog>
+    <md-dialog-content>
+      <div class="modal-container">
+        <div class="group-section clearfix">
+          <div class="group-title">
+            文件上传
+          </div>
+          <div class="group-section clearfix">
+            <md-progress-linear md-mode="determinate" value="{{ vm.progress }}"></md-progress-linear>
+            <div class="normal-text pull-right" style="margin-top: 10px;">
+              {{ vm.progress }}%
+            </div>
+          </div>
+          <div class="pull-right">
+            <span class="error" ng-show="vm.isError" style="margin-right: 30px;">
+              上传错误，请重新上传
+            </span>
+            <span flex></span>
+            <md-button ng-show="!vm.isSuccess" class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+              取消
+            </md-button>
+            <md-button ng-show="vm.isSuccess" class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+              确定
+            </md-button>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+  </script>
+</div>

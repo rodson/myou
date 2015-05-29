@@ -21,15 +21,15 @@ describe('AppDevelopCtrl: ', function() {
   describe('fn: isActive ', function() {
 
     beforeEach(function() {
-      $location.path('/updatesetting');
+      $location.path('/appdevelop/sdaf/updatesetting');
     });
 
     it('should return true if the path is matched', function() {
-      expect(AppDevelopCtrl.isActive('updatesetting')).toBe(true);
+      expect(AppDevelopCtrl.isActive('appdevelop', 'updatesetting')).toBe(true);
     });
 
     it('should return false if the path is not matched', function() {
-      expect(AppDevelopCtrl.isActive('keydata')).toBe(false);
+      expect(AppDevelopCtrl.isActive('appdevelop', 'keydata')).toBe(false);
     });
   });
 

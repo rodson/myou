@@ -43,11 +43,11 @@ describe('shared: StateManager', function() {
         .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
     });
 
-    it('should call go on $state with systemupdate when systemupdate', function() {
+    it('should call go on $state with systemupdate.updatesetting when systemupdate', function() {
       var platform = Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE;
       var id = 'qwerty';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.systemupdate', {id: id});
+      expect($state.go).toHaveBeenCalledWith('dashboard.systemupdate.updatesetting', {id: id});
     });
 
     it('should call go on $state with servicemonitor when servicemonitor', function() {
