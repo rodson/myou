@@ -115,6 +115,13 @@ td .md-icon-button {
   width: 40%;
   min-width: 480px;
 
+  .sticky-container {
+    >h3 {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+  }
+
   .alert-dialog-form {
     padding: 10px 30px 30px;
   }
