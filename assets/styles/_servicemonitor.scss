@@ -137,6 +137,13 @@ td .md-icon-button {
   min-width: 800px;
 }
 
+// .alert-dialog-caller {
+//   position: fixed;
+//   top: 20%;
+//   left: 50%;
+//   margin-left: -20%;
+// }
+
 .contacts {
   h3 {
     display: inline-block;
@@ -167,6 +174,10 @@ td .md-icon-button {
     margin-left: 0px;
     display: inline-block;
     margin-right: 20px;
+  }
+
+  md-select {
+    height: 20px;
   }
 }
 
