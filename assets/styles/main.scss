@@ -308,6 +308,21 @@ tr {
   color: $primary-color;
 }
 
+.card-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 32px;
+
+  .card-info {
+    padding: 12px 24px;
+    color: $primary-color;
+  }
+}
+
+.inline {
+  display: inline-block;
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
