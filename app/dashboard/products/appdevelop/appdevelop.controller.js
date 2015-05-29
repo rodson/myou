@@ -16,8 +16,8 @@
     var vm = this;
 
     vm.product = localStorageService.get('app');
-    vm.isActive = function(path) {
-      return $location.path().indexOf(path) > -1;
+    vm.isActive = function(parent, path) {
+      return ($location.path().indexOf(parent) > -1 && $location.path().indexOf(path) > -1);
     };
   }
 

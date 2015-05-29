@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .tmp/
+tmp/
 bower_components
 .DS_Store
 assets/.DS_Store

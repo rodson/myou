@@ -13,7 +13,7 @@
           state = 'dashboard.appdevelop.updatesetting';
           break;
         case Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE:
-          state = 'dashboard.systemupdate';
+          state = 'dashboard.systemupdate.updatesetting';
           break;
         case Constant.PRODUCT_PLATFORM.SERVICE_MONITOR:
           state = 'dashboard.servicemonitor';
