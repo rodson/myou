@@ -47,7 +47,8 @@
       'myou.dashboard.webpublish',
       'myou.dashboard.document',
       'myou.dashboard.apistatis',
-      'myou.dashboard.usermaneger'
+      'myou.dashboard.usermaneger',
+      'myou.dashboard.appcompontent'
     ])
     .config(dashboardConfig);
 

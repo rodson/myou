@@ -16,13 +16,13 @@
           state = 'dashboard.systemupdate.updatesetting';
           break;
         case Constant.PRODUCT_PLATFORM.SERVICE_MONITOR:
-          state = 'dashboard.servicemonitor';
+          state = 'dashboard.servicemonitor.dailydata';
           break;
         case Constant.PRODUCT_PLATFORM.WEB_PUBLISH:
           state = 'dashboard.webpublish';
           break;
         case Constant.PRODUCT_PLATFORM.PAGE_ANALYTIC:
-          state = 'dashboard.pageanalytic';
+          state = 'dashboard.pageanalytic.global';
           break;
       }
 

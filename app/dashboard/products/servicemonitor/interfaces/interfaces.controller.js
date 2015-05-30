@@ -370,6 +370,9 @@
             }
             $mdDialog.hide('添加成功');
           });
+          $timeout(function() {
+            vm.errortip = '';
+          }, 2000);
         }
       } else {
         if (!vm.interfaceName || !vm.interfaceDesc) {
