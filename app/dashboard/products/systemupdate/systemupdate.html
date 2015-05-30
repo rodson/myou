@@ -3,6 +3,13 @@
     <div class="md-toolbar-tools">
       <h2>
         {{ vm.product.name }}
+        <md-button class="md-primary appkey-btn" ng-show="!vm.showAppKey" ng-click="vm.show()">
+        &nbsp;>&nbsp;
+        </md-button>
+        <md-button class="md-primary appkey-btn" ng-show="vm.showAppKey" ng-click="vm.hide()">
+          &nbsp;<&nbsp;
+        </md-button>
+        <span ng-show="vm.showAppKey">&nbsp;&nbsp;(appkey:&nbsp;{{ vm.product.appKey }})</span>
       </h2>
     </div>
   </md-toolbar>

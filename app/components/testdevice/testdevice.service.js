@@ -106,7 +106,7 @@
   }
 
   angular
-    .module('myou.dashboard.appdevelop.testdevice')
+    .module('myou.testdevice')
     .factory('TestDeviceService', TestDeviceService);
 
 })();
