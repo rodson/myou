@@ -2,8 +2,9 @@
   'use strict';
 
   angular
-    .module('myou.dashboard.appdevelop.testdevice', [
+    .module('myou.testdevice', [
       'ui.router',
+      'ngMaterial',
       'tableSort',
 
       'myou.shared'

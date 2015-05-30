@@ -5,7 +5,14 @@
     $stateProvider
       .state('dashboard.appdevelop.testdevice', {
         url: '/testdevice',
-        templateUrl: 'app/dashboard/products/appdevelop/testdevice/testdevice.html',
+        templateUrl: 'app/components/testdevice/testdevice.html',
+        controllerAs: 'vm',
+        controller: 'TestDeviceCtrl',
+        resolve: TestDeviceCtrl.resolve
+      })
+      .state('dashboard.systemupdate.testdevice', {
+        url: '/testdevice',
+        templateUrl: 'app/components/testdevice/testdevice.html',
         controllerAs: 'vm',
         controller: 'TestDeviceCtrl',
         resolve: TestDeviceCtrl.resolve
@@ -106,7 +113,7 @@
   }
 
   angular
-    .module('myou.dashboard.appdevelop.testdevice')
+    .module('myou.testdevice')
     .controller('TestDeviceCtrl', TestDeviceCtrl)
     .controller('AddTestDeviceDialogCtrl', AddTestDeviceDialogCtrl)
     .controller('EditTestDeviceDialogCtrl', EditTestDeviceDialogCtrl)

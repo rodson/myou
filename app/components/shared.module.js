@@ -7,6 +7,7 @@
       'LocalStorageModule',
       'myou.ui',
       'myou.util',
-      'myou.filter'
+      'myou.filter',
+      'myou.testdevice'
     ]);
 })();
