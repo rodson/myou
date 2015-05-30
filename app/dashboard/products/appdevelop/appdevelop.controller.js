@@ -19,6 +19,14 @@
     vm.isActive = function(parent, path) {
       return ($location.path().indexOf(parent) > -1 && $location.path().indexOf(path) > -1);
     };
+
+    vm.show = function() {
+      vm.showAppKey = true;
+    };
+
+    vm.hide = function() {
+      vm.showAppKey = false;
+    };
   }
 
   angular

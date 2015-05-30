@@ -10,8 +10,7 @@
 
       'myou.dashboard.appdevelop.appupdate',
       'myou.dashboard.appdevelop.dataanalytic',
-      'myou.dashboard.appdevelop.useranalytic',
-      'myou.dashboard.appdevelop.testdevice'
+      'myou.dashboard.appdevelop.useranalytic'
     ]);
 
 })();
