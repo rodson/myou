@@ -2,11 +2,10 @@
   'use strict';
 
   angular
-    .module('myou.dashboard.appcompontent', [
+    .module('myou.approm', [
       'ui.router',
       'LocalStorageModule',
       'ngMaterial',
-
-      'myou.shared'
+      'highcharts-ng'
     ]);
 })();

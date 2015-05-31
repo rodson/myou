@@ -30,7 +30,8 @@
         USERGROUP: 'http://localhost:4000/api/in/userGroups',
         CUSTOMEVENT_API: 'http://localhost:4000/api/in/events',
 
-        QINIU_TOKEN: 'http://localhost:4000/api/in/qiniu/token'
+        QINIU_TOKEN: 'http://localhost:4000/api/in/qiniu/token',
+        UPDATE_POLICY: 'http://localhost:4000/api/in/updatePolicy'
       },
 
       RETURN_DATA: {

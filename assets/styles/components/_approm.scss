@@ -1,0 +1,49 @@
+.update-policy {
+  h3 {
+    display: inline-block;
+  }
+  button {
+    padding: 4px;
+    margin-left: 20px;
+  }
+  .min-update {
+    height: 50px;
+    md-switch {
+      display: inline-block;
+      margin: 0px;
+      vertical-align: middle;
+    }
+    md-input-container {
+      width: 200px;
+      top: -32px;
+      margin-left: 220px;
+    }
+    .error-tip {
+      color: red;
+      top: -82px;
+      left: 430px;
+      display: block;
+      position: relative;
+    }
+  }
+  .area-update {
+    .area-title {
+      font-size: 16px;
+      color: black;
+    }
+    button {
+      height: 30px;
+      padding: 3px;
+    }
+    .area-check {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      md-checkbox {
+        display: inline-block;
+        width: 80px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
