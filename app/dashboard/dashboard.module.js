@@ -59,7 +59,7 @@
         '    <div class="title">{{display.title()}}</div>',
         '    <div class="content">',
         '      <div class="super-title">{{display.super()}}</div>',
-        '      <div ng-bind-html="display.main()" class="main-title"></div>',
+        '      <div ng-bind-html="display.main()" class="main-title" style="color: white;"></div>',
         '      <div class="sub-title">{{display.sub()}}</div>',
         '    </div>',
         '  </div>',

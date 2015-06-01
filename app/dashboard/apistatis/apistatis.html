@@ -1,7 +1,10 @@
 <div class='apistat-div'>
   <md-toolbar class='white-toolbar'>
     <h4 class='oneday-apistat'>单日API请求：{{vm.onedayCount}}</h4>
-    <datatime-picker init-datatime='vm.checkdate' display-mode='date' class='date-picker'></datatime-picker>
+    <div class='date-picker'>
+      <datatime-picker init-datatime='vm.checkdate' display-mode='date'></datatime-picker>
+      <md-button class="md-raised md-primary margin-left-10" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+    </div>
   </md-toolbar>
   <md-content class='content-padding'>
     <highchart class='margin-top-30' config="vm.highchartsURL"></highchart>
@@ -9,20 +12,42 @@
     <highchart class='margin-top-30' config="vm.highchartsAPP"></highchart>
     <hr>
     <div class='table-div'>
-      <h4>URL详细数据：</h4>
+      <h4>API访问数据：</h4>
       <table class="table" ts-wrapper>
         <thead>
           <tr>
-            <th ts-criteria="name|lowercase">URL</th>
+            <th ts-criteria="name|lowercase">API</th>
             <th ts-criteria="count|parseInt" ts-default='descending' class='count-th'>数量</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="x in vm.dataURL" ts-repeat>
+          <tr ng-repeat="x in vm.dataTable.url" ts-repeat>
             <td>{{ x.name }}</td>
             <td>{{ x.count }}</td>
           </tr>
+          <tr ng-show='vm.dataAll.url.length === 0 || vm.dataAll.url.length > vm.showCountInit'>
+            <td colspan='2' class='show-more' ng-click='vm.showOrhideMoreData("url")'>{{ vm.showOrhide.url }}</td>
+          </tr>
         </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class='table-div'>
+      <h4>API-APP请求数据：</h4>
+      <table class="table" ts-wrapper>
+        <tr>
+          <th ts-criteria="api_name|lowercase" class='width-35-per'>API</th>
+          <th ts-criteria="app_name|lowercase" class='width-35-per'>APP</th>
+          <th ts-criteria="count|parseInt" ts-default='descending'>数量</th>
+        </tr>
+        <tr ng-repeat="x in vm.dataTable.urlApp" ts-repeat>
+          <td>{{ x.api_name }}</td>
+          <td>{{ x.app_name }}</td>
+          <td>{{ x.count }}</td>
+        </tr>
+        <tr ng-show='vm.dataAll.urlApp.length === 0 || vm.dataAll.urlApp.length > vm.showCountInit'>
+          <td colspan='3' class='show-more' ng-click='vm.showOrhideMoreData("urlApp")'>{{ vm.showOrhide.urlApp }}</td>
+        </tr>
       </table>
     </div>
     <hr>
@@ -36,11 +61,33 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="x in vm.dataAPP" ts-repeat>
+          <tr ng-repeat="x in vm.dataTable.app" ts-repeat>
             <td>{{ x.name }}</td>
             <td>{{ x.count }}</td>
           </tr>
+          <tr ng-show='vm.dataAll.app.length === 0 || vm.dataAll.app.length > vm.showCountInit'>
+            <td colspan='2' class='show-more' ng-click='vm.showOrhideMoreData("app")'>{{ vm.showOrhide.app }}</td>
+          </tr>
         </tbody>
+      </table>
+    </div>
+    <hr>
+    <div class='table-div'>
+      <h4>APP下载数据：</h4>
+      <table class="table" ts-wrapper>
+        <tr>
+          <th ts-criteria="name|lowercase" class='width-35-per'>APP</th>
+          <th ts-criteria="requestCount|parseInt" class='width-35-per'>请求数</th>
+          <th ts-criteria="count|parseInt" ts-default='descending'>下载量</th>
+        </tr>
+        <tr ng-repeat="x in vm.dataTable.appDownload" ts-repeat>
+          <td>{{ x.name }}</td>
+          <td>{{ x.requestCount }}</td>
+          <td>{{ x.count }}</td>
+        </tr>
+        <tr ng-show='vm.dataAll.appDownload.length === 0 || vm.dataAll.appDownload.length > vm.showCountInit'>
+          <td colspan='3' class='show-more' ng-click='vm.showOrhideMoreData("appDownload")'>{{ vm.showOrhide.appDownload }}</td>
+        </tr>
       </table>
     </div>
   </md-content>

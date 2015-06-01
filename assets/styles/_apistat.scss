@@ -21,6 +21,10 @@
   }
 }
 
+.margin-left-10 {
+  margin-left: 10px;
+}
+
 
 
 .content-padding {
@@ -33,7 +37,24 @@
   }
 
   .count-th {
-    width: 40%;
+    width: 30%;
+  }
+
+  .width-35-per {
+    width: 35%;
+  }
+
+  tr {
+    .show-more {
+      background-color: rgba(0,0,0,0.01);
+      cursor: pointer;
+      opacity: 0.5;
+      text-align: center;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
   }
 
 }

@@ -9,6 +9,9 @@
     apiStatisService.apppie = [];
     apiStatisService.appcount = [];
 
+    apiStatisService.apidownload = [];
+    apiStatisService.apiapp = [];
+
     /******************************** test data start***************************/
     // apiStatisService.count = 123333;
 
@@ -122,6 +125,20 @@
         apiStatisService.apicount = data;
         cb();
       });
+    };
+    apiStatisService.getAppDownloadStat = function(date, cb) {
+      return $http.get(Constant.URL.APISTATIS_USAGE + '?date=' + date + '&view_type=update_download')
+        .success(function(data) {
+          apiStatisService.apidownload = data;
+          cb();
+        });
+    };
+    apiStatisService.getURLAppStat = function(date, cb) {
+      return $http.get(Constant.URL.APISTATIS_USAGE + '?date=' + date + '&view_type=app_api')
+        .success(function(data) {
+          apiStatisService.apiapp = data;
+          cb();
+        });
     };
 
     return apiStatisService;

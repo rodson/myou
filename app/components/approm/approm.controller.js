@@ -4,13 +4,13 @@
   function appRomConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.approm', {
-        url: '/approm',
+        url: '/appsetting',
         templateUrl: 'app/components/approm/approm.html',
         controllerAs: 'vm',
         controller: 'AppRomCtrl'
       })
       .state('dashboard.systemupdate.approm', {
-        url: '/approm',
+        url: '/romsetting',
         templateUrl: 'app/components/approm/approm.html',
         controllerAs: 'vm',
         controller: 'AppRomCtrl'
@@ -194,12 +194,6 @@
     };
 
     vm.getUpdateSetting = function() {
-      var result = {
-        allow_all_region: false,
-        allow_regions: [],
-        enable_minute_update_limit: false,
-        minute_update_limit_count: 0
-      };
 
       AppRomService.getUpdatePolicy(vm.app._id, function() {
         vm.limit = AppRomService.data.mindata.enable_minute_update_limit;
@@ -207,7 +201,9 @@
 
         vm.provinces.forEach(function(dt) {
           AppRomService.data.mindata.allow_regions.forEach(function(i) {
-            if (dt.label === i) dt.value = true;
+            if (dt.label === i) {
+              dt.value = true;
+            }
           });
         });
 

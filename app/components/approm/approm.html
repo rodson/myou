@@ -13,9 +13,9 @@
   <md-button class="md-raised md-primary" ng-click="vm.saveUpdateSetting()">&nbsp;保存&nbsp;</md-button>
   <div class='min-update'>
     <span>限制每分钟更新次数：</span>
-    <md-switch class='md-primary' ng-model="vm.limit" aria-label="limit"></md-switch>
+    <md-switch class='md-primary' ng-model="vm.limit" aria-label="limit" ng-disabled='vm.userInfo.userType!=="root"'></md-switch>
     <md-input-container md-no-float>
-      <input ng-model="vm.limitCount" type="text" placeholder='请输入次数' ng-show='vm.limit'>
+      <input ng-model="vm.limitCount" type="text" placeholder='请输入次数' ng-show='vm.limit' ng-disabled='vm.userInfo.userType!=="root"'>
     </md-input-container>
     <span class='error-tip' ng-show='vm.limit && vm.showError'>请输入正整数</span>
   </div>

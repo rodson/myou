@@ -5,6 +5,7 @@
     var vm = this;
     vm.checkdate = MomentDateService.getToday().start;
     vm.onedayCount = 0;
+    vm.showCountInit = 5;
 
     vm.highchartsURL = {
       options: {
@@ -52,7 +53,7 @@
         }
       },
       title: {
-        text: 'URL数据'
+        text: 'API实时访问数据'
       },
       xAxis: {
         type: 'datetime',
@@ -103,22 +104,66 @@
         }
       },
       title: {
-        text: 'APP分布'
+        text: 'APP访问分布'
       },
       noData: 'No data',
       loading: true
     };
 
-    $scope.$watch('vm.checkdate', function(){
-      vm.getData();
-    });
-
     vm.highchartsURL.series = [];
     vm.highchartsAPP.series = [];
 
+    var showHide = ['加载更多数据', '隐藏部分数据', 'No data'];
+
+    vm.showOrhide = {
+      app: showHide[2],
+      url: showHide[2],
+      appDownload: showHide[2],
+      urlApp: showHide[2]
+    };
+
+    vm.initData = function() {
+      vm.dataTable = {
+        app: [],
+        url: [],
+        appDownload: [],
+        urlApp: []
+      };
+
+      vm.dataAll = {
+        app: [],
+        url: [],
+        appDownload: [],
+        urlApp: []
+      };
+    };
+
+    vm.showOrhideMoreData = function(type) {
+      if (vm.showOrhide[type] === showHide[0]) {
+        vm.showOrhide[type] = showHide[1];
+        angular.copy(vm.dataAll[type], vm.dataTable[type]);
+      } else if (vm.showOrhide[type] === showHide[1]) {
+        vm.showOrhide[type] = showHide[0];
+        vm.dataTable[type].length = vm.showCountInit;
+      } else {
+        return;
+      }
+    };
+
+    function getMaxData(data) {
+      var temp = [];
+      angular.copy(data, temp);
+      temp.length = temp.length < vm.showCountInit ? temp.length : vm.showCountInit;
+      return temp;
+    }
+
+    function sortFun(a, b) {
+      return b.count - a.count;
+    }
+
+
     vm.getData = function() {
-      vm.dataURL = [];
-      vm.dataAPP = [];
+      vm.initData();
 
       APIStatisService.getCount(vm.checkdate, function() {
         vm.onedayCount = APIStatisService.count;
@@ -129,7 +174,9 @@
       });
 
       APIStatisService.getAppStat(vm.checkdate, function() {
-        vm.dataAPP = APIStatisService.appcount;
+        vm.showOrhide.app = APIStatisService.appcount.length > vm.showCountInit ? showHide[0] : showHide[2];
+        vm.dataAll.app = APIStatisService.appcount.sort(sortFun);
+        vm.dataTable.app = getMaxData(vm.dataAll.app);
 
         vm.highchartsAPP.series = [{
           type: 'pie',
@@ -138,7 +185,28 @@
       });
 
       APIStatisService.getUrlStat(vm.checkdate, function() {
-        vm.dataURL = APIStatisService.apicount;
+        vm.showOrhide.url = APIStatisService.apicount.length > vm.showCountInit ? showHide[0] : showHide[2];
+        vm.dataAll.url = APIStatisService.apicount.sort(sortFun);
+        vm.dataTable.url = getMaxData(vm.dataAll.url);
+      });
+
+      APIStatisService.getAppDownloadStat(vm.checkdate, function() {
+        var data = APIStatisService.apidownload.list.map(function(i) {
+          return {
+            name: i.name,
+            requestCount: i.update_api_request_count,
+            count: i.can_download_count
+          };
+        });
+        vm.showOrhide.appDownload = data.length > vm.showCountInit ? showHide[0] : showHide[2];
+        vm.dataAll.appDownload = data.sort(sortFun);
+        vm.dataTable.appDownload = getMaxData(vm.dataAll.appDownload);
+      });
+
+      APIStatisService.getURLAppStat(vm.checkdate, function() {
+        vm.showOrhide.urlApp = APIStatisService.apiapp.length > vm.showCountInit ? showHide[0] : showHide[2];
+        vm.dataAll.urlApp = APIStatisService.apiapp.sort(sortFun);
+        vm.dataTable.urlApp = getMaxData(vm.dataAll.urlApp);
       });
     };
 
@@ -174,7 +242,6 @@
 
     // vm.setData();
     /************************ for test start *************************/
-
     vm.getData();
   }
 
