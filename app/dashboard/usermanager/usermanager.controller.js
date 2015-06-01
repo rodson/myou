@@ -16,8 +16,6 @@
     var vm = this;
     vm.userInfo = localStorageService.get('user');
 
-    console.log(vm.userInfo);
-
     vm.isAdmin = function() {
       return vm.userInfo.userType === 'root';
     };

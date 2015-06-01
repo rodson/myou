@@ -52,12 +52,9 @@
         },
       },
       title: {
-        text: '',//'<label style="font-size:14px;">运营商分布</label>',
-        align: 'center',
-        verticalAlign: 'middle',
-        y: Math.ceil(OperatorService.data.tableData.length / 5 + 1) * (-5)
+        text: '',
       },
-      noData: '<br>No data'
+      noData: 'No data'
     };
 
     vm.getCheckDate = function() {

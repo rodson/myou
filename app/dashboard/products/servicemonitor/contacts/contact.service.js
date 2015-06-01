@@ -25,7 +25,6 @@
           cb(null);
         })
         .error(function(error) {
-          console.log(error);
           cb(error);
         });
     };

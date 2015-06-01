@@ -6,32 +6,32 @@
     .constant('Constant', {
 
       URL: {
-        LOGIN: 'http://localhost:4000/api/in/auth/login',
-        CHECK_LOGIN: 'http://localhost:4000/api/in/auth/loggedin',
-        FILE_SYNC: 'http://localhost:4000/uploads',
+        LOGIN: '/api/in/auth/login',
+        CHECK_LOGIN: '/api/in/auth/loggedin',
+        FILE_SYNC: '/uploads',
 
-        PRODUCTS: 'http://localhost:4000/api/in/applications',
-        PRODUCTS_TRICKID: 'http://localhost:4000/api/analytics/trackid',
-        PRODUCTS_OVERVIEW: 'http://localhost:4000/api/analytics/overview',
-        PRODUCTS_SUMMARY: 'http://localhost:4000/api/analytics/summary',
-        PRODUCTS_PAGERANKING: 'http://localhost:4000/api/analytics/pagerank',
-        PRODUCTS_ISP: 'http://localhost:4000/api/analytics/isp',
-        PRODUCTS_REGION: 'http://localhost:4000/api/analytics/region',
-        PRODUCTS_DEVICE: 'http://localhost:4000/api/analytics/device',
-        PRODUCTS_SOURCE: 'http://localhost:4000/api/analytics/source',
-        APISTATIS_USAGE: 'http://localhost:4000/api-java/in/api-usage',
-        PRODUCTS_SERVICE_MONITOR: 'http://localhost:4000/api/in/monitor',
-        ANALYZE_URL: 'http://localhost:4000/api/in/analyze',
+        PRODUCTS: '/api/in/applications',
+        PRODUCTS_TRICKID: '/api/analytics/trackid',
+        PRODUCTS_OVERVIEW: '/api/analytics/overview',
+        PRODUCTS_SUMMARY: '/api/analytics/summary',
+        PRODUCTS_PAGERANKING: '/api/analytics/pagerank',
+        PRODUCTS_ISP: '/api/analytics/isp',
+        PRODUCTS_REGION: '/api/analytics/region',
+        PRODUCTS_DEVICE: '/api/analytics/visitor/device',
+        PRODUCTS_SOURCE: '/api/analytics/visitor/source',
+        APISTATIS_USAGE: '/api-java/in/api-usage',
+        PRODUCTS_SERVICE_MONITOR: '/api/in/monitor',
+        ANALYZE_URL: '/api/in/analyze',
 
-        UPDATE_API_STAT: 'http://localhost:4000/api/in/stats/update/applications',
-        VERSION_API_STAT: 'http://localhost:4000/api/in/stats/update/versions',
-        USERINFO: 'http://localhost:4000/api/in/users',
-        USERAUTH: 'http://localhost:4000/api/in/auth',
-        USERGROUP: 'http://localhost:4000/api/in/userGroups',
-        CUSTOMEVENT_API: 'http://localhost:4000/api/in/events',
+        UPDATE_API_STAT: '/api/in/stats/update/applications',
+        VERSION_API_STAT: '/api/in/stats/update/versions',
+        USERINFO: '/api/in/users',
+        USERAUTH: '/api/in/auth',
+        USERGROUP: '/api/in/userGroups',
+        CUSTOMEVENT_API: '/api/in/events',
 
-        QINIU_TOKEN: 'http://localhost:4000/api/in/qiniu/token',
-        UPDATE_POLICY: 'http://localhost:4000/api/in/updatePolicy'
+        QINIU_TOKEN: '/api/in/qiniu/token',
+        UPDATE_POLICY: '/api/in/updatePolicy'
       },
 
       RETURN_DATA: {

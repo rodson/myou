@@ -51,10 +51,7 @@
         },
       },
       title: {
-        text: '', //'<label style='font-size:14px;'>地域分布</label>',
-        align: 'center',
-        verticalAlign: 'top',
-        y: Math.ceil(AreaService.data.tableData.length / 5 + 1) * (-5)
+        text: '',
       },
       noData: 'No data'
     };

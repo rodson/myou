@@ -23,7 +23,6 @@
 
     /***************************** 每分钟下载曲线 start *******************************/
     vm.onedayCount = 0;
-    console.log(vm.app);
     vm.checkdate = MomentDateService.getToday().start;
 
     vm.highchartsURL = {
@@ -100,14 +99,12 @@
       vm.highchartsURL.options.plotOptions.series.pointStart = pointStart;
     };
 
-    vm.getData = function() {
+    vm.getMinData = function() {
       AppRomService.getUpdateMinData(vm.app._id, vm.checkdate, function() {
         vm.onedayCount = AppRomService.data.mindata.count;
         vm.setURLData(AppRomService.data.mindata.values);
       });
     };
-
-    vm.getData();
 
     /***************************** 每分钟下载曲线 end *******************************/
 
@@ -196,26 +193,24 @@
     vm.getUpdateSetting = function() {
 
       AppRomService.getUpdatePolicy(vm.app._id, function() {
-        vm.limit = AppRomService.data.mindata.enable_minute_update_limit;
-        vm.limitCount = AppRomService.data.mindata.minute_update_limit_count;
+        vm.limit = AppRomService.data.policy.enable_minute_update_limit || false;
+        vm.limitCount = AppRomService.data.policy.minute_update_limit_count || 1;
 
         vm.provinces.forEach(function(dt) {
-          AppRomService.data.mindata.allow_regions.forEach(function(i) {
+          AppRomService.data.policy.allow_regions.forEach(function(i) {
             if (dt.label === i) {
               dt.value = true;
             }
           });
         });
 
-        if (AppRomService.data.mindata.allow_all_region) {
+        if (AppRomService.data.policy.allow_all_region) {
           vm.provinces.forEach(function(dt) {
             dt.value = true;
           });
         }
       });
     };
-
-    // vm.getUpdateSetting();
 
     vm.provinces = [{
       value: false,
@@ -326,6 +321,12 @@
 
     /***************************** 更新设置 end *******************************/
 
+    vm.getData = function(){
+      vm.getMinData();
+      vm.getUpdateSetting();
+    };
+
+    vm.getData();
   }
 
   angular
