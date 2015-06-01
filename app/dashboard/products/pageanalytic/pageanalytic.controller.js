@@ -8,14 +8,16 @@
         url: '/pageanalytic/:id',
         templateUrl: 'app/dashboard/products/pageanalytic/pageanalytic.html',
         controllerAs: 'vm',
-        controller: 'PageAnalyticCtrl'
+        controller: 'PageAnalyticCtrl',
+        resolve: PageAnalyticCtrl.getData
       });
   }
 
-  function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast, $state, PageAnalyticService) {
+  function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast) {
     var vm = this;
 
     vm.product = localStorageService.get('app');
+    vm.trickId = localStorageService.get('trickId');
 
     vm.isActive = function(path) {
       return $location.path().indexOf(path) > -1;
@@ -44,21 +46,20 @@
       }, function() {});
     };
 
-    vm.getData = function() {
-      PageAnalyticService.getData(vm.product.appKey, function() {
-        vm.trickId = PageAnalyticService.trickId;
-        localStorageService.set('trickId', vm.trickId);
-
-        $state.go('dashboard.pageanalytic.global');
-      });
-    };
-
-    vm.getData();
     /**************************** start test *****************************/
     // $state.go('dashboard.pageanalytic.global');
     // vm.trickId = 10000015;
     // localStorageService.set('trickId', vm.trickId);
     /**************************** end test *****************************/
+  }
+
+  PageAnalyticCtrl.getData = {
+    getData: function(localStorageService, PageAnalyticService) {
+      var product = localStorageService.get('app');
+      return PageAnalyticService.getData(product.appKey, function() {
+        localStorageService.set('trickId', PageAnalyticService.trickId);
+      });
+    }
   }
 
   function DialogController($mdDialog, data) {
