@@ -63,9 +63,9 @@
       return $http.get(Constant.URL.ANALYZE_URL + '/' + appKey + CRASH_LIST + '?platform=' + platform + '&fixed=' + fixed)
         .success(function(data) {
           if (fixed) {
-            errorListService.data.fixed = testFixedData.data; //data
+            errorListService.data.fixed = data;
           } else {
-            errorListService.data.unfix = testData.data; //data
+            errorListService.data.unfix = data;
           }
           cb();
         });
