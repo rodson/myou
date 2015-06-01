@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
         controller: WebsiteTrendCtrl,
-        // resolve: WebsiteTrendCtrl.resolve
+        resolve: WebsiteTrendCtrl.resolve
       });
   }
 
@@ -80,8 +80,9 @@
     };
 
     /******************************* test start ******************************/
-    vm.setData(WebsiteTrendService.data);
+    // vm.setData(WebsiteTrendService.data);
     /******************************* test end ******************************/
+    vm.setData(WebsiteTrendService.data);
   }
 
   WebsiteTrendCtrl.resolve = {

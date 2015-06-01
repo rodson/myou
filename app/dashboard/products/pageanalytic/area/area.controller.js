@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/area/area.html',
         controllerAs: 'vm',
         controller: 'AreaCtrl',
-        // resolve: AreaCtrl.resolve
+        resolve: AreaCtrl.resolve
       });
   }
 
@@ -175,10 +175,10 @@
       }];
     };
     /******************* test start *****************/
-    vm.setData();
+    // vm.setData();
     /******************* test end *****************/
 
-    // vm.getData();
+    vm.setData();
   }
 
   AreaCtrl.resolve = {

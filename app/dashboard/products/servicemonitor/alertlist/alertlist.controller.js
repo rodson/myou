@@ -63,8 +63,8 @@
     };
 
     /*********************** test start ***************************/
-    vm.setStatisticData();
-    vm.setALertData();
+    // vm.setStatisticData();
+    // vm.setALertData();
     /*********************** test end ***************************/
 
     vm.getData();

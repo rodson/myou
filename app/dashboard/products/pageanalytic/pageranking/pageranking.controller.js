@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/pageranking/pageranking.html',
         controllerAs: 'vm',
         controller: 'PageRankingCtrl',
-        // resolve: PageRankingCtrl.resolve
+        resolve: PageRankingCtrl.resolve
       });
   }
 
@@ -58,8 +58,9 @@
     };
 
     /******************************* test start ******************************/
-    vm.setData(PageRankingService.data);
+    // vm.setData(PageRankingService.data);
     /******************************* test end ******************************/
+    vm.setData(PageRankingService.data);
   }
 
   PageRankingCtrl.resolve = {

@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/operator/operator.html',
         controllerAs: 'vm',
         controller: 'OperatorCtrl',
-        // resolve: OperatorCtrl.resolve
+        resolve: OperatorCtrl.resolve
       });
   }
 
@@ -108,8 +108,9 @@
     };
 
     /******************************* test start ******************************/
-    vm.setData();
+    // vm.setData();
     /******************************* test end ******************************/
+    vm.setData();
   }
 
   OperatorCtrl.resolve = {

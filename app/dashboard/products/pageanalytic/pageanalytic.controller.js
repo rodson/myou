@@ -56,8 +56,8 @@
     vm.getData();
     /**************************** start test *****************************/
     // $state.go('dashboard.pageanalytic.global');
-    vm.trickId = 10000015;
-    localStorageService.set('trickId', vm.trickId);
+    // vm.trickId = 10000015;
+    // localStorageService.set('trickId', vm.trickId);
     /**************************** end test *****************************/
   }
 

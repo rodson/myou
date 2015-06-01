@@ -8,7 +8,7 @@
         templateUrl: 'app/dashboard/products/pageanalytic/userinfo/userinfo.html',
         controllerAs: 'vm',
         controller: 'UserInfoCtrl',
-        // resolve: UserinfoService.resolve
+        resolve: UserInfoCtrl.resolve
       });
   }
 
@@ -101,8 +101,9 @@
     };
 
     /******************************* test start ******************************/
-    vm.setData();
+    // vm.setData();
     /******************************* test end ******************************/
+    vm.setData();
   }
 
   UserInfoCtrl.resolve = {

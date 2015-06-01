@@ -8,16 +8,16 @@
 				templateUrl: 'app/dashboard/products/pageanalytic/global/global.html',
 				controllerAs: 'vm',
 				controller: 'GlobalCtrl',
-        // resolve: GlobalCtrl.resolve
+        resolve: GlobalCtrl.resolve
 			});
 	}
 
 	function GlobalCtrl(GlobalService) {
     var vm = this;
 
-    vm.ip = GlobalService.globalData.ip;
-    vm.pv = GlobalService.globalData.pv;
-    vm.uv = GlobalService.globalData.uv;
+    vm.ip = GlobalService.globalData.ip || 0;
+    vm.pv = GlobalService.globalData.pv || 0;
+    vm.uv = GlobalService.globalData.uv || 0;
 
 	}
 
