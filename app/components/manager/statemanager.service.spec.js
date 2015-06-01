@@ -54,7 +54,7 @@ describe('shared: StateManager', function() {
       var platform = Constant.PRODUCT_PLATFORM.SERVICE_MONITOR;
       var id = 'qwerty';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.servicemonitor', {id: id});
+      expect($state.go).toHaveBeenCalledWith('dashboard.servicemonitor.dailydata', {id: id});
     });
 
     it('should call go on $state with webpublish when webpublish', function() {
@@ -68,7 +68,7 @@ describe('shared: StateManager', function() {
       var platform = Constant.PRODUCT_PLATFORM.PAGE_ANALYTIC;
       var id = 'qwerty';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.pageanalytic', {id: id});
+      expect($state.go).toHaveBeenCalledWith('dashboard.pageanalytic.global', {id: id});
     });
 
   });

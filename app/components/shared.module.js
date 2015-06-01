@@ -8,6 +8,7 @@
       'myou.ui',
       'myou.util',
       'myou.filter',
-      'myou.testdevice'
+      'myou.testdevice',
+      'myou.approm'
     ]);
 })();

@@ -4,6 +4,7 @@
   function serviceMonitorConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor', {
+        abstract: true,
         url: '/servicemonitor/:id',
         templateUrl: 'app/dashboard/products/servicemonitor/servicemonitor.html',
         controllerAs: 'vm',
@@ -32,7 +33,7 @@
       vm.showAppKey = false;
     };
 
-    $state.go('dashboard.servicemonitor.dailydata');
+    // $state.go('dashboard.servicemonitor.dailydata');
   }
 
   ServiceMonitorCtrl.getAppId = {
