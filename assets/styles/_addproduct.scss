@@ -5,7 +5,7 @@
     width: 600px;
     margin: 0 auto;
     padding-bottom: 10px;
-    border: 1px solid #eee;
+    border: 1px solid #ccc  ;
 
     section {
       padding: 12px 16px;
@@ -19,7 +19,7 @@
 
   .label {
     display: inline-block;
-    color: #bababa;
+    color: #aaa;
     font-size: 16px;
   }
 
@@ -81,7 +81,7 @@ md-radio-group {
     i {
       margin-right: 16px;
       cursor: pointer;
-      color: #ccc;
+      color: #aaa;
       display: inline;
       box-sizing: border-box;
       width: 120px;
@@ -92,7 +92,7 @@ md-radio-group {
       border-radius: 3px;
       float: left;
       span {
-        color: #ccc;
+        color: #aaa;
         margin-left: 6px;
         font-size: 14px;
       }
