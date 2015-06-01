@@ -97,16 +97,16 @@
           </td>
           <td>
             <rs-dropdown>
-              <li ng-click="vm.showUpdateDescDialog($event, updateInfo)">
-                <a href="javascript:void(0)">
-                  <i class="fa fa-edit"></i>
-                  <span>版本描述</span>
-                </a>
-              </li>
               <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, false)" ng-class="{'hidden': vm.test === 'true'}">
                 <a href="javascript:void(0)">
                   <i class="fa fa-cog"></i>
                   <span>更新配置</span>
+                </a>
+              </li>
+              <li ng-click="vm.showUpdateDescDialog($event, updateInfo)">
+                <a href="javascript:void(0)">
+                  <i class="fa fa-edit"></i>
+                  <span>版本描述</span>
                 </a>
               </li>
               <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, true)" ng-class="{'hidden': vm.test === 'false'}">
