@@ -52,7 +52,6 @@ describe('LoginService', function() {
       .respond(postResponse);
     LoginService.login({name: 'rodson'});
     $httpBackend.flush();
-    expect(mockStorageService.set).toHaveBeenCalledWith('token', 'token');
     expect(mockStorageService.set).toHaveBeenCalledWith('user', 'user');
   });
 

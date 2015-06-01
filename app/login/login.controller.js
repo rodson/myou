@@ -15,7 +15,7 @@
       LoginService.login({
         email: vm.email,
         password: vm.password
-      }, ev);
+      }, ev, vm.autoLogin);
     };
   }
 

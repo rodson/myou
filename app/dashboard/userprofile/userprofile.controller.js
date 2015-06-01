@@ -8,7 +8,7 @@
 
     vm.logout = function(){
       localStorageService.set('user', null);
-      StorageManager.removeToken();
+      StorageManager.deleteToken();
       $state.go('login');
     };
 

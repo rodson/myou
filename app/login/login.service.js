@@ -2,11 +2,11 @@
   'use strict';
 
   function LoginService($http, $state, $mdToast,
-      Constant, localStorageService) {
+      Constant, localStorageService, StorageManager) {
 
     var LoginService = {};
 
-    LoginService.login = function (data, ev) {
+    LoginService.login = function (data, ev, autoLogin) {
       return $http.post(Constant.URL.LOGIN, data)
         .success(loginComplete)
         .error(loginFailed);
@@ -15,7 +15,7 @@
         var responseData = response;
 
         // Save data to local storage
-        localStorageService.set('token', responseData.token);
+        StorageManager.setToken(responseData.token, autoLogin);
         localStorageService.set('user', responseData.user);
 
         $state.go('dashboard.products');

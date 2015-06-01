@@ -14,12 +14,12 @@
       .primaryPalette('blue');
   }
 
-  function TokenInterceptor(localStorageService) {
+  function TokenInterceptor(localStorageService, StorageManager) {
     return {
       request: function(config) {
-        if (localStorageService.get('token')) {
+        if (StorageManager.getToken()) {
           config.headers.Authorization = 'Bearer ' +
-              localStorageService.get('token');
+              StorageManager.getToken();
         }
         return config;
       }

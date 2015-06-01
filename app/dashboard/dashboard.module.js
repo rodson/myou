@@ -13,15 +13,15 @@
       });
   }
 
-  function checkLoggedIn($q, $state, $http, localStorageService, Constant) {
+  function checkLoggedIn($q, $state, $http, localStorageService, Constant, StorageManager) {
     var deferred = $q.defer();
     $http.get(Constant.URL.CHECK_LOGIN)
       .success(function() {
         deferred.resolve();
       }).error(function() {
         deferred.reject();
-        if (localStorageService.get('token')) {
-          localStorageService.remove('token');
+        if (StorageManager.getToken()) {
+          StorageManager.deleteToken();
           localStorageService.remove('user');
         }
         $state.go('login');
