@@ -17,6 +17,8 @@
 
     vm.app = localStorageService.get('app');
 
+    FileUploadService.init();
+
     vm.uploadData = FileUploadService.uploadData;
 
     vm.checkAppType = function(type) {

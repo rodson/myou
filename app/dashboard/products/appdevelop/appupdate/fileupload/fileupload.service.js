@@ -9,6 +9,13 @@
 
     FileUploadService.uploadData = {};
 
+    FileUploadService.init = function() {
+      FileUploadService.uploadData.apk = null;
+      FileUploadService.uploadData.zip = null;
+      FileUploadService.uploadData.exe = null;
+      FileUploadService.uploadData.updateDesc = '';
+    };
+
     FileUploadService.checkAppType = function(platform, type) {
       switch(type) {
         case 'android':
