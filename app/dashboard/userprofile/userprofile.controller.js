@@ -1,13 +1,14 @@
 (function() {
   'use strict';
 
-  function UserProfileCtrl(localStorageService, $mdDialog, $mdToast, $state) {
+  function UserProfileCtrl(localStorageService, $mdDialog, $mdToast, $state, StorageManager) {
     var vm = this;
     var user = localStorageService.get('user');
     vm.username = user.username;
 
     vm.logout = function(){
       localStorageService.set('user', null);
+      StorageManager.removeToken();
       $state.go('login');
     };
 

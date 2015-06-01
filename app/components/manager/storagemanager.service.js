@@ -8,6 +8,10 @@
       return localStorageService.get('app');
     };
 
+    StorageManager.removeToken = function() {
+      localStorageService.remove('token');
+    };
+
     StorageManager.setEvent = function(event) {
       localStorageService.set('event', event);
     };
