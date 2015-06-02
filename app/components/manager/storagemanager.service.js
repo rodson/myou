@@ -42,6 +42,18 @@
       return localStorageService.get('app');
     };
 
+    StorageManager.setPath = function(path) {
+      localStorageService.set('currentpath', path);
+    };
+
+    StorageManager.getPath = function() {
+      return localStorageService.get('currentpath');
+    };
+
+    StorageManager.deletePath = function() {
+      localStorageService.remove('currentpath');
+    };
+
     StorageManager.setEvent = function(event) {
       localStorageService.set('event', event);
     };

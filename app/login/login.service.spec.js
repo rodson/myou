@@ -43,24 +43,6 @@ describe('LoginService', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should save token and user by calling set on storageService', function() {
-    var postResponse = {
-        'token': 'token',
-        'user': 'user'
-    };
-    $httpBackend.whenPOST(Constant.URL.LOGIN_URL, {name: 'rodson'})
-      .respond(postResponse);
-    LoginService.login({name: 'rodson'});
-    $httpBackend.flush();
-    expect(mockStorageService.set).toHaveBeenCalledWith('user', 'user');
-  });
-
-  it('should go to dashboard state when login successfully', function() {
-    LoginService.login({name: 'rodson'});
-    $httpBackend.flush();
-    expect($state.go).toHaveBeenCalled();
-  });
-
   it('should show error toast when login failed', function() {
     authRequestHandler.respond(401, '');
     $httpBackend.expectPOST(Constant.URL.LOGIN_URL, {name: 'rodson'});

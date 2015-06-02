@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function LoginService($http, $state, $mdToast,
+  function LoginService($http, $state, $mdToast, $location,
       Constant, localStorageService, StorageManager) {
 
     var LoginService = {};
@@ -18,7 +18,13 @@
         StorageManager.setToken(responseData.token, autoLogin);
         localStorageService.set('user', responseData.user);
 
-        $state.go('dashboard.products');
+        var currentPath = StorageManager.getPath();
+        if (currentPath) {
+          $location.path(currentPath);
+          StorageManager.deletePath();
+        } else {
+          $state.go('dashboard.products');
+        }
       }
 
       function loginFailed(error) {
