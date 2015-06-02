@@ -7,8 +7,9 @@
     var UserRetainService = {};
 
     UserRetainService.app = {};
-    UserRetainService.radioDate = 'today';
+    UserRetainService.radioDate = 'last7days';
     UserRetainService.tableData = [];
+    UserRetainService.date = {};
 
     UserRetainService.getApp = function() {
       UserRetainService.app = StorageManager.getApp();
@@ -44,19 +45,19 @@
           checkDate = MomentDateService.getToday();
           break;
       }
-      UserRetainService.startdate = checkDate.start;
-      UserRetainService.enddate = checkDate.end;
+      UserRetainService.date.start = checkDate.start;
+      UserRetainService.date.end = checkDate.end;
     };
 
     UserRetainService.getTableData = function() {
-      if (!UserRetainService.startdate) {
+      if (!UserRetainService.date.start) {
         UserRetainService.init();
-        UserRetainService.getCheckDate('today');
+        UserRetainService.getCheckDate('last7days');
       }
 
       return $http.get(UrlManager.getUserRetainUrl(UserRetainService.app.appKey) +
-        '?start_date=' + UserRetainService.startdate +
-        '&end_date=' + UserRetainService.enddate +
+        '?start_date=' + UserRetainService.date.start +
+        '&end_date=' + UserRetainService.date.end +
         '&platform=' + UserRetainService.app.platform +
         '&stats=user_retain').success(function(data) {
           UserRetainService.tableData = data;

@@ -17,15 +17,14 @@
 
     vm.radioDate = UserRetainService.radioDate;
     vm.tableData = UserRetainService.tableData;
+    vm.date = UserRetainService.date;
 
     UserRetainService.init();
 
     vm.getCheckDate = function() {
       UserRetainService.getCheckDate(vm.radioDate);
-      $state.transitionTo($state.current, $stateParams, {
-        reload: true,
-        inherit: false,
-        notify: true
+      UserRetainService.getTableData().then(function() {
+        vm.tableData = UserRetainService.tableData;
       });
     };
 
