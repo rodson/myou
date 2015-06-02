@@ -10,6 +10,7 @@
     DeviceStatService.radioDate = 'today';
     DeviceStatService.radioDataType = 'resolution';
     DeviceStatService.total = 1;
+    DeviceStatService.date = {};
 
     DeviceStatService.chartConfig = {
       options: {
@@ -80,12 +81,12 @@
           checkDate = MomentDateService.getToday();
           break;
       }
-      DeviceStatService.startdate = checkDate.start;
-      DeviceStatService.enddate = checkDate.end;
+      DeviceStatService.date.start = checkDate.start;
+      DeviceStatService.date.end = checkDate.end;
     };
 
     DeviceStatService.getBarChartData = function(stats) {
-      if (!DeviceStatService.startdate) {
+      if (!DeviceStatService.date.start) {
         DeviceStatService.init();
       }
 
@@ -96,8 +97,8 @@
       }
 
       return $http.get(UrlManager.getDeviceUrl(DeviceStatService.app.appKey) +
-        '?start_date=' + DeviceStatService.startdate +
-        '&end_date=' + DeviceStatService.enddate +
+        '?start_date=' + DeviceStatService.date.start +
+        '&end_date=' + DeviceStatService.date.end +
         '&platform=' + DeviceStatService.app.platform +
         '&stats=' + stats).success(function(data) {
           $timeout(function() {

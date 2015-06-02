@@ -20,6 +20,7 @@
     vm.chartConfig = DeviceStatService.chartConfig;
     vm.radioDate = DeviceStatService.radioDate;
     vm.radioDataType = DeviceStatService.radioDataType;
+    vm.date = DeviceStatService.date;
 
     vm.getCheckDate = function() {
       DeviceStatService.getCheckDate(vm.radioDate);
