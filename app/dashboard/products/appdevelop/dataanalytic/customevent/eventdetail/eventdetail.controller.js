@@ -55,6 +55,10 @@
   }
 
   EventDetailCtrl.resolve = {
+    getEventInfo: function(EventDetailService, $stateParams, getApp) {
+      return EventDetailService.getEventInfo($stateParams.eventId);
+    },
+
     getEventData: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventData(eventId);
