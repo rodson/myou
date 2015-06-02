@@ -45,7 +45,7 @@
   }
 
   RomUpdateSettingCtrl.resolve = {
-    getUpdateInfos: function(RomUpdateSettingService) {
+    getUpdateInfos: function(RomUpdateSettingService, getApp) {
       return RomUpdateSettingService.getUpdateInfos();
     }
   };

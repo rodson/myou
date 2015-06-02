@@ -31,8 +31,8 @@
   }
 
   AppDevelopCtrl.resolve = {
-    getApp: function(AppDevelopService, $stateParams) {
-      return AppDevelopService.getApp($stateParams.id);
+    getApp: function(RouteStateManager, $stateParams) {
+      return RouteStateManager.getApp($stateParams.id);
     }
   };
 
