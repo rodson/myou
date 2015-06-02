@@ -1,15 +1,12 @@
 <div class="clearfix">
-  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
-    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
-    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
-    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
-    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
-  </md-radio-group>
-</div>
+  <md-select class="nopadding pull-left" placeholder="Pick" ng-model="vm.radioDate" ng-change='vm.getCheckDate()'> <md-select-label>{{ vm.date.start + ' 到 ' + vm.date.end }}</md-select-label>
+    <md-option value="last30days"> 过去30天 </md-option>
+    <md-option value="last7days"> 过去7天 </md-option>
+    <md-option value="yesterday"> 昨天 </md-option>
+    <md-option value="today"> 今天 </md-option>
+  </md-select>
 
-<!-- Key data linechart -->
-<div>
-  <md-radio-group ng-model="vm.radioKeyDataType"  class="pa-pull-right" ng-change='vm.getLineChartData()'>
+  <md-radio-group ng-model="vm.radioKeyDataType"  class="nopadding pull-right" ng-change='vm.getLineChartData()'>
     <md-radio-button ng-show="vm.isWindowsApp()" value="new_user_count" class="md-primary">新增装机量</md-radio-button>
     <md-radio-button ng-hide="vm.isWindowsApp()" value="new_user_count" class="md-primary">新增用户</md-radio-button>
     <md-radio-button ng-show="vm.isWindowsApp()" value="active_user_count" class="md-primary">活跃电脑数</md-radio-button>
@@ -18,7 +15,10 @@
     <md-radio-button ng-show="vm.isWindowsApp()" value="accumulate_user_count" class="md-primary">累计装机量</md-radio-button>
     <md-radio-button ng-hide="vm.isWindowsApp()" value="accumulate_user_count" class="md-primary">累计用户</md-radio-button>
   </md-radio-group>
+</div>
 
+<!-- Key data linechart -->
+<div>
   <highchart config="vm.chartConfig"></highchart>
 </div>
 

@@ -20,6 +20,7 @@
     vm.tableData = KeyDataService.tableData;
     vm.radioDate = KeyDataService.radioDate;
     vm.radioKeyDataType = KeyDataService.radioKeyDataType;
+    vm.date = KeyDataService.date;
 
     vm.getCheckDate = function() {
       KeyDataService.getCheckDate(vm.radioDate);

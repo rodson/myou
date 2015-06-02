@@ -6,9 +6,10 @@
 
     KeyDataService.app = {};
 
-    KeyDataService.radioDate = 'today';
+    KeyDataService.radioDate = 'last7days';
     KeyDataService.radioKeyDataType = 'new_user_count';
     KeyDataService.tableData = [];
+    KeyDataService.date = {};
 
     // Key data statistic line char config
     KeyDataService.chartConfig = {
@@ -33,7 +34,7 @@
       // Y axis data
       series: [{
         showInLegend: false,
-        pointStart: (new Date(KeyDataService.startdate)).getTime(),
+        pointStart: (new Date(KeyDataService.date.start)).getTime(),
         pointInterval: 24 * 3600 * 1000,
         name: '',
         data: []
@@ -71,7 +72,7 @@
 
     KeyDataService.init = function() {
       KeyDataService.getApp();
-      KeyDataService.getCheckDate('today');
+      KeyDataService.getCheckDate('last7days');
     };
 
 
@@ -100,13 +101,13 @@
           checkDate = MomentDateService.getToday();
           break;
       }
-      KeyDataService.startdate = checkDate.start;
-      KeyDataService.enddate = checkDate.end;
+      KeyDataService.date.start = checkDate.start;
+      KeyDataService.date.end = checkDate.end;
       KeyDataService.chartConfig.series[0].pointStart = (new Date(checkDate.start)).getTime();
     };
 
     KeyDataService.getLineChartData = function(stats) {
-      if (!KeyDataService.startdate) {
+      if (!KeyDataService.date.start) {
         KeyDataService.init();
       }
 
@@ -117,7 +118,7 @@
       }
 
       return $http.get(UrlManager.getAnalyzeKeyDataUrl(KeyDataService.app.appKey) +
-        '?start_date=' + KeyDataService.startdate + '&end_date=' + KeyDataService.enddate +
+        '?start_date=' + KeyDataService.date.start + '&end_date=' + KeyDataService.date.end +
         '&platform=' + KeyDataService.app.platform + '&stats=' + stats)
         .success(function(data) {
           KeyDataService.chartConfig.series[0].data = data.counts;
@@ -125,12 +126,12 @@
     };
 
     KeyDataService.getTableData = function() {
-      if (!KeyDataService.startdate) {
+      if (!KeyDataService.date.start) {
         KeyDataService.init();
       }
 
       return $http.get(UrlManager.getAnalyzeKeyDataUrl(KeyDataService.app.appKey) +
-        '?start_date=' + KeyDataService.startdate + '&end_date=' + KeyDataService.enddate +
+        '?start_date=' + KeyDataService.date.start + '&end_date=' + KeyDataService.date.end +
         '&platform=' + KeyDataService.app.platform + '&stats=key_data')
         .success(function(data) {
           KeyDataService.tableData = data;
