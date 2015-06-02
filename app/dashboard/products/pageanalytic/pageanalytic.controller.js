@@ -60,7 +60,7 @@
         localStorageService.set('trickId', PageAnalyticService.trickId);
       });
     }
-  }
+  };
 
   function DialogController($mdDialog, data) {
     var vm = this;

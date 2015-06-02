@@ -10,64 +10,64 @@
     areaService.data = {};
 
     /******************************* test data start ******************************/
-    var testData = [{
-      'country': 'China',
-      'ip': '1',
-      'province': '上海市',
-      'pv': '21',
-      'uv': '1'
-    }, {
-      'country': '中国',
-      'ip': '1',
-      'province': '吉林省',
-      'pv': '31',
-      'uv': '1'
-    }, {
-      'country': '中国',
-      'ip': '28',
-      'province': '广东省',
-      'pv': '368',
-      'uv': '65'
-    }, {
-      'country': 'China',
-      'ip': '1',
-      'province': '湖北省',
-      'pv': '82',
-      'uv': '1'
-    }, {
-      'country': '中国',
-      'ip': '2',
-      'province': '湖南省',
-      'pv': '71',
-      'uv': '2'
-    }, {
-      'country': '中国',
-      'ip': '2',
-      'province': '陕西省',
-      'pv': '71',
-      'uv': '2'
-    }];
+    // var testData = [{
+    //   'country': 'China',
+    //   'ip': '1',
+    //   'province': '上海市',
+    //   'pv': '21',
+    //   'uv': '1'
+    // }, {
+    //   'country': '中国',
+    //   'ip': '1',
+    //   'province': '吉林省',
+    //   'pv': '31',
+    //   'uv': '1'
+    // }, {
+    //   'country': '中国',
+    //   'ip': '28',
+    //   'province': '广东省',
+    //   'pv': '368',
+    //   'uv': '65'
+    // }, {
+    //   'country': 'China',
+    //   'ip': '1',
+    //   'province': '湖北省',
+    //   'pv': '82',
+    //   'uv': '1'
+    // }, {
+    //   'country': '中国',
+    //   'ip': '2',
+    //   'province': '湖南省',
+    //   'pv': '71',
+    //   'uv': '2'
+    // }, {
+    //   'country': '中国',
+    //   'ip': '2',
+    //   'province': '陕西省',
+    //   'pv': '71',
+    //   'uv': '2'
+    // }];
 
-    areaService.data.tableData = testData;
-    areaService.data.pv = [];
-    areaService.data.uv = [];
-    areaService.data.ip = [];
+    // areaService.data.tableData = testData;
+    // areaService.data.pv = [];
+    // areaService.data.uv = [];
+    // areaService.data.ip = [];
 
-    testData.forEach(function(dt) {
+    // testData.forEach(function(dt) {
 
-      areaService.data.pv.push({
-        name: dt.province,
-        value: parseInt(dt.pv)
-      });
-      areaService.data.uv.push({
-        name: dt.province,
-        value: parseInt(dt.uv)
-      });
-      areaService.data.ip.push({
-        name: dt.province,
-        value: parseInt(dt.ip)
-      });
-    });
+    //   areaService.data.pv.push({
+    //     name: dt.province,
+    //     value: parseInt(dt.pv)
+    //   });
+    //   areaService.data.uv.push({
+    //     name: dt.province,
+    //     value: parseInt(dt.uv)
+    //   });
+    //   areaService.data.ip.push({
+    //     name: dt.province,
+    //     value: parseInt(dt.ip)
+    //   });
+    // });
 
     // var findHcKeyFromProvince = function(province) {
     //   var length = AreaMapDataConstant.MAP_DATA.features.length;
@@ -93,18 +93,20 @@
           areaService.data.ip = [];
 
           data.forEach(function(dt) {
-            areaService.data.pv.push({
-              name: dt.province,
-              value: parseInt(dt.pv)
-            });
-            areaService.data.uv.push({
-              name: dt.province,
-              value: parseInt(dt.uv)
-            });
-            areaService.data.ip.push({
-              name: dt.province,
-              value: parseInt(dt.ip)
-            });
+            if (AreaMapDataConstant.PROVICE_DATA.indexOf(dt.province) !== -1) {
+              areaService.data.pv.push({
+                name: dt.province,
+                value: parseInt(dt.pv)
+              });
+              areaService.data.uv.push({
+                name: dt.province,
+                value: parseInt(dt.uv)
+              });
+              areaService.data.ip.push({
+                name: dt.province,
+                value: parseInt(dt.ip)
+              });
+            }
           });
 
           // PieArrayService.getLarger(areaService.data.pv);

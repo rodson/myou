@@ -190,6 +190,13 @@
       return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=os_family_name')
         .success(function(data) {
 
+          clientInfoService.data.dataOs = {
+            tableData: [],
+            ip: [],
+            pv: [],
+            uv: []
+          };
+
           clientInfoService.data.dataOs.tableData = data;
           data.forEach(function(dt) {
             clientInfoService.data.dataOs.pv.push([dt.name, parseInt(dt.pv)]);
@@ -211,6 +218,13 @@
       return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=browser_name')
         .success(function(data) {
 
+          clientInfoService.data.dataBr = {
+            tableData: [],
+            ip: [],
+            pv: [],
+            uv: []
+          };
+
           clientInfoService.data.dataBr.tableData = data;
           data.forEach(function(dt) {
             clientInfoService.data.dataBr.pv.push([dt.name, parseInt(dt.pv)]);
@@ -231,6 +245,13 @@
     clientInfoService.getDataSr = function(start, end, trickId, cb) {
       return $http.get(Constant.URL.PRODUCTS_DEVICE + '?start_date=' + start + '&end_date=' + end + '&tid=' + trickId + '&type=sr')
         .success(function(data) {
+
+          clientInfoService.data.dataSr = {
+            tableData: [],
+            ip: [],
+            pv: [],
+            uv: []
+          };
 
           clientInfoService.data.dataSr.tableData = data;
           data.forEach(function(dt) {
