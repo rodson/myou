@@ -19,9 +19,9 @@
       });
   }
 
-  function AppRomCtrl(MomentDateService, localStorageService, $timeout, AppRomService, $mdDialog, $mdToast) {
+  function AppRomCtrl(MomentDateService, StorageManager, $timeout, AppRomService, $mdDialog, $mdToast) {
     var vm = this;
-    vm.app = localStorageService.get('app');
+    vm.app = StorageManager.getApp();
 
     /***************************** 每分钟下载曲线 start *******************************/
     vm.onedayCount = 0;
@@ -116,7 +116,7 @@
     vm.limitCount = 0;
     vm.showError = false;
     vm.isOpenUpdatePolicy = false;
-    vm.userInfo = localStorageService.get('user');
+    vm.userInfo = StorageManager.getUser();
 
     vm.selectAll = function() {
       vm.provinces.forEach(function(dt) {

@@ -2,7 +2,7 @@
   'use strict';
 
   function LoginService($http, $state, $mdToast, $location,
-      Constant, localStorageService, StorageManager) {
+      Constant, StorageManager) {
 
     var LoginService = {};
 
@@ -16,7 +16,7 @@
 
         // Save data to local storage
         StorageManager.setToken(responseData.token, autoLogin);
-        localStorageService.set('user', responseData.user);
+        StorageManager.setUser(responseData.user);
 
         var currentPath = StorageManager.getPath();
         if (currentPath) {

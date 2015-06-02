@@ -34,6 +34,18 @@
       }
     };
 
+    StorageManager.setUser = function(user) {
+      $localStorage.user = user;
+    };
+
+    StorageManager.getUser = function() {
+      return $localStorage.user;
+    };
+
+    StorageManager.deleteUser = function() {
+      delete $localStorage.user;
+    };
+
     StorageManager.setApp = function(app) {
       localStorageService.set('app', app);
     };

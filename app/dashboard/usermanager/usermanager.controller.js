@@ -12,9 +12,9 @@
       });
   }
 
-  function UserManagerCtrl(localStorageService, $mdDialog, $mdToast, UserGroupService, UserInfoService) {
+  function UserManagerCtrl(StorageManager, $mdDialog, $mdToast, UserGroupService, UserInfoService) {
     var vm = this;
-    vm.userInfo = localStorageService.get('user');
+    vm.userInfo = StorageManager.getUser();
 
     vm.isAdmin = function() {
       return vm.userInfo.userType === 'root';

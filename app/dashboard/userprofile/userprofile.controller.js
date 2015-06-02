@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  function UserProfileCtrl(localStorageService, $mdDialog, $mdToast, $state, StorageManager) {
+  function UserProfileCtrl($mdDialog, $mdToast, $state, StorageManager) {
     var vm = this;
-    var user = localStorageService.get('user');
+    var user = StorageManager.getUser();
     vm.username = user.username;
 
     vm.logout = function(){
-      localStorageService.set('user', null);
+      StorageManager.deleteUser();
       StorageManager.deleteToken();
       $state.go('login');
     };
@@ -49,7 +49,7 @@
     };
   }
 
-  function ModifyUserDialogCtrl($mdDialog, $timeout, localStorageService, data, UserProfileService) {
+  function ModifyUserDialogCtrl($mdDialog, $timeout, StorageManager, data, UserProfileService) {
     var vm = this;
     vm.name = data.username;
     vm.email = data.email;
@@ -75,7 +75,7 @@
               userType: data.userType,
               groupName: data.groupName
             };
-            localStorageService.set('user', profile);
+            StorageManager.setUser(profile);
             $mdDialog.hide();
           }
         });
