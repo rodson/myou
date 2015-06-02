@@ -23,6 +23,7 @@
 
     vm.show = function() {
       vm.showAppKey = true;
+      vm.showModify = false;
     };
 
     vm.hide = function() {
