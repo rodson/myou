@@ -107,7 +107,7 @@
   }
 
   UserInfoCtrl.resolve = {
-    getData: function(localStorageService, MomentDateService, UserinfoService) {
+    getData: function(localStorageService, MomentDateService, UserinfoService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');
       return UserinfoService.getData(today.start, today.end, trickId);

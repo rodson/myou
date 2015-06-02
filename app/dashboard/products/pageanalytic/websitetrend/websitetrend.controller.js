@@ -86,7 +86,7 @@
   }
 
   WebsiteTrendCtrl.resolve = {
-    getData: function(localStorageService, MomentDateService, WebsiteTrendService) {
+    getData: function(localStorageService, MomentDateService, WebsiteTrendService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');
       return WebsiteTrendService.getData(trickId, today.start, today.end);

@@ -52,6 +52,9 @@
           }
         }
       },
+      credits: {
+        enabled: false
+      },
       title: {
         text: 'API实时访问数据'
       },
@@ -76,7 +79,7 @@
         borderWidth: 0
       },
       noData: 'No data',
-      loading: true
+      loading: false
     };
 
     vm.highchartsAPP = {

@@ -111,7 +111,7 @@
   }
 
   OperatorCtrl.resolve = {
-    getData: function(localStorageService, MomentDateService, OperatorService) {
+    getData: function(localStorageService, MomentDateService, OperatorService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');
       return OperatorService.getData(today.start, today.end, trickId);

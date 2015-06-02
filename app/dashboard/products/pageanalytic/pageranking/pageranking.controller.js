@@ -64,7 +64,7 @@
   }
 
   PageRankingCtrl.resolve = {
-    getData: function(localStorageService, MomentDateService, PageRankingService) {
+    getData: function(localStorageService, MomentDateService, PageRankingService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');
       return PageRankingService.getData(today.start, today.end, trickId);

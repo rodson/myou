@@ -60,7 +60,7 @@
 
     vm.highchartsMap = {
       loading: false,
-      noData: 'No data',
+      // noData: 'No data',
       options: {
         chart: {
           height: 450,
@@ -179,7 +179,7 @@
   }
 
   AreaCtrl.resolve = {
-    getData: function(localStorageService, MomentDateService, AreaService) {
+    getData: function(localStorageService, MomentDateService, AreaService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');
       return AreaService.getData(today.start, today.end, trickId);
