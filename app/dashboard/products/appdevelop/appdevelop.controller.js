@@ -22,6 +22,7 @@
     };
 
     vm.show = function() {
+      vm.product = localStorageService.get('app');
       vm.showAppKey = true;
       vm.showModify = false;
     };

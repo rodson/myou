@@ -16,7 +16,8 @@
       </md-input-container>
       <md-button class="md-primary" ng-click="vm.saveAppKey()" ng-show="vm.showModify"> 保存 </md-button>
 
-      <span flex class='error-tip'>{{ vm.errorTip }}</span>
+      <span class='error-tip' ng-show="vm.showModify">{{ vm.errorTip }}</span>
+      <span flex></span>
       <md-button class="md-primary" ng-click="vm.modifyAppKey()"> 修改AppKey </md-button>
     </div>
   </md-toolbar>
