@@ -117,9 +117,9 @@
           <md-checkbox md-no-ink aria-label="使用公共接口" ng-model="vm.usePublic" class="md-primary" ng-change='vm.usePublicChange()'>
             使用公共接口
           </md-checkbox>
-          <md-select name='selectName' placeholder="选择接口" ng-model="vm.selectCallee" ng-disabled='!vm.usePublic'>
-            <md-option ng-value="callee" ng-repeat="callee in vm.calleeList">{{callee.display}}</md-option>
-          </md-select>
+          <select name='selectName' placeholder="选择接口" ng-model="vm.selectCallee.interface_id" ng-disabled='!vm.usePublic'>
+            <option ng-value="callee.interface_id" ng-repeat="callee in vm.calleeList">{{callee.display}}</md-option>
+          </select>
         </div>
 
       </md-dialog-content>

@@ -370,10 +370,13 @@
             }
             $mdDialog.hide('添加成功');
           });
-          $timeout(function() {
-            vm.errortip = '';
-          }, 2000);
+        } else {
+          vm.errortip = '请选择一个公共接口';
         }
+        $timeout(function() {
+          vm.errortip = '';
+        }, 2000);
+
       } else {
         if (!vm.interfaceName || !vm.interfaceDesc) {
           return;

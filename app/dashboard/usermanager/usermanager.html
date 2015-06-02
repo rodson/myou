@@ -19,7 +19,7 @@
           <md-button class="md-icon-button" aria-label='编辑分组' title='编辑分组' ng-click="vm.showEditGroupDialog($event, group)">
             <ng-md-icon icon="mode_edit" size="25"></ng-md-icon>
           </md-button>
-          <md-button class="md-icon-button" aria-label='删除分组' title='删除分组' ng-click="vm.showDeleteGroupDialog($event, group)">
+          <md-button class="md-icon-button" aria-label='删除分组' title='删除分组' ng-click="vm.showDeleteGroupDialog($event, group)" ng-show="vm.isAdmin()">
             <ng-md-icon icon="delete" size="25"></ng-md-icon>
           </md-button>
         </div>
