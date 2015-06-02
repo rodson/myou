@@ -107,9 +107,7 @@
     };
 
     KeyDataService.getLineChartData = function(stats) {
-      if (!KeyDataService.date.start) {
-        KeyDataService.init();
-      }
+      KeyDataService.init();
 
       if (!stats) {
         stats = KeyDataService.radioKeyDataType;
@@ -126,9 +124,7 @@
     };
 
     KeyDataService.getTableData = function() {
-      if (!KeyDataService.date.start) {
-        KeyDataService.init();
-      }
+      KeyDataService.init();
 
       return $http.get(UrlManager.getAnalyzeKeyDataUrl(KeyDataService.app.appKey) +
         '?start_date=' + KeyDataService.date.start + '&end_date=' + KeyDataService.date.end +
