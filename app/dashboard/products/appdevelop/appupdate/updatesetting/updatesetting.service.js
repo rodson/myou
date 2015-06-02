@@ -204,6 +204,10 @@
 
       rule = angular.copy(rule);
 
+      if (!rule.targetVersion) {
+        rule.targetVersion = versions[0];
+      }
+
       $mdDialog.show({
         controller: 'UpdateRuleDialogCtrl',
         controllerAs: 'vm',
