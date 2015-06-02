@@ -9,6 +9,7 @@
         templateUrl: 'app/dashboard/products/systemupdate/systemupdate.html',
         controllerAs: 'vm',
         controller: 'SystemUpdateCtrl',
+        resolve: SystemUpdateCtrl.resolve
       });
   }
 
@@ -82,6 +83,12 @@
       );
     };
   }
+
+  SystemUpdateCtrl.resolve = {
+    getApp: function(RouteStateManager, $stateParams) {
+      return RouteStateManager.getApp($stateParams.id);
+    }
+  };
 
   angular
     .module('myou.dashboard.systemupdate')

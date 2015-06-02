@@ -73,11 +73,15 @@
   }
 
   WebPublishCtrl.resolve = {
-    getIps: function(WebPublishService) {
+    getApp: function(RouteStateManager, $stateParams) {
+      return RouteStateManager.getApp($stateParams.id);
+    },
+
+    getIps: function(WebPublishService, getApp) {
       return WebPublishService.getIps();
     },
 
-    getUpdateInfos: function(WebPublishService) {
+    getUpdateInfos: function(WebPublishService, getApp) {
       return WebPublishService.getUpdateInfos();
     }
   };

@@ -7,7 +7,8 @@
         url: '/fileupload',
         templateUrl: 'app/dashboard/products/systemupdate/fileupload/fileupload.html',
         controllerAs: 'vm',
-        controller: 'RomFileUploadCtrl'
+        controller: 'RomFileUploadCtrl',
+        resolve: RomFileUploadCtrl.resolve
       });
   }
 
@@ -41,6 +42,12 @@
       RomFileUploadService.upload();
     };
   }
+
+  RomFileUploadCtrl.resolve = {
+    getData: function(getApp) {
+      return getApp;
+    }
+  };
 
   function RomUploadProgressDialogCtrl($mdDialog, data, RomFileUploadService, Upload) {
     var vm = this;
