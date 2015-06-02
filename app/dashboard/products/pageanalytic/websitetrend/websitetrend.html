@@ -4,15 +4,17 @@
   <span class='margin-left-30'>截止日期：</span>
   <datatime-picker init-datatime='vm.enddate' display-mode='date'></datatime-picker>
   <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
-
-  <md-radio-group ng-model="vm.radioChecked" class='pa-pull-right' ng-change='vm.getCheckDate()'>
-    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
-    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
-    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
-    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
-  </md-radio-group>
+  <div class='pull-right'>
+    <span>快速查询：</span>
+    <md-select class="nopadding normal-size normal-text" placeholder="Pick" ng-model="vm.radioChecked" ng-change='vm.getCheckDate()'>
+      <md-select-label>{{ vm.startdate + ' 到 ' + vm.enddate }}</md-select-label>
+      <md-option value="last30days"> 过去30天 </md-option>
+      <md-option value="last7days"> 过去7天 </md-option>
+      <md-option value="yesterday"> 昨天 </md-option>
+      <md-option value="today"> 今天 </md-option>
+    </md-select>
+  </div>
 </div>
 <div>
   <highchart id="chart" class='margin-top-30 border-radio-15' config="vm.highchartsNG"></highchart>
 </div>
-
