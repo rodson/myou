@@ -6,11 +6,12 @@
 
     EventDetailService.app = {};
     EventDetailService.event = {};
-    EventDetailService.radioDate = 'today';
+    EventDetailService.radioDate = 'last7days';
     EventDetailService.radioDataType = 'count';
     EventDetailService.tableData = [];
     EventDetailService.lineChart = {};
     EventDetailService.eventLabelData = [];
+    EventDetailService.date = {};
 
     EventDetailService.chartConfig = {
       options: {
@@ -34,7 +35,7 @@
       // Y axis data
       series: [{
         showInLegend: false,
-        pointStart: (new Date(EventDetailService.startdate)).getTime(),
+        pointStart: (new Date(EventDetailService.date.start)).getTime(),
         pointInterval: 24 * 3600 * 1000,
         name: '',
         data: []
@@ -78,7 +79,7 @@
     EventDetailService.init = function() {
       EventDetailService.getApp();
       EventDetailService.getEvent();
-      EventDetailService.getCheckDate('today');
+      EventDetailService.getCheckDate('last7days');
     };
 
     EventDetailService.getCheckDate = function(selectedDate) {
@@ -102,8 +103,8 @@
           checkDate = MomentDateService.getToday();
           break;
       }
-      EventDetailService.startdate = checkDate.start;
-      EventDetailService.enddate = checkDate.end;
+      EventDetailService.date.start = checkDate.start;
+      EventDetailService.date.end = checkDate.end;
       EventDetailService.chartConfig.series[0].pointStart = (new Date(checkDate.start)).getTime();
     };
 
@@ -124,10 +125,10 @@
     };
 
     EventDetailService.getEventData = function(eventId, version) {
-      if (!EventDetailService.startdate) {
+      if (!EventDetailService.date.start) {
         EventDetailService.init();
       }
-      var queryString = '?start_date=' + EventDetailService.startdate + '&end_date=' + EventDetailService.enddate;
+      var queryString = '?start_date=' + EventDetailService.date.start + '&end_date=' + EventDetailService.date.end;
 
       if (version) {
         queryString = queryString + '&version=' + version;
@@ -143,11 +144,11 @@
     };
 
     EventDetailService.getEventLabelData = function(eventId, version) {
-      if (!EventDetailService.startdate) {
+      if (!EventDetailService.date.start) {
         EventDetailService.init();
       }
 
-      var queryString = '?start_date=' + EventDetailService.startdate + '&end_date=' + EventDetailService.enddate;
+      var queryString = '?start_date=' + EventDetailService.date.start + '&end_date=' + EventDetailService.date.end;
 
       if (version) {
         queryString = queryString + '&version=' + version;

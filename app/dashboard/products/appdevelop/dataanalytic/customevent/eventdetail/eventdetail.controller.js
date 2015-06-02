@@ -25,6 +25,7 @@
     vm.tableData = EventDetailService.tableData;
     vm.eventLabelData = EventDetailService.eventLabelData;
     vm.versions = EventDetailService.versions;
+    vm.date = EventDetailService.date;
 
     vm.getCheckDate = function() {
       EventDetailService.getCheckDate(vm.radioDate);

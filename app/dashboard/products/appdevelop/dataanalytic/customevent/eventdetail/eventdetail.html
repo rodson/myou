@@ -2,13 +2,15 @@
   <span class="main-title">
     {{ vm.event.event_name }}
   </span>
-  <md-radio-group ng-model="vm.radioDate" class='pa-pull-right' ng-change='vm.getCheckDate()'>
-    <md-radio-button value="today" class="md-primary">今天</md-radio-button>
-    <md-radio-button value="yesterday" class="md-primary">昨天</md-radio-button>
-    <md-radio-button value="last7days" class="md-primary">最近7天</md-radio-button>
-    <md-radio-button value="last30days" class="md-primary">最近30天</md-radio-button>
-  </md-radio-group>
-  <md-select placeholder="所有版本" class="nopadding normal-text normal-size pull-right" ng-model="vm.selectedVersion" ng-change="vm.onVersionSelect()" style="margin-right: 32px; margin-top: 5px;">
+
+  <md-select class="nopadding normal-size normal-text pull-right" placeholder="Pick" ng-model="vm.radioDate" ng-change='vm.getCheckDate()'> <md-select-label>{{ vm.date.start + ' 到 ' + vm.date.end }}</md-select-label>
+    <md-option value="last30days"> 过去30天 </md-option>
+    <md-option value="last7days"> 过去7天 </md-option>
+    <md-option value="yesterday"> 昨天 </md-option>
+    <md-option value="today"> 今天 </md-option>
+  </md-select>
+
+  <md-select placeholder="所有版本" class="nopadding normal-text normal-size pull-right" ng-model="vm.selectedVersion" ng-change="vm.onVersionSelect()" style="margin-right: 32px;">
     <md-option value="">所有版本</md-option>
     <md-option ng-repeat="version in vm.versions" value="{{version}}"></md-option>
   </md-select>
