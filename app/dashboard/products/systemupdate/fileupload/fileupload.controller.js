@@ -69,8 +69,7 @@
 
         uploader = Upload.upload({
           url: returnData.uploadUrl,
-          data: uploadData,
-          mothod: 'POST',
+          fields: uploadData,
           file: RomFileUploadService.uploadData.file
         })
         .progress(onProgress)
