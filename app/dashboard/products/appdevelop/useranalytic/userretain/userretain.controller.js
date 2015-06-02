@@ -42,7 +42,7 @@
   }
 
   UserRetainCtrl.resolve = {
-    getTableData: function(UserRetainService) {
+    getTableData: function(UserRetainService, getApp) {
       return UserRetainService.getTableData();
     }
   };

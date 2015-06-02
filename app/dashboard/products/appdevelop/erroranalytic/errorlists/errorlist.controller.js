@@ -7,7 +7,8 @@
         url: '/errorlists',
         templateUrl: 'app/dashboard/products/appdevelop/erroranalytic/errorlists/errorlists.html',
         controllerAs: 'vm',
-        controller: 'ErrorListsCtrl'
+        controller: 'ErrorListsCtrl',
+        resolve: ErrorListsCtrl.resolve
       });
   }
 
@@ -139,6 +140,12 @@
     // vm.setPieChart();
     /**************************************** sider page end *****************************************/
   }
+
+  ErrorListsCtrl.resovle = {
+    getData: function(getApp) {
+      return getApp;
+    }
+  };
 
   angular
     .module('myou.dashboard.appdevelop')

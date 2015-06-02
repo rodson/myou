@@ -38,7 +38,7 @@
   }
 
   TestDeviceCtrl.resolve = {
-    getTestDevices: function(TestDeviceService) {
+    getTestDevices: function(TestDeviceService, getApp) {
       return TestDeviceService.getTestDevices();
     }
   };

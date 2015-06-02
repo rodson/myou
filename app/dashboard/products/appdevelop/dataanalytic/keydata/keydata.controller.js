@@ -47,11 +47,11 @@
   }
 
   KeyDataCtrl.resolve = {
-    getLineChartData: function(KeyDataService) {
+    getLineChartData: function(KeyDataService, getApp) {
       return KeyDataService.getLineChartData();
     },
 
-    getTableData: function(KeyDataService) {
+    getTableData: function(KeyDataService, getApp) {
       return KeyDataService.getTableData();
     }
   };

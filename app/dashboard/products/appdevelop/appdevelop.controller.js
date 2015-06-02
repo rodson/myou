@@ -8,7 +8,8 @@
         url: '/appdevelop/:id',
         templateUrl: 'app/dashboard/products/appdevelop/appdevelop.html',
         controllerAs: 'vm',
-        controller: 'AppDevelopCtrl'
+        controller: 'AppDevelopCtrl',
+        resolve: AppDevelopCtrl.resolve
       });
   }
 
@@ -28,6 +29,12 @@
       vm.showAppKey = false;
     };
   }
+
+  AppDevelopCtrl.resolve = {
+    getApp: function(AppDevelopService, $stateParams) {
+      return AppDevelopService.getApp($stateParams.id);
+    }
+  };
 
   angular
     .module('myou.dashboard.appdevelop')

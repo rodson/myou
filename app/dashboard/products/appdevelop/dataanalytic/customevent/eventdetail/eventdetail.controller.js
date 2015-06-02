@@ -55,17 +55,17 @@
   }
 
   EventDetailCtrl.resolve = {
-    getEventData: function($stateParams, EventDetailService) {
+    getEventData: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventData(eventId);
     },
 
-    getEventlabelData: function($stateParams, EventDetailService) {
+    getEventlabelData: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventLabelData(eventId);
     },
 
-    getEventVersions: function($stateParams, EventDetailService) {
+    getEventVersions: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventVersions(eventId);
     }

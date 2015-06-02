@@ -37,7 +37,7 @@
   }
 
   DeviceStatCtrl.resolve = {
-    getBarChartData: function(DeviceStatService) {
+    getBarChartData: function(DeviceStatService, getApp) {
       return DeviceStatService.getBarChartData();
     }
   };

@@ -48,11 +48,11 @@
   }
 
   CustomEventCtrl.resolve = {
-    getEvents: function(CustomEventService) {
+    getEvents: function(CustomEventService, getApp) {
       return CustomEventService.getEvents();
     },
 
-    getEventVersions: function(CustomEventService) {
+    getEventVersions: function(CustomEventService, getApp) {
       return CustomEventService.getEventVersions();
     }
   };

@@ -57,7 +57,7 @@
               <th>版本</th>
               <th>创建时间</th>
               <!-- <th>上传路径</th> -->
-              <th>发布路径</th>
+              <!-- <th>发布路径</th> -->
               <th>状态</th>
               <th></th>
             </tr>
@@ -67,7 +67,7 @@
               <td style="min-width: 100px">version {{ updateInfo.versionCode }}</td>
               <td style="min-width: 100px">{{ updateInfo.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
               <!-- <td style="min-width: 100px">{{ updateInfo.uploadDir }}</td> -->
-              <td style="min-width: 100px">{{ updateInfo.pubDir }}</td>
+              <!-- <td style="min-width: 100px">{{ updateInfo.pubDir }}</td> -->
               <td style="min-width: 100px">{{ vm.showPackageState(updateInfo) }}</td>
               <td>
                 <rs-dropdown>

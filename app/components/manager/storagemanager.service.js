@@ -34,8 +34,8 @@
       }
     };
 
-    StorageManager.removeToken = function() {
-      localStorageService.remove('token');
+    StorageManager.setApp = function(app) {
+      localStorageService.set('app', app);
     };
 
     StorageManager.getApp = function() {
