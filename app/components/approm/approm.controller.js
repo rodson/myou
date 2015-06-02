@@ -7,13 +7,15 @@
         url: '/appsetting',
         templateUrl: 'app/components/approm/approm.html',
         controllerAs: 'vm',
-        controller: 'AppRomCtrl'
+        controller: 'AppRomCtrl',
+        resolve: AppRomCtrl.resolve
       })
       .state('dashboard.systemupdate.approm', {
         url: '/romsetting',
         templateUrl: 'app/components/approm/approm.html',
         controllerAs: 'vm',
-        controller: 'AppRomCtrl'
+        controller: 'AppRomCtrl',
+        resolve: AppRomCtrl.resolve
       });
   }
 
@@ -328,6 +330,12 @@
 
     vm.getData();
   }
+
+  AppRomCtrl.resolve = {
+    getData: function(getApp) {
+      return getApp;
+    }
+  };
 
   angular
     .module('myou.approm')

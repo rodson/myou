@@ -48,11 +48,11 @@
   }
 
   UpdateSettingCtrl.resolve = {
-    getAppUpdates: function(UpdateSettingService, $stateParams) {
+    getAppUpdates: function(UpdateSettingService, $stateParams, getApp) {
       return UpdateSettingService.getAppUpdates($stateParams.id);
     },
 
-    getUpdateToLatest: function(UpdateSettingService, $stateParams) {
+    getUpdateToLatest: function(UpdateSettingService, $stateParams, getApp) {
       return UpdateSettingService.getUpdateToLatest($stateParams.id);
     }
   };

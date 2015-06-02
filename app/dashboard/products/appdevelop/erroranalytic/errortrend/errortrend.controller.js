@@ -7,7 +7,8 @@
         url: '/errortrend',
         templateUrl: 'app/dashboard/products/appdevelop/erroranalytic/errortrend/errortrend.html',
         controllerAs: 'vm',
-        controller: 'ErrorTrendCtrl'
+        controller: 'ErrorTrendCtrl',
+        resolve: ErrorTrendCtrl.resolve
       });
   }
 
@@ -110,6 +111,12 @@
 
     vm.selectDateChanged();
   }
+
+  ErrorTrendCtrl.resolve = {
+    getData: function(getApp) {
+      return getApp;
+    }
+  };
 
   angular
     .module('myou.dashboard.appdevelop')

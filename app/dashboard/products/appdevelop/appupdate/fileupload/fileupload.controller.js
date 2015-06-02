@@ -7,7 +7,8 @@
         url: '/fileupload',
         templateUrl: 'app/dashboard/products/appdevelop/appupdate/fileupload/fileupload.html',
         controllerAs: 'vm',
-        controller: 'FileUploadCtrl'
+        controller: 'FileUploadCtrl',
+        resolve: FileUploadCtrl.resolve
       });
   }
 
@@ -36,8 +37,13 @@
     vm.abortUpload = function() {
       FileUploadService.abortUpload();
     };
-
   }
+
+  FileUploadCtrl.resolve = {
+    getData: function(getApp) {
+      return getApp;
+    }
+  };
 
   angular
     .module('myou.dashboard.appdevelop.appupdate')

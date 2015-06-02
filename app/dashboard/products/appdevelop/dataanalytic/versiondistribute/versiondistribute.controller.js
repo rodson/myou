@@ -61,15 +61,15 @@
   }
 
   VersionDistributeCtrl.resolve = {
-    getApiStat: function(VersionDistributeService) {
+    getApiStat: function(VersionDistributeService, getApp) {
       return VersionDistributeService.getApiStat();
     },
 
-    getVersionStatPie: function(VersionDistributeService) {
+    getVersionStatPie: function(VersionDistributeService, getApp) {
       return VersionDistributeService.getVersionStatPie();
     },
 
-    getVersionStatTable: function(VersionDistributeService) {
+    getVersionStatTable: function(VersionDistributeService, getApp) {
       return VersionDistributeService.getVersionStatTable();
     }
   };
