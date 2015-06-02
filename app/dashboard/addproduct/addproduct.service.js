@@ -22,7 +22,7 @@
           $mdToast.show(
             $mdToast.simple()
               .content(error.message)
-              .position('right bottom')
+              .position('right top')
               .hideDelay(3000)
           );
         });
