@@ -11,10 +11,12 @@
       });
   }
 
-  function SettingsCtrl(localStorageService, $mdDialog, SettingsService) {
+  function SettingsCtrl(localStorageService, $mdToast, SettingsService, $timeout) {
     var vm = this;
     var appKey = localStorageService.get('app').appKey;
     var appId = localStorageService.get('appId');
+    vm.message = false;
+    vm.email = false;
 
     vm.getMonitorConfig = function() {
       SettingsService.getMonitorConfig(appKey, function() {
@@ -32,20 +34,25 @@
         app_id: appId
       };
       SettingsService.modifyMonitorConfig(appKey, config, function(error) {
-        if(error) {
-          vm.showAlert(error);
-          vm.getContacts();
+        if (error) {
+          vm.errortip = error.message;
+          vm.getMonitorConfig();
+
+          $timeout(function() {
+            vm.errortip = '';
+          }, 3000);
+          return;
         }
+        vm.showAlert('更新成功');
       });
     };
 
-    vm.showAlert = function(error) {
-      $mdDialog.show(
-        $mdDialog.alert()
-        .title('Error')
-        .content(error.message)
-        .ariaLabel('Alert Dialog')
-        .ok('关闭')
+    vm.showAlert = function(msg) {
+      $mdToast.show(
+        $mdToast.simple()
+        .content(msg)
+        .position('top right')
+        .hideDelay(1500)
       );
     };
   }

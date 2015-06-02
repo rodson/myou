@@ -323,6 +323,10 @@ tr {
   display: inline-block;
 }
 
+md-toast {
+  position: fixed !important;
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;

@@ -13,6 +13,7 @@
       return $http.get(Constant.URL.PRODUCTS_SERVICE_MONITOR + '/' + appKey + '/' + MONITOR_CONFIG)
         .success(function(data) {
           settingsService.data = data;
+          cb();
         });
     };
 
