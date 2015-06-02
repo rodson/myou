@@ -1,22 +1,28 @@
 <div class="wrapper main">
-  <md-toolbar class="toolbar-tabs" style="min-width: 1200px;">
+  <md-toolbar class="toolbar-tabs">
     <div class="md-toolbar-tools">
-      <h2>
-        {{ vm.product.name }}
-        <md-button class="md-primary appkey-btn" ng-show="!vm.showAppKey" ng-click="vm.show()">
+      <h2>{{ vm.product.name }}</h2>
+      <md-button class="md-primary appkey-btn" ng-show="!vm.showAppKey" ng-click="vm.show()">
         &nbsp;>&nbsp;
-        </md-button>
-        <md-button class="md-primary appkey-btn" ng-show="vm.showAppKey" ng-click="vm.hide()">
-          &nbsp;<&nbsp;
-        </md-button>
-        <span ng-show="vm.showAppKey">&nbsp;&nbsp;(appkey:&nbsp;{{ vm.product.appKey }})</span>
-      </h2>
+      </md-button>
+      <md-button class="md-primary appkey-btn" ng-show="vm.showAppKey" ng-click="vm.hide()">
+        &nbsp;<&nbsp;
+      </md-button>
+      <span ng-show="vm.showAppKey" class='appkey-animation'>&nbsp;&nbsp;(appkey:&nbsp;{{ vm.product.appKey }})</span>
+
+      <md-input-container class='appkey-modify' ng-show="vm.showModify">
+        <label></label>
+        <input ng-model="vm.product.appKey">
+      </md-input-container>
+      <md-button class="md-primary" ng-click="vm.saveAppKey()" ng-show="vm.showModify"> 保存 </md-button>
+
+      <span flex class='error-tip'>{{ vm.errorTip }}</span>
+      <md-button class="md-primary" ng-click="vm.modifyAppKey()"> 修改AppKey </md-button>
     </div>
   </md-toolbar>
   <div class="main-container">
     <nav class="sidebar">
       <ul>
-
         <li>
           <a>应用更新</a>
           <ul>
@@ -31,7 +37,6 @@
             </li>
           </ul>
         </li>
-
         <li>
           <a>数据分析</a>
           <ul>
@@ -46,7 +51,6 @@
             </li>
           </ul>
         </li>
-
         <li>
           <a>用户分析</a>
           <ul>
@@ -58,7 +62,6 @@
             </li>
           </ul>
         </li>
-
         <li>
           <a>错误分析</a>
           <ul>
@@ -66,7 +69,6 @@
             <li ng-class="{active: vm.isActive('appdevelop', 'errorlists')}"><a ui-sref=".errorlists">错误列表</a></li>
           </ul>
         </li>
-
         <li>
           <a>测试设置</a>
           <ul>
@@ -75,7 +77,6 @@
             </li>
           </ul>
         </li>
-
       </ul>
     </nav>
     <main class="main-section">

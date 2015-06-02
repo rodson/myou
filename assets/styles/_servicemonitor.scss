@@ -245,7 +245,7 @@ paging {
 .appkey-animation {
   position: relative;
   overflow: hidden;
-  width: 600px;
+  width: 620px;
 }
 
 .appkey-animation.ng-hide {
@@ -256,6 +256,17 @@ paging {
 .appkey-animation.ng-hide-remove.ng-hide-remove-active {
   -webkit-transition: all linear 0.5s;
   transition: all linear 0.5s;
+}
+
+.appkey-modify {
+  padding-bottom: 2px;
+  margin-right: 10px;
+
+  input {
+    color: #157EF4;
+    font-size: 18px;
+    width: 450px;
+  }
 }
 
 

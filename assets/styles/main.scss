@@ -327,6 +327,13 @@ md-toast {
   position: fixed !important;
 }
 
+.error-tip {
+  color: red;
+  height: 22px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;

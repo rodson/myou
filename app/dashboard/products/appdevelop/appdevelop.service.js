@@ -11,6 +11,17 @@
         });
     };
 
+    AppDevelopService.updateAppKey = function(id, application, cb) {
+      return $http.put(Constant.URL.PRODUCTS + '/' + id, application)
+        .success(function(data){
+          cb();
+        })
+        .error(function(error){
+          cb(error);
+        });
+
+    };
+
     return AppDevelopService;
   }
 
