@@ -79,7 +79,7 @@
     EventDetailService.getEventInfo = function(eventId) {
       EventDetailService.getApp();
       return $http.get(UrlManager
-        .getAnalyzeCustomEventUrl(EventDetailService.app.appKey) + '/' + eventId)
+        .getCustomEventUrl(EventDetailService.app.appKey) + '/' + eventId)
         .success(function(event) {
           StorageManager.setEvent(event);
           EventDetailService.event = event;
