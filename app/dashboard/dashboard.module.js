@@ -13,8 +13,7 @@
       });
   }
 
-  function checkLoggedIn($q, $state, $http, $location,
-    localStorageService, Constant, StorageManager) {
+  function checkLoggedIn($q, $state, $http, $location, Constant, StorageManager) {
 
     var deferred = $q.defer();
     $http.get(Constant.URL.CHECK_LOGIN)
@@ -24,7 +23,7 @@
         deferred.reject();
         if (StorageManager.getToken()) {
           StorageManager.deleteToken();
-          localStorageService.remove('user');
+          StorageManager.deleteUser();
         }
 
         var currentPath = $location.path();
