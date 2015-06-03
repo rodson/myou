@@ -43,8 +43,14 @@
     /**
      * @ngInject
      */
-    getAppId: function(localStorageService, $stateParams, ServiceMonitorService){
-      ServiceMonitorService.getAppId($stateParams.id, function(){
+    getApp: function(RouteStateManager, $stateParams) {
+      return RouteStateManager.getApp($stateParams.id);
+    },
+    /**
+     * @ngInject
+     */
+    getAppId: function(localStorageService, ServiceMonitorService, getApp){
+      return ServiceMonitorService.getAppId(getApp.data.appKey, function(){
         localStorageService.set('appId', ServiceMonitorService.data.appId);
       });
     },

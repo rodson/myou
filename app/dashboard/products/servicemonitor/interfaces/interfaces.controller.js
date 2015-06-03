@@ -18,7 +18,7 @@
   /**
    * @ngInject
    */
-  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService) {
+  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService, getAppId) {
     var vm = this;
     var now = new Date();
     vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
@@ -30,7 +30,7 @@
       sortable: true
     };
 
-    vm.appId = localStorageService.get('appId');
+    vm.appId = getAppId.data.app_id;
 
     vm.colDefs = [{
       field: 'ID',

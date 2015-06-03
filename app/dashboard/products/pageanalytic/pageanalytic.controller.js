@@ -63,8 +63,14 @@
     /**
      * @ngInject
      */
-    getData: function(localStorageService, $stateParams, PageAnalyticService) {
-      PageAnalyticService.getData($stateParams.id, function() {
+    getApp: function(RouteStateManager, $stateParams) {
+      return RouteStateManager.getApp($stateParams.id);
+    },
+    /**
+     * @ngInject
+     */
+    getData: function(localStorageService, PageAnalyticService, getApp) {
+      return PageAnalyticService.getData(getApp.data.appKey, function() {
         localStorageService.set('trickId', PageAnalyticService.trickId);
       });
     }
