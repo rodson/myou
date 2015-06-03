@@ -50,7 +50,6 @@
 
     /**************************************** sider page start *****************************************/
     vm.toggleRight = function(navId, dt) {
-      console.log(dt);
       vm.radioCheckedSider = 'os_version';
       vm.errorStatu = !!dt.fixed ? '已修复' : '未修复';
       vm.errorContext = dt.crash_context;

@@ -78,6 +78,7 @@
       return $http.get(Constant.URL.ANALYZE_URL + '/' + appKey + CRASH_LIST + '/' + crash_id + '/crash_device_stats' + '?platform=' + platform + '&stats=' + stats)
         .success(function(data) {
           errorListService.data.pie = data;
+          cb();
         });
     };
 
