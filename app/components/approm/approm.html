@@ -1,5 +1,5 @@
-<div class='download-curve'>
-  <h3>每分钟下载曲线</h3>
+<div class='download-curve group-section nopadding'>
+  <div class="normal-title">每分钟下载曲线</div>
   <div>
     <span>选择日期：</span>
     <datatime-picker init-datatime='vm.checkdate' display-mode='date' class='date-picker'></datatime-picker>
@@ -8,8 +8,8 @@
   </div>
   <highchart class='margin-top-30' config="vm.highchartsURL"></highchart>
 </div>
-<div class='update-policy'>
-  <h3>更新设置</h3>
+<div class='update-policy group-section noppading'>
+  <h3 class="normal-title">更新设置</h3>
   <md-button class="md-raised md-primary" ng-click="vm.saveUpdateSetting()">&nbsp;保存&nbsp;</md-button>
   <div class='min-update'>
     <span>限制每分钟更新次数：</span>
