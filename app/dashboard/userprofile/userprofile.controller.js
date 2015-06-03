@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function UserProfileCtrl($mdDialog, $mdToast, $state, StorageManager) {
+  function UserProfileCtrl($mdDialog, $mdToast, $state, $stateParams, StorageManager) {
     var vm = this;
     var user = StorageManager.getUser();
     vm.username = user.username;
@@ -24,6 +24,7 @@
           }
         }
       }).then(function(error) {
+          refreshPage();
           vm.showAlert(error);
         },
         function() {});
@@ -47,6 +48,14 @@
         // );
       }
     };
+
+    function refreshPage() {
+      $state.transitionTo($state.current, $stateParams, {
+        reload: true,
+        inherit: false,
+        notify: true
+      });
+    }
   }
 
   function ModifyUserDialogCtrl($mdDialog, $timeout, StorageManager, data, UserProfileService) {
