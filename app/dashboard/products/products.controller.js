@@ -49,8 +49,9 @@
     /**
      * @ngInject
      */
-    getProducts: function(ProductsService) {
-      return ProductsService.getProducts();
+    getProducts: function(ProductsService, StorageManager) {
+      var user = StorageManager.getUser();
+      return ProductsService.getProducts(user.groupId);
     }
   };
 

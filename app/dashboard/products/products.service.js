@@ -4,7 +4,7 @@
   /**
    * @ngInject
    */
-  function ProductsService($http, $mdDialog, Constant, localStorageService,
+  function ProductsService($http, $mdDialog, Constant, StorageManager,
     $state, $stateParams, StateManager, PlatformManager) {
 
     var ProductsService = {};
@@ -32,7 +32,7 @@
     };
 
     ProductsService.enterProduct = function(product) {
-      localStorageService.set('app', product);
+      StorageManager.setApp(product);
       StateManager.enterProduct(product.platform, product._id);
     };
 
