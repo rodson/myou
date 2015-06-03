@@ -18,6 +18,11 @@
       WebPublishService.app = StorageManager.getApp();
     };
 
+    WebPublishService.initUploadData = function() {
+      WebPublishService.uploadData.file = null;
+      WebPublishService.uploadData.versionDesc = '';
+    };
+
     WebPublishService.getIps = function() {
       WebPublishService.init();
 

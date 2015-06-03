@@ -34,13 +34,13 @@
               </td>
               <td>
                 <md-button ng-show="vm.isPackageRunning(ip) && !vm.isSelf()" class="md-raised md-accent"
-                ng-click="vm.publishOpt($event, ip, 'stop')" aria-label="stop" ng-click="vm.showAddTestDeviceDialog($event)">停止</md-button>
+                ng-click="vm.publishOpt($event, ip, 'stop')" aria-label="stop">停止</md-button>
 
                 <md-button ng-show="vm.isPackageStoped(ip)" class="md-raised md-primary"
-                ng-click="vm.publishOpt($event, ip, 'start')" aria-label="start" ng-click="vm.showAddTestDeviceDialog($event)">启动</md-button>
+                ng-click="vm.publishOpt($event, ip, 'start')" aria-label="start">启动</md-button>
 
                 <md-button ng-show="vm.isPackageRunning(ip)" class="md-raised md-primary"
-                ng-click="vm.publishOpt($event, ip, 'restart')" aria-label="restart" ng-click="vm.showAddTestDeviceDialog($event)">重启</md-button>
+                ng-click="vm.publishOpt($event, ip, 'restart')" aria-label="restart">重启</md-button>
               </td>
             </tr>
           </tbody>

@@ -162,6 +162,8 @@
   function WebPubUploadDialogCtrl($mdDialog, WebPublishService) {
     var vm = this;
 
+    WebPublishService.initUploadData();
+
     vm.uploadData = WebPublishService.uploadData;
 
     vm.onFileSelect = function(files) {
