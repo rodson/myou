@@ -12,7 +12,7 @@
 
   <md-select placeholder="所有版本" class="nopadding normal-text normal-size pull-right" ng-model="vm.selectedVersion" ng-change="vm.onVersionSelect()" style="margin-right: 32px;">
     <md-option value="">所有版本</md-option>
-    <md-option ng-repeat="version in vm.versions" value="{{version}}"></md-option>
+    <md-option ng-repeat="version in vm.versions" value="{{version}}">{{version}}</md-option>
   </md-select>
 </div>
 
