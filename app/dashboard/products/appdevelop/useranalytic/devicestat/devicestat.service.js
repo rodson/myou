@@ -17,7 +17,6 @@
         chart: {
           type: 'bar'
         },
-        colors: ['#157EF4'],
         tooltip: {
           formatter: function() {
             return this.x + ' : ' + this.y + ' (' + (this.y / DeviceStatService.total * 100).toFixed(1) + '%)';

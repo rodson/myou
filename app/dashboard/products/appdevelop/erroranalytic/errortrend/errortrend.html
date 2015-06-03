@@ -1,6 +1,5 @@
 <div class='error-trend'>
-  <span>选择查询时间段：</span>
-  <md-select placeholder="Pick" ng-model="vm.selectedDate" ng-change='vm.selectDateChanged()'>
+  <md-select placeholder="Pick" class="normal-text" ng-model="vm.selectedDate" ng-change='vm.selectDateChanged()' style="margin-bottom: 10px;">
     <md-select-label>{{ vm.selectDate[vm.selectedDate].start + ' 到 ' + vm.selectDate[vm.selectedDate].end }}</md-select-label>
     <md-option value="0"> {{ vm.selectDate[0].label }} </md-option>
     <md-option value="1"> {{ vm.selectDate[1].label }} </md-option>
