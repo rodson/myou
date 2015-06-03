@@ -47,12 +47,21 @@ gulp.task('jshint', function() {
 });
 
 // Optimize images
+//gulp.task('images', function() {
+//  return gulp.src('assets/images/**/*')
+//    .pipe($.cache($.imagemin({
+//      progressive: true,
+//      interlaced: true
+//    })))
+//    .pipe(gulp.dest('dist/assets/images'))
+//    .pipe($.size({
+//      title: 'images'
+//    }));
+//});
+
+// Copy web images to dist
 gulp.task('images', function() {
-  return gulp.src('assets/images/**/*')
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true
-    })))
+  return gulp.src(['assets/images/**/*'])
     .pipe(gulp.dest('dist/assets/images'))
     .pipe($.size({
       title: 'images'
