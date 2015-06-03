@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function updateSettingConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.updatesetting', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function UpdateSettingCtrl(UpdateSettingService) {
     var vm = this;
 
@@ -48,10 +54,16 @@
   }
 
   UpdateSettingCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getAppUpdates: function(UpdateSettingService, $stateParams, getApp) {
       return UpdateSettingService.getAppUpdates($stateParams.id);
     },
 
+    /**
+     * @ngInject
+     */
     getUpdateToLatest: function(UpdateSettingService, $stateParams, getApp) {
       return UpdateSettingService.getUpdateToLatest($stateParams.id);
     }

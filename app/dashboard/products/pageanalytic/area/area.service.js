@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('AreaService', AreaService);
 
+  /**
+   * @ngInject
+   */
   function AreaService($http, $q, Constant, PieArrayService, AreaMapDataConstant) {
     var areaService = {};
 

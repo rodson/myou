@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function deviceStatConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.devicestat', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function DeviceStatCtrl(DeviceStatService) {
     var vm = this;
 
@@ -37,6 +43,9 @@
   }
 
   DeviceStatCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getBarChartData: function(DeviceStatService, getApp) {
       return DeviceStatService.getBarChartData();
     }

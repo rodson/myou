@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function apiStatisConfig($stateProvider) {
     $stateProvider
       .state('dashboard.apistatis', {

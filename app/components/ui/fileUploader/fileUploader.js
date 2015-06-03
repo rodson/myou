@@ -5,6 +5,9 @@
     .module('myou.ui.fileUploader', [])
     .directive('rsFileUploader', RsFileUploaderDirective);
 
+  /**
+   * @ngInject
+   */
   function RsFileUploaderDirective() {
     return {
       restrict: 'EA',
@@ -22,6 +25,9 @@
       link: link
     };
 
+    /**
+     * @ngInject
+     */
     function FileUploadCtrl($scope) {
       $scope.fileName = '未选择任何文件';
     }

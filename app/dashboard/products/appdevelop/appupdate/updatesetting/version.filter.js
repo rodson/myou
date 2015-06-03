@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function versionFilter() {
     return function(version) {
       if (version) {

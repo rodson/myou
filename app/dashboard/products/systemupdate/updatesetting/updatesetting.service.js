@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function RomUpdateSettingService($http, $mdDialog, UrlManager, $state, $stateParams,
     StorageManager) {
 

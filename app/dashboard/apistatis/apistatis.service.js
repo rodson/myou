@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function APIStatisService($http, $q, Constant) {
     var apiStatisService = {};
     apiStatisService.count = 0;

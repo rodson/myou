@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function errorTrendConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.errortrend', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function ErrorTrendCtrl(localStorageService, MomentDateService, ErrorTrendService) {
     var vm = this;
     vm.selectedDate = 2;
@@ -113,6 +119,9 @@
   }
 
   ErrorTrendCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(getApp) {
       return getApp;
     }

@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('UserinfoService', UserinfoService);
 
+  /**
+   * @ngInject
+   */
   function UserinfoService($http, $q, Constant) {
     var userinfoService = {};
 

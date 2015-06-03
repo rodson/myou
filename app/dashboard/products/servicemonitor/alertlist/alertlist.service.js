@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('AlertListService', AlertListService);
 
+  /**
+   * @ngInject
+   */
   function AlertListService($http, $q, Constant) {
     var alertListService = {};
     alertListService.data = {

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function keyDataConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.keydata', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function KeyDataCtrl(KeyDataService) {
     var vm = this;
 
@@ -47,10 +53,16 @@
   }
 
   KeyDataCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getLineChartData: function(KeyDataService, getApp) {
       return KeyDataService.getLineChartData();
     },
 
+    /**
+     * @ngInject
+     */
     getTableData: function(KeyDataService, getApp) {
       return KeyDataService.getTableData();
     }

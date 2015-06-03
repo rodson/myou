@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function ContactsConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.contacts', {
@@ -11,6 +14,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function ContactsCtrl($mdDialog, $mdToast, localStorageService, ContactsService) {
     var vm = this;
     var product = localStorageService.get('app');
@@ -97,6 +103,9 @@
     vm.getContacts();
   }
 
+  /**
+   * @ngInject
+   */
   function AddContactDialogCtrl($mdDialog, data, $timeout, ContactsService) {
     var vm = this;
     vm.title = '添加联系人';
@@ -131,6 +140,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function EditContactDialogCtrl($mdDialog, data, $timeout, ContactsService) {
     var vm = this;
     vm.title = '编辑联系人';
@@ -174,6 +186,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteContactModalDialogCtrl($mdDialog, data, $timeout, ContactsService) {
     var vm = this;
     vm.name = data.contact.name;

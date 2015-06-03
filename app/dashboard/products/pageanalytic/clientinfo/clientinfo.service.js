@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('ClientInfoService', ClientInfoService);
 
+  /**
+   * @ngInject
+   */
   function ClientInfoService($http, $q, Constant, PieArrayService) {
     var clientInfoService = {};
 

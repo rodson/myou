@@ -7,6 +7,9 @@
     ])
     .directive('datatimePicker', DatatimePicker);
 
+  /**
+   * @ngInject
+   */
   function DatatimePicker() {
     return {
       restrict: 'EA',
@@ -18,6 +21,9 @@
       controller: controller
     };
 
+    /**
+     * @ngInject
+     */
     function controller($scope, dateFilter, $mdDialog) {
       if($scope.displayMode === 'full'){
         var format = 'yyyy-MM-dd  HH:mm:ss';
@@ -46,6 +52,9 @@
         }, function() {});
       };
 
+      /**
+       * @ngInject
+       */
       function DialogController($mdDialog, displayMode) {
         var vm = this;
 

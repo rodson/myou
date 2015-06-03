@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function webPublishConfig($stateProvider) {
     $stateProvider
       .state('dashboard.webpublish', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function WebPublishCtrl(WebPublishService) {
     var vm = this;
 
@@ -73,14 +79,23 @@
   }
 
   WebPublishCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getApp: function(RouteStateManager, $stateParams) {
       return RouteStateManager.getApp($stateParams.id);
     },
 
+    /**
+     * @ngInject
+     */
     getIps: function(WebPublishService, getApp) {
       return WebPublishService.getIps();
     },
 
+    /**
+     * @ngInject
+     */
     getUpdateInfos: function(WebPublishService, getApp) {
       return WebPublishService.getUpdateInfos();
     }

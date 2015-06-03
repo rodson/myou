@@ -4,7 +4,9 @@
   angular.module('myou.dashboard.servicemonitor')
     .factory('ContactsService', ContactsService);
 
-
+  /**
+   * @ngInject
+   */
   function ContactsService($http, Constant) {
     var PROJECT_CONTACTS = 'project_contacts';
 

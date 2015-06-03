@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function AppRomService($http, Constant) {
     var appRomService = {};
     appRomService.data = {};

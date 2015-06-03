@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function romFileUploadConfig($stateProvider) {
     $stateProvider
       .state('dashboard.systemupdate.fileupload', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function RomFileUploadCtrl($scope, RomFileUploadService, SparkMD5Manager) {
     var vm = this;
 
@@ -44,11 +50,17 @@
   }
 
   RomFileUploadCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(getApp) {
       return getApp;
     }
   };
 
+  /**
+   * @ngInject
+   */
   function RomUploadProgressDialogCtrl($mdDialog, data, RomFileUploadService, Upload) {
     var vm = this;
     var uploader;

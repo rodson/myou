@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function systemUpdateConfig($stateProvider) {
     $stateProvider
       .state('dashboard.systemupdate', {
@@ -13,6 +16,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function SystemUpdateCtrl(localStorageService, StorageManager, $location, $timeout, $stateParams, $mdToast, SystemUpdateService) {
     var vm = this;
 
@@ -87,6 +93,9 @@
   }
 
   SystemUpdateCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getApp: function(RouteStateManager, $stateParams) {
       return RouteStateManager.getApp($stateParams.id);
     }

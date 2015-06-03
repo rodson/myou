@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UserProfileService($http, Constant) {
     var userProfileService = {};
 

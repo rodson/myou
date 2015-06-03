@@ -5,7 +5,9 @@
     .factory('InterfacesService', InterfacesService)
     .factory('CalleeService', CalleeService);
 
-
+  /**
+   * @ngInject
+   */
   function InterfacesService($http, $q, Constant) {
 
     var interfacesService = {};
@@ -59,6 +61,9 @@
 
   }
 
+  /**
+   * @ngInject
+   */
   function CalleeService($http, $q, Constant) {
     var INTERFACES = 'interfaces';
     var CALLEE_INTERFACE = 'callee_interfaces_report';

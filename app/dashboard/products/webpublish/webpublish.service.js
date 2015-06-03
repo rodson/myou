@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function WebPublishService($http, $state, $stateParams, $mdDialog,
     StorageManager, Constant, UrlManager) {
 

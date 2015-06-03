@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function documentConfig($stateProvider) {
 
     $stateProvider

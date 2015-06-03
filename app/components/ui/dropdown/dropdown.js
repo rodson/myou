@@ -5,6 +5,9 @@
     .module('myou.ui.dropdown', [])
     .directive('rsDropdown', RsDropdownDirective);
 
+  /**
+   * @ngInject
+   */
   function RsDropdownDirective() {
     return {
       restrict: 'EA',

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function operatorConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.operator', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function OperatorCtrl(localStorageService, MomentDateService, OperatorService) {
     var vm = this;
     var trickId = localStorageService.get('trickId');
@@ -111,6 +117,9 @@
   }
 
   OperatorCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, MomentDateService, OperatorService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');

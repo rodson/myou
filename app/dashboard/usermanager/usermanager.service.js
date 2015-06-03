@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UserInfoService($http, $q, Constant) {
     var userInfoService = {};
 
@@ -46,6 +49,9 @@
 
   }
 
+  /**
+   * @ngInject
+   */
   function UserGroupService($http, $q, Constant) {
     var userGroupService = {};
     userGroupService.groupList = {};

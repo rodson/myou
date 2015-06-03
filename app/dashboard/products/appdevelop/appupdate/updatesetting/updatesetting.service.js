@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UpdateSettingService($http, $mdDialog, UrlManager, $state, $stateParams,
     localStorageService, PlatformManager, VersionHelper) {
 

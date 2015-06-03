@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function DeleteUpdateDialogCtrl($mdDialog, UpdateSettingService, data) {
     var vm = this;
 

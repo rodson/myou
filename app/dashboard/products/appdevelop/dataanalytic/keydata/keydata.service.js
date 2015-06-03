@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function KeyDataService($http, StorageManager, UrlManager, PlatformManager, MomentDateService) {
     var KeyDataService = {};
 

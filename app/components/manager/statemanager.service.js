@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function StateManager($state, Constant) {
     var StateManager = {};
 

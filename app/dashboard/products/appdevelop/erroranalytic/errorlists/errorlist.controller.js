@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function errorListsConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.errorlists', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function ErrorListsCtrl(localStorageService, $mdSidenav, $mdDialog, MomentDateService, ErrorListService) {
     var vm = this;
     vm.radioChecked = 'unfix';
@@ -142,6 +148,9 @@
   }
 
   ErrorListsCtrl.resovle = {
+    /**
+     * @ngInject
+     */
     getData: function(getApp) {
       return getApp;
     }

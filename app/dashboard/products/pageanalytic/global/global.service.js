@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function GlobalService($http, $q, Constant) {
     var globalService = {};
 

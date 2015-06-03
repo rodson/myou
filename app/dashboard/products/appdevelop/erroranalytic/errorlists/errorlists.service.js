@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function ErrorListService($http, Constant) {
     var CRASH_LIST = '/crash_list';
 

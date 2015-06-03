@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function SystemUpdateService($http, Constant) {
     var SystemUpdateService = {};
 

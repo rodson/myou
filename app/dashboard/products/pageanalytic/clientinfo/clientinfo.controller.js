@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function clientInfoConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.clientinfo', {
@@ -11,6 +14,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function ClientInfoCtrl(localStorageService, MomentDateService, ClientInfoService) {
     var vm = this;
     var trickId = localStorageService.get('trickId');

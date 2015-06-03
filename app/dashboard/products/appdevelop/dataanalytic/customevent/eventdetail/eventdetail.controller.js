@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function eventDetailConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.eventdetail', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function EventDetailCtrl(EventDetailService, $stateParams) {
     var vm = this;
 
@@ -55,20 +61,32 @@
   }
 
   EventDetailCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getEventInfo: function(EventDetailService, $stateParams, getApp) {
       return EventDetailService.getEventInfo($stateParams.eventId);
     },
 
+    /**
+     * @ngInject
+     */
     getEventData: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventData(eventId);
     },
 
+    /**
+     * @ngInject
+     */
     getEventlabelData: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventLabelData(eventId);
     },
 
+    /**
+     * @ngInject
+     */
     getEventVersions: function($stateParams, EventDetailService, getApp) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventVersions(eventId);

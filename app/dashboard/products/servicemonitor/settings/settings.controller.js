@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function SettingsConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.settings', {
@@ -11,6 +14,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function SettingsCtrl(localStorageService, $mdToast, SettingsService, $timeout) {
     var vm = this;
     var appKey = localStorageService.get('app').appKey;

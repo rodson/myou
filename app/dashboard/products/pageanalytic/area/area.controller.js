@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function areaConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.area', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function AreaCtrl(localStorageService, MomentDateService, AreaService, AreaMapDataConstant) {
     var vm = this;
     var trickId = localStorageService.get('trickId');
@@ -179,6 +185,9 @@
   }
 
   AreaCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, MomentDateService, AreaService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');

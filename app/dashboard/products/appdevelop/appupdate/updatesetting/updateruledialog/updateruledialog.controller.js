@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UpdateRuleDialogCtrl($mdDialog, data, UpdateSettingService) {
     var vm = this;
 

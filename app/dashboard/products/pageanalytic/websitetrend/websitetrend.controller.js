@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function websiteTrendConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.websitetrend', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function WebsiteTrendCtrl(localStorageService, MomentDateService, WebsiteTrendService) {
     var trickId = localStorageService.get('trickId');
 
@@ -86,6 +92,9 @@
   }
 
   WebsiteTrendCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, MomentDateService, WebsiteTrendService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');

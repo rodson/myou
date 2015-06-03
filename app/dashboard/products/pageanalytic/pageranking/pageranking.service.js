@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('PageRankingService', PageRankingService);
 
+  /**
+   * @ngInject
+   */
   function PageRankingService($http, $q, Constant){
     var pageRankingService = {};
     pageRankingService.data = {};

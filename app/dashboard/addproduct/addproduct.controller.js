@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function addProductConfig($stateProvider) {
     $stateProvider
       .state('dashboard.addproduct', {
@@ -11,6 +14,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function AddProductCtrl(AddProductService) {
     var vm = this;
 

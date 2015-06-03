@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function AlertListConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.alertlist', {
@@ -11,6 +14,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function AlertListCtrl($filter, localStorageService, AlertListService) {
     var vm = this;
     var appKey = localStorageService.get('app').appKey;

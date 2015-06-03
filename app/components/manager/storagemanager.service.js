@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function StorageManager(localStorageService, $localStorage, $sessionStorage) {
     var KEY_TOKEN = 'myouToken';
 

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function VersionDistributeService($http, Constant, StorageManager, MomentDateService) {
     var VersionDistributeService = {};
 

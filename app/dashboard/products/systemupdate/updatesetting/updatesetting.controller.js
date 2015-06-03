@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function romUpdateSettingConfig($stateProvider) {
     $stateProvider
       .state('dashboard.systemupdate.updatesetting', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function RomUpdateSettingCtrl(RomUpdateSettingService) {
     var vm = this;
 
@@ -45,11 +51,17 @@
   }
 
   RomUpdateSettingCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getUpdateInfos: function(RomUpdateSettingService, getApp) {
       return RomUpdateSettingService.getUpdateInfos();
     }
   };
 
+  /**
+   * @ngInject
+   */
   function RomUpdateDescDialogCtrl($mdDialog, data, RomUpdateSettingService) {
     var vm = this;
     vm.updateDesc = data.updateDesc;
@@ -70,6 +82,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function RomDeleteUpdateDialogCtrl($mdDialog, RomUpdateSettingService, data) {
     var vm = this;
 

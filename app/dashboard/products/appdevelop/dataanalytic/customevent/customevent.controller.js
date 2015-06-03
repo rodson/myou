@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function customEventConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.customevent', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function CustomEventCtrl(CustomEventService) {
     var vm = this;
 
@@ -48,15 +54,23 @@
   }
 
   CustomEventCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getEvents: function(CustomEventService, getApp) {
       return CustomEventService.getEvents();
     },
-
+    /**
+     * @ngInject
+     */
     getEventVersions: function(CustomEventService, getApp) {
       return CustomEventService.getEventVersions();
     }
   };
 
+  /**
+   * @ngInject
+   */
   function AddCustomEventDialogCtrl($mdDialog, CustomEventService) {
     var vm = this;
 
@@ -84,6 +98,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function EditCustomEventDialogCtrl($mdDialog, data, CustomEventService) {
     var vm = this;
 
@@ -108,6 +125,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteCustomEventDialogCtrl($mdDialog, data, CustomEventService) {
     var vm = this;
 

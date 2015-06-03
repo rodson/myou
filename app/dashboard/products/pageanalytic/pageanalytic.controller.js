@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function pageAnalyticConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic', {
@@ -13,6 +16,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast) {
     var vm = this;
 
@@ -54,6 +60,9 @@
   }
 
   PageAnalyticCtrl.getData = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, PageAnalyticService) {
       var product = localStorageService.get('app');
       return PageAnalyticService.getData(product.appKey, function() {
@@ -62,6 +71,9 @@
     }
   };
 
+  /**
+   * @ngInject
+   */
   function DialogController($mdDialog, data) {
     var vm = this;
     vm.trickId = data.trickid;

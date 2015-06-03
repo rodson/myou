@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function LoginCtrl(LoginService) {
     var vm = this;
 
@@ -19,6 +22,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function loginConfig($stateProvider) {
     $stateProvider
       .state('login', {

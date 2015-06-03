@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function productsConfig($stateProvider) {
     $stateProvider
       .state('dashboard.products', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function ProductsCtrl($state, ProductsService) {
     var vm = this;
 
@@ -39,11 +45,18 @@
   }
 
   ProductsCtrl.resolve = {
+
+    /**
+     * @ngInject
+     */
     getProducts: function(ProductsService) {
       return ProductsService.getProducts();
     }
   };
 
+  /**
+   * @ngInject
+   */
   function EditProductDialogCtrl(data, $mdDialog, ProductsService, PlatformManager) {
     var vm = this;
 
@@ -67,6 +80,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteProductDialogCtrl(data, $mdDialog, ProductsService) {
     var vm = this;
 

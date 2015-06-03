@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function dashboardConfig($stateProvider, $httpProvider) {
     $stateProvider
       .state('dashboard', {
@@ -13,6 +16,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function checkLoggedIn($q, $state, $http, $location, Constant, StorageManager) {
 
     var deferred = $q.defer();

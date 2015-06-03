@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UserManagerConfig($stateProvider) {
     $stateProvider
       .state('dashboard.usermanager', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function UserManagerCtrl(StorageManager, $mdDialog, $mdToast, UserGroupService, UserInfoService) {
     var vm = this;
     vm.userInfo = StorageManager.getUser();
@@ -156,6 +162,9 @@
     vm.getGroupList();
   }
 
+  /**
+   * @ngInject
+   */
   function AddGroupDialogCtrl($mdDialog, $timeout, UserGroupService) {
     var vm = this;
     vm.title = '添加分组';
@@ -182,6 +191,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function EditGroupDialogCtrl($mdDialog, data, $timeout, UserGroupService) {
     var vm = this;
     vm.title = '编辑分组';
@@ -211,6 +223,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteGroupDialogCtrl($mdDialog, data, $timeout, UserGroupService) {
     var vm = this;
     vm.grupName = data.groupName;
@@ -233,6 +248,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function AddMemberDialogCtrl($mdDialog, data, $timeout, UserInfoService) {
     var vm = this;
     vm.userType = 'user';
@@ -276,6 +294,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function EditMemberDialogCtrl($mdDialog, data, $timeout, UserInfoService) {
     var vm = this;
     console.log(data);
@@ -310,6 +331,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteMemberDialogCtrl($mdDialog, data, $timeout, UserInfoService) {
     var vm = this;
     vm.memberName = data.username;

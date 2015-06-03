@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('DailyDataService', DailyDataService);
 
+  /**
+   * @ngInject
+   */
   function DailyDataService($http, $q, Constant) {
     var dailyDataService = {};
     dailyDataService.data = {

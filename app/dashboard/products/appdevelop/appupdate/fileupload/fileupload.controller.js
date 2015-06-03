@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function fileUploadConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.fileupload', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function FileUploadCtrl(FileUploadService, localStorageService, $mdDialog) {
 
     var vm = this;
@@ -40,6 +46,9 @@
   }
 
   FileUploadCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(getApp) {
       return getApp;
     }

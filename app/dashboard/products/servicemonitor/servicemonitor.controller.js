@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function serviceMonitorConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor', {
@@ -13,6 +16,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function ServiceMonitorCtrl($state, localStorageService, ServiceMonitorService) {
 
     localStorageService.set('appId', ServiceMonitorService.data.appId);
@@ -37,6 +43,9 @@
   }
 
   ServiceMonitorCtrl.getAppId = {
+    /**
+     * @ngInject
+     */
     getAppId: function(localStorageService, ServiceMonitorService){
       var appKey = localStorageService.get('app').appKey;
       return ServiceMonitorService.getAppId(appKey);

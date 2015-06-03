@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UserRetainService($http, $state, $stateParams, StorageManager,
     PlatformManager, UrlManager, MomentDateService) {
 

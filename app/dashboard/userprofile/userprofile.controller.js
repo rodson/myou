@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UserProfileCtrl($mdDialog, $mdToast, $state, $stateParams, StorageManager) {
     var vm = this;
     var user = StorageManager.getUser();
@@ -58,6 +61,9 @@
     }
   }
 
+  /**
+   * @ngInject
+   */
   function ModifyUserDialogCtrl($mdDialog, $timeout, StorageManager, data, UserProfileService) {
     var vm = this;
     vm.name = data.username;

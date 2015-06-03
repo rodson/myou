@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function ErrorTrendService($http, Constant) {
     var CRASH_REPORT = '/crash_report/overview';
 

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function EventDetailService($http, StorageManager, UrlManager, MomentDateService) {
     var EventDetailService = {};
 

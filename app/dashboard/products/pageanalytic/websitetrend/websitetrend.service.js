@@ -4,7 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('WebsiteTrendService', WebsiteTrendService);
 
-
+  /**
+   * @ngInject
+   */
   function WebsiteTrendService($http, $q, Constant) {
 
     var websiteTrendService = {};

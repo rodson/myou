@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function DailyDataConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.dailydata', {
@@ -11,6 +14,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function DailyDataCtrl($filter, localStorageService, DailyDataService) {
     var vm = this;
     vm.requestCount = 0;

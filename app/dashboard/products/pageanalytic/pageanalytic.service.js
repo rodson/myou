@@ -4,7 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('PageAnalyticService', PageAnalyticService);
 
-
+  /**
+   * @ngInject
+   */
   function PageAnalyticService($http, $q, Constant) {
 
     var pageAnalyticService = {};

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function CustomEventService($http, $mdDialog, $state, $stateParams,
     UrlManager, StorageManager) {
 

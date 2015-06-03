@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function versionDistributeConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.versiondistribute', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function VersionDistributeCtrl($scope, VersionDistributeService, MomentDateService) {
     var vm = this;
 
@@ -61,14 +67,23 @@
   }
 
   VersionDistributeCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getApiStat: function(VersionDistributeService, getApp) {
       return VersionDistributeService.getApiStat();
     },
 
+    /**
+     * @ngInject
+     */
     getVersionStatPie: function(VersionDistributeService, getApp) {
       return VersionDistributeService.getVersionStatPie();
     },
 
+    /**
+     * @ngInject
+     */
     getVersionStatTable: function(VersionDistributeService, getApp) {
       return VersionDistributeService.getVersionStatTable();
     }

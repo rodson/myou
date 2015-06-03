@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function AddProductService($http, $state, $mdToast, localStorageService,
     Constant, StateManager) {
 

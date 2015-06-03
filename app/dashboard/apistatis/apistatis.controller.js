@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function APIStatisCtrl($scope, MomentDateService, APIStatisService) {
     var vm = this;
     vm.checkdate = MomentDateService.getToday().start;

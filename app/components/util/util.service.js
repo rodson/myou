@@ -6,6 +6,9 @@
     .factory('MomentDateService', MomentDateService)
     .factory('PieArrayService', PieArrayService);
 
+  /**
+   * @ngInject
+   */
   function MomentDateService() {
     var moment = window.moment;
     var momentDateService = {};
@@ -47,8 +50,11 @@
     return momentDateService;
   }
 
-  //适合数据格式为[['', int],['', int],['', int]]
+  /**
+   * @ngInject
+   */
   function PieArrayService() {
+    //适合数据格式为[['', int],['', int],['', int]]
     var pieArrayService = {};
 
     var compare = function(a, b) {

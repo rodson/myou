@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UrlManager(Constant) {
     var UrlManager = {};
 

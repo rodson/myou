@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function DeviceStatService($http, $timeout, PlatformManager,
     StorageManager, UrlManager, MomentDateService) {
 

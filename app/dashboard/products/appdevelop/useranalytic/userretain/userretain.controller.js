@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function userRetainConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.userretain', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function UserRetainCtrl(UserRetainService, $state, $stateParams) {
     var vm = this;
 
@@ -42,6 +48,9 @@
   }
 
   UserRetainCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getTableData: function(UserRetainService, getApp) {
       return UserRetainService.getTableData();
     }

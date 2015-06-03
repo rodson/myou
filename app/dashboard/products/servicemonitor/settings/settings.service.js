@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.servicemonitor')
     .factory('SettingsService', SettingsService);
 
+  /**
+   * @ngInject
+   */
   function SettingsService($http, Constant) {
     var MONITOR_CONFIG = 'monitor_config';
 

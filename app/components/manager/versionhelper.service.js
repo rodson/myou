@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function VersionHelper() {
     var VersionHelper = {};
 

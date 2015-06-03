@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
 	function globalConfig($stateProvider) {
 		$stateProvider
 			.state('dashboard.pageanalytic.global', {
@@ -12,6 +15,9 @@
 			});
 	}
 
+  /**
+   * @ngInject
+   */
 	function GlobalCtrl(GlobalService) {
     var vm = this;
 
@@ -22,6 +28,9 @@
 	}
 
   GlobalCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     globalData: function(localStorageService, GlobalService, getData){
       var trickId = localStorageService.get('trickId');
       return GlobalService.getData(trickId);

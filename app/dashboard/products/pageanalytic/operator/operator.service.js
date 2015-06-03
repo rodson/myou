@@ -4,6 +4,9 @@
   angular.module('myou.dashboard.pageanalytic')
     .factory('OperatorService', OperatorService);
 
+  /**
+   * @ngInject
+   */
   function OperatorService($http, $q, Constant) {
     var operatorService = {};
 

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function appDevelopConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop', {
@@ -13,6 +16,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function AppDevelopCtrl(localStorageService, $location, $timeout, $stateParams, $mdToast, AppDevelopService) {
     var vm = this;
 
@@ -87,6 +93,9 @@
   }
 
   AppDevelopCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getApp: function(RouteStateManager, $stateParams) {
       return RouteStateManager.getApp($stateParams.id);
     }

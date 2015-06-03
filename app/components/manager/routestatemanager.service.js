@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function RouteStateManager($http, StorageManager, Constant) {
     var RouteStateManager = {};
 

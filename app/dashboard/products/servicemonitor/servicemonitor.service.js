@@ -4,7 +4,9 @@
   angular.module('myou.dashboard.servicemonitor')
     .factory('ServiceMonitorService', ServiceMonitorService);
 
-
+  /**
+   * @ngInject
+   */
   function ServiceMonitorService($http, $q, Constant) {
 
     var serviceMonitorService = {};

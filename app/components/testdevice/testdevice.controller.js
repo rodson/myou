@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function testDeviceConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.testdevice', {
@@ -19,6 +22,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function TestDeviceCtrl(TestDeviceService) {
     var vm = this;
 
@@ -38,11 +44,17 @@
   }
 
   TestDeviceCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getTestDevices: function(TestDeviceService, getApp) {
       return TestDeviceService.getTestDevices();
     }
   };
 
+  /**
+   * @ngInject
+   */
   function AddTestDeviceDialogCtrl($mdDialog, TestDeviceService) {
     var vm = this;
 
@@ -70,6 +82,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function EditTestDeviceDialogCtrl(TestDeviceService, $mdDialog, data) {
     var vm = this;
 
@@ -94,6 +109,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteTestDeviceDialogCtrl($mdDialog, TestDeviceService, data) {
     var vm = this;
 

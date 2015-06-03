@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function TestDeviceService($http, $state, $stateParams, $mdDialog,
     StorageManager, UrlManager) {
 

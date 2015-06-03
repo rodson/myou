@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function UploadDialogCtrl($mdDialog, Upload, data, $state) {
     var vm = this;
     var uploader;

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function pageRankingConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.pageranking', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function PageRankingCtrl(localStorageService, MomentDateService, PageRankingService) {
     var trickId = localStorageService.get('trickId');
 
@@ -64,6 +70,9 @@
   }
 
   PageRankingCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, MomentDateService, PageRankingService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');

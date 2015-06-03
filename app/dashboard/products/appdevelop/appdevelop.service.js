@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function AppDevelopService($http, StorageManager, Constant) {
     var AppDevelopService = {};
 

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function appRomConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.approm', {
@@ -19,6 +22,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function AppRomCtrl(MomentDateService, StorageManager, $timeout, AppRomService, $mdDialog, $mdToast) {
     var vm = this;
     vm.app = StorageManager.getApp();
@@ -332,6 +338,9 @@
   }
 
   AppRomCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(getApp) {
       return getApp;
     }

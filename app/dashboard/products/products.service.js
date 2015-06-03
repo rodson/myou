@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function ProductsService($http, $mdDialog, Constant, localStorageService,
     $state, $stateParams, StateManager, PlatformManager) {
 

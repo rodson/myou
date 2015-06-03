@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function FileUploadService(PlatformManager, UrlManager,
     $mdDialog, Upload, Constant) {
 

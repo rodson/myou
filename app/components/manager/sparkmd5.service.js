@@ -570,6 +570,10 @@ SparkMD5.ArrayBuffer.hash = function (arr, raw) {
 };
 
 (function() {
+
+  /**
+   * @ngInject
+   */
   function SparkMD5Manager() {
     var service = {};
     var abort = false;

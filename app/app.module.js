@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function mainConfig($urlRouterProvider, $mdThemingProvider,
       localStorageServiceProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/login');
@@ -14,6 +17,9 @@
       .primaryPalette('blue');
   }
 
+  /**
+   * @ngInject
+   */
   function TokenInterceptor(localStorageService, StorageManager) {
     return {
       request: function(config) {

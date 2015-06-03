@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function PlatformManager(Constant) {
     var PlatformManager = {};
 

@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function InterfacesConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.interfaces', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService) {
     var vm = this;
     var now = new Date();
@@ -265,12 +271,18 @@
   }
 
   InterfacesCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, InterfacesService) {
       var product = localStorageService.get('app');
       return InterfacesService.getAppId(product.appKey);
     }
   };
 
+  /**
+   * @ngInject
+   */
   function AddModalDialogCtrl($mdDialog, $timeout, data, InterfacesService) {
     var vm = this;
     vm.title = '添加接口';
@@ -302,6 +314,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function EditModalDialogCtrl($mdDialog, $timeout, data, InterfacesService) {
     var vm = this;
     vm.title = '编辑接口';
@@ -331,6 +346,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function AddCalleeModalDialogCtrl($mdDialog, $timeout, data, CalleeService) {
     var vm = this;
     var appId = data.appId;
@@ -402,6 +420,9 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
   function DetialDialogCtrl($mdDialog, data, CalleeService) {
     var vm = this;
     vm.calleeName = data.calleeName;
@@ -449,6 +470,9 @@
     vm.getData();
   }
 
+  /**
+   * @ngInject
+   */
   function DeleteInterfaceModalDialogCtrl($mdDialog, $timeout, data, InterfacesService) {
     var vm = this;
     vm.interfaceName = data.interface_name;

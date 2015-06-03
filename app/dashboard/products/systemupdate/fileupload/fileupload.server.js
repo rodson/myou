@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function RomFileUploadService($http, $mdDialog, $state, UrlManager,
     StorageManager, Constant) {
 

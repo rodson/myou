@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function LoginService($http, $state, $mdToast, $location,
       Constant, StorageManager) {
 

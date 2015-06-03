@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  /**
+   * @ngInject
+   */
   function userInfoConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.userinfo', {
@@ -12,6 +15,9 @@
       });
   }
 
+  /**
+   * @ngInject
+   */
   function UserInfoCtrl(localStorageService, MomentDateService, UserinfoService) {
     var vm = this;
     var trickId = localStorageService.get('trickId');
@@ -107,6 +113,9 @@
   }
 
   UserInfoCtrl.resolve = {
+    /**
+     * @ngInject
+     */
     getData: function(localStorageService, MomentDateService, UserinfoService, getData) {
       var today = MomentDateService.getToday();
       var trickId = localStorageService.get('trickId');
