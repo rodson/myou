@@ -5,7 +5,7 @@
   <div class="action pull-right">
     <md-select placeholder="所有版本" class="nopadding normal-text normal-size inline-center" ng-model="vm.selectedVersion" ng-change="vm.onVersionSelect()" style="margin-right: 32px;">
       <md-option value="">所有版本</md-option>
-      <md-option ng-repeat="version in vm.versions" value="{{version}}"></md-option>
+      <md-option ng-repeat="version in vm.versions" value="{{version}}">{{version}}</md-option>
     </md-select>
     <md-button class="md-raised md-primary btn-lg inline-center" aria-label="add event" ng-click="vm.showAddEventDialog($event)">添加</md-button>
   </div>
