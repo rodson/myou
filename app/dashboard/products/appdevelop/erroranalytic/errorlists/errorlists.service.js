@@ -82,7 +82,7 @@
         });
     };
 
-    errorListService.markToFixed = function(appKey, crash_id, isFix, cb) {
+    errorListService.changeFixStatu = function(appKey, crash_id, isFix, cb) {
       var data = {
         fixed: isFix
       };
@@ -93,6 +93,34 @@
         .error(function(error) {
           cb(error);
         });
+    };
+
+    errorListService.moveToFixed = function(crash_id) {
+      var fixedItem = null;
+      errorListService.data.unfix = errorListService.data.unfix.filter(function(dt){
+        if(dt.crash_id === crash_id) {
+          fixedItem = dt;
+        }
+        return dt.crash_id !== crash_id;
+      });
+      if(errorListService.data.fixed) {
+        fixedItem.fixed = true;
+        errorListService.data.fixed.push(fixedItem);
+      }
+    };
+
+    errorListService.moveToUnfix = function(crash_id) {
+      var unfixItem = null;
+      errorListService.data.fixed = errorListService.data.fixed.filter(function(dt){
+        if(dt.crash_id === crash_id) {
+          unfixItem = dt;
+        }
+        return dt.crash_id !== crash_id;
+      });
+      if(errorListService.data.unfix) {
+        unfixItem.fixed = false;
+        errorListService.data.unfix.push(unfixItem);
+      }
     };
 
     return errorListService;

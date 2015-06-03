@@ -44,7 +44,9 @@
         title: {
           text: '数量'
         }
-      }
+      },
+      loading: false,
+      noData: 'No data'
     };
 
     vm.getCheckDate = function(){

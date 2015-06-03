@@ -99,11 +99,19 @@
       noData: 'No data'
     };
 
-    vm.setErrorFix = function() {
+    vm.setErrorFixStatu = function() {
       var fixed = vm.errorStatu === '已修复' ? true : false;
-      ErrorListService.markToFixed(appKey, vm.crashId, fixed, function(error) {
+      ErrorListService.changeFixStatu(appKey, vm.crashId, fixed, function(error) {
         if (error) {
           vm.showAlert(error);
+          return;
+        }
+        if(fixed) {
+          ErrorListService.moveToFixed(vm.crashId);
+          vm.tableDatas = ErrorListService.data.unfix;
+        } else {
+          ErrorListService.moveToUnfix(vm.crashId);
+          vm.tableDatas = ErrorListService.data.fixed;
         }
       });
     };

@@ -66,7 +66,7 @@
 
     vm.highchartsMap = {
       loading: false,
-      // noData: 'No data',
+      noData: 'No data',
       options: {
         chart: {
           height: 450,
