@@ -26,9 +26,11 @@
     margin-right: 5%;
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
     md-card {
-      display: inline-block;
       min-width: 330px;
       margin-bottom: 15px;
       overflow: hidden;
@@ -51,9 +53,10 @@
       md-card-content {
         height: 360px;
         display: block;
-        padding: 0px;
-        padding-top: 5px;
-        padding-bottom: 10px;
+        padding: 5px 0px 10px;
+        overflow: hidden;
+        overflow-y: auto;
+        width: 100%;
       }
 
       .md-list-item-text {
