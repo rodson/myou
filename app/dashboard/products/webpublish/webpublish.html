@@ -28,7 +28,7 @@
               <td>{{ ip.ip }}</td>
               <td>{{ ip.updatedAt | date: 'yyyy-MM-dd H:mm'}}</td>
               <td>{{ ip.versionCode }}</td>
-              <td>{{ vm.showPublishState(ip) }}<i class="icon-spinner icon-spin loading" ng-show="ip.waiting"></i></td>
+              <td>{{ vm.showPublishState(ip) }}</td>
               <td class="clickable" ng-click="vm.showPublishDialog($event, ip)">
                 <span class="lg-size"><i class="fa fa-paper-plane"></i></span>
               </td>
