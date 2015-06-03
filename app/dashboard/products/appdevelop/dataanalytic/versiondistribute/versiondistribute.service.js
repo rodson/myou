@@ -18,7 +18,6 @@
           panning: true,
           panKey: 'shift'
         },
-        colors: ['#157EF4'],
         tooltip: {
           style: {
             padding: 10,
