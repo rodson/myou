@@ -63,9 +63,8 @@
     /**
      * @ngInject
      */
-    getData: function(localStorageService, PageAnalyticService) {
-      var product = localStorageService.get('app');
-      return PageAnalyticService.getData(product.appKey, function() {
+    getData: function(localStorageService, $stateParams, PageAnalyticService) {
+      PageAnalyticService.getData($stateParams.id, function() {
         localStorageService.set('trickId', PageAnalyticService.trickId);
       });
     }

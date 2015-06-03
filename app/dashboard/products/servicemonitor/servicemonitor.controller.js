@@ -20,9 +20,6 @@
    * @ngInject
    */
   function ServiceMonitorCtrl($state, localStorageService, ServiceMonitorService) {
-
-    localStorageService.set('appId', ServiceMonitorService.data.appId);
-
     var vm = this;
     vm.product = localStorageService.get('app');
     vm.isActive = function(li) {
@@ -46,9 +43,10 @@
     /**
      * @ngInject
      */
-    getAppId: function(localStorageService, ServiceMonitorService){
-      var appKey = localStorageService.get('app').appKey;
-      return ServiceMonitorService.getAppId(appKey);
+    getAppId: function(localStorageService, $stateParams, ServiceMonitorService){
+      ServiceMonitorService.getAppId($stateParams.id, function(){
+        localStorageService.set('appId', ServiceMonitorService.data.appId);
+      });
     },
   };
 
