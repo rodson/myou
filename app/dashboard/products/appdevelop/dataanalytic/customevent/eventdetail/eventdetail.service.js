@@ -18,7 +18,6 @@
         chart: {
           type: 'line'
         },
-        colors: ['#157EF4'],
         tooltip: {
           style: {
             padding: 10,
@@ -29,7 +28,6 @@
       },
       plotOptions: {
         column: {
-          color: '#157EF4'
         }
       },
       // Y axis data
