@@ -29,10 +29,6 @@
       return RomUpdateSettingService.showVersion(version);
     };
 
-    vm.toggleSilentDownload = function(ev, targetItem) {
-      RomUpdateSettingService.toggleSilentDownload(ev, targetItem);
-    };
-
     vm.toggleTestUpdatable = function(ev, targetItem, updateInfo) {
       RomUpdateSettingService.toggleTestUpdatable(ev, targetItem, updateInfo);
     };
@@ -47,6 +43,10 @@
 
     vm.showDeleteUpdateDialog = function(ev, targetItem) {
       RomUpdateSettingService.showDeleteUpdateDialog(ev, targetItem);
+    };
+
+    vm.showUpdateRuleDialog = function(ev, targetItem) {
+      RomUpdateSettingService.showUpdateRuleDialog(ev, targetItem);
     };
   }
 
@@ -101,11 +101,32 @@
     };
   }
 
+  /**
+   * @ngInject
+   */
+  function RomUpdateRuleDialogCtrl($mdDialog, RomUpdateSettingService, data) {
+    var vm = this;
+
+    vm.targetItem = angular.copy(data.targetItem);
+
+    vm.ok = function() {
+      RomUpdateSettingService.toggleSilentDownload(vm.targetItem)
+        .success(function() {
+          $mdDialog.hide(vm.targetItem.isSilentDownload);
+        });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
   angular
     .module('myou.dashboard.systemupdate')
     .controller('RomUpdateSettingCtrl', RomUpdateSettingCtrl)
     .controller('RomUpdateDescDialogCtrl', RomUpdateDescDialogCtrl)
     .controller('RomDeleteUpdateDialogCtrl', RomDeleteUpdateDialogCtrl)
+    .controller('RomUpdateRuleDialogCtrl', RomUpdateRuleDialogCtrl)
     .config(romUpdateSettingConfig);
 
 })();

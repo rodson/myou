@@ -33,11 +33,17 @@
       }
     };
 
-    RomUpdateSettingService.toggleSilentDownload = function(ev, targetItem) {
-      modifyUpdateInfo(targetItem._id, {isSilentDownload: targetItem.isSilentDownload})
+    RomUpdateSettingService.toggleSilentDownload = function(targetItem) {
+      return modifyUpdateInfo(targetItem._id, {isSilentDownload: targetItem.isSilentDownload})
         .error(function(err) {
           targetItem.isSilentDownload = !targetItem.isSilentDownload;
-          showDialog(ev, '修改失败', err.message);
+          $mdDialog.show(
+            $mdDialog.alert()
+              .title('修改失败')
+              .content(err.message)
+              .ariaLabel('result dialog')
+              .ok('知道了')
+          );
         });
     };
 
@@ -112,6 +118,25 @@
           inherit: false,
           notify: true
         });
+      });
+    };
+
+    RomUpdateSettingService.showUpdateRuleDialog = function(ev, targetItem) {
+      $mdDialog.show({
+        controller: 'RomUpdateRuleDialogCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'updateRuleDialog.html',
+        targetEvent: ev,
+        resolve: {
+          data: function() {
+            return {
+              targetItem: targetItem
+            };
+          }
+        }
+      })
+      .then(function(result) {
+        targetItem.isSilentDownload = result;
       });
     };
 
