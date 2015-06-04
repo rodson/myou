@@ -14,12 +14,12 @@
           </md-button>
         </a>
         <a ui-sref=".apistatis">
-          <md-button class="md-icon-button nav-item">
+          <md-button class="md-icon-button nav-item" ng-show="vm.isRoot()">
             <span class="text">API统计</span>
           </md-button>
         </a>
         <a ui-sref=".usermanager">
-          <md-button class="md-icon-button nav-item">
+          <md-button class="md-icon-button nav-item" ng-show="vm.isRoot() || vm.isGroup()">
             <span class="text">人员管理</span>
           </md-button>
         </a>

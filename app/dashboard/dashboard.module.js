@@ -10,10 +10,29 @@
         abstract: true,
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
+        controllerAs: 'vm',
+        controller: 'DashboardCtrl',
         resolve: {
           loggedIn: checkLoggedIn
         }
       });
+  }
+
+  /**
+   * @ngInject
+   */
+  function DashboardCtrl(StorageManager) {
+    var vm = this;
+
+    var user = StorageManager.getUser();
+
+    vm.isRoot = function() {
+      return user.userType === 'root';
+    };
+
+    vm.isGroup = function() {
+      return user.userType === 'group';
+    };
   }
 
   /**
@@ -60,6 +79,7 @@
       'myou.dashboard.apistatis',
       'myou.dashboard.usermaneger'
     ])
+    .controller('DashboardCtrl', DashboardCtrl)
     .config(dashboardConfig);
 
   angular.module('mdDateTime').run(['$templateCache',
