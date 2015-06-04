@@ -65,7 +65,8 @@
         verticalAlign: 'middle',
         borderWidth: 0
       },
-      noData: '没有数据'
+      loading: false,
+      noData: 'No data'
     };
 
     VersionDistributeService.versionChartConfig = {

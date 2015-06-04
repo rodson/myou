@@ -43,7 +43,8 @@
       title: {
         text: ' '
       },
-      noData: '没有数据',
+      loading: false,
+      noData: 'No data',
       // X axis data
       xAxis: {
         type: 'datetime',

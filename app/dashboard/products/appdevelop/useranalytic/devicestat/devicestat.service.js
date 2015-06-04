@@ -39,7 +39,7 @@
         text: ' '
       },
       loading: false,
-      noData: '没有数据',
+      noData: 'No data',
       yAxis: {
         allowDecimals: false,
         min: 0,

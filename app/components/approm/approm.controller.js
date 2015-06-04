@@ -89,6 +89,7 @@
         verticalAlign: 'middle',
         borderWidth: 0
       },
+      loading: false,
       noData: 'No data'
     };
 
