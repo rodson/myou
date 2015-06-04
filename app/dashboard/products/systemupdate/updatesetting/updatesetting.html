@@ -46,16 +46,16 @@
               </td>
               <td>
                 <rs-dropdown>
-                  <li ng-click="vm.showUpdateDescDialog($event, targetItem)">
-                    <a href="javascript:void(0)">
-                      <i class="fa fa-edit"></i>
-                      <span>版本描述</span>
-                    </a>
-                  </li>
                   <li ng-click="vm.showUpdateRuleDialog($event, targetItem)">
                     <a href="javascript:void(0)">
                       <i class="fa fa-cog"></i>
                       <span>更新配置</span>
+                    </a>
+                  </li>
+                  <li ng-click="vm.showUpdateDescDialog($event, targetItem)">
+                    <a href="javascript:void(0)">
+                      <i class="fa fa-edit"></i>
+                      <span>版本描述</span>
                     </a>
                   </li>
                   <li ng-click="vm.showDeleteUpdateDialog($event, targetItem)">

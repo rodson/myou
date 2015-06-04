@@ -10,7 +10,7 @@
     var DeviceStatService = {};
 
     DeviceStatService.app = {};
-    DeviceStatService.radioDate = 'today';
+    DeviceStatService.radioDate = 'last30days';
     DeviceStatService.radioDataType = 'resolution';
     DeviceStatService.total = 1;
     DeviceStatService.date = {};
@@ -55,7 +55,7 @@
 
     DeviceStatService.init = function() {
       DeviceStatService.app = StorageManager.getApp();
-      DeviceStatService.getCheckDate('today');
+      DeviceStatService.getCheckDate('last30days');
     };
 
     DeviceStatService.isAndroidApp = function() {
