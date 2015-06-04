@@ -10,7 +10,8 @@
         url: '/contacts',
         templateUrl: 'app/dashboard/products/servicemonitor/contacts/contacts.html',
         controllerAs: 'vm',
-        controller: 'ContactsCtrl'
+        controller: 'ContactsCtrl',
+        resolve: ContactsCtrl.resolve
       });
   }
 
@@ -102,6 +103,15 @@
 
     vm.getContacts();
   }
+
+  ContactsCtrl.resolve = {
+    /**
+     * @ngInject
+     */
+    getAppId: function(getAppId) {
+      return getAppId;
+    }
+  };
 
   /**
    * @ngInject
