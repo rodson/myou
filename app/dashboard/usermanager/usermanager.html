@@ -69,10 +69,10 @@
       </md-dialog-content>
       <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
-        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+        <md-button ng-click="vm.cancel($event)" class="md-raised md-accent btn-lg">
           取消
         </md-button>
-        <md-button ng-click="vm.ok()" class="md-primary">
+        <md-button ng-click="vm.ok()" class="md-raised md-primary btn-lg">
           确定
         </md-button>
       </div>
@@ -89,10 +89,10 @@
       </md-dialog-content>
       <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
-        <md-button ng-click="vm.cancel()" class="md-default-theme">
+        <md-button ng-click="vm.cancel()" class="md-raised md-accent btn-lg">
           取消
         </md-button>
-        <md-button ng-click="vm.ok()" class="md-primary">
+        <md-button ng-click="vm.ok()" class="md-raised md-primary btn-lg">
           确定
         </md-button>
       </div>
@@ -110,7 +110,7 @@
           <md-radio-button value="group" class="md-primary">分组管理员</md-radio-button>
         </md-radio-group>
 
-        <md-input-container>
+        <md-input-container class="nopadding">
           <label>姓名：</label>
           <input required name="memberName" ng-model="vm.memberName">
           <div ng-messages="addMemberModal.memberName.$error">
@@ -118,7 +118,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container>
+        <md-input-container class="nopadding">
           <label>邮箱：</label>
           <input required name="memberMail" ng-model="vm.memberMail"  ng-disabled='!vm.addMember'>
           <div ng-messages="addMemberModal.memberMail.$error">
@@ -126,7 +126,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container ng-show='vm.addMember'>
+        <md-input-container ng-show='vm.addMember' class="nopadding">
           <label>密码：</label>
           <input required name="password" ng-model="vm.password" type='password'>
           <div ng-messages="addMemberModal.password.$error">
@@ -134,7 +134,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container ng-show='vm.addMember'>
+        <md-input-container ng-show='vm.addMember' class="nopadding">
           <label>确认密码：</label>
           <input required name="repassword" ng-model="vm.repassword" type='password'>
           <div ng-messages="addMemberModal.repassword.$error">
@@ -145,10 +145,10 @@
       </md-dialog-content>
       <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
-        <md-button ng-click="vm.cancel($event)" class="md-default-theme">
+        <md-button ng-click="vm.cancel($event)" class="md-raised md-accent btn-lg">
           取消
         </md-button>
-        <md-button ng-click="vm.ok()" class="md-primary">
+        <md-button ng-click="vm.ok()" class="md-raised md-primary btn-lg">
           确定
         </md-button>
       </div>
@@ -165,10 +165,10 @@
       </md-dialog-content>
       <h4 class='error-tip'>{{ vm.errortip }}</h4>
       <div class="md-actions" layout="row">
-        <md-button ng-click="vm.cancel()" class="md-default-theme">
+        <md-button ng-click="vm.cancel()" class="md-raised md-accent btn-lg">
           取消
         </md-button>
-        <md-button ng-click="vm.ok()" class="md-primary">
+        <md-button ng-click="vm.ok()" class="md-raised md-primary btn-lg">
           确定
         </md-button>
       </div>
