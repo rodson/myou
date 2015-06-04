@@ -92,7 +92,7 @@
           $mdDialog.cancel();
           $mdDialog.show(
             $mdDialog.alert()
-              .content('发布成功')
+              .content('操作成功')
               .ariaLabel('operaion success')
               .ok('知道了')
               .targetEvent(ev)
