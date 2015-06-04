@@ -55,7 +55,9 @@
 
     DeviceStatService.init = function() {
       DeviceStatService.app = StorageManager.getApp();
-      DeviceStatService.getCheckDate('last30days');
+      if (!DeviceStatService.date.start) {
+        DeviceStatService.getCheckDate('last30days');
+      }
     };
 
     DeviceStatService.isAndroidApp = function() {
@@ -88,9 +90,7 @@
     };
 
     DeviceStatService.getBarChartData = function(stats) {
-      if (!DeviceStatService.date.start) {
-        DeviceStatService.init();
-      }
+      DeviceStatService.init();
 
       if (!stats) {
         stats = DeviceStatService.radioDataType;

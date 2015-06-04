@@ -16,9 +16,7 @@
     };
 
     CustomEventService.getEvents = function(version) {
-      if (!CustomEventService.app) {
-        CustomEventService.init();
-      }
+      CustomEventService.init();
 
       var queryString = version ? ('?version=' + version) : '';
       return $http.get(UrlManager.getAnalyzeCustomEventUrl(CustomEventService.app.appKey) +
@@ -28,9 +26,7 @@
     };
 
     CustomEventService.getEventVersions = function(eventId) {
-      if (!CustomEventService.app) {
-        CustomEventService.init();
-      }
+      CustomEventService.init();
 
       eventId = eventId || '';
 

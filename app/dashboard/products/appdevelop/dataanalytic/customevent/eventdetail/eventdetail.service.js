@@ -137,6 +137,7 @@
     };
 
     EventDetailService.getEventData = function(eventId, version) {
+      EventDetailService.getApp();
       if (!EventDetailService.date.start) {
         EventDetailService.init();
       }
@@ -156,6 +157,7 @@
     };
 
     EventDetailService.getEventLabelData = function(eventId, version) {
+      EventDetailService.getApp();
       if (!EventDetailService.date.start) {
         EventDetailService.init();
       }
@@ -173,6 +175,7 @@
     };
 
     EventDetailService.getEventVersions = function(eventId) {
+      EventDetailService.getApp();
       if (!EventDetailService.app) {
         EventDetailService.init();
       }

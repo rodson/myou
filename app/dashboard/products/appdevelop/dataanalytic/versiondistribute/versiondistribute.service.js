@@ -120,9 +120,9 @@
 
 
     VersionDistributeService.getApiStat = function(date) {
+      VersionDistributeService.init();
       if (!date) {
         date = VersionDistributeService.getToday();
-        VersionDistributeService.init();
       }
 
       return $http.get(Constant.URL.UPDATE_API_STAT + '/' +
@@ -142,9 +142,9 @@
     };
 
     VersionDistributeService.getVersionStatPie = function(date, dataType) {
+      VersionDistributeService.init();
       if (!date) {
         date = VersionDistributeService.getToday();
-        VersionDistributeService.init();
       }
 
       return $http.get(Constant.URL.VERSION_API_STAT + '?appKey=' +
@@ -163,9 +163,9 @@
     };
 
     VersionDistributeService.getVersionStatTable = function(date) {
+      VersionDistributeService.init();
       if (!date) {
         date = VersionDistributeService.getToday();
-        VersionDistributeService.init();
       }
 
       return $http.get(Constant.URL.VERSION_API_STAT + '?appKey=' +

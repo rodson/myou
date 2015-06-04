@@ -21,6 +21,9 @@
 
     UserRetainService.init = function() {
       UserRetainService.getApp();
+      if (!UserRetainService.date.start) {
+        UserRetainService.getCheckDate('last7days');
+      }
     };
 
     UserRetainService.isWindowsApp = function() {
@@ -53,10 +56,7 @@
     };
 
     UserRetainService.getTableData = function() {
-      if (!UserRetainService.date.start) {
-        UserRetainService.init();
-        UserRetainService.getCheckDate('last7days');
-      }
+      UserRetainService.init();
 
       return $http.get(UrlManager.getUserRetainUrl(UserRetainService.app.appKey) +
         '?start_date=' + UserRetainService.date.start +
