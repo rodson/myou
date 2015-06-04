@@ -10,7 +10,8 @@
         url: '/alertlist',
         templateUrl: 'app/dashboard/products/servicemonitor/alertlist/alertlist.html',
         controllerAs: 'vm',
-        controller: 'AlertListCtrl'
+        controller: 'AlertListCtrl',
+        resolve: AlertListCtrl.resolve
       });
   }
 
@@ -75,6 +76,15 @@
 
     vm.getData();
   }
+
+  AlertListCtrl.resolve = {
+    /**
+     * @ngInject
+     */
+    getAppId: function(getAppId) {
+      return getAppId;
+    }
+  };
 
   angular
     .module('myou.dashboard.servicemonitor')

@@ -11,14 +11,14 @@
         templateUrl: 'app/dashboard/products/servicemonitor/interfaces/interfaces.html',
         controllerAs: 'vm',
         controller: InterfacesCtrl,
-        // resolve: InterfacesCtrl.resolve
+        resolve: InterfacesCtrl.resolve
       });
   }
 
   /**
    * @ngInject
    */
-  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService, getAppId) {
+  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService) {
     var vm = this;
     var now = new Date();
     vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
@@ -30,7 +30,7 @@
       sortable: true
     };
 
-    vm.appId = getAppId.data.app_id;
+    vm.appId = localStorageService.get('appId');
 
     vm.colDefs = [{
       field: 'ID',
@@ -274,9 +274,8 @@
     /**
      * @ngInject
      */
-    getData: function(localStorageService, InterfacesService) {
-      var product = localStorageService.get('app');
-      return InterfacesService.getAppId(product.appKey);
+    getAppId: function(getAppId) {
+      return getAppId;
     }
   };
 

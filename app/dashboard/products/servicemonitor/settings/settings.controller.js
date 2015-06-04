@@ -10,7 +10,8 @@
         url: '/settings',
         templateUrl: 'app/dashboard/products/servicemonitor/settings/settings.html',
         controllerAs: 'vm',
-        controller: 'SettingsCtrl'
+        controller: 'SettingsCtrl',
+        resolve: SettingsCtrl.resolve
       });
   }
 
@@ -62,6 +63,15 @@
       );
     };
   }
+
+  SettingsCtrl.resolve = {
+    /**
+     * @ngInject
+     */
+    getAppId: function(getAppId) {
+      return getAppId;
+    }
+  };
 
   angular
     .module('myou.dashboard.servicemonitor')

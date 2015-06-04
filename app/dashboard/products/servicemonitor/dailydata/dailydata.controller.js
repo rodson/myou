@@ -10,7 +10,8 @@
         url: '/dailydata',
         templateUrl: 'app/dashboard/products/servicemonitor/dailydata/dailydata.html',
         controllerAs: 'vm',
-        controller: 'DailyDataCtrl'
+        controller: 'DailyDataCtrl',
+        resolve: DailyDataCtrl.resolve
       });
   }
 
@@ -44,6 +45,15 @@
 
     vm.getData();
   }
+
+  DailyDataCtrl.resolve = {
+    /**
+     * @ngInject
+     */
+    getAppId: function(getAppId) {
+      return getAppId;
+    }
+  };
 
   angular
     .module('myou.dashboard.servicemonitor')
