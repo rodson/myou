@@ -23,9 +23,9 @@
 
     var vm = this;
     vm.step = 8;
-    vm.radioChecked = 'today';
+    vm.radioChecked = 'last7days';
 
-    var checkDate = MomentDateService.getToday();
+    var checkDate = MomentDateService.getLast7Day();
 
     vm.startdate = checkDate.start;
     vm.enddate = checkDate.end;
@@ -98,9 +98,9 @@
      * @ngInject
      */
     getData: function(localStorageService, MomentDateService, WebsiteTrendService, getData) {
-      var today = MomentDateService.getToday();
+      var last7days = MomentDateService.getLast7Day();
       var trickId = localStorageService.get('trickId');
-      return WebsiteTrendService.getData(trickId, today.start, today.end);
+      return WebsiteTrendService.getData(trickId, last7days.start, last7days.end);
     }
   };
 

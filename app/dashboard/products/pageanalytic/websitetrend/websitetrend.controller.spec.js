@@ -24,12 +24,12 @@ describe('WebsiteTrendCtrl: ', function() {
       expect(WebsiteTrendCtrl.step).toBe(8);
     });
 
-    it('radioChecked should equal "today"', function() {
-      expect(WebsiteTrendCtrl.radioChecked).toEqual('today');
+    it('radioChecked should equal "last7days"', function() {
+      expect(WebsiteTrendCtrl.radioChecked).toEqual('last7days');
     });
 
-    it('startdate & enddate should equal "MomentDateService.getToday()"', function() {
-      var today = MomentDateService.getToday();
+    it('startdate & enddate should equal "MomentDateService.getLast7Day()"', function() {
+      var today = MomentDateService.getLast7Day();
       expect(WebsiteTrendCtrl.startdate).toEqual(today.start);
       expect(WebsiteTrendCtrl.enddate).toEqual(today.end);
     });
