@@ -116,7 +116,7 @@
       var updateInfos = WebPublishService.updateInfos;
       var length = updateInfos.length;
 
-      for (var i = 0; i < length; i++) {
+      for (var i = length - 1; i >= 0; i--) {
         if (updateInfos[i].nginxServerState === 'install_done') {
           versions.push(updateInfos[i].versionCode);
         }

@@ -118,7 +118,7 @@
         vm.errorMessage = '没有安装版本';
       } else {
         vm.isPublishing = true;
-        var versionId = WebPublishService.getVersionId(vm.versionCode);
+        var versionId = WebPublishService.getVersionId(parseInt(vm.versionCode));
         WebPublishService.publishWebApp(versionId, ip, Constant.PACKAGE_ACTION.PUB)
           .success(function(data) {
             vm.isDone = true;
