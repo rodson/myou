@@ -4,13 +4,15 @@
   /**
    * @ngInject
    */
-  function mainConfig($urlRouterProvider, $mdThemingProvider,
+  function mainConfig($urlRouterProvider, $mdThemingProvider, $locationProvider,
       localStorageServiceProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/login');
 
     localStorageServiceProvider.setPrefix('Myou');
 
     $httpProvider.interceptors.push('TokenInterceptor');
+
+    $locationProvider.html5Mode(true).hashPrefix('!');
 
     // Config default theme
     $mdThemingProvider.theme('default')
