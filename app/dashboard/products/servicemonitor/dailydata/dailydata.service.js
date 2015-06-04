@@ -50,7 +50,7 @@
           dailyDataService.data.data = data.data;
 
           dailyDataService.data.data.forEach(function(i) {
-            i.alert_percent = (i.alert_percent * 100).toFIxed(2);
+            i.alert_percent = (i.alert_percent * 100).toFixed(2);
           });
 
           if (cb && typeof(cb) === 'function') {
