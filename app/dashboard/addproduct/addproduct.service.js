@@ -4,7 +4,7 @@
   /**
    * @ngInject
    */
-  function AddProductService($http, $state, $mdToast, localStorageService,
+  function AddProductService($http, $state, $mdToast, StorageManager,
     Constant, StateManager) {
 
     var AddProductService = {};
@@ -12,6 +12,8 @@
     AddProductService.platforms = Constant.PRODUCT_PLATFORM;
 
     AddProductService.createProduct = function(product) {
+      product.ownerId = StorageManager.getUser().groupId;
+
       return $http.post(Constant.URL.PRODUCTS, product)
         .success(function(response) {
           AddProductService.createdProduct = {
@@ -32,7 +34,7 @@
     };
 
     AddProductService.enterProduct = function() {
-      localStorageService.set('app', AddProductService.createdProduct);
+      StorageManager.setApp(AddProductService.createdProduct);
       StateManager.enterProduct(AddProductService.createdProduct.platform,
         AddProductService.createdProduct._id);
     };
