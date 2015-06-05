@@ -7,11 +7,15 @@
   function keyDataConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.keydata', {
-        url: '/keydata',
+        url: '/keydata?stats&selected_date',
         templateUrl: 'app/dashboard/products/appdevelop/dataanalytic/keydata/keydata.html',
         controllerAs: 'vm',
         controller: 'KeyDataCtrl',
-        resolve: KeyDataCtrl.resolve
+        resolve: KeyDataCtrl.resolve,
+        defaultQueryParams: {
+          stats: 'new_user_count',
+          selected_date: 'last7days'
+        }
       });
   }
 
@@ -21,27 +25,29 @@
   function KeyDataCtrl(KeyDataService) {
     var vm = this;
 
-    vm.app = KeyDataService.getApp();
     vm.chartConfig = KeyDataService.chartConfig;
     vm.tableData = KeyDataService.tableData;
+
     vm.radioDate = KeyDataService.radioDate;
     vm.radioKeyDataType = KeyDataService.radioKeyDataType;
+
     vm.date = KeyDataService.date;
 
     vm.getCheckDate = function() {
       KeyDataService.getCheckDate(vm.radioDate);
-      KeyDataService.getLineChartData(vm.radioKeyDataType);
+      KeyDataService.getLineChartData();
       KeyDataService.getTableData().then(function() {
         vm.tableData = KeyDataService.tableData;
       });
     };
 
-    vm.isWindowsApp = function() {
-      return KeyDataService.isWindowsApp();
+    vm.getCheckDataType = function() {
+      KeyDataService.getCheckDataType(vm.radioKeyDataType);
+      KeyDataService.getLineChartData();
     };
 
-    vm.getLineChartData = function() {
-      KeyDataService.getLineChartData(vm.radioKeyDataType);
+    vm.isWindowsApp = function() {
+      return KeyDataService.isWindowsApp();
     };
 
     vm.getTableData = function() {
@@ -56,14 +62,21 @@
     /**
      * @ngInject
      */
-    getLineChartData: function(KeyDataService, getApp) {
+    initData: function(getApp, $stateParams, KeyDataService) {
+      return KeyDataService.init($stateParams.stats, $stateParams.selected_date);
+    },
+
+    /**
+     * @ngInject
+     */
+    getLineChartData: function(KeyDataService, initData) {
       return KeyDataService.getLineChartData();
     },
 
     /**
      * @ngInject
      */
-    getTableData: function(KeyDataService, getApp) {
+    getTableData: function(KeyDataService, initData) {
       return KeyDataService.getTableData();
     }
   };

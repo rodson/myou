@@ -6,7 +6,7 @@
     <md-option value="today"> 今天 </md-option>
   </md-select>
 
-  <md-radio-group ng-model="vm.radioKeyDataType"  class="nopadding pull-right" ng-change='vm.getLineChartData()'>
+  <md-radio-group ng-model="vm.radioKeyDataType"  class="nopadding pull-right" ng-change='vm.getCheckDataType()'>
     <md-radio-button ng-show="vm.isWindowsApp()" value="new_user_count" class="md-primary">新增装机量</md-radio-button>
     <md-radio-button ng-hide="vm.isWindowsApp()" value="new_user_count" class="md-primary">新增用户</md-radio-button>
     <md-radio-button ng-show="vm.isWindowsApp()" value="active_user_count" class="md-primary">活跃电脑数</md-radio-button>

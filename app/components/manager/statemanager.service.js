@@ -4,7 +4,7 @@
   /**
    * @ngInject
    */
-  function StateManager($state, Constant) {
+  function StateManager($state, $location, $timeout, Constant) {
     var StateManager = {};
 
     StateManager.enterProduct = function(platform, id) {
@@ -30,6 +30,16 @@
       }
 
       $state.go(state, { id: id });
+    };
+
+    StateManager.setQueryParams = function(queryKey, queryValue) {
+      $state.current.reloadOnSearch = false;
+
+      $location.search(queryKey, queryValue);
+
+      $timeout(function () {
+        $state.current.reloadOnSearch = undefined;
+      });
     };
 
     return StateManager;

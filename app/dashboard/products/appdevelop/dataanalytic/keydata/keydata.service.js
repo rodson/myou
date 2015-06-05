@@ -4,13 +4,25 @@
   /**
    * @ngInject
    */
-  function KeyDataService($http, StorageManager, UrlManager, PlatformManager, MomentDateService) {
+  function KeyDataService($http, StorageManager, UrlManager,
+    PlatformManager, MomentDateService, StateManager) {
+
     var KeyDataService = {};
 
     KeyDataService.app = {};
 
-    KeyDataService.radioDate = 'last7days';
-    KeyDataService.radioKeyDataType = 'new_user_count';
+    var VALID_STATS_ARRAY = ['new_user_count', 'active_user_count', 'session_count', 'accumulate_user_count'];
+    var VALID_DATE_ARRAY = ['today', 'yesterday', 'last7days', 'last30days'];
+
+    var DEFAULT_STATS = 'new_user_count';
+    var DEFAULT_DATE = 'last7days';
+
+    var KEY_SELECTED_DATE = 'selected_date';
+    var KEY_STATS = 'stats';
+
+
+    KeyDataService.radioDate = DEFAULT_DATE;
+    KeyDataService.radioKeyDataType = DEFAULT_STATS;
     KeyDataService.tableData = [];
     KeyDataService.date = {};
 
@@ -72,19 +84,32 @@
       return KeyDataService.app;
     };
 
-    KeyDataService.init = function() {
+    KeyDataService.init = function(stats, selected_date) {
+      // Init app info
       KeyDataService.getApp();
-      if (!KeyDataService.date.start) {
-        KeyDataService.getCheckDate('last7days');
-      }
-    };
 
+      // Init queryString
+      if (VALID_STATS_ARRAY.indexOf(stats) > -1) {
+        KeyDataService.radioKeyDataType = stats;
+      } else {
+        KeyDataService.radioKeyDataType = DEFAULT_STATS;
+      }
+      if (VALID_DATE_ARRAY.indexOf(selected_date) > -1) {
+        KeyDataService.radioDate = selected_date;
+      } else {
+        KeyDataService.radioDate = DEFAULT_DATE;
+      }
+
+      // Init startdate and enddate
+      KeyDataService.getCheckDate(KeyDataService.radioDate);
+    };
 
     KeyDataService.isWindowsApp = function() {
       return PlatformManager.isWindowsApp(KeyDataService.app.platform);
     };
 
     KeyDataService.getCheckDate = function(selectedDate) {
+      StateManager.setQueryParams(KEY_SELECTED_DATE, selectedDate);
       var checkDate;
       KeyDataService.radioDate = selectedDate;
 
@@ -110,26 +135,21 @@
       KeyDataService.chartConfig.series[0].pointStart = (new Date(checkDate.start)).getTime();
     };
 
-    KeyDataService.getLineChartData = function(stats) {
-      KeyDataService.init();
+    KeyDataService.getCheckDataType = function(stats) {
+      StateManager.setQueryParams(KEY_STATS, stats);
+      KeyDataService.radioKeyDataType = stats;
+    };
 
-      if (!stats) {
-        stats = KeyDataService.radioKeyDataType;
-      } else {
-        KeyDataService.radioKeyDataType = stats;
-      }
-
+    KeyDataService.getLineChartData = function() {
       return $http.get(UrlManager.getAnalyzeKeyDataUrl(KeyDataService.app.appKey) +
         '?start_date=' + KeyDataService.date.start + '&end_date=' + KeyDataService.date.end +
-        '&platform=' + KeyDataService.app.platform + '&stats=' + stats)
+        '&platform=' + KeyDataService.app.platform + '&stats=' + KeyDataService.radioKeyDataType)
         .success(function(data) {
           KeyDataService.chartConfig.series[0].data = data.counts;
         });
     };
 
     KeyDataService.getTableData = function() {
-      KeyDataService.init();
-
       return $http.get(UrlManager.getAnalyzeKeyDataUrl(KeyDataService.app.appKey) +
         '?start_date=' + KeyDataService.date.start + '&end_date=' + KeyDataService.date.end +
         '&platform=' + KeyDataService.app.platform + '&stats=key_data')

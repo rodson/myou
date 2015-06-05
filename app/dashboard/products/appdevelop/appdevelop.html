@@ -42,7 +42,7 @@
           <a>数据分析</a>
           <ul>
             <li ng-class="{active: vm.isActive('appdevelop', 'keydata')}">
-              <a ui-sref=".keydata">关键数据</a>
+              <a ui-sref=".keydata({stats: 'new_user_count', selected_date: 'last7days'})">关键数据</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'versiondistribute')}">
               <a ui-sref=".versiondistribute">版本分布</a>
