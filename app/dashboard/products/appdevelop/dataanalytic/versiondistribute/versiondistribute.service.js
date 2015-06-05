@@ -4,8 +4,13 @@
   /**
    * @ngInject
    */
-  function VersionDistributeService($http, Constant, StorageManager, MomentDateService) {
+  function VersionDistributeService($http, Constant,
+    StateManager, StorageManager, MomentDateService) {
+
     var VersionDistributeService = {};
+
+    var KEY_API_STAT_DATE = 'api_stat_date';
+    var KEY_VERSION_STAT_DATE = 'version_stat_date';
 
     VersionDistributeService.userCount = 0;
     VersionDistributeService.apiCount = 0;
@@ -110,23 +115,27 @@
       VersionDistributeService.app = StorageManager.getApp();
     };
 
-    VersionDistributeService.getToday = function() {
-      return MomentDateService.getToday().start;
-    };
-
-    VersionDistributeService.init = function() {
+    VersionDistributeService.init = function(apiStatDate, versionStatDate) {
       VersionDistributeService.getApp();
+
+      // init queryString
+      VersionDistributeService.apiStatDate = apiStatDate;
+      VersionDistributeService.versionStatDate = versionStatDate;
     };
 
+    VersionDistributeService.apiStatDateChange = function(apiStatDate) {
+      StateManager.setQueryParams(KEY_API_STAT_DATE, apiStatDate);
+      VersionDistributeService.apiStatDate = apiStatDate;
+    };
 
-    VersionDistributeService.getApiStat = function(date) {
-      VersionDistributeService.init();
-      if (!date) {
-        date = VersionDistributeService.getToday();
-      }
+    VersionDistributeService.versionStatDateChange = function(versionStatDate) {
+      StateManager.setQueryParams(KEY_VERSION_STAT_DATE, versionStatDate);
+      VersionDistributeService.versionStatDate = versionStatDate;
+    };
 
+    VersionDistributeService.getApiStat = function() {
       return $http.get(Constant.URL.UPDATE_API_STAT + '/' +
-        VersionDistributeService.app.appKey + '?date=' + date)
+        VersionDistributeService.app.appKey + '?date=' + VersionDistributeService.apiStatDate)
         .success(function(data) {
           // Set api stat count
           VersionDistributeService.apiCount = data.count;
@@ -137,18 +146,14 @@
           });
 
           // Set point start time
-          VersionDistributeService.apiChartConfig.series[0].pointStart = Date.parse(date);
+          VersionDistributeService.apiChartConfig.series[0].pointStart = Date.parse(VersionDistributeService.apiStatDate);
         });
     };
 
-    VersionDistributeService.getVersionStatPie = function(date, dataType) {
-      VersionDistributeService.init();
-      if (!date) {
-        date = VersionDistributeService.getToday();
-      }
+    VersionDistributeService.getVersionStatPie = function() {
 
       return $http.get(Constant.URL.VERSION_API_STAT + '?appKey=' +
-        VersionDistributeService.app.appKey + '&date=' + date +
+        VersionDistributeService.app.appKey + '&date=' + VersionDistributeService.versionStatDate +
         '&dataType=' + 'pieChart').success(function(data) {
           // Set user count
           VersionDistributeService.userCount = data.count;
@@ -162,14 +167,10 @@
         });
     };
 
-    VersionDistributeService.getVersionStatTable = function(date) {
-      VersionDistributeService.init();
-      if (!date) {
-        date = VersionDistributeService.getToday();
-      }
+    VersionDistributeService.getVersionStatTable = function() {
 
       return $http.get(Constant.URL.VERSION_API_STAT + '?appKey=' +
-        VersionDistributeService.app.appKey + '&date=' + date +
+        VersionDistributeService.app.appKey + '&date=' + VersionDistributeService.versionStatDate +
         '&dataType=' + 'table').success(function(data) {
           // Set table data
           VersionDistributeService.versionTableData = data;

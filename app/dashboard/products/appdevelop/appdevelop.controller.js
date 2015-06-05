@@ -19,10 +19,12 @@
   /**
    * @ngInject
    */
-  function AppDevelopCtrl(localStorageService, $location, $timeout, $stateParams, $mdToast, AppDevelopService) {
+  function AppDevelopCtrl(localStorageService, $location, $timeout, $stateParams, $mdToast, AppDevelopService, MomentDateService) {
     var vm = this;
 
     vm.product = localStorageService.get('app');
+    vm.today = MomentDateService.getToday().start;
+
     vm.isActive = function(parent, path) {
       return ($location.path().indexOf(parent) > -1 && $location.path().indexOf(path) > -1);
     };

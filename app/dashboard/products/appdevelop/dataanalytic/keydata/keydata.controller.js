@@ -11,11 +11,7 @@
         templateUrl: 'app/dashboard/products/appdevelop/dataanalytic/keydata/keydata.html',
         controllerAs: 'vm',
         controller: 'KeyDataCtrl',
-        resolve: KeyDataCtrl.resolve,
-        defaultQueryParams: {
-          stats: 'new_user_count',
-          selected_date: 'last7days'
-        }
+        resolve: KeyDataCtrl.resolve
       });
   }
 

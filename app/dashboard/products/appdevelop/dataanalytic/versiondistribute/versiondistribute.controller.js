@@ -7,7 +7,7 @@
   function versionDistributeConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.versiondistribute', {
-        url: '/versiondistribute',
+        url: '/versiondistribute?api_stat_date&version_stat_date',
         templateUrl: 'app/dashboard/products/appdevelop/dataanalytic/versiondistribute/versiondistribute.html',
         controllerAs: 'vm',
         controller: 'VersionDistributeCtrl',
@@ -18,16 +18,14 @@
   /**
    * @ngInject
    */
-  function VersionDistributeCtrl($scope, VersionDistributeService, MomentDateService) {
+  function VersionDistributeCtrl(VersionDistributeService) {
     var vm = this;
-
-    VersionDistributeService.init();
 
     vm.apiCount = VersionDistributeService.apiCount;
     vm.userCount = VersionDistributeService.userCount;
 
-    vm.apiStatDate = VersionDistributeService.getToday();
-    vm.versionStatDate = VersionDistributeService.getToday();
+    vm.apiStatDate = VersionDistributeService.apiStatDate;
+    vm.versionStatDate = VersionDistributeService.versionStatDate;
 
     vm.versionTableData = VersionDistributeService.versionTableData;
 
@@ -35,48 +33,20 @@
     vm.versionChartConfig = VersionDistributeService.versionChartConfig;
 
     vm.apiStatDateChange = function() {
-      VersionDistributeService.getApiStat(vm.apiStatDate)
+      VersionDistributeService.apiStatDateChange(vm.apiStatDate);
+      VersionDistributeService.getApiStat()
         .then(function() {
           vm.apiCount = VersionDistributeService.apiCount;
         });
     };
 
     vm.versionStatDateChange = function() {
-      VersionDistributeService.getVersionStatPie(vm.versionStatDate)
+      VersionDistributeService.versionStatDateChange(vm.versionStatDate);
+      VersionDistributeService.getVersionStatPie()
         .then(function() {
           vm.userCount = VersionDistributeService.userCount;
         });
 
-      VersionDistributeService.getVersionStatTable(vm.versionStatDate)
-        .then(function() {
-          vm.versionTableData = VersionDistributeService.versionTableData;
-        });
-      };
-
-    // $scope.$watch('vm.apiStatDate', function(current, original) {
-    //   if (current !== original) {
-    //     VersionDistributeService.getApiStat(vm.apiStatDate)
-    //       .then(function() {
-    //         vm.apiCount = VersionDistributeService.apiCount;
-    //       });
-    //   }
-    // });
-
-    // $scope.$watch('vm.versionStatDate', function(current, original) {
-    //   if (current !== original) {
-    //     VersionDistributeService.getVersionStatPie(vm.versionStatDate)
-    //       .then(function() {
-    //         vm.userCount = VersionDistributeService.userCount;
-    //       });
-
-    //     VersionDistributeService.getVersionStatTable(vm.versionStatDate)
-    //       .then(function() {
-    //         vm.versionTableData = VersionDistributeService.versionTableData;
-    //       });
-    //   }
-    // });
-
-    vm.test = function() {
       VersionDistributeService.getVersionStatTable(vm.versionStatDate)
         .then(function() {
           vm.versionTableData = VersionDistributeService.versionTableData;
@@ -89,21 +59,28 @@
     /**
      * @ngInject
      */
-    getApiStat: function(VersionDistributeService, getApp) {
+    initData: function(getApp, $stateParams, VersionDistributeService) {
+      return VersionDistributeService.init($stateParams.api_stat_date, $stateParams.version_stat_date);
+    },
+
+    /**
+     * @ngInject
+     */
+    getApiStat: function(VersionDistributeService, initData) {
       return VersionDistributeService.getApiStat();
     },
 
     /**
      * @ngInject
      */
-    getVersionStatPie: function(VersionDistributeService, getApp) {
+    getVersionStatPie: function(VersionDistributeService, initData) {
       return VersionDistributeService.getVersionStatPie();
     },
 
     /**
      * @ngInject
      */
-    getVersionStatTable: function(VersionDistributeService, getApp) {
+    getVersionStatTable: function(VersionDistributeService, initData) {
       return VersionDistributeService.getVersionStatTable();
     }
   };

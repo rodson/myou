@@ -45,7 +45,7 @@
               <a ui-sref=".keydata({stats: 'new_user_count', selected_date: 'last7days'})">关键数据</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'versiondistribute')}">
-              <a ui-sref=".versiondistribute">版本分布</a>
+              <a ui-sref=".versiondistribute({api_stat_date: vm.today, version_stat_date: vm.today})">版本分布</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'customevent')}">
               <a ui-sref=".customevent">自定义事件</a>
