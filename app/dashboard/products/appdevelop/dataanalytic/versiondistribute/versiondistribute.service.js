@@ -108,7 +108,8 @@
       title: {
         text: '版本统计'
       },
-      noData: '没有数据'
+      loading: false,
+      noData: 'No data'
     };
 
     VersionDistributeService.getApp = function() {
