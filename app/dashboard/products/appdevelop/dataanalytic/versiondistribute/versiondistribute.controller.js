@@ -34,28 +34,47 @@
     vm.apiChartConfig = VersionDistributeService.apiChartConfig;
     vm.versionChartConfig = VersionDistributeService.versionChartConfig;
 
-    $scope.$watch('vm.apiStatDate', function(current, original) {
-      if (current !== original) {
-        VersionDistributeService.getApiStat(vm.apiStatDate)
-          .then(function() {
-            vm.apiCount = VersionDistributeService.apiCount;
-          });
-      }
-    });
+    vm.apiStatDateChange = function() {
+      VersionDistributeService.getApiStat(vm.apiStatDate)
+        .then(function() {
+          vm.apiCount = VersionDistributeService.apiCount;
+        });
+    };
 
-    $scope.$watch('vm.versionStatDate', function(current, original) {
-      if (current !== original) {
-        VersionDistributeService.getVersionStatPie(vm.versionStatDate)
-          .then(function() {
-            vm.userCount = VersionDistributeService.userCount;
-          });
+    vm.versionStatDateChange = function() {
+      VersionDistributeService.getVersionStatPie(vm.versionStatDate)
+        .then(function() {
+          vm.userCount = VersionDistributeService.userCount;
+        });
 
-        VersionDistributeService.getVersionStatTable(vm.versionStatDate)
-          .then(function() {
-            vm.versionTableData = VersionDistributeService.versionTableData;
-          });
-      }
-    });
+      VersionDistributeService.getVersionStatTable(vm.versionStatDate)
+        .then(function() {
+          vm.versionTableData = VersionDistributeService.versionTableData;
+        });
+      };
+
+    // $scope.$watch('vm.apiStatDate', function(current, original) {
+    //   if (current !== original) {
+    //     VersionDistributeService.getApiStat(vm.apiStatDate)
+    //       .then(function() {
+    //         vm.apiCount = VersionDistributeService.apiCount;
+    //       });
+    //   }
+    // });
+
+    // $scope.$watch('vm.versionStatDate', function(current, original) {
+    //   if (current !== original) {
+    //     VersionDistributeService.getVersionStatPie(vm.versionStatDate)
+    //       .then(function() {
+    //         vm.userCount = VersionDistributeService.userCount;
+    //       });
+
+    //     VersionDistributeService.getVersionStatTable(vm.versionStatDate)
+    //       .then(function() {
+    //         vm.versionTableData = VersionDistributeService.versionTableData;
+    //       });
+    //   }
+    // });
 
     vm.test = function() {
       VersionDistributeService.getVersionStatTable(vm.versionStatDate)
