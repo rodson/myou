@@ -2,8 +2,7 @@
   <div class="normal-title">每分钟下载曲线</div>
   <div>
     <span>选择日期：</span>
-    <datatime-picker init-datatime='vm.checkdate' display-mode='date' class='date-picker'></datatime-picker>
-    <md-button class="md-raised md-primary margin-left-30" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+    <datatime-picker init-datatime='vm.checkdate' display-mode='date' class='date-picker' date-changed='vm.getData()'></datatime-picker>
     <span class='pull-right'>单日下载量：{{vm.onedayCount}}</span>
   </div>
   <highchart class='margin-top-30' config="vm.highchartsURL"></highchart>

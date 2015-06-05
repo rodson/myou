@@ -15,10 +15,13 @@
       restrict: 'EA',
       scope: {
         initDatatime: '=',
+        startDatetime: '=',
+        endDatetime: '=',
         displayMode: '@',
+        timeQuantum: '@',
         dateChanged: '&'
       },
-      template: '<md-button class="md-raised md-primary" ng-click="showDatatimeimePickDialog($event)">{{ initDatatime }}</md-button>',
+      template: '<md-button class="md-raised md-primary" ng-click="showDatatimeimePickDialog($event)">{{ timeQuantum ? startDatetime + " 到 " + endDatetime : initDatatime }}</md-button>',
       controller: controller
     };
 
@@ -32,26 +35,50 @@
         var format = 'yyyy-MM-dd';
       }
 
-      $scope.$watch('initDatatime', function(){
-        if(typeof($scope.dateChanged) === 'function') {
+      $scope.$watch('initDatatime', function() {
+        if (typeof($scope.dateChanged) === 'function') {
           $scope.dateChanged();
         }
       });
 
       $scope.showDatatimeimePickDialog = function(ev) {
+        var template;
+        if ($scope.timeQuantum) {
+          template = ['<md-dialog aria-label="日期时间选择" ',
+            'style="-webkit-flex-direction: row;-ms-flex-direction: row; flex-direction: row;">',
+            '<time-date-picker ng-model="vm.dateValue" orientation="true" ',
+            'on-save="vm.save($value)" display-mode="date" on-cancel="vm.cancel()" ',
+            'style="margin-top: -37%;">',
+            '<ng-transclude></ng-transclude>',
+            '</time-date-picker>',
+            '<time-date-picker ng-model="vm.dateValue" orientation="true" ',
+            'on-save="vm.save($value)" display-mode="date" on-cancel="vm.cancel()" ',
+            'style="margin-top: -37%;">',
+            '<ng-transclude></ng-transclude>',
+            '</time-date-picker>',
+            '</md-dialog>'
+          ].join('');
+        } else {
+          template = ['<md-dialog aria-label="日期时间选择">',
+            '<time-date-picker ng-model="vm.dateValue" display-twentyfour="true" ',
+            'on-save="vm.save($value)" display-mode={{vm.displayMode}} on-cancel="vm.cancel()">',
+            '</time-date-picker>',
+            '</md-dialog>'
+          ].join('');
+        }
 
         $mdDialog.show({
           controller: DialogController,
           controllerAs: 'vm',
-          template: ['<md-dialog aria-label="日期时间选择">',
-            '<time-date-picker ng-model="vm.dateValue" display-twentyfour="true" on-save="vm.save($value)" display-mode={{vm.displayMode}} on-cancel="vm.cancel()">',
-            '</time-date-picker>',
-            '</md-dialog>'
-          ].join(''),
+          template: template,
           targetEvent: ev,
+          transclude: true,
           resolve: {
-            displayMode: function() {
-              return $scope.displayMode || 'full';
+            data: function() {
+              return {
+                displayMode: $scope.displayMode || 'full',
+                showButtons: $scope.showButtons
+              };
             }
           }
         }).then(function(answer) {
@@ -62,10 +89,11 @@
       /**
        * @ngInject
        */
-      function DialogController($mdDialog, displayMode) {
+      function DialogController($mdDialog, data) {
         var vm = this;
 
-        vm.displayMode = displayMode;
+        vm.showButtons = data.showButtons;
+        vm.displayMode = data.displayMode;
 
         vm.save = function(value) {
           $mdDialog.hide(value);

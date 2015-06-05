@@ -2,8 +2,7 @@
   <md-toolbar class='white-toolbar'>
     <h4 class='oneday-apistat'>单日API请求：{{vm.onedayCount}}</h4>
     <div class='date-picker'>
-      <datatime-picker init-datatime='vm.checkdate' display-mode='date'></datatime-picker>
-      <md-button class="md-raised md-primary margin-left-10" ng-click="vm.getData()">&nbsp;查询&nbsp;</md-button>
+      <datatime-picker init-datatime='vm.checkdate' display-mode='date' date-changed='vm.getData()'></datatime-picker>
     </div>
   </md-toolbar>
   <md-content class='content-padding'>
