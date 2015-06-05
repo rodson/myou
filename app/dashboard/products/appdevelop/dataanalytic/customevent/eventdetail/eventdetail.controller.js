@@ -7,7 +7,7 @@
   function eventDetailConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.eventdetail', {
-        url: '/customevent/:eventId',
+        url: '/customevent/:eventId?selected_date&stats',
         templateUrl: 'app/dashboard/products/appdevelop/dataanalytic/customevent/eventdetail/eventdetail.html',
         controllerAs: 'vm',
         controller: 'EventDetailCtrl',
@@ -23,7 +23,6 @@
 
     var eventId = $stateParams.eventId;
 
-    vm.app = EventDetailService.getApp();
     vm.event = EventDetailService.getEvent();
     vm.radioDate = EventDetailService.radioDate;
     vm.radioDataType = EventDetailService.radioDataType;
@@ -64,14 +63,21 @@
     /**
      * @ngInject
      */
-    getEventInfo: function(EventDetailService, $stateParams, getApp) {
+    initData: function(EventDetailService, $stateParams, getApp) {
+      return EventDetailService.init($stateParams.selected_date, $stateParams.stats);
+    },
+
+    /**
+     * @ngInject
+     */
+    getEventInfo: function(EventDetailService, $stateParams, initData) {
       return EventDetailService.getEventInfo($stateParams.eventId);
     },
 
     /**
      * @ngInject
      */
-    getEventData: function($stateParams, EventDetailService, getApp) {
+    getEventData: function($stateParams, EventDetailService, initData) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventData(eventId);
     },
@@ -79,7 +85,7 @@
     /**
      * @ngInject
      */
-    getEventlabelData: function($stateParams, EventDetailService, getApp) {
+    getEventlabelData: function($stateParams, EventDetailService, initData) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventLabelData(eventId);
     },
@@ -87,7 +93,7 @@
     /**
      * @ngInject
      */
-    getEventVersions: function($stateParams, EventDetailService, getApp) {
+    getEventVersions: function($stateParams, EventDetailService, initData) {
       var eventId = $stateParams.eventId;
       return EventDetailService.getEventVersions(eventId);
     }

@@ -4,13 +4,16 @@
   /**
    * @ngInject
    */
-  function EventDetailService($http, StorageManager, UrlManager, MomentDateService) {
+  function EventDetailService($http, StorageManager,
+    StateManager, UrlManager, MomentDateService) {
+
     var EventDetailService = {};
+
+    var KEY_SELECTED_DATE = 'selected_date';
+    var KEY_STATS = 'stats';
 
     EventDetailService.app = {};
     EventDetailService.event = {};
-    EventDetailService.radioDate = 'last7days';
-    EventDetailService.radioDataType = 'count';
     EventDetailService.tableData = [];
     EventDetailService.lineChart = {};
     EventDetailService.eventLabelData = [];
@@ -79,7 +82,6 @@
     };
 
     EventDetailService.getEventInfo = function(eventId) {
-      EventDetailService.getApp();
       return $http.get(UrlManager
         .getCustomEventUrl(EventDetailService.app.appKey) + '/' + eventId)
         .success(function(event) {
@@ -88,13 +90,17 @@
         });
     };
 
-    EventDetailService.init = function() {
+    EventDetailService.init = function(selectedDate, stats) {
       EventDetailService.getApp();
-      EventDetailService.getEvent();
-      EventDetailService.getCheckDate('last7days');
+
+      EventDetailService.radioDate = selectedDate;
+      EventDetailService.radioDataType = stats;
+
+      EventDetailService.getCheckDate(selectedDate);
     };
 
     EventDetailService.getCheckDate = function(selectedDate) {
+      StateManager.setQueryParams(KEY_SELECTED_DATE, selectedDate);
       var checkDate;
       EventDetailService.radioDate = selectedDate;
 
@@ -121,6 +127,7 @@
     };
 
     EventDetailService.getCheckDataType = function(dataType) {
+      StateManager.setQueryParams(KEY_STATS, dataType);
       EventDetailService.radioDataType = dataType;
 
       switch (dataType) {
@@ -137,10 +144,6 @@
     };
 
     EventDetailService.getEventData = function(eventId, version) {
-      EventDetailService.getApp();
-      if (!EventDetailService.date.start) {
-        EventDetailService.init();
-      }
       var queryString = '?start_date=' + EventDetailService.date.start + '&end_date=' + EventDetailService.date.end;
 
       if (version) {
@@ -157,11 +160,6 @@
     };
 
     EventDetailService.getEventLabelData = function(eventId, version) {
-      EventDetailService.getApp();
-      if (!EventDetailService.date.start) {
-        EventDetailService.init();
-      }
-
       var queryString = '?start_date=' + EventDetailService.date.start + '&end_date=' + EventDetailService.date.end;
 
       if (version) {
@@ -175,11 +173,6 @@
     };
 
     EventDetailService.getEventVersions = function(eventId) {
-      EventDetailService.getApp();
-      if (!EventDetailService.app) {
-        EventDetailService.init();
-      }
-
       eventId = eventId || '';
 
       return $http.get(UrlManager

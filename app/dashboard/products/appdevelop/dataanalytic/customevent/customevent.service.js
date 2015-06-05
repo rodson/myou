@@ -40,7 +40,7 @@
     };
 
     CustomEventService.enterEvent = function(event) {
-      $state.go('dashboard.appdevelop.eventdetail', { eventId: event.event_db_id });
+      $state.go('dashboard.appdevelop.eventdetail', { eventId: event.event_db_id, selected_date: 'last7days', stats: 'count'});
     };
 
     CustomEventService.showAddEventDialog = function(ev) {
