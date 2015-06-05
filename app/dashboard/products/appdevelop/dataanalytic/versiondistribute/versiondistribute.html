@@ -3,7 +3,7 @@
     <span style="margin-right: 32px;">
       单日API请求: {{ vm.apiCount }}
     </span>
-    <datatime-picker init-datatime='vm.apiStatDate' display-mode='date' class='date-picker'></datatime-picker>
+    <datatime-picker init-datatime='vm.apiStatDate' display-mode='date' class='date-picker' date-changed="vm.apiStatDateChange()"></datatime-picker>
   </div>
   <div class="margin-top-30">
     <highchart config="vm.apiChartConfig"></highchart>
@@ -15,7 +15,7 @@
     <span style="margin-right: 32px;">
       用户总数: {{ vm.userCount }}
     </span>
-    <datatime-picker init-datatime='vm.versionStatDate' display-mode='date' class='date-picker'></datatime-picker>
+    <datatime-picker init-datatime='vm.versionStatDate' display-mode='date' class='date-picker' date-changed="vm.versionStatDateChange()"></datatime-picker>
 
   </div>
 
