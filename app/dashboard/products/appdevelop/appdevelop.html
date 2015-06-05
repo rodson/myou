@@ -48,7 +48,7 @@
               <a ui-sref=".versiondistribute({api_stat_date: vm.today, version_stat_date: vm.today})">版本分布</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'customevent')}">
-              <a ui-sref=".customevent">自定义事件</a>
+              <a ui-sref=".customevent({selected_version: ''})">自定义事件</a>
             </li>
           </ul>
         </li>

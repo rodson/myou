@@ -5,33 +5,35 @@
    * @ngInject
    */
   function CustomEventService($http, $mdDialog, $state, $stateParams,
-    UrlManager, StorageManager) {
+    UrlManager, StorageManager, StateManager) {
 
     var CustomEventService = {};
 
     CustomEventService.events = [];
 
-    CustomEventService.init = function() {
+    var KEY_SELECTED_VERSION = 'selected_version';
+
+    CustomEventService.init = function(selectedVersion) {
       CustomEventService.app = StorageManager.getApp();
+      CustomEventService.selectedVersion = selectedVersion;
     };
 
-    CustomEventService.getEvents = function(version) {
-      CustomEventService.init();
+    CustomEventService.onVersionSelect = function(selectedVersion) {
+      StateManager.setQueryParams(KEY_SELECTED_VERSION, selectedVersion);
+      CustomEventService.selectedVersion = selectedVersion;
+    };
 
-      var queryString = version ? ('?version=' + version) : '';
+    CustomEventService.getEvents = function() {
+      var queryString = CustomEventService.selectedVersion ? ('?version=' + CustomEventService.selectedVersion) : '';
       return $http.get(UrlManager.getAnalyzeCustomEventUrl(CustomEventService.app.appKey) +
         '/' + queryString).success(function(data) {
           CustomEventService.events = data;
         });
     };
 
-    CustomEventService.getEventVersions = function(eventId) {
-      CustomEventService.init();
-
-      eventId = eventId || '';
-
+    CustomEventService.getEventVersions = function() {
       return $http.get(UrlManager
-        .getEventVersionUrl(CustomEventService.app.appKey, eventId))
+        .getEventVersionUrl(CustomEventService.app.appKey, ''))
         .success(function(data) {
           CustomEventService.versions = data;
         });

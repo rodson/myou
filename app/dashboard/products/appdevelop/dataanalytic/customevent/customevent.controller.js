@@ -7,7 +7,7 @@
   function customEventConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.customevent', {
-        url: '/customevent',
+        url: '/customevent?selected_version',
         templateUrl: 'app/dashboard/products/appdevelop/dataanalytic/customevent/customevent.html',
         controllerAs: 'vm',
         controller: 'CustomEventCtrl',
@@ -21,16 +21,15 @@
   function CustomEventCtrl(CustomEventService) {
     var vm = this;
 
-    CustomEventService.init();
-
     vm.versions = CustomEventService.versions;
 
     vm.events = CustomEventService.events;
 
-    vm.selectedVersion = '';
+    vm.selectedVersion = CustomEventService.selectedVersion;
 
     vm.onVersionSelect = function() {
-      CustomEventService.getEvents(vm.selectedVersion)
+      CustomEventService.onVersionSelect(vm.selectedVersion);
+      CustomEventService.getEvents()
         .then(function() {
           vm.events = CustomEventService.events;
         });
@@ -57,13 +56,19 @@
     /**
      * @ngInject
      */
-    getEvents: function(CustomEventService, getApp) {
+    initData: function(CustomEventService, $stateParams, getApp) {
+      return CustomEventService.init($stateParams.selected_version);
+    },
+    /**
+     * @ngInject
+     */
+    getEvents: function(CustomEventService, initData) {
       return CustomEventService.getEvents();
     },
     /**
      * @ngInject
      */
-    getEventVersions: function(CustomEventService, getApp) {
+    getEventVersions: function(CustomEventService, initData) {
       return CustomEventService.getEventVersions();
     }
   };
