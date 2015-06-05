@@ -39,11 +39,15 @@
       vm.tableDatas = DailyDataService.data.data;
     };
 
+    vm.dateChanged = function() {
+      vm.getData();
+    };
+
     /************************* test start **************************/
     // vm.setData();
     /************************* test end **************************/
 
-    vm.getData();
+    // vm.getData();
   }
 
   DailyDataCtrl.resolve = {

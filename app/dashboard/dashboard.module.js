@@ -165,7 +165,7 @@
         '  <div class="buttons">',
         '    <md-button ng-click="setNow()" aria-label="Set To Current {{ _dispalyMode == \'date\' ? \'Date\' : \'Date/Time\'}}">今天</md-button>',
         '    <md-button ng-click="cancel()" aria-label="Cancel">取消</md-button>',
-        '    <md-button ng-click="save()" aria-label="Save">保存</md-button>',
+        '    <md-button ng-click="save()" aria-label="Save">确定</md-button>',
         '  </div>',
         '</div>'].join(''));
     }
