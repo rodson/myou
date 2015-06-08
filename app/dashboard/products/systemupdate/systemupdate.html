@@ -28,7 +28,7 @@
           <a>系统更新</a>
           <ul>
             <li ng-class="{active: vm.isActive('systemupdate', 'updatesetting')}">
-              <a ui-sref=".updatesetting">升级策略</a>
+              <a ui-sref=".updatesetting({show_test: false})">升级策略</a>
             </li>
             <li ng-class="{active: vm.isActive('systemupdate', 'fileupload')}">
               <a ui-sref=".fileupload">上传文件</a>

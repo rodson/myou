@@ -7,7 +7,7 @@
   function romUpdateSettingConfig($stateProvider) {
     $stateProvider
       .state('dashboard.systemupdate.updatesetting', {
-        url: '/updatesetting',
+        url: '/updatesetting?show_test',
         templateUrl: 'app/dashboard/products/systemupdate/updatesetting/updatesetting.html',
         controllerAs: 'vm',
         controller: 'RomUpdateSettingCtrl',
@@ -18,10 +18,12 @@
   /**
    * @ngInject
    */
-  function RomUpdateSettingCtrl(RomUpdateSettingService) {
+  function RomUpdateSettingCtrl(RomUpdateSettingService, initDate, StateManager) {
     var vm = this;
 
     RomUpdateSettingService.init();
+
+    vm.showTest = initDate.showTest;
 
     vm.updateInfos = RomUpdateSettingService.updateInfos;
 
@@ -48,13 +50,26 @@
     vm.showUpdateRuleDialog = function(ev, targetItem) {
       RomUpdateSettingService.showUpdateRuleDialog(ev, targetItem);
     };
+
+    vm.changeTest = function() {
+      StateManager.setQueryParams('show_test', vm.showTest);
+    };
   }
 
   RomUpdateSettingCtrl.resolve = {
     /**
      * @ngInject
      */
-    getUpdateInfos: function(RomUpdateSettingService, getApp) {
+    initData: function($stateParams, getApp) {
+      var initData = {};
+      initData.showTest = $stateParams.show_test;
+      return initData;
+    },
+
+    /**
+     * @ngInject
+     */
+    getUpdateInfos: function(RomUpdateSettingService, initData) {
       return RomUpdateSettingService.getUpdateInfos();
     }
   };

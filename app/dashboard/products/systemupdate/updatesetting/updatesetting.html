@@ -4,7 +4,7 @@
   </div>
   <div ng-show="vm.updateInfos.length">
     <div class="inline">
-      <md-switch class="md-primary nopadding" style="margin-bottom: 14px" md-no-ink aria-label="switch test" ng-model="vm.showTest">
+      <md-switch class="md-primary nopadding" style="margin-bottom: 14px" md-no-ink aria-label="switch test" ng-model="vm.showTest" ng-change="vm.changeTest()">
         <span class="normal-text">显示测试版本</span>
       </md-switch>
     </div>
