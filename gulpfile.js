@@ -89,6 +89,15 @@ gulp.task('fonts', function() {
     }));
 });
 
+// Copy web icon
+gulp.task('webicon', function() {
+  return gulp.src(['./favicon.ico'])
+    .pipe(gulp.dest('dist/'))
+    .pipe($.size({
+      title: 'webicon'
+    }));
+})
+
 // Compile and automatically prefix stylesheets
 gulp.task('styles', function() {
   return gulp.src([
@@ -193,7 +202,7 @@ gulp.task('dev', ['serve', 'karma']);
 
 // Build production files, the default task
 gulp.task('default', ['clean'], function(cb) {
-  runSequence('styles', 'concat', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
+  runSequence('styles', 'concat', ['jshint', 'html', 'images', 'fonts', 'webicon', 'copy'], cb);
 });
 
 // Run PageSpeed Insights
