@@ -7,7 +7,7 @@
   function AlertListConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.alertlist', {
-        url: '/alertlist',
+        url: '/alertlist?start_date&end_date&stats',
         templateUrl: 'app/dashboard/products/servicemonitor/alertlist/alertlist.html',
         controllerAs: 'vm',
         controller: 'AlertListCtrl',
@@ -18,14 +18,15 @@
   /**
    * @ngInject
    */
-  function AlertListCtrl($filter, localStorageService, AlertListService) {
-    var vm = this;
-    var appKey = localStorageService.get('app').appKey;
+  function AlertListCtrl($scope, $filter, StorageManager,
+    AlertListService, StateManager, initData) {
 
-    var now = new Date();
-    vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
-    vm.startdate = $filter('date')(now.getTime() - 5 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss');
-    vm.radio = 'statistic';
+    var vm = this;
+    var appKey = StorageManager.getApp().appKey;
+
+    vm.enddate = initData.endDate;
+    vm.startdate = initData.startDate;
+    vm.radio = initData.stats;
 
     vm.limit = 20;
     vm.skip = 0;
@@ -35,6 +36,8 @@
     vm.serverAddr = '';
 
     vm.getData = function() {
+      StateManager.setQueryParams('start_date', vm.startdate);
+      StateManager.setQueryParams('end_date', vm.enddate);
       vm.getStatisticData();
       vm.getAlertData();
     };
@@ -69,6 +72,12 @@
       vm.alertList = AlertListService.data.alert.data;
     };
 
+    $scope.$watch('vm.radio', function(current, origin) {
+      if (current !== origin) {
+        StateManager.setQueryParams('stats', current);
+      }
+    });
+
     /*********************** test start ***************************/
     // vm.setStatisticData();
     // vm.setALertData();
@@ -81,8 +90,14 @@
     /**
      * @ngInject
      */
-    getAppId: function(getAppId) {
-      return getAppId;
+    initData: function(getAppId, $stateParams) {
+      var initData = {};
+
+      initData.startDate = $stateParams.start_date;
+      initData.endDate = $stateParams.end_date;
+      initData.stats = $stateParams.stats;
+
+      return initData;
     }
   };
 

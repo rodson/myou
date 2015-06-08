@@ -54,13 +54,6 @@ describe('shared: StateManager', function() {
       expect($state.go).toHaveBeenCalledWith('dashboard.systemupdate.updatesetting', {id: id, show_test: showTest});
     });
 
-    it('should call go on $state with servicemonitor when servicemonitor', function() {
-      var platform = Constant.PRODUCT_PLATFORM.SERVICE_MONITOR;
-      var id = 'qwerty';
-      StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.servicemonitor.dailydata', {id: id});
-    });
-
     it('should call go on $state with webpublish when webpublish', function() {
       var platform = Constant.PRODUCT_PLATFORM.WEB_PUBLISH;
       var id = 'qwerty';

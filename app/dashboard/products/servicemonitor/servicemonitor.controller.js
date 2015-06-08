@@ -19,7 +19,7 @@
   /**
    * @ngInject
    */
-  function ServiceMonitorCtrl($state, localStorageService,
+  function ServiceMonitorCtrl($filter, $state, localStorageService,
     ServiceMonitorService, MomentDateService) {
 
     var vm = this;
@@ -29,6 +29,9 @@
     };
 
     vm.today = MomentDateService.getToday().start;
+    var now = new Date();
+    vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
+    vm.startdate = $filter('date')(now.getTime() - 5 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss');
 
     vm.showAppKey = false;
 
