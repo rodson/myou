@@ -29,7 +29,9 @@
             <li ng-class="{active: vm.isActive('area')}">
               <a ui-sref=".area({start_date: vm.endDate, end_date: vm.endDate, stats: 'pv'})">地域</a>
             </li>
-            <li ng-class="{active: vm.isActive('clientinfo')}"><a ui-sref='.clientinfo'>客户端信息</a></li>
+            <li ng-class="{active: vm.isActive('clientinfo')}">
+              <a ui-sref=".clientinfo({start_date: vm.endDate, end_date: vm.endDate, stats: 'pv'})">客户端信息</a>
+            </li>
           </ul>
         </li>
         <li>

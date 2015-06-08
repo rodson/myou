@@ -7,26 +7,26 @@
   function clientInfoConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.clientinfo', {
-        url: '/clientinfo',
+        url: '/clientinfo?start_date&end_date&stats',
         templateUrl: 'app/dashboard/products/pageanalytic/clientinfo/clientinfo.html',
         controllerAs: 'vm',
-        controller: 'ClientInfoCtrl'
+        controller: 'ClientInfoCtrl',
+        resolve: ClientInfoCtrl.resolve
       });
   }
 
   /**
    * @ngInject
    */
-  function ClientInfoCtrl(localStorageService, MomentDateService, ClientInfoService) {
+  function ClientInfoCtrl(localStorageService, MomentDateService,
+    ClientInfoService, StateManager, initData) {
     var vm = this;
     var trickId = localStorageService.get('trickId');
-    vm.radioDate = 'today';
-    vm.radioPvUvIp = 'pv';
 
-    var checkDate = MomentDateService.getToday();
+    vm.radioPvUvIp = initData.stats;
 
-    vm.startdate = checkDate.start;
-    vm.enddate = checkDate.end;
+    vm.startdate = initData.startDate;
+    vm.enddate = initData.endDate;
 
     vm.highchartsPieOS = {
       options: {
@@ -110,6 +110,8 @@
     };
 
     vm.getCheckDate = function() {
+      var checkDate;
+
       switch (vm.radioDate) {
         case 'today':
           checkDate = MomentDateService.getToday();
@@ -133,10 +135,13 @@
     };
 
     vm.getCheckPieType = function() {
+      StateManager.setQueryParams('stats', vm.radioPvUvIp);
       vm.setPieData();
     };
 
     vm.getData = function() {
+      StateManager.setQueryParams('start_date', vm.startdate);
+      StateManager.setQueryParams('end_date', vm.enddate);
       ClientInfoService.getDataOs(vm.startdate, vm.enddate, trickId, function(){
         setDataOs();
       });
@@ -203,6 +208,21 @@
     /******************************* test end ******************************/
     vm.getData();
   }
+
+  ClientInfoCtrl.resolve = {
+    /**
+     * @ngInject
+     */
+    initData: function(getData, $stateParams) {
+      var initData = {};
+
+      initData.startDate = $stateParams.start_date;
+      initData.endDate = $stateParams.end_date;
+      initData.stats = $stateParams.stats;
+
+      return initData;
+    }
+  };
 
   angular
     .module('myou.dashboard.pageanalytic')
