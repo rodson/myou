@@ -23,7 +23,9 @@
         <li>
           <a>访客信息</a>
           <ul>
-            <li ng-class="{active: vm.isActive('operator')}"><a ui-sref='.operator'>运营商</a></li>
+            <li ng-class="{active: vm.isActive('operator')}">
+              <a ui-sref=".operator({start_date: vm.endDate, end_date: vm.endDate, stats: 'pv'})">运营商</a>
+            </li>
             <li ng-class="{active: vm.isActive('area')}"><a ui-sref='.area'>地域</a></li>
             <li ng-class="{active: vm.isActive('clientinfo')}"><a ui-sref='.clientinfo'>客户端信息</a></li>
           </ul>

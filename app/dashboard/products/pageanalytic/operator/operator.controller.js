@@ -7,7 +7,7 @@
   function operatorConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.operator', {
-        url: '/operator',
+        url: '/operator?start_date&end_date&stats',
         templateUrl: 'app/dashboard/products/pageanalytic/operator/operator.html',
         controllerAs: 'vm',
         controller: 'OperatorCtrl',
@@ -18,17 +18,16 @@
   /**
    * @ngInject
    */
-  function OperatorCtrl(localStorageService, MomentDateService, OperatorService) {
+  function OperatorCtrl(localStorageService, MomentDateService,
+    OperatorService, StateManager, initData) {
+
     var vm = this;
     var trickId = localStorageService.get('trickId');
 
-    vm.radioDate = 'today';
-    vm.radioPvUvIp = 'pv';
+    vm.radioPvUvIp = initData.stats;
 
-    var checkDate = MomentDateService.getToday();
-
-    vm.startdate = checkDate.start;
-    vm.enddate = checkDate.end;
+    vm.startdate = initData.startDate;
+    vm.enddate = initData.endDate;
 
     vm.highchartsPie = {
       options: {
@@ -64,6 +63,8 @@
     };
 
     vm.getCheckDate = function() {
+      var checkDate;
+
       switch (vm.radioDate) {
         case 'today':
           checkDate = MomentDateService.getToday();
@@ -87,10 +88,13 @@
     };
 
     vm.getCheckPieType = function() {
+      StateManager.setQueryParams('stats', vm.radioPvUvIp);
       vm.setPieData();
     };
 
     vm.getData = function() {
+      StateManager.setQueryParams('start_date', vm.startdate);
+      StateManager.setQueryParams('end_date', vm.enddate);
       OperatorService.getData(vm.startdate, vm.enddate, trickId, function(data) {
         vm.setData();
       });
@@ -120,10 +124,24 @@
     /**
      * @ngInject
      */
-    getData: function(localStorageService, MomentDateService, OperatorService, getData) {
-      var today = MomentDateService.getToday();
+    initData: function(getData, $stateParams) {
+      var initData = {};
+
+      initData.startDate = $stateParams.start_date;
+      initData.endDate = $stateParams.end_date;
+      initData.stats = $stateParams.stats;
+
+      return initData;
+    },
+
+    /**
+     * @ngInject
+     */
+    getData: function(localStorageService, OperatorService, $stateParams, getData) {
+      var startDate = $stateParams.start_date;
+      var endDate = $stateParams.end_date;
       var trickId = localStorageService.get('trickId');
-      return OperatorService.getData(today.start, today.end, trickId);
+      return OperatorService.getData(startDate, endDate, trickId);
     }
   };
 
