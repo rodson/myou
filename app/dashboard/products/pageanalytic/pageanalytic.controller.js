@@ -19,11 +19,15 @@
   /**
    * @ngInject
    */
-  function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast) {
+  function PageAnalyticCtrl(localStorageService, $location, $mdDialog, $mdToast, MomentDateService) {
     var vm = this;
 
     vm.product = localStorageService.get('app');
     vm.trickId = localStorageService.get('trickId');
+
+    var checkDate = MomentDateService.getLast7Day();
+    vm.startDate = checkDate.start;
+    vm.endDate = checkDate.end;
 
     vm.isActive = function(path) {
       return $location.path().indexOf(path) > -1;

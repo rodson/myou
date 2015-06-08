@@ -7,7 +7,7 @@
   function websiteTrendConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.websitetrend', {
-        url: '/websitetrend',
+        url: '/websitetrend?start_date&end_date',
         templateUrl: 'app/dashboard/products/pageanalytic/websitetrend/websitetrend.html',
         controllerAs: 'vm',
         controller: WebsiteTrendCtrl,
@@ -18,17 +18,16 @@
   /**
    * @ngInject
    */
-  function WebsiteTrendCtrl(localStorageService, MomentDateService, WebsiteTrendService) {
+  function WebsiteTrendCtrl(localStorageService, MomentDateService,
+    WebsiteTrendService, StateManager, initData) {
+
     var trickId = localStorageService.get('trickId');
 
     var vm = this;
     vm.step = 8;
-    vm.radioChecked = 'last7days';
 
-    var checkDate = MomentDateService.getLast7Day();
-
-    vm.startdate = checkDate.start;
-    vm.enddate = checkDate.end;
+    vm.startdate = initData.startDate;
+    vm.enddate = initData.endDate;
 
     vm.highchartsNG = {
       title: {
@@ -50,6 +49,8 @@
     };
 
     vm.getCheckDate = function(){
+      var checkDate;
+
       switch (vm.radioChecked) {
         case 'today':
           checkDate = MomentDateService.getToday();
@@ -73,6 +74,8 @@
     };
 
     vm.getData = function() {
+      StateManager.setQueryParams('start_date', vm.startdate);
+      StateManager.setQueryParams('end_date', vm.enddate);
       WebsiteTrendService.getData(trickId, vm.startdate, vm.enddate, function(data) {
         vm.setData(data);
       });
@@ -97,10 +100,22 @@
     /**
      * @ngInject
      */
-    getData: function(localStorageService, MomentDateService, WebsiteTrendService, getData) {
-      var last7days = MomentDateService.getLast7Day();
+    initData: function(getData, $stateParams) {
+      var initData = {};
+      initData.startDate = $stateParams.start_date;
+      initData.endDate = $stateParams.end_date;
+
+      return initData;
+    },
+
+    /**
+     * @ngInject
+     */
+    getData: function(localStorageService, MomentDateService, WebsiteTrendService, $stateParams, getData) {
       var trickId = localStorageService.get('trickId');
-      return WebsiteTrendService.getData(trickId, last7days.start, last7days.end);
+      var startDate = $stateParams.start_date;
+      var endDate = $stateParams.end_date;
+      return WebsiteTrendService.getData(trickId, startDate, endDate);
     }
   };
 

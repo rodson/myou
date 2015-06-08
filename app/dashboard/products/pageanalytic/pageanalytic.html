@@ -12,7 +12,9 @@
           <a>基础运营</a>
           <ul>
         		<li ng-class="{active: vm.isActive('global')}"><a ui-sref='.global'>网站概述</a></li>
-            <li ng-class="{active: vm.isActive('websitetrend')}"><a ui-sref='.websitetrend'>网站趋势</a></li>
+            <li ng-class="{active: vm.isActive('websitetrend')}">
+              <a ui-sref=".websitetrend({start_date: vm.startDate, end_date: vm.endDate})">网站趋势</a>
+            </li>
             <li ng-class="{active: vm.isActive('pageranking')}"><a ui-sref='.pageranking'>页面排行</a></li>
           </ul>
         </li>
