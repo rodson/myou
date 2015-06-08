@@ -7,7 +7,7 @@
   function userRetainConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.userretain', {
-        url: '/userretain',
+        url: '/userretain?selected_date',
         templateUrl: 'app/dashboard/products/appdevelop/useranalytic/userretain/userretain.html',
         controllerAs: 'vm',
         controller: 'UserRetainCtrl',
@@ -24,8 +24,6 @@
     vm.radioDate = UserRetainService.radioDate;
     vm.tableData = UserRetainService.tableData;
     vm.date = UserRetainService.date;
-
-    UserRetainService.init();
 
     vm.getCheckDate = function() {
       UserRetainService.getCheckDate(vm.radioDate);
@@ -51,7 +49,14 @@
     /**
      * @ngInject
      */
-    getTableData: function(UserRetainService, getApp) {
+    initData: function(getApp, $stateParams, UserRetainService) {
+      return UserRetainService.init($stateParams.selected_date);
+    },
+
+    /**
+     * @ngInject
+     */
+    getTableData: function(UserRetainService, initData) {
       return UserRetainService.getTableData();
     }
   };

@@ -56,7 +56,7 @@
           <a>用户分析</a>
           <ul>
             <li ng-class="{active: vm.isActive('appdevelop', 'userretain')}">
-              <a ui-sref=".userretain">用户留存</a>
+              <a ui-sref=".userretain({selected_date: 'last7days'})">用户留存</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'devicestat')}">
               <a ui-sref=".devicestat">设备终端</a>

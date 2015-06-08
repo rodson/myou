@@ -5,12 +5,13 @@
    * @ngInject
    */
   function UserRetainService($http, $state, $stateParams, StorageManager,
-    PlatformManager, UrlManager, MomentDateService) {
+    PlatformManager, UrlManager, MomentDateService, StateManager) {
 
     var UserRetainService = {};
 
+    var KEY_SELECTED_DATE = 'selected_date';
+
     UserRetainService.app = {};
-    UserRetainService.radioDate = 'last7days';
     UserRetainService.tableData = [];
     UserRetainService.date = {};
 
@@ -19,11 +20,12 @@
       return UserRetainService.app;
     };
 
-    UserRetainService.init = function() {
+    UserRetainService.init = function(selected_date) {
       UserRetainService.getApp();
-      if (!UserRetainService.date.start) {
-        UserRetainService.getCheckDate('last7days');
-      }
+
+      UserRetainService.radioDate = selected_date;
+
+      UserRetainService.getCheckDate(selected_date);
     };
 
     UserRetainService.isWindowsApp = function() {
@@ -31,6 +33,7 @@
     };
 
     UserRetainService.getCheckDate = function(selectedDate) {
+      StateManager.setQueryParams(KEY_SELECTED_DATE, selectedDate);
       var checkDate;
       UserRetainService.radioDate = selectedDate;
 
@@ -56,8 +59,6 @@
     };
 
     UserRetainService.getTableData = function() {
-      UserRetainService.init();
-
       return $http.get(UrlManager.getUserRetainUrl(UserRetainService.app.appKey) +
         '?start_date=' + UserRetainService.date.start +
         '&end_date=' + UserRetainService.date.end +
