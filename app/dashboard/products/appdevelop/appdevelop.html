@@ -59,7 +59,7 @@
               <a ui-sref=".userretain({selected_date: 'last7days'})">用户留存</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'devicestat')}">
-              <a ui-sref=".devicestat">设备终端</a>
+              <a ui-sref=".devicestat({dev_stats: 'resolution', dev_selected_date: 'last30days'})">设备终端</a>
             </li>
           </ul>
         </li>

@@ -7,7 +7,7 @@
   function deviceStatConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.devicestat', {
-        url: '/devicestat',
+        url: '/devicestat?dev_stats&dev_selected_date',
         templateUrl: 'app/dashboard/products/appdevelop/useranalytic/devicestat/devicestat.html',
         controllerAs: 'vm',
         controller: 'DeviceStatCtrl',
@@ -21,8 +21,6 @@
   function DeviceStatCtrl(DeviceStatService) {
     var vm = this;
 
-    DeviceStatService.init();
-
     vm.chartConfig = DeviceStatService.chartConfig;
     vm.radioDate = DeviceStatService.radioDate;
     vm.radioDataType = DeviceStatService.radioDataType;
@@ -30,11 +28,12 @@
 
     vm.getCheckDate = function() {
       DeviceStatService.getCheckDate(vm.radioDate);
-      DeviceStatService.getBarChartData(vm.radioDataType);
+      DeviceStatService.getBarChartData();
     };
 
-    vm.getBarChartData = function() {
-      DeviceStatService.getBarChartData(vm.radioDataType);
+    vm.getCheckDataType = function() {
+      DeviceStatService.getCheckDataType(vm.radioDataType);
+      DeviceStatService.getBarChartData();
     };
 
     vm.isAndroidApp = function() {
@@ -46,7 +45,14 @@
     /**
      * @ngInject
      */
-    getBarChartData: function(DeviceStatService, getApp) {
+    initData: function(getApp, $stateParams, DeviceStatService) {
+      return DeviceStatService.init($stateParams.dev_stats, $stateParams.dev_selected_date);
+    },
+
+    /**
+     * @ngInject
+     */
+    getBarChartData: function(DeviceStatService, initData) {
       return DeviceStatService.getBarChartData();
     }
   };

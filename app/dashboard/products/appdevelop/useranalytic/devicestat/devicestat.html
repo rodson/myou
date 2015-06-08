@@ -6,7 +6,7 @@
     <md-option value="today"> 今天 </md-option>
   </md-select>
 
-  <md-radio-group ng-model="vm.radioDataType"  class="pull-left nopadding" ng-change='vm.getBarChartData()'>
+  <md-radio-group ng-model="vm.radioDataType"  class="pull-left nopadding" ng-change='vm.getCheckDataType()'>
     <md-radio-button value="resolution" class="md-primary">分辨率</md-radio-button>
     <md-radio-button ng-show="vm.isAndroidApp()" value="device_model" class="md-primary">设备型号</md-radio-button>
     <md-radio-button value="os_version" class="md-primary">操作系统版本</md-radio-button>

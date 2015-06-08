@@ -5,13 +5,14 @@
    * @ngInject
    */
   function DeviceStatService($http, $timeout, PlatformManager,
-    StorageManager, UrlManager, MomentDateService) {
+    StorageManager, UrlManager, MomentDateService, StateManager) {
 
     var DeviceStatService = {};
 
+    var KEY_SELECTED_DATE = 'dev_selected_date';
+    var KEY_STATS = 'dev_stats';
+
     DeviceStatService.app = {};
-    DeviceStatService.radioDate = 'last30days';
-    DeviceStatService.radioDataType = 'resolution';
     DeviceStatService.total = 1;
     DeviceStatService.date = {};
 
@@ -53,11 +54,11 @@
       }
     };
 
-    DeviceStatService.init = function() {
+    DeviceStatService.init = function(stats, selected_date) {
       DeviceStatService.app = StorageManager.getApp();
-      if (!DeviceStatService.date.start) {
-        DeviceStatService.getCheckDate('last30days');
-      }
+      DeviceStatService.radioDataType = stats;
+      DeviceStatService.radioDate = selected_date;
+      DeviceStatService.getCheckDate(selected_date);
     };
 
     DeviceStatService.isAndroidApp = function() {
@@ -65,6 +66,7 @@
     };
 
     DeviceStatService.getCheckDate = function(selectedDate) {
+      StateManager.setQueryParams(KEY_SELECTED_DATE, selectedDate);
       var checkDate;
       DeviceStatService.radioDate = selectedDate;
 
@@ -89,20 +91,17 @@
       DeviceStatService.date.end = checkDate.end;
     };
 
-    DeviceStatService.getBarChartData = function(stats) {
-      DeviceStatService.init();
+    DeviceStatService.getCheckDataType = function(stats) {
+      StateManager.setQueryParams(KEY_STATS, stats);
+      DeviceStatService.radioDataType = stats;
+    };
 
-      if (!stats) {
-        stats = DeviceStatService.radioDataType;
-      } else {
-        DeviceStatService.radioDataType = stats;
-      }
-
+    DeviceStatService.getBarChartData = function() {
       return $http.get(UrlManager.getDeviceUrl(DeviceStatService.app.appKey) +
         '?start_date=' + DeviceStatService.date.start +
         '&end_date=' + DeviceStatService.date.end +
         '&platform=' + DeviceStatService.app.platform +
-        '&stats=' + stats).success(function(data) {
+        '&stats=' + DeviceStatService.radioDataType).success(function(data) {
           $timeout(function() {
             DeviceStatService.chartConfig.options.xAxis.categories = data.categories;
           }, 1);
