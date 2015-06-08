@@ -427,7 +427,7 @@
     vm.calleeName = data.calleeName;
 
     vm.totalItems = 0;
-    vm.limit = 10;
+    vm.limit = 5;
     vm.skip = 0;
     vm.pageCount = 0;
     vm.currentPage = 1;
@@ -438,22 +438,6 @@
         vm.calleeList = CalleeService.data.calleeDetail.data;
         vm.totalItems = CalleeService.data.calleeDetail.total;
         vm.pageCount = vm.totalItems / vm.limit;
-
-        vm.calleeList = [{
-          time_cost: 100,
-          return_code: 404,
-          caller_ip: '172.18.49.89',
-          callee_ip: '172.18.90.90',
-          callee_port: 409,
-          created_at: '2015-05-04 10:09:08'
-        }, {
-          time_cost: 200,
-          return_code: 400,
-          caller_ip: '172.18.49.189',
-          callee_ip: '172.18.90.910',
-          callee_port: 4000,
-          created_at: '2015-05-05 10:09:08'
-        }];
       });
     };
 
