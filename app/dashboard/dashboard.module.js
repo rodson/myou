@@ -51,7 +51,8 @@
           StorageManager.deleteUser();
         }
 
-        var currentPath = $location.path();
+        var currentPath = $location.absUrl();
+        console.log(currentPath);
         StorageManager.setPath(currentPath);
 
         $state.go('login');

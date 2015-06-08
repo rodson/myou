@@ -4,7 +4,7 @@
   /**
    * @ngInject
    */
-  function LoginService($http, $state, $mdToast, $location,
+  function LoginService($http, $state, $mdToast, $window,
       Constant, StorageManager) {
 
     var LoginService = {};
@@ -23,7 +23,7 @@
 
         var currentPath = StorageManager.getPath();
         if (currentPath) {
-          $location.path(currentPath);
+          $window.location.href = currentPath;
           StorageManager.deletePath();
         } else {
           $state.go('dashboard.products');
