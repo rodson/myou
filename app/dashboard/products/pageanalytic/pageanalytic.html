@@ -15,7 +15,9 @@
             <li ng-class="{active: vm.isActive('websitetrend')}">
               <a ui-sref=".websitetrend({start_date: vm.startDate, end_date: vm.endDate})">网站趋势</a>
             </li>
-            <li ng-class="{active: vm.isActive('pageranking')}"><a ui-sref='.pageranking'>页面排行</a></li>
+            <li ng-class="{active: vm.isActive('pageranking')}">
+              <a ui-sref=".pageranking({start_date: vm.endDate, end_date: vm.endDate})">页面排行</a>
+            </li>
           </ul>
         </li>
         <li>
