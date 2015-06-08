@@ -28,7 +28,7 @@
           <a>应用更新</a>
           <ul>
             <li ng-class="{active: vm.isActive('appdevelop', 'updatesetting')}">
-              <a ui-sref=".updatesetting">升级策略</a>
+              <a ui-sref=".updatesetting({test: 'false'})">升级策略</a>
             </li>
             <li ng-class="{active: vm.isActive('appdevelop', 'fileupload')}">
               <a ui-sref=".fileupload">上传文件</a>

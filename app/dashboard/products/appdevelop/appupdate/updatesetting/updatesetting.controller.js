@@ -7,7 +7,7 @@
   function updateSettingConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.updatesetting', {
-        url: '/updatesetting',
+        url: '/updatesetting?test',
         templateUrl: 'app/dashboard/products/appdevelop/appupdate/updatesetting/updatesetting.html',
         controllerAs: 'vm',
         controller: 'UpdateSettingCtrl',
@@ -18,14 +18,14 @@
   /**
    * @ngInject
    */
-  function UpdateSettingCtrl(UpdateSettingService) {
+  function UpdateSettingCtrl($scope, UpdateSettingService, initData, StateManager) {
     var vm = this;
 
     vm.newestUpdate = UpdateSettingService.newestUpdate;
     vm.updateInfos = UpdateSettingService.updateInfos;
     vm.app = UpdateSettingService.getApplication();
     vm.updateConfig = UpdateSettingService.updateConfig;
-    vm.test = 'false';
+    vm.test = initData.test;
 
     vm.showUpdateDescDialog = function(ev, updateInfo) {
       UpdateSettingService.showUpdateDescDialog(ev, updateInfo);
@@ -51,20 +51,36 @@
       return UpdateSettingService.isWindowsApp();
     };
 
+    $scope.$watch('vm.test', function(current, origin) {
+      if (current !== origin) {
+        StateManager.setQueryParams('test', current);
+      }
+    });
+
   }
 
   UpdateSettingCtrl.resolve = {
     /**
      * @ngInject
      */
-    getAppUpdates: function(UpdateSettingService, $stateParams, getApp) {
+    initData: function(getApp, $stateParams) {
+      var initData = {};
+      initData.test = $stateParams.test;
+
+      return initData;
+    },
+
+    /**
+     * @ngInject
+     */
+    getAppUpdates: function(UpdateSettingService, $stateParams, initData) {
       return UpdateSettingService.getAppUpdates($stateParams.id);
     },
 
     /**
      * @ngInject
      */
-    getUpdateToLatest: function(UpdateSettingService, $stateParams, getApp) {
+    getUpdateToLatest: function(UpdateSettingService, $stateParams, initData) {
       return UpdateSettingService.getUpdateToLatest($stateParams.id);
     }
   };
