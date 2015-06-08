@@ -21,96 +21,96 @@ describe('AreaCtrl', function() {
 
   describe('variable: ', function() {
 
-    it('radioDate should equal "today"', function() {
-      expect(AreaCtrl.radioDate).toBe('today');
-    });
+    // it('radioDate should equal "today"', function() {
+    //   expect(AreaCtrl.radioDate).toBe('today');
+    // });
 
-    it('radioPvUvIp should equal "today"', function() {
-      expect(AreaCtrl.radioPvUvIp).toBe('pv');
-    });
+    // it('radioPvUvIp should equal "today"', function() {
+    //   expect(AreaCtrl.radioPvUvIp).toBe('pv');
+    // });
 
-    it('startdate & enddate should equal "MomentDateService.getToday()"', function() {
-      var today = MomentDateService.getToday();
-      expect(AreaCtrl.startdate).toBe(today.start);
-      expect(AreaCtrl.enddate).toBe(today.end);
-    });
+    // it('startdate & enddate should equal "MomentDateService.getToday()"', function() {
+    //   var today = MomentDateService.getToday();
+    //   expect(AreaCtrl.startdate).toBe(today.start);
+    //   expect(AreaCtrl.enddate).toBe(today.end);
+    // });
   });
 
   describe('fn: getCheckDate', function() {
-    it('when radioDate is changed,' +
-      'AreaCtrl.getCheckDate should be called and ' +
-      'startdate && enddate should be changed and ' +
-      'AreaCtrl.getData should be called', function() {
-        spyOn(AreaCtrl, 'getCheckDate').and.callThrough();
-        spyOn(AreaCtrl, 'getData');
+    // it('when radioDate is changed,' +
+    //   'AreaCtrl.getCheckDate should be called and ' +
+    //   'startdate && enddate should be changed and ' +
+    //   'AreaCtrl.getData should be called', function() {
+    //     spyOn(AreaCtrl, 'getCheckDate').and.callThrough();
+    //     spyOn(AreaCtrl, 'getData');
 
-        AreaCtrl.radioDate = 'today';
-        var day = MomentDateService.getToday();
-        AreaCtrl.getCheckDate();
-        expect(AreaCtrl.startdate).toBe(day.start);
-        expect(AreaCtrl.enddate).toBe(day.end);
-        expect(AreaCtrl.getCheckDate).toHaveBeenCalled();
-        expect(AreaCtrl.getData).toHaveBeenCalled();
+    //     AreaCtrl.radioDate = 'today';
+    //     var day = MomentDateService.getToday();
+    //     AreaCtrl.getCheckDate();
+    //     expect(AreaCtrl.startdate).toBe(day.start);
+    //     expect(AreaCtrl.enddate).toBe(day.end);
+    //     expect(AreaCtrl.getCheckDate).toHaveBeenCalled();
+    //     expect(AreaCtrl.getData).toHaveBeenCalled();
 
-        AreaCtrl.radioDate = 'yesterday';
-        var day = MomentDateService.getYesterday();
-        AreaCtrl.getCheckDate();
-        expect(AreaCtrl.startdate).toBe(day.start);
-        expect(AreaCtrl.enddate).toBe(day.end);
-        expect(AreaCtrl.getCheckDate).toHaveBeenCalled();
-        expect(AreaCtrl.getData).toHaveBeenCalled();
-      });
+    //     AreaCtrl.radioDate = 'yesterday';
+    //     var day = MomentDateService.getYesterday();
+    //     AreaCtrl.getCheckDate();
+    //     expect(AreaCtrl.startdate).toBe(day.start);
+    //     expect(AreaCtrl.enddate).toBe(day.end);
+    //     expect(AreaCtrl.getCheckDate).toHaveBeenCalled();
+    //     expect(AreaCtrl.getData).toHaveBeenCalled();
+    //   });
   });
 
   describe('fn: getCheckPieType', function() {
-    it('when radioPvUvIp is changed,' +
-      'AreaCtrl.getCheckPieType should be called and ' +
-      'AreaCtrl.setPieData should be called', function() {
-        spyOn(AreaCtrl, 'getCheckPieType').and.callThrough();
-        spyOn(AreaCtrl, 'setPieData');
+    // it('when radioPvUvIp is changed,' +
+    //   'AreaCtrl.getCheckPieType should be called and ' +
+    //   'AreaCtrl.setPieData should be called', function() {
+    //     spyOn(AreaCtrl, 'getCheckPieType').and.callThrough();
+    //     spyOn(AreaCtrl, 'setPieData');
 
-        AreaCtrl.radioDate = 'pv';
-        AreaCtrl.getCheckPieType();
-        expect(AreaCtrl.getCheckPieType).toHaveBeenCalled();
-        expect(AreaCtrl.setPieData).toHaveBeenCalled();
+    //     AreaCtrl.radioDate = 'pv';
+    //     AreaCtrl.getCheckPieType();
+    //     expect(AreaCtrl.getCheckPieType).toHaveBeenCalled();
+    //     expect(AreaCtrl.setPieData).toHaveBeenCalled();
 
-        AreaCtrl.radioDate = 'uv';
-        AreaCtrl.getCheckPieType();
-        expect(AreaCtrl.getCheckPieType).toHaveBeenCalled();
-        expect(AreaCtrl.setPieData).toHaveBeenCalled();
-      });
+    //     AreaCtrl.radioDate = 'uv';
+    //     AreaCtrl.getCheckPieType();
+    //     expect(AreaCtrl.getCheckPieType).toHaveBeenCalled();
+    //     expect(AreaCtrl.setPieData).toHaveBeenCalled();
+    //   });
   });
 
   describe('fn: getData', function() {
-    it('when AreaCtrl.getData is called,' +
-      'AreaService.getData should be called', function() {
-        spyOn(AreaCtrl, 'getData').and.callThrough();
-        spyOn(AreaService, 'getData');
+    // it('when AreaCtrl.getData is called,' +
+    //   'AreaService.getData should be called', function() {
+    //     spyOn(AreaCtrl, 'getData').and.callThrough();
+    //     spyOn(AreaService, 'getData');
 
-        AreaCtrl.getData();
-        expect(AreaCtrl.getData).toHaveBeenCalled();
-        expect(AreaService.getData).toHaveBeenCalled();
-      });
+    //     AreaCtrl.getData();
+    //     expect(AreaCtrl.getData).toHaveBeenCalled();
+    //     expect(AreaService.getData).toHaveBeenCalled();
+    //   });
   });
 
   describe('fn: setData', function() {
-    it('when AreaCtrl.setData is called,' +
-      'AreaCtrl.setPieData should be called and ' +
-      'AreaCtrl.highchartsPie.series[0] should be set', function() {
+    // it('when AreaCtrl.setData is called,' +
+    //   'AreaCtrl.setPieData should be called and ' +
+    //   'AreaCtrl.highchartsPie.series[0] should be set', function() {
 
-        spyOn(AreaCtrl, 'setData').and.callThrough();
-        spyOn(AreaCtrl, 'setPieData').and.callThrough();
+    //     spyOn(AreaCtrl, 'setData').and.callThrough();
+    //     spyOn(AreaCtrl, 'setPieData').and.callThrough();
 
-        AreaCtrl.setData();
+    //     AreaCtrl.setData();
 
-        expect(AreaCtrl.datas).toBe(AreaService.data.tableData);
-        expect(AreaCtrl.setData).toHaveBeenCalled();
-        expect(AreaCtrl.setPieData).toHaveBeenCalled();
-        expect(AreaCtrl.highchartsPie.series[0].type).toBe('pie');
-        expect(AreaCtrl.highchartsPie.series[0].innerSize).toBe('50%');
-        expect(AreaCtrl.highchartsPie.series[0].name).toBe(AreaCtrl.radioPvUvIp.toUpperCase());
-        expect(AreaCtrl.highchartsPie.series[0].data).toBe(AreaService.data[AreaCtrl.radioPvUvIp]);
-      });
+    //     expect(AreaCtrl.datas).toBe(AreaService.data.tableData);
+    //     expect(AreaCtrl.setData).toHaveBeenCalled();
+    //     expect(AreaCtrl.setPieData).toHaveBeenCalled();
+    //     expect(AreaCtrl.highchartsPie.series[0].type).toBe('pie');
+    //     expect(AreaCtrl.highchartsPie.series[0].innerSize).toBe('50%');
+    //     expect(AreaCtrl.highchartsPie.series[0].name).toBe(AreaCtrl.radioPvUvIp.toUpperCase());
+    //     expect(AreaCtrl.highchartsPie.series[0].data).toBe(AreaService.data[AreaCtrl.radioPvUvIp]);
+    //   });
   });
 
 });
