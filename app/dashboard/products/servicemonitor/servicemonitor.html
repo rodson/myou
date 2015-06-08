@@ -17,7 +17,9 @@
         <li>
           <a>统计</a>
           <ul>
-            <li ng-class="{active: vm.isActive('dailydata')}"><a ui-sref='.dailydata'>每日统计</a></li>
+            <li ng-class="{active: vm.isActive('dailydata')}">
+              <a ui-sref=".dailydata({stat_date: vm.today})">每日统计</a>
+            </li>
             <li ng-class="{active: vm.isActive('alertlist')}"><a ui-sref='.alertlist'>告警列表</a></li>
             <li ng-class="{active: vm.isActive('interfaces')}"><a ui-sref='.interfaces'>模调列表</a></li>
           </ul>

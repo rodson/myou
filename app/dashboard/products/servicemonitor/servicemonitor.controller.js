@@ -19,12 +19,16 @@
   /**
    * @ngInject
    */
-  function ServiceMonitorCtrl($state, localStorageService, ServiceMonitorService) {
+  function ServiceMonitorCtrl($state, localStorageService,
+    ServiceMonitorService, MomentDateService) {
+
     var vm = this;
     vm.product = localStorageService.get('app');
     vm.isActive = function(li) {
       return $state.current.name === 'dashboard.servicemonitor.' + li;
     };
+
+    vm.today = MomentDateService.getToday().start;
 
     vm.showAppKey = false;
 

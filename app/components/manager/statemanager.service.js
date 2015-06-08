@@ -4,7 +4,7 @@
   /**
    * @ngInject
    */
-  function StateManager($state, $location, $timeout, Constant) {
+  function StateManager($state, $location, $timeout, Constant, MomentDateService) {
     var StateManager = {};
 
     StateManager.enterProduct = function(platform, id) {
@@ -21,8 +21,9 @@
           $state.go(state, { id: id, show_test: 'false' });
           break;
         case Constant.PRODUCT_PLATFORM.SERVICE_MONITOR:
+          var today = MomentDateService.getToday().start;
           state = 'dashboard.servicemonitor.dailydata';
-          $state.go(state, { id: id });
+          $state.go(state, { id: id, stat_date: today });
           break;
         case Constant.PRODUCT_PLATFORM.WEB_PUBLISH:
           state = 'dashboard.webpublish';
