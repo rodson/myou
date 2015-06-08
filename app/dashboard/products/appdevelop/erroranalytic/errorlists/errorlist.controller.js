@@ -7,7 +7,7 @@
   function errorListsConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.errorlists', {
-        url: '/errorlists',
+        url: '/errorlists?stats',
         templateUrl: 'app/dashboard/products/appdevelop/erroranalytic/errorlists/errorlists.html',
         controllerAs: 'vm',
         controller: 'ErrorListsCtrl',
@@ -18,12 +18,17 @@
   /**
    * @ngInject
    */
-  function ErrorListsCtrl(localStorageService, $mdSidenav, $mdDialog, MomentDateService, ErrorListService) {
+  function ErrorListsCtrl(StorageManager, $mdSidenav, $mdDialog, initData,
+    StateManager, MomentDateService, ErrorListService) {
+
     var vm = this;
-    vm.radioChecked = 'unfix';
+
+    var KEY_STATS = 'stats';
+
+    vm.radioChecked = initData.stats;
     vm.tableDatas = [];
 
-    var app = localStorageService.get('app');
+    var app = StorageManager.getApp();
     var appKey = app.appKey;
     var platform = app.platform;
 
@@ -39,6 +44,8 @@
     };
 
     vm.selectRadioChanged = function() {
+      StateManager.setQueryParams(KEY_STATS, vm.radioChecked);
+
       if (!ErrorListService.data[vm.radioChecked]) {
         vm.getTableDatas();
         return;
@@ -154,12 +161,15 @@
     /**************************************** sider page end *****************************************/
   }
 
-  ErrorListsCtrl.resovle = {
+  ErrorListsCtrl.resolve = {
     /**
      * @ngInject
      */
-    getData: function(getApp) {
-      return getApp;
+    initData: function(getApp, $stateParams) {
+      var initData = {};
+      initData.stats = $stateParams.stats;
+
+      return initData;
     }
   };
 
