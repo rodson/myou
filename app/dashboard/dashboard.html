@@ -13,7 +13,7 @@
             <span class="text">我的产品</span>
           </md-button>
         </a>
-        <a ui-sref=".apistatis">
+        <a ui-sref=".apistatis({stat_date: vm.today})">
           <md-button class="md-icon-button nav-item" ng-show="vm.isRoot()">
             <span class="text">API统计</span>
           </md-button>

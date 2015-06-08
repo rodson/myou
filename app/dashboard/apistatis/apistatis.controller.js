@@ -4,9 +4,24 @@
   /**
    * @ngInject
    */
-  function APIStatisCtrl($scope, MomentDateService, APIStatisService) {
+  function apiStatisConfig($stateProvider) {
+    $stateProvider
+      .state('dashboard.apistatis', {
+        url: '/apistatis?stat_date',
+        templateUrl: 'app/dashboard/apistatis/apistatis.html',
+        controller: 'APIStatisCtrl',
+        controllerAs: 'vm',
+        resolve: APIStatisCtrl.resolve
+      });
+  }
+
+  /**
+   * @ngInject
+   */
+  function APIStatisCtrl($scope, MomentDateService, APIStatisService,
+    StateManager, initData) {
     var vm = this;
-    vm.checkdate = MomentDateService.getToday().start;
+    vm.checkdate = initData.stat_date;
     vm.onedayCount = 0;
     vm.showCountInit = 5;
 
@@ -169,6 +184,7 @@
 
 
     vm.getData = function() {
+      StateManager.setQueryParams('stat_date', vm.checkdate);
       vm.initData();
 
       APIStatisService.getCount(vm.checkdate, function() {
@@ -251,8 +267,21 @@
     vm.getData();
   }
 
+  APIStatisCtrl.resolve = {
+    /**
+     * @ngInject
+     */
+    initData: function($stateParams) {
+      var initData = {};
+      initData.stat_date = $stateParams.stat_date;
+
+      return initData;
+    }
+  };
+
   angular
     .module('myou.dashboard.apistatis')
-    .controller('APIStatisCtrl', APIStatisCtrl);
+    .controller('APIStatisCtrl', APIStatisCtrl)
+    .config(apiStatisConfig);
 
 })();

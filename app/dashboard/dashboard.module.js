@@ -21,10 +21,11 @@
   /**
    * @ngInject
    */
-  function DashboardCtrl(StorageManager) {
+  function DashboardCtrl(StorageManager, MomentDateService) {
     var vm = this;
 
     var user = StorageManager.getUser();
+    vm.today = MomentDateService.getToday().start;
 
     vm.isRoot = function() {
       return user.userType === 'root';
