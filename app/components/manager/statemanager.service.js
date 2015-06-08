@@ -14,22 +14,26 @@
         case Constant.PRODUCT_PLATFORM.WINDOWS_APP:
         case Constant.PRODUCT_PLATFORM.IOS_APP:
           state = 'dashboard.appdevelop.updatesetting';
+          $state.go(state, { id: id, test: 'false' });
           break;
         case Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE:
           state = 'dashboard.systemupdate.updatesetting';
+          $state.go(state, { id: id, show_test: 'false' });
           break;
         case Constant.PRODUCT_PLATFORM.SERVICE_MONITOR:
           state = 'dashboard.servicemonitor.dailydata';
+          $state.go(state, { id: id });
           break;
         case Constant.PRODUCT_PLATFORM.WEB_PUBLISH:
           state = 'dashboard.webpublish';
+          $state.go(state, { id: id });
           break;
         case Constant.PRODUCT_PLATFORM.PAGE_ANALYTIC:
           state = 'dashboard.pageanalytic.global';
+          $state.go(state, { id: id });
           break;
       }
 
-      $state.go(state, { id: id });
     };
 
     StateManager.setQueryParams = function(queryKey, queryValue) {

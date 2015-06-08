@@ -22,32 +22,36 @@ describe('shared: StateManager', function() {
     it('should call go on $state with appdevelop when androidapp', function() {
       var platform = Constant.PRODUCT_PLATFORM.ANDROID_APP;
       var id = 'qwerty';
+      var test = 'false';
       StateManager.enterProduct(platform, id);
       expect($state.go)
-        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
+        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id, test: test});
     });
 
     it('should call go on $state with appdevelop when windowsapp', function() {
       var platform = Constant.PRODUCT_PLATFORM.WINDOWS_APP;
       var id = 'qwerty';
+      var test = 'false';
       StateManager.enterProduct(platform, id);
       expect($state.go)
-        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
+        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id, test: test});
     });
 
     it('should call go on $state with appdevelop when iosapp', function() {
       var platform = Constant.PRODUCT_PLATFORM.IOS_APP;
       var id = 'qwerty';
+      var test = 'false';
       StateManager.enterProduct(platform, id);
       expect($state.go)
-        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id});
+        .toHaveBeenCalledWith('dashboard.appdevelop.updatesetting', {id: id, test: test});
     });
 
     it('should call go on $state with systemupdate.updatesetting when systemupdate', function() {
       var platform = Constant.PRODUCT_PLATFORM.SYSTEM_UPDATE;
       var id = 'qwerty';
+      var showTest = 'false';
       StateManager.enterProduct(platform, id);
-      expect($state.go).toHaveBeenCalledWith('dashboard.systemupdate.updatesetting', {id: id});
+      expect($state.go).toHaveBeenCalledWith('dashboard.systemupdate.updatesetting', {id: id, show_test: showTest});
     });
 
     it('should call go on $state with servicemonitor when servicemonitor', function() {

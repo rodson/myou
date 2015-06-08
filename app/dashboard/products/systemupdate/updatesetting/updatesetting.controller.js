@@ -18,12 +18,16 @@
   /**
    * @ngInject
    */
-  function RomUpdateSettingCtrl(RomUpdateSettingService, initDate, StateManager) {
+  function RomUpdateSettingCtrl(RomUpdateSettingService, initData, StateManager) {
     var vm = this;
 
     RomUpdateSettingService.init();
 
-    vm.showTest = initDate.showTest;
+    if (initData.showTest === 'true') {
+      vm.showTest = true;
+    } else {
+      vm.showTest = false;
+    }
 
     vm.updateInfos = RomUpdateSettingService.updateInfos;
 
@@ -52,7 +56,12 @@
     };
 
     vm.changeTest = function() {
-      StateManager.setQueryParams('show_test', vm.showTest);
+      console.log(vm.showTest);
+      if (vm.showTest) {
+        StateManager.setQueryParams('show_test', 'true');
+      } else {
+        StateManager.setQueryParams('show_test', 'false');
+      }
     };
   }
 
