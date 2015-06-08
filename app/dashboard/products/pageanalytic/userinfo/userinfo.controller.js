@@ -7,7 +7,7 @@
   function userInfoConfig($stateProvider) {
     $stateProvider
       .state('dashboard.pageanalytic.userinfo', {
-        url: '/userinfo',
+        url: '/userinfo?start_date&end_date',
         templateUrl: 'app/dashboard/products/pageanalytic/userinfo/userinfo.html',
         controllerAs: 'vm',
         controller: 'UserInfoCtrl',
@@ -18,15 +18,14 @@
   /**
    * @ngInject
    */
-  function UserInfoCtrl(localStorageService, MomentDateService, UserinfoService) {
+  function UserInfoCtrl(localStorageService, MomentDateService,
+    UserinfoService, StateManager, initData) {
+
     var vm = this;
     var trickId = localStorageService.get('trickId');
-    vm.radioDate = 'today';
 
-    var checkDate = MomentDateService.getToday();
-
-    vm.startdate = checkDate.start;
-    vm.enddate = checkDate.end;
+    vm.startdate = initData.startDate;
+    vm.enddate = initData.endDate;
 
     vm.highchartsPie = {
       options: {
@@ -65,6 +64,8 @@
     };
 
     vm.getCheckDate = function() {
+      var checkDate;
+
       switch (vm.radioDate) {
         case 'today':
           checkDate = MomentDateService.getToday();
@@ -88,6 +89,8 @@
     };
 
     vm.getData = function() {
+      StateManager.setQueryParams('start_date', vm.startdate);
+      StateManager.setQueryParams('end_date', vm.enddate);
       UserinfoService.getData(vm.startdate, vm.enddate, trickId, function(data) {
         vm.setData();
       });
@@ -116,10 +119,22 @@
     /**
      * @ngInject
      */
-    getData: function(localStorageService, MomentDateService, UserinfoService, getData) {
-      var today = MomentDateService.getToday();
+    initData: function(getData, $stateParams) {
+      var initData = {};
+
+      initData.startDate = $stateParams.start_date;
+      initData.endDate = $stateParams.end_date;
+
+      return initData;
+    },
+    /**
+     * @ngInject
+     */
+    getData: function(localStorageService, UserinfoService, $stateParams, getData) {
+      var startDate = $stateParams.start_date;
+      var endDate = $stateParams.end_date;
       var trickId = localStorageService.get('trickId');
-      return UserinfoService.getData(today.start, today.end, trickId);
+      return UserinfoService.getData(startDate, endDate, trickId);
     }
   };
 

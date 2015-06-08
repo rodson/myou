@@ -37,7 +37,9 @@
         <li>
           <a>转换跟踪</a>
           <ul>
-            <li ng-class="{active: vm.isActive('userinfo')}"><a ui-sref='.userinfo'>用户来源</a></li>
+            <li ng-class="{active: vm.isActive('userinfo')}">
+              <a ui-sref=".userinfo({start_date: vm.endDate, end_date: vm.endDate})">用户来源</a>
+            </li>
           </ul>
         </li>
       </ul>
