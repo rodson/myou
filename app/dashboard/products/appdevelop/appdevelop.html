@@ -66,8 +66,12 @@
         <li>
           <a>错误分析</a>
           <ul>
-            <li ng-class="{active: vm.isActive('appdevelop', 'errortrend')}"><a ui-sref=".errortrend">错误趋势</a></li>
-            <li ng-class="{active: vm.isActive('appdevelop', 'errorlists')}"><a ui-sref=".errorlists">错误列表</a></li>
+            <li ng-class="{active: vm.isActive('appdevelop', 'errortrend')}">
+              <a ui-sref=".errortrend({selected_date: 2, stats: 'crash_count'})">错误趋势</a>
+            </li>
+            <li ng-class="{active: vm.isActive('appdevelop', 'errorlists')}">
+              <a ui-sref=".errorlists">错误列表</a>
+            </li>
           </ul>
         </li>
         <li>

@@ -7,7 +7,7 @@
   function errorTrendConfig($stateProvider) {
     $stateProvider
       .state('dashboard.appdevelop.errortrend', {
-        url: '/errortrend',
+        url: '/errortrend?selected_date&stats',
         templateUrl: 'app/dashboard/products/appdevelop/erroranalytic/errortrend/errortrend.html',
         controllerAs: 'vm',
         controller: 'ErrorTrendCtrl',
@@ -18,13 +18,19 @@
   /**
    * @ngInject
    */
-  function ErrorTrendCtrl(localStorageService, MomentDateService, ErrorTrendService) {
+  function ErrorTrendCtrl(StorageManager, MomentDateService, ErrorTrendService,
+    StateManager, initData) {
+
     var vm = this;
-    vm.selectedDate = 2;
-    vm.radioChecked = 'crash_count';
+
+    var KEY_SELECTED_DATE = 'selected_date';
+    var KEY_STATS = 'stats';
+
+    vm.selectedDate = initData.selectedDate;
+    vm.radioChecked = initData.stats;
     vm.tableDatas = [];
 
-    var app = localStorageService.get('app');
+    var app = StorageManager.getApp();
     var appKey = app.appKey;
     var platform = app.platform;
     var step = 8;
@@ -80,10 +86,12 @@
     };
 
     vm.selectRadioChanged = function() {
+      StateManager.setQueryParams(KEY_STATS, vm.radioChecked);
       vm.setHighcharsData();
     };
 
     vm.selectDateChanged = function() {
+      StateManager.setQueryParams(KEY_SELECTED_DATE, vm.selectedDate);
       ErrorTrendService.data.crash_count = null;
       ErrorTrendService.data.crash_count_per_session = null;
       vm.updateHighChartsData();
@@ -122,8 +130,11 @@
     /**
      * @ngInject
      */
-    getData: function(getApp) {
-      return getApp;
+    initData: function(getApp, $stateParams) {
+      var initData = {};
+      initData.selectedDate = $stateParams.selected_date;
+      initData.stats = $stateParams.stats;
+      return initData;
     }
   };
 
