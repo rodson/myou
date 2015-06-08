@@ -7,7 +7,7 @@
   function InterfacesConfig($stateProvider) {
     $stateProvider
       .state('dashboard.servicemonitor.interfaces', {
-        url: '/interfaces',
+        url: '/interfaces?start_date&end_date',
         templateUrl: 'app/dashboard/products/servicemonitor/interfaces/interfaces.html',
         controllerAs: 'vm',
         controller: InterfacesCtrl,
@@ -18,11 +18,10 @@
   /**
    * @ngInject
    */
-  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService) {
+  function InterfacesCtrl(localStorageService, $filter, $mdDialog, $mdToast, InterfacesService, CalleeService, StateManager, initData) {
     var vm = this;
-    var now = new Date();
-    vm.enddate = $filter('date')(now, 'yyyy-MM-dd HH:mm:ss');
-    vm.startdate = $filter('date')(now.getTime() - 5 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss');
+    vm.enddate = initData.endDate;
+    vm.startdate = initData.startDate;
     vm.treeGridCtrl = {};
     vm.treeData = [];
     vm.expandingProperty = {
@@ -113,6 +112,8 @@
     }];
 
     vm.getInterfacesInternal = function() {
+      StateManager.setQueryParams('start_date', vm.startdate);
+      StateManager.setQueryParams('end_date', vm.enddate);
       InterfacesService.getInterfaces(vm.appId, function() {
         vm.treeData = [];
         vm.interfaceList = InterfacesService.data.interfaces;
@@ -274,8 +275,12 @@
     /**
      * @ngInject
      */
-    getAppId: function(getAppId) {
-      return getAppId;
+    initData: function(getAppId, $stateParams) {
+      var initData = {};
+      initData.startDate = $stateParams.start_date;
+      initData.endDate = $stateParams.end_date;
+
+      return initData;
     }
   };
 

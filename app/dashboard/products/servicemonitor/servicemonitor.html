@@ -23,7 +23,9 @@
             <li ng-class="{active: vm.isActive('alertlist')}">
               <a ui-sref=".alertlist({start_date: vm.startdate, end_date: vm.enddate, stats: 'statistic'})">告警列表</a>
             </li>
-            <li ng-class="{active: vm.isActive('interfaces')}"><a ui-sref='.interfaces'>模调列表</a></li>
+            <li ng-class="{active: vm.isActive('interfaces')}">
+              <a ui-sref=".interfaces({start_date: vm.startdate, end_date: vm.enddate})">模调列表</a>
+            </li>
           </ul>
         </li>
         <li>
