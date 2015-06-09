@@ -24,6 +24,10 @@
       .state('dashboard.document.androidappsdk.configmanifest', {
         url: '/configmanifest',
         templateUrl: 'app/dashboard/document/androidappsdk/integrate/configmanifest.html'
+      })
+      .state('dashboard.document.androidappsdk.sessionstats', {
+        url: '/sessionstats',
+        templateUrl: 'app/dashboard/document/androidappsdk/integrate/sessionstats.html'
       });
   }
 

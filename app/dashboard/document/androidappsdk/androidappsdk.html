@@ -10,14 +10,22 @@
         <li>
           <a>集成准备</a>
           <ul>
-            <li ng-class="{active: vm.isActive('getappkey')}">
-              <a ui-sref=".getappkey">获得Appkey</a>
-            </li>
             <li ng-class="{active: vm.isActive('importsdk')}">
               <a ui-sref=".importsdk">导入SDK</a>
             </li>
+            <li ng-class="{active: vm.isActive('getappkey')}">
+              <a ui-sref=".getappkey">获得Appkey</a>
+            </li>
             <li ng-class="{active: vm.isActive('configmanifest')}">
               <a ui-sref=".configmanifest">配置manifest</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a>功能集成</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('sessionstats')}">
+              <a ui-sref=".sessionstats">session统计</a>
             </li>
           </ul>
         </li>

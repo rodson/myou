@@ -1,0 +1,24 @@
+<h2 id="session统计">session统计</h2>
+
+<h3></h3>
+
+<p>正确集成如下代码，才能保证获取正确的新增用户、活跃用户、启动次数、使用时长等基本数据。 <br>
+在每个Activity的onResume方法中调用 <code>MengYouAnalyzeAgent.onResume(context)</code>，onPause方法中调用<code>MengYouAnalyzeAgent.onPause(context)</code></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResume</span>() {
+    <span class="hljs-keyword">super</span>.onResume();
+    MengYouAnalyzeAgent.onResume(<span class="hljs-keyword">this</span>);
+}
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPause</span>() {
+    <span class="hljs-keyword">super</span>.onPause();
+    MengYouAnalyzeAgent.onPause(<span class="hljs-keyword">this</span>);
+}</code></pre>
+
+<ul>
+<li><p>确保在所有的Activity中都调用 MengYouAnalyzeAgent.onResume() 和MengYouAnalyzeAgent.onPause()方法，这两个调用将不会阻塞应用程序的主线程，也不会影响应用程序的性能。</p></li>
+<li><p>注意 如果您的Activity之间有继承或者控制关系请不要同时在父和子Activity中重复添加onPause和onResume方法，否则会造成重复统计，导致启动次数异常增高。(eg.使用TabHost、TabActivity、ActivityGroup时)。</p></li>
+<li><p>当应用在后台运行超过30秒（默认）再回到前端，将被认为是两个独立的session(启动)，例如用户回到home，或进入其他程序，经过一段时间后再返回之前的应用。可通过接口：AnalyzeConfig.setContinueSessionMillis(long interval) 来自定义这个间隔（参数单位为毫秒）。</p></li>
+<li><p>如果开发者调用Process.kill或者System.exit之类的方法杀死进程，请务必在此之前调用MengYouAnalyzeAgent.onKillProcess(Context context)方法，用来保存统计数据。</p></li>
+</ul>
