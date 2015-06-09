@@ -1,1 +1,49 @@
-<h1>Import SDK</h1>
+<h2 id="导入sdk">导入SDK</h2>
+
+
+
+<h3 id="使用android-studio导入sdk">使用Android Studio导入SDK</h3>
+
+
+
+<h4 id="1-maven仓库导入">1. maven仓库导入</h4>
+
+<p>在项目的build.gradle中配置maven仓库</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">allprojects {
+    repositories {
+        jcenter()
+        <span class="hljs-comment">//这里是 萌友sdk 的包仓库</span>
+        maven {
+            url <span class="hljs-string">"http://mvn.gz.cvte.cn/nexus/content/repositories/releases"</span>
+        }
+    }
+}</code></pre>
+
+<p>在app目录下的build.gradle中配置依赖</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs nginx"><span class="hljs-title">dependencies</span> {
+    <span class="hljs-title">compile</span> <span class="hljs-string">'com.cvte:myou:0.9.0<span class="hljs-variable">@aar</span>'</span>
+}</code></pre>
+
+<h4 id="2-本地导入">2. 本地导入</h4>
+
+<p><a href="http://mvn.gz.cvte.cn/nexus/content/repositories/releases/com/cvte/myou/app-services/0.9.0/app-services-0.9.0.aar">下载Android应用 SDK</a>，将下载的aar文件放到工程的app/libs目录，并将aar文件命名为myou-version.aar(如myou-0.9.0.aar)</p>
+
+<img src="/assets/images/document/androidappsdk/addaar.jpg" alt="addaar">
+
+<p>在app目录的build.gradle文件中添加repositories配置，并指定依赖（依赖的包名可以任意，名字和版本号需要与aar文件的名字对应）</p>
+
+<pre class="prettyprint"><code class=" hljs matlab">repositories <span class="hljs-cell">{
+    flatDir {
+        dirs <span class="hljs-string">'libs'</span>
+    }</span>
+}
+
+dependencies <span class="hljs-cell">{
+    compile <span class="hljs-string">'com.cvte:myou:0.9.0@aar'</span>
+}</span></code></pre>
