@@ -28,6 +28,10 @@
       .state('dashboard.document.androidappsdk.sessionstats', {
         url: '/sessionstats',
         templateUrl: 'app/dashboard/document/androidappsdk/integrate/sessionstats.html'
+      })
+      .state('dashboard.document.androidappsdk.customevent', {
+        url: '/customevent',
+        templateUrl: 'app/dashboard/document/androidappsdk/integrate/customevent.html'
       });
   }
 

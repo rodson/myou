@@ -1,0 +1,45 @@
+<h2 id="自定义事件">自定义事件</h2>
+
+<br>
+
+<p><code>event_id</code>: 自定义事件id <br>
+<code>key</code>: 自定义事件下的参数 <br>
+<code>value</code>: 自定义事件参数下的参数值</p>
+
+<ol>
+<li>使用自定义事件功能请先登陆萌友官网 ， 在 “数据分析-&gt;自定义事件” 页面中添加相应的事件id（事件id可用英文或数字，不建议使用中文），然后服务器才会对相应的事件请求进行处理。</li>
+<li>自定义事件的代码需要放在Activity里的onResume方法后面，不支持放在onCreat()方法中。</li>
+</ol>
+
+<h3 id="1-统计事件发生次数">1. 统计事件发生次数</h3>
+
+<p>在您希望跟踪的代码部分，调用如下方法</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">MengYouAnalyzeAgent.onEvent(<span class="hljs-built_in">String</span> eventId)</code></pre>
+
+<p>eventId为当前统计的事件ID。</p>
+
+<p>示例：统计微博应用中”转发”事件发生的次数，那么在转发的函数里调用</p>
+
+<pre class="prettyprint"><code class=" hljs avrasm">MengYouAnalyzeAgent<span class="hljs-preprocessor">.onEvent</span>(<span class="hljs-string">"Forward"</span>)<span class="hljs-comment">;</span></code></pre>
+
+<h3 id="2-统计点击行为各属性被触发的次数">2. 统计点击行为各属性被触发的次数</h3>
+
+<p>考虑事件在不同属性上的取值，可以调用如下方法：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vhdl">MengYouAnalyzeAgent.onEvent(<span class="hljs-typename">String</span> eventId, HashMap&lt;<span class="hljs-typename">String</span>, <span class="hljs-typename">String</span>&gt; <span class="hljs-keyword">map</span>);</code></pre>
+
+<p><code>map</code> 为当前事件的属性和取值（Key-Value键值对）。</p>
+
+<p>示例：统计电商应用中“购买”事件发生的次数，以及购买的商品类型及数量，那么在购买的函数里调用：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vhdl">HashMap&lt;<span class="hljs-typename">String</span>,<span class="hljs-typename">String</span>&gt; <span class="hljs-keyword">map</span> = <span class="hljs-keyword">new</span> HashMap&lt;<span class="hljs-typename">String</span>, <span class="hljs-typename">String</span>&gt;();
+<span class="hljs-keyword">map</span>.put(<span class="hljs-string">"type"</span>, <span class="hljs-string">"book"</span>);
+<span class="hljs-keyword">map</span>.put(<span class="hljs-string">"quantity"</span>, <span class="hljs-string">"3"</span>);
+MengYouAnalyzeAgent.onEvent(<span class="hljs-string">"purchase"</span>, <span class="hljs-keyword">map</span>);</code></pre>
