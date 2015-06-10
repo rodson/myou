@@ -33,6 +33,10 @@
         url: '/customevent',
         templateUrl: 'app/dashboard/document/androidappsdk/content/customevent.html'
       })
+      .state('dashboard.document.androidappsdk.otherstats', {
+        url: '/otherstats',
+        templateUrl: 'app/dashboard/document/androidappsdk/content/otherstats.html'
+      })
       .state('dashboard.document.androidappsdk.appupdate', {
         url: '/appupdate',
         templateUrl: 'app/dashboard/document/androidappsdk/content/appupdate.html'
@@ -40,6 +44,10 @@
       .state('dashboard.document.androidappsdk.customupdate', {
         url: '/customupdate',
         templateUrl: 'app/dashboard/document/androidappsdk/content/customupdate.html'
+      })
+      .state('dashboard.document.androidappsdk.servicemonitor', {
+        url: '/servicemonitor',
+        templateUrl: 'app/dashboard/document/androidappsdk/content/servicemonitor.html'
       });
   }
 

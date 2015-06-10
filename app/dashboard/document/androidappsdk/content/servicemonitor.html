@@ -1,0 +1,40 @@
+<h2 id="接口监控">接口监控</h2>
+
+<br>
+
+<p>接口监控主要提供http接口的监控</p>
+
+<p>API：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">MengYouMonitor
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">send</span>(Context context, ArrayList&lt;BasicMonitorEntity&gt; entities);
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">send</span>(Context context, BasicMonitorEntity entity);
+</code></pre>
+
+<p>接口监控功能只提供了数据发送接口，客户端在获取http返回后调用上述两个接口实现数据的上报功能</p>
+
+<blockquote>
+  <p><code>BasicMonitorEntity</code>是一个抽象数据类，http数据上报类<code>HttpMonitorEntity</code>是它的子类，<code>HttpMonitorEntity</code>的字段包括：</p>
+
+  <p><code>serviceAddress</code>  请求地址 <br>
+  <code>statusCode</code>  HTTP返回码 <br>
+  <code>errorMessage</code>  错误信息 <br>
+  <code>timeCost</code>  时延 <br>
+  <code>httpMethod</code>  HTTP方法</p>
+</blockquote>
+
+<h3 id="使用示例">使用示例</h3>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"> HttpMonitorEntity entity1 = <span class="hljs-keyword">new</span> HttpMonitorEntity(<span class="hljs-string">"http://myou.cvte.com/api/v1"</span>,
+                        <span class="hljs-number">501</span>, <span class="hljs-string">"server error"</span>, <span class="hljs-number">100</span>, <span class="hljs-string">"GET"</span>);
+ HttpMonitorEntity entity2 = <span class="hljs-keyword">new</span> HttpMonitorEntity(<span class="hljs-string">"http://myou.cvte.com/api/v1"</span>,
+                        <span class="hljs-number">501</span>, <span class="hljs-string">"database error"</span>, <span class="hljs-number">200</span>);
+ ArrayList&lt;BasicMonitorEntity&gt; entities = <span class="hljs-keyword">new</span> ArrayList&lt;BasicMonitorEntity&gt;();
+ entities.add(entity1);
+ entities.add(entity2);
+ MengYouMonitor.send(MainActivity.<span class="hljs-keyword">this</span>, entities);</code></pre>

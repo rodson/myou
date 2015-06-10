@@ -41,6 +41,17 @@
             <li ng-class="{active: vm.isActive('customevent')}">
               <a ui-sref=".customevent">自定义事件</a>
             </li>
+            <li ng-class="{active: vm.isActive('otherstats')}">
+              <a ui-sref=".otherstats">其他功能</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a>接口监控</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('servicemonitor')}">
+              <a ui-sref=".servicemonitor">接口监控</a>
+            </li>
           </ul>
         </li>
       </ul>

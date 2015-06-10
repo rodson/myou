@@ -1,0 +1,16 @@
+<h2 id="其他统计功能">其他统计功能</h2>
+
+<h3 id="错误统计">错误统计</h3>
+
+<p>Android统计SDK内建错误统计，不需要开发者手动集成。SDK通过Thread.UncaughtExceptionHandler捕获程序崩溃日志，并在程序下次启动时发送到服务器。 </p>
+
+<h3 id="日志加密设置">日志加密设置</h3>
+
+<p>您可以通过在程序入口处的activity中调用如下代码来设置加密模式。</p>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-javadoc">/** 设置是否对日志信息进行加密, 默认false(不加密). */</span>
+AnalyzeConfig.enableEncrypt(<span class="hljs-keyword">boolean</span> enable);</code></pre>
+
+<p>如果enable为true，SDK会对日志进行加密。加密模式可以有效防止网络攻击，提高数据安全性。 <br>
+如果enable为false，SDK将按照非加密的方式来传输日志。 <br>
+如果您没有设置加密模式，SDK的加密模式为false（不加密）。</p>

@@ -97,15 +97,32 @@
 
   <pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onUpdateReturned</span>(<span class="hljs-keyword">int</span> updateStatus, Update update)</code></pre>
 
-  <p><code>updateStatus</code>  更新回调接口返回状态： <br>
-  <code>UpdateStatus.YES</code>  有更新； <br>
-  <code>UpdateStatus.NO</code>  没有更新； <br>
-  <code>UpdateStatus.NONE_WIFI</code>  非wifi状态（在设置仅wifi下更新时才会有此状态）； <br>
-  <code>UpdateStatus.TIMEOUT</code>  超时； <br>
-  <code>update</code> 更新回调返回数据，包含App更新信息（如升级版本、下载链接等）</p>
+  <p><code>updateStatus</code>  更新回调接口返回状态：</p>
+
+  <p>UpdateStatus.YES ： 有更新 <br>
+  UpdateStatus.NO ： 没有更新 <br>
+  UpdateStatus.NONE_WIFI ： 非wifi状态（除手动更新外，其他两种方式都需要在wifi状态下进行） <br>
+  UpdateStatus.TIMEOUT ： 服务器超过15s没有响应 <br>
+  UpdateStatus.IGNORE ： 用户已经忽略该版本的更新 <br>
+  UpdateStatus.APP_KEY_ERROR ： AppKey错误 <br>
+  UpdateStatus.SERVER_ERROR : 服务器错误 <br>
+  UpdateStatus.ALREADY_DOWNLOADING ： 已经在下载了</p>
 </blockquote>
 
+<p><code>update</code> 更新回调返回数据，包含App更新信息（如升级版本、下载链接等）</p>
 
+<blockquote>
+  <p>hasUpdate 是否有更新 <br>
+  delta 是否增量 <br>
+  downloadUrl 更新包下载路径 <br>
+  fileName 更新包名 <br>
+  fileMd5 完整包md5 <br>
+  versionName 版本名 <br>
+  versionCode 版本号 <br>
+  updateDesc 更新描述 <br>
+  patchMd5 差分包md5 <br>
+  fileSize 更新包大小</p>
+</blockquote>
 
 <h4 id="22-监听下载">2.2 监听下载</h4>
 
@@ -163,10 +180,4 @@
 
 <pre class="prettyprint"><code class=" hljs cs">MengYouUpdateAgent
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startInstall</span>(Context context, File file)</code></pre>
-
-<p>打印信息开关接口</p>
-
-<pre class="prettyprint"><code class=" hljs java">MengYouConfig
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setLog</span>(<span class="hljs-keyword">boolean</span> enable)</code></pre>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">v
