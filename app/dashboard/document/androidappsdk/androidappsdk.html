@@ -22,6 +22,17 @@
           </ul>
         </li>
         <li>
+          <a>升级功能</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('appupdate')}">
+              <a ui-sref=".appupdate">应用升级</a>
+            </li>
+            <li ng-class="{active: vm.isActive('customupdate')}">
+              <a ui-sref=".customupdate">自定义升级</a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <a>统计功能</a>
           <ul>
             <li ng-class="{active: vm.isActive('sessionstats')}">

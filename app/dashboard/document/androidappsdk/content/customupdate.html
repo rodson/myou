@@ -1,0 +1,172 @@
+<h2 id="自定义升级">自定义升级</h2>
+
+<h3 id="1-设置更新参数">1 设置更新参数</h3>
+
+<p>设置更新相关的参数，这些方法都需要在调用检测更新的方法之前调用才能生效。</p>
+
+<h4 id="11-设置应用appkey">1.1 设置应用appkey</h4>
+
+<p>API：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">MengYouConfig
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAppKey</span>(String appkey)；</code></pre>
+
+<h4 id="12-设置更新网络条件">1.2 设置更新网络条件</h4>
+
+<p>API:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUpdateOnlyWifi</span>(<span class="hljs-keyword">boolean</span> updateOnlyWifi)；
+</code></pre>
+
+<blockquote>
+  <p>updateOnlyWifi 布尔值true(默认)只在wifi环境下检测更新，false在所有网络环境中均检测更新。</p>
+</blockquote>
+
+<p>特别提示：针对机顶盒等可能不支持或者没有无线网络的设备，请同样将该参数设为false。 注意：该参数仅针对自动更新接口update(context)，对于手动更新接口（无视网络环境）和静默下载更新接口（仅WIFI）无效。</p>
+
+<h4 id="13-更新提示开关">1.3 更新提示开关</h4>
+
+<p>如果您要自己处理更新回调，选择自己对用户进行更新提示，请关闭自动弹出提示，避免重复弹出提示。 <br>
+对于自动更新和手动更新接口，该参数控制检测到更新后自动弹出更新提示</p>
+
+<p>API：</p>
+
+<pre class="prettyprint"><code class=" hljs java">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUpdateAutoPopup</span>(Context context, <span class="hljs-keyword">boolean</span> updateAutoPopup)；</code></pre>
+
+<blockquote>
+  <p>updateAutoPopup 布尔值true(默认)自动弹出更新提示的对话框/通知栏，false禁止弹出更新提示的对话框/通知栏。</p>
+</blockquote>
+
+<h3 id="2-设置回调监听事件">2 设置回调，监听事件</h3>
+
+<p>您可以通过下面的方法设置回调，来监听以下的事件：检测更新的结果返回、用户点击对话框按键、下载进度。方便开发者自主处理。</p>
+
+<h4 id="21-监听检测更新结果">2.1 监听检测更新结果</h4>
+
+<p>如果程序想自己处理检测更新的结果可以按如下步骤，禁止弹出对话框或者通知栏，实现更新监听接口，自主处理更新事件：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java">       MengYouUpdateAgent.setUpdateAutoPopup(mContext, <span class="hljs-keyword">false</span>);
+       MengYouUpdateAgent.setUpdateListener(<span class="hljs-keyword">new</span> MengYouUpdateListener() {
+            <span class="hljs-annotation">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onUpdateReturned</span>(<span class="hljs-keyword">int</span> updateStatus, Update update) {
+                <span class="hljs-keyword">super</span>.onUpdateReturned(updateStatus, update);
+                Log.d(<span class="hljs-string">"OTA"</span>, <span class="hljs-string">"updateStatus:"</span> + updateStatus);
+                <span class="hljs-keyword">switch</span> (updateStatus) {
+                    <span class="hljs-keyword">case</span> UpdateStatus.YES: <span class="hljs-comment">// has update</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.NO: <span class="hljs-comment">// has no update</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.NONE_WIFI: <span class="hljs-comment">// none wifi</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.NONE_NETWORK:
+                    <span class="hljs-keyword">case</span> UpdateStatus.TIMEOUT: <span class="hljs-comment">// time out (15s)</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.IGNORE: <span class="hljs-comment">// ignore current version by user</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.APP_KEY_ERROR: <span class="hljs-comment">// app key error</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.SERVER_ERROR: <span class="hljs-comment">// server error</span>
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> UpdateStatus.ALREADY_DOWNLOADING:
+                        <span class="hljs-keyword">break</span>;
+                }
+            }
+        });</code></pre>
+
+<p>API:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUpdateListener</span>(MengYouUpdateListener updateListener)</code></pre>
+
+<blockquote>
+  <p><code>MengYouUpdateListener</code>  更新回调接口</p>
+
+  <pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onUpdateReturned</span>(<span class="hljs-keyword">int</span> updateStatus, Update update)</code></pre>
+
+  <p><code>updateStatus</code>  更新回调接口返回状态： <br>
+  <code>UpdateStatus.YES</code>  有更新； <br>
+  <code>UpdateStatus.NO</code>  没有更新； <br>
+  <code>UpdateStatus.NONE_WIFI</code>  非wifi状态（在设置仅wifi下更新时才会有此状态）； <br>
+  <code>UpdateStatus.TIMEOUT</code>  超时； <br>
+  <code>update</code> 更新回调返回数据，包含App更新信息（如升级版本、下载链接等）</p>
+</blockquote>
+
+
+
+<h4 id="22-监听下载">2.2 监听下载</h4>
+
+<p>您可以设置下载回调接口，这样在自动更新下载APK开始，进行，结束或者失败的时候，可以使用该接口来做出相应的反应，以提供 更友好的用户体验</p>
+
+<pre class="prettyprint"><code class=" hljs java">MengYouUpdateAgent.setDownloadListener(<span class="hljs-keyword">new</span> MengYouDownloadListener() {
+            <span class="hljs-annotation">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDownloadStart</span>() {
+                Log.d(<span class="hljs-string">"OTA"</span>, <span class="hljs-string">"download start"</span>);
+            }
+
+            <span class="hljs-annotation">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDownloadUpdate</span>(<span class="hljs-keyword">int</span> progress, Update update) {
+                Log.d(<span class="hljs-string">"OTA"</span>, <span class="hljs-string">"download update "</span> + progress);
+            }
+
+            <span class="hljs-annotation">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDownloadSuccess</span>(<span class="hljs-keyword">final</span> String file, <span class="hljs-keyword">final</span> Update update) {
+                Log.d(<span class="hljs-string">"OTA"</span>, <span class="hljs-string">"download success "</span> + file);
+            }
+        });</code></pre>
+
+<p>API:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDownloadListener</span>(MengYouDownloadListener downloadListener)</code></pre>
+
+<h3 id="3-其他设置">3 其他设置</h3>
+
+<p>设置下载完成后不自动安装，默认自动安装</p>
+
+<pre class="prettyprint"><code class=" hljs java">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDownloadAutoInstall</span>(Context context, <span class="hljs-keyword">boolean</span> autoInstall)</code></pre>
+
+<p>设置和获取忽略版本</p>
+
+<pre class="prettyprint"><code class=" hljs cs">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setIgnoreVersion</span>(Context context, <span class="hljs-keyword">int</span> versionCode)
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getIgnoreVersion</span>(Context context)</code></pre>
+
+<p>只有当更新回调显示检测到更新的时候，可以调用该函数下载新版本。</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startDownload</span>(Context context, Update update)</code></pre>
+
+<p>只有检测到已经下载完成的新版本时，调用该函数安装新版本。</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">MengYouUpdateAgent
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startInstall</span>(Context context, File file)</code></pre>
+
+<p>打印信息开关接口</p>
+
+<pre class="prettyprint"><code class=" hljs java">MengYouConfig
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setLog</span>(<span class="hljs-keyword">boolean</span> enable)</code></pre>

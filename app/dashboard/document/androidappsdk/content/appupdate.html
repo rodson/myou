@@ -1,0 +1,65 @@
+<h2 id="应用更新">应用更新</h2>
+
+<h3 id="调用更新接口">调用更新接口</h3>
+
+<p>主要应用场景：最常见的自动更新模式，当用户进入应用首页后，如果处于wifi环境则检测更新，如果有更新，弹出对话框提示有新版本，用户点选更新开始下载更新。 <br>
+在应用程序入口Activity里的OnCreate() 方法中调用</p>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>(Bundle  savedInstanceState) {
+    <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);
+    MengYouUpdateAgent.update(<span class="hljs-keyword">this</span>);
+}</code></pre>
+
+<blockquote>
+  <p>注意 <br>
+  考虑到用户流量的限制，目前我们默认在Wi-Fi接入情况下才进行自动提醒。如需要在任意网络环境下都进行更新自动提醒，则请在update调用之前添加以下代码：MengYouUpdateAgent.setUpdateOnlyWifi(false)。 特别提示：针对机顶盒等可能不支持或者没有无线网络的设备， 请同样添加上述代码。</p>
+</blockquote>
+
+<p>API：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span>(Context context);</code></pre>
+
+<h3 id="上传apk">上传APK</h3>
+
+<p>如果开发者已经有了新的APK版本，只要上传到萌友网站并进行升级配置，同时客户端版本的版本号（VersionCode）有对应的升级版本配置，客户端就会收到更新提示。 <br>
+上传位置：登录萌友开发者后台，应用更新 &gt; 上传文件。</p>
+
+<h3 id="手动静默更新">手动／静默更新</h3>
+
+<p>除了自动更新外，android升级sdk还支持另外两种场景： 手动更新、静默更新</p>
+
+<h4 id="1-手动更新">1. 手动更新</h4>
+
+<p>主要使用场景：许多应用的设置界面中都会有检查更新等类似功能，需要用户主动触发而检测更新。它的默认行为基本和自动更新基本一致。 <br>
+它和自动更新的主要区别是：在这种手动更新的情况下，无论网络状况是否Wifi，无论用户是否忽略过该版本的更新，都可以像下面的示例一样在按钮的回调中发起更新检查，代替update(Context context)：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span>(View v) {
+    MengYouUpdateAgent.forceUpdate(mContext);
+}</code></pre>
+
+<p>API:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">forceUpdate</span>(Context context)</code></pre>
+
+<h4 id="2-静默下载更新">2. 静默下载更新</h4>
+
+<p>主要使用场景：当用户进入应用首页后如果处于wifi环境检测更新，如果有更新，后台下载新版本，如果下载成功，则进行通知栏展示，用户点击通知栏开始安装。 <br>
+静默下载中途如果wifi断开，则会停止下载。 <br>
+在应用程序入口<code>Activity</code>里的<code>OnCreate()</code> 方法中调用</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>(Bundle  savedInstanceState) {
+    <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);
+    MengYouUpdateAgent.silentUpdate(<span class="hljs-keyword">this</span>);
+}</code></pre>
+
+<p>API</p>
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">silentUpdate</span>(Context context)</code></pre>
