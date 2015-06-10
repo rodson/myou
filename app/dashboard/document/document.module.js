@@ -19,7 +19,10 @@
       'ui.router',
       'ngMaterial',
 
-      'myou.shared'
+      'myou.shared',
+
+      'myou.dashboard.document.androidappsdk',
+      'myou.dashboard.document.androidossdk'
     ])
     .config(documentConfig);
 

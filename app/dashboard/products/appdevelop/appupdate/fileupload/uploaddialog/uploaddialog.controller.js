@@ -32,7 +32,7 @@
 
     vm.ok = function() {
       $mdDialog.cancel();
-      $state.go('dashboard.appdevelop.updatesetting');
+      $state.go('dashboard.appdevelop.updatesetting', {test: 'false'});
     };
 
     function onProgress(evt) {

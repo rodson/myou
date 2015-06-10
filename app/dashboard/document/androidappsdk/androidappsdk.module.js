@@ -62,7 +62,7 @@
   }
 
    angular
-     .module('myou.dashboard.document')
+     .module('myou.dashboard.document.androidappsdk', [])
      .controller('DocAndroidAppSdkCtrl', DocAndroidAppSdkCtrl)
      .config(docAndroidAppSdkConfig);
 
