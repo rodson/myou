@@ -1,0 +1,41 @@
+<div class="wrapper main">
+  <md-toolbar class="toolbar-tabs">
+    <div class="md-toolbar-tools">
+      <div class="header-title">文档中心 > Android系统 SDK</div>
+    </div>
+  </md-toolbar>
+  <div class="main-container">
+    <nav class="sidebar">
+      <ul>
+        <li>
+          <a>集成准备</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('importsdk')}">
+              <a ui-sref=".importsdk">导入SDK</a>
+            </li>
+            <li ng-class="{active: vm.isActive('getappkey')}">
+              <a ui-sref=".getappkey">获得Appkey</a>
+            </li>
+            <li ng-class="{active: vm.isActive('configmanifest')}">
+              <a ui-sref=".configmanifest">配置manifest</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a>升级功能</a>
+          <ul>
+            <li ng-class="{active: vm.isActive('updateapi')}">
+              <a ui-sref=".updateapi">升级接口</a>
+            </li>
+            <li ng-class="{active: vm.isActive('updatedemo')}">
+              <a ui-sref=".updatedemo">使用示例</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <main class="main-section">
+      <div ui-view></div>
+    </main>
+  </div>
+</div>

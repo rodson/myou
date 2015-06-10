@@ -1,0 +1,53 @@
+<h2 id="使用示例">使用示例</h2>
+
+
+<br>
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-comment">// 检测更新</span>
+MengYouOSUpdateAgent.setUpdateOnlyWifi(<span class="hljs-keyword">false</span>);
+MengYouOSUpdateAgent.update(mContext, getCurrentVersion(), <span class="hljs-keyword">new</span> MengYouOSUpdateListener() {
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onUpdateReturned</span>(<span class="hljs-keyword">int</span> updateStatus, Update update) {
+        <span class="hljs-keyword">super</span>.onUpdateReturned(updateStatus, update);
+
+        mUpdate = update;
+        <span class="hljs-keyword">switch</span> (updateStatus) {
+            <span class="hljs-keyword">case</span> UpdateStatus.YES:
+                MengYouOSUpdateAgent.startDownload(mContext, update, mDownloadFile, mMengYouOSDownloadListener);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> UpdateStatus.NO:
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> UpdateStatus.NO_NETWORK:
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> UpdateStatus.NO_WIFI:
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> UpdateStatus.TIMEOUT:
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">break</span>;
+        }
+    }
+}
+);
+
+<span class="hljs-comment">// 检测下载</span>
+<span class="hljs-keyword">private</span> MengYouOSDownloadListener mMengYouOSDownloadListener = <span class="hljs-keyword">new</span> MengYouOSDownloadListener() {
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span>() {
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onProgress</span>(<span class="hljs-keyword">long</span> downloaded, <span class="hljs-keyword">long</span> total) {
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSuccess</span>(File file) {
+        LogUtils.d(TAG, <span class="hljs-string">"OTA SystemUpgradeServer download onSuccess"</span>);
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onFailure</span>(<span class="hljs-keyword">int</span> i, String s) {
+        LogUtils.d(TAG, <span class="hljs-string">"OTA SystemUpgradeServer download onFailure"</span>);
+    }
+};</code></pre>

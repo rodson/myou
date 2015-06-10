@@ -1,0 +1,38 @@
+<h2 id="配置manifest">配置Manifest</h2>
+
+
+
+<h3 id="1-导入aar文件的配置">1. 导入aar文件的配置</h3>
+
+<p>导入aar文件的配置很简单，manifest的配置主要为填写Appkey，在<code>&lt;application&gt;</code>标签下添加如下代码</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">application</span>&gt;</span>
+    ......
+    <span class="hljs-tag">&lt;<span class="hljs-title">meta-data
+</span>        <span class="hljs-attribute">android:name</span>=<span class="hljs-value">"MENGYOU_APPKEY"</span>
+        <span class="hljs-attribute">android:value</span>=<span class="hljs-value">"YOUR_APP_KEY"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">application</span>&gt;</span></code></pre>
+
+<p>将上面的YOUR_APP_KEY替换为你在萌友后台申请的应用Appkey(Appkey可在统计后台的应用页面查看，点击左上角应用名旁边的小箭头)</p>
+
+<p>如不想在manifest里配置萌友的Appkey，可在Activity中配置：只需在程序启动时的Activity中调用：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">  MengYouConfig.setAppKey(<span class="hljs-built_in">String</span> appKey)；</code></pre>
+
+
+
+<h3 id="2-导入jar文件的配置">2. 导入jar文件的配置</h3>
+
+<p>如果导入的是jar文件，还需要在manifest中添加相应的权限</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml">    <span class="hljs-tag">&lt;<span class="hljs-title">uses-permission</span> <span class="hljs-attribute">android:name</span>=<span class="hljs-value">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">uses-permission</span> <span class="hljs-attribute">android:name</span>=<span class="hljs-value">"android.permission.INTERNET"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">uses-permission</span> <span class="hljs-attribute">android:name</span>=<span class="hljs-value">"android.permission.ACCESS_NETWORK_STATE"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">uses-permission</span> <span class="hljs-attribute">android:name</span>=<span class="hljs-value">"android.permission.READ_PHONE_STATE"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">uses-permission</span> <span class="hljs-attribute">android:name</span>=<span class="hljs-value">"android.permission.ACCESS_WIFI_STATE"</span>/&gt;</span></code></pre>

@@ -1,0 +1,28 @@
+<h2 id="更新接口">更新接口</h2>
+
+
+
+<h3 id="mengyouosupdateagent">MengYouOSUpdateAgent</h3>
+
+<p>检测更新</p>
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span>(Context context, String version, MengYouOSUpdateListener listener)
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span>(Context context, String version, MengYouOSUpdateListener listener, String deviceMac)</code></pre>
+
+<p>设置更新网络条件</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUpdateOnlyWifi</span>(<span class="hljs-keyword">boolean</span> updateOnlyWifi)</code></pre>
+
+<blockquote>
+  <p>updateOnlyWifi 布尔值true(默认)只在wifi环境下检测更新，false在所有网络环境中均检测更新。特别提示：针对机顶盒等可能不支持或者没有无线网络的设备，请同样将该参数设为false。 </p>
+</blockquote>
+
+<p>只有当更新回调显示检测到更新的时候，可以调用该函数下载新版本。</p>
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startDownload</span>(Context context, <span class="hljs-keyword">final</span> Update update, File file, <span class="hljs-keyword">final</span> MengYouOSDownloadListener listener)</code></pre>
+
+<p>判断是否正在下载</p>
+
+<pre class="prettyprint"><code class=" hljs vhdl">public static <span class="hljs-typename">boolean</span> isDownloadind(<span class="hljs-keyword">Context</span> <span class="hljs-keyword">context</span>, Update update, <span class="hljs-keyword">File</span> <span class="hljs-keyword">file</span>)</code></pre>
