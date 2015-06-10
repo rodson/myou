@@ -56,7 +56,6 @@
     };
 
     vm.changeTest = function() {
-      console.log(vm.showTest);
       if (vm.showTest) {
         StateManager.setQueryParams('show_test', 'true');
       } else {
