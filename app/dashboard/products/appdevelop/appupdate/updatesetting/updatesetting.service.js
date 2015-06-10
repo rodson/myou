@@ -196,7 +196,7 @@
       var rule = isTest ? updateInfo.testRule : updateInfo.rule;
 
       // Initialize rule if it's not set
-      if (!rule) {
+      if (!rule || !rule.targetVersion) {
         rule = {
           targetVersion: versions[0],
           updatable: false,
