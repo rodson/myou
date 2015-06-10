@@ -30,21 +30,21 @@
           </thead>
           <tbody>
             <tr ng-repeat="targetItem in updateInfo.list | orderBy: 'createdAt':true">
-              <td style="min-width: 100px">{{ targetItem.targetVersion }}</td>
-              <td style="min-width: 100px">{{ targetItem.fileName }}</td>
-              <td style="min-width: 100px">{{ targetItem.fileSize | bytes}}</td>
-              <td style="min-width: 150px">{{ targetItem.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
-              <td>
+              <td flex="25">{{ targetItem.targetVersion }}</td>
+              <td flex="25">{{ targetItem.fileName }}</td>
+              <td flex="10">{{ targetItem.fileSize | bytes}}</td>
+              <td flex="14">{{ targetItem.createdAt | date: 'yyyy-MM-dd H:mm'}}</td>
+              <td flex="9">
                 <md-switch class="nopadding md-primary"
                 aria-label="toggle" md-no-ink ng-model="targetItem.testUpdatable" ng-change="vm.toggleTestUpdatable($event, targetItem, updateInfo)">
                 </md-switch>
               </td>
-              <td>
+              <td flex="9">
                 <md-switch class="nopadding md-primary"
                 aria-label="toggle" md-no-ink ng-model="targetItem.updatable" ng-change="vm.toggleUpdatable($event, targetItem, updateInfo)">
                 </md-switch>
               </td>
-              <td>
+              <td flex="8">
                 <rs-dropdown>
                   <li ng-click="vm.showUpdateRuleDialog($event, targetItem)">
                     <a href="javascript:void(0)">

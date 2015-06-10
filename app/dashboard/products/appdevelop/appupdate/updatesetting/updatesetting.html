@@ -29,7 +29,7 @@
             aria-label="toggle" md-no-ink ng-model="vm.updateConfig.updateToLatest" ng-change="vm.toggleUpdateToLatest($event)">
             </md-switch>
           </td>
-          <td>
+          <td style="min-width: 70px">
             <rs-dropdown>
               <li ng-click="vm.showUpdateDescDialog($event, vm.newestUpdate)">
                 <a href="javascript:void(0)">
@@ -95,7 +95,7 @@
             aria-label="toggle" md-no-ink ng-model="updateInfo.testRule.updatable" ng-change="vm.toggleUpdatable($event, updateInfo, true)">
             </md-switch>
           </td>
-          <td>
+          <td style="min-width: 70px;">
             <rs-dropdown>
               <li ng-click="vm.showUpdateRuleDialog($event, updateInfo, false)" ng-class="{'hidden': vm.test === 'true'}">
                 <a href="javascript:void(0)">
