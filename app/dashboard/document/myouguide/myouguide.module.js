@@ -16,6 +16,10 @@
       .state('dashboard.document.myouguide.overview', {
         url: '/overview',
         templateUrl: 'app/dashboard/document/myouguide/content/overview.html'
+      })
+      .state('dashboard.document.myouguide.createproduct', {
+        url: '/createproduct',
+        templateUrl: 'app/dashboard/document/myouguide/content/createproduct.html'
       });
   }
 
