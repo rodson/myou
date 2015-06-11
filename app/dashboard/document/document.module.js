@@ -22,7 +22,8 @@
       'myou.shared',
 
       'myou.dashboard.document.androidappsdk',
-      'myou.dashboard.document.androidossdk'
+      'myou.dashboard.document.androidossdk',
+      'myou.dashboard.document.myouguide'
     ])
     .config(documentConfig);
 

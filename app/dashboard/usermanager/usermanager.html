@@ -110,7 +110,7 @@
           <md-radio-button value="group" class="md-primary">分组管理员</md-radio-button>
         </md-radio-group>
 
-        <md-input-container class="nopadding">
+        <md-input-container class="smpadding">
           <label>姓名：</label>
           <input required name="memberName" ng-model="vm.memberName">
           <div ng-messages="addMemberModal.memberName.$error">
@@ -118,7 +118,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container class="nopadding">
+        <md-input-container class="smpadding">
           <label>邮箱：</label>
           <input required name="memberMail" ng-model="vm.memberMail"  ng-disabled='!vm.addMember'>
           <div ng-messages="addMemberModal.memberMail.$error">
@@ -126,7 +126,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container ng-show='vm.addMember' class="nopadding">
+        <md-input-container ng-show='vm.addMember' class="smpadding">
           <label>密码：</label>
           <input required name="password" ng-model="vm.password" type='password'>
           <div ng-messages="addMemberModal.password.$error">
@@ -134,7 +134,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container ng-show='vm.addMember' class="nopadding">
+        <md-input-container ng-show='vm.addMember' class="smpadding">
           <label>确认密码：</label>
           <input required name="repassword" ng-model="vm.repassword" type='password'>
           <div ng-messages="addMemberModal.repassword.$error">
