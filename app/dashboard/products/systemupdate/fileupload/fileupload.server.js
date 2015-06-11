@@ -87,6 +87,16 @@
         '&srcVersion=' + srcVersion + '&targetVersion=' + targetVersion + '&fileName=' + fileName);
     };
 
+    RomFileUploadService.selfUpload = function(appId, data, cb) {
+      return $http.post(Constant.URL.PRODUCTS + '/' + appId + '/update/versions?platform=android_rom', data)
+        .success(function(data) {
+          $state.go('dashboard.systemupdate.updatesetting');
+        })
+        .error(function(error) {
+          cb(error);
+        });
+    };
+
     return RomFileUploadService;
   }
 

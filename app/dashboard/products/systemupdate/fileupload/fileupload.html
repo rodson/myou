@@ -1,16 +1,15 @@
 <div class="page-sm-container">
-
-  <div class="sm-container">
-
+  <md-button id="switch-model" class="md-raised md-primary" ng-click="vm.switchModle()">
+    {{ vm.nextModel === 'upload' ? '上传文件' : '自定义文件' }}
+  </md-button>
+  <div class="sm-container" ng-hide="vm.nextModel === 'upload'">
     <div class="group-section">
       <div class="group-title">
         选择文件
       </div>
-      <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files)"
-          file="vm.uploadData.file">
+      <rs-file-uploader ngf-select ngf-change="vm.onFileSelect($files)" file="vm.uploadData.file">
       </rs-file-uploader>
     </div>
-
     <div class="group-section clearfix" ng-show="vm.uploadData.progress">
       <div class="normal-text">
         计算md5: <span class="normal-size emphasis">{{ vm.uploadData.md5 }}</span>
@@ -20,72 +19,107 @@
         {{ vm.uploadData.progress }}%
       </div>
     </div>
-
     <md-input-container flex>
-        <label>源版本</label>
-        <input ng-model="vm.uploadData.srcVersion">
-      </md-input-container>
-
-      <md-input-container flex>
-        <label>目标版本</label>
-        <input ng-model="vm.uploadData.targetVersion">
-      </md-input-container>
-
-      <md-input-container flex>
-        <label>版本描述</label>
-        <textarea columns="2" ng-model="vm.uploadData.versionDesc"></textarea>
-      </md-input-container>
-
-      <div class="error" style="margin: 10px 0px;">
-        {{ vm.uploadData.errorMessage }}
+      <label>源版本</label>
+      <input ng-model="vm.uploadData.srcVersion">
+    </md-input-container>
+    <md-input-container flex>
+      <label>目标版本</label>
+      <input ng-model="vm.uploadData.targetVersion">
+    </md-input-container>
+    <md-input-container flex>
+      <label>版本描述</label>
+      <textarea columns="2" ng-model="vm.uploadData.versionDesc"></textarea>
+    </md-input-container>
+    <div class="error" style="margin: 10px 0px;">
+      {{ vm.uploadData.errorMessage }}
+    </div>
+    <div class="group-section clearfix">
+      <div class="pull-right">
+        <span flex></span>
+        <md-button class="md-raised md-primary btn-lg" ng-click="vm.upload()">
+          上传
+        </md-button>
       </div>
-
+    </div>
+  </div>
+  <div class="sm-container" ng-hide="vm.nextModel === 'userself'">
+    <div class="group-section">
+      <div class="group-title">
+        自定义文件
+      </div>
+    </div>
+    <form name="addSelfFile">
+      <md-input-container>
+        <label>源版本</label>
+        <input required name="srcVersion" ng-model="vm.custom.srcVersion">
+      </md-input-container>
+      <md-input-container>
+        <label>目标版本</label>
+        <input required name="targetVersion" ng-model="vm.custom.targetVersion">
+      </md-input-container>
+      <md-input-container>
+        <label>文件名</label>
+        <input required name="fileName" ng-model="vm.custom.fileName">
+      </md-input-container>
+      <md-input-container>
+        <label>文件地址</label>
+        <input required name="fileSrc" ng-model="vm.custom.fileSrc">
+      </md-input-container>
+      <md-input-container>
+        <label>文件大小(bytes)</label>
+        <input required name="fileSize" ng-model="vm.custom.fileSize">
+      </md-input-container>
+      <md-input-container>
+        <label>MD5</label>
+        <input required name="md5" ng-model="vm.custom.md5">
+      </md-input-container>
+      <md-input-container>
+        <label>升级描述</label>
+        <input required name="fileDesc" ng-model="vm.custom.fileDesc">
+      </md-input-container>
+      <h4 class='error-tip'>{{ vm.errorTip }}</h4>
       <div class="group-section clearfix">
         <div class="pull-right">
           <span flex></span>
-          <md-button class="md-raised md-primary btn-lg" ng-click="vm.upload()">
+          <md-button class="md-raised md-primary btn-lg" ng-click="vm.selfUpload()">
             上传
           </md-button>
         </div>
       </div>
-
-
+    </form>
   </div>
-
-</div>
-
-
-<!-- Upload progress dialog -->
-<div>
-  <script type="text/ng-template" id="uploadProgressDialog.html">
-  <md-dialog>
-    <md-dialog-content>
-      <div class="modal-container">
-        <div class="group-section clearfix">
-          <div class="group-title">
-            文件上传
-          </div>
-          <div class="group-section clearfix">
-            <md-progress-linear md-mode="determinate" value="{{ vm.progress }}"></md-progress-linear>
-            <div class="normal-text pull-right" style="margin-top: 10px;">
-              {{ vm.progress }}%
-            </div>
-          </div>
-          <div class="pull-right">
-            <span class="error" ng-show="vm.isError" style="margin-right: 30px;">
+  <!-- Upload progress dialog -->
+  <div>
+    <script type="text/ng-template" id="uploadProgressDialog.html">
+      <md-dialog>
+        <md-dialog-content>
+          <div class="modal-container">
+            <div class="group-section clearfix">
+              <div class="group-title">
+                文件上传
+              </div>
+              <div class="group-section clearfix">
+                <md-progress-linear md-mode="determinate" value="{{ vm.progress }}"></md-progress-linear>
+                <div class="normal-text pull-right" style="margin-top: 10px;">
+                  {{ vm.progress }}%
+                </div>
+              </div>
+              <div class="pull-right">
+                <span class="error" ng-show="vm.isError" style="margin-right: 30px;">
               上传错误，请重新上传
             </span>
-            <span flex></span>
-            <md-button ng-show="!vm.isSuccess" class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
-              取消
-            </md-button>
-            <md-button ng-show="vm.isSuccess" class="md-raised md-primary btn-lg" ng-click="vm.ok()">
-              确定
-            </md-button>
+                <span flex></span>
+                <md-button ng-show="!vm.isSuccess" class="md-raised md-accent btn-lg" ng-click="vm.cancel()">
+                  取消
+                </md-button>
+                <md-button ng-show="vm.isSuccess" class="md-raised md-primary btn-lg" ng-click="vm.ok()">
+                  确定
+                </md-button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </md-dialog-content>
-  </md-dialog>
-  </script>
-</div>
+        </md-dialog-content>
+      </md-dialog>
+    </script>
+  </div>

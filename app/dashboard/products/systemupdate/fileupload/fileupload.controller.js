@@ -18,7 +18,7 @@
   /**
    * @ngInject
    */
-  function RomFileUploadCtrl($scope, RomFileUploadService, SparkMD5Manager) {
+  function RomFileUploadCtrl($scope, RomFileUploadService, SparkMD5Manager, StorageManager, $timeout) {
     var vm = this;
 
     RomFileUploadService.init();
@@ -47,6 +47,63 @@
     vm.upload = function() {
       RomFileUploadService.upload();
     };
+
+    /********************** userself start *********************/
+    var model = 0;
+    vm.allModel = ['upload', 'userself'];
+    vm.nextModel = vm.allModel[1];
+
+    var product = StorageManager.getApp();
+
+    vm.switchModle = function() {
+      vm.nextModel = vm.allModel[model++ % 2];
+    };
+
+    vm.selfUpload = function() {
+      var regUrl = /^((http|https|ftp):\/\/)?(\w(\:\w)?@)?([0-9a-z_-]+\.)*?([a-z0-9-]+\.[a-z]{2,6}(\.[a-z]{2})?(\:[0-9]{2,6})?)((\/[^?#<>\/\\*":]*)+(\?[^#]*)?(#.*)?)?$/i;
+      if (!vm.custom.fileName) {
+        vm.errorTip = '请输入文件名';
+      } else if (!vm.custom.fileSrc) {
+        vm.errorTip = '请输入文件地址';
+      } else if (!regUrl.test(vm.custom.fileSrc)) {
+        vm.errorTip = '请输入正确的URL地址';
+      } else if (!vm.custom.fileSize) {
+        vm.errorTip = '请输入文件大小';
+      } else if (!Number(vm.custom.fileSize)) {
+        vm.errorTip = '文件大小框请输入数字';
+      } else if (!vm.custom.md5) {
+        vm.errorTip = '请输入文件MD5';
+      } else if (vm.custom.md5.length !== 32) {
+        vm.errorTip = '请输入包含32位字符的MD5，现在为' + vm.custom.md5.length + '位字符';
+      } else if (!/^[0-9a-z]{32}$/gi.test(vm.custom.md5)) {
+        vm.errorTip = '请输入正确的MD5，由0-9，a-z，A-Z组成';
+      } else if (!vm.custom.fileDesc) {
+        vm.errorTip = '请输入文件描述';
+      } else if (!vm.custom.srcVersion) {
+        vm.errorTip = '请输入源版本';
+      } else if (!vm.custom.targetVersion) {
+        vm.errorTip = '请输入目标版本';
+      } else {
+        var data = {
+          srcVersion: vm.custom.srcVersion,
+          targetVersion: vm.custom.targetVersion,
+          appKey: product.appKey,
+          updateDesc: vm.custom.fileDesc,
+          fileName: vm.custom.fileName,
+          fsize: Number(vm.custom.fileSize),
+          downUrl: vm.custom.fileSrc,
+          fileMd5: vm.custom.md5
+        };
+        RomFileUploadService.selfUpload(product._id, data, function(error) {
+          vm.errorTip = error.message;
+        });
+      }
+      $timeout(function() {
+        vm.errorTip = '';
+      }, 5000);
+    };
+    /********************** userself end *********************/
+
   }
 
   RomFileUploadCtrl.resolve = {
@@ -91,9 +148,9 @@
           fields: uploadData,
           file: RomFileUploadService.uploadData.file
         })
-        .progress(onProgress)
-        .success(onSuccess)
-        .error(onError);
+          .progress(onProgress)
+          .success(onSuccess)
+          .error(onError);
       }).error(function() {
         vm.isError = true;
       });
