@@ -78,10 +78,6 @@
       options: {
         chart: {
           type: 'pie',
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          shadow: false
         },
         plotOptions: {
           pie: {
@@ -162,7 +158,7 @@
           // Set version data
           VersionDistributeService.versionChartConfig.series[0].data =
             data.versionList.map(function(item) {
-            return [item.name, parseInt(item.count)];
+            return [item.version, parseInt(item.count)];
           });
 
         });
